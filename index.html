@@ -254,48 +254,6 @@
     <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Calculators</h4>
-                    <ul class="footer-links">
-                        <li><a href="calculators/compound-interest-modern.html">Compound Interest</a></li>
-                        <li><a href="calculators/loan-payment-modern.html">Loan Payment</a></li>
-                        <li><a href="calculators/mortgage-modern.html">Mortgage</a></li>
-                        <li><a href="calculators/savings-goal-modern.html">Savings Goal</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Resources</h4>
-                    <ul class="footer-links">
-                        <li><a href="#articles">Articles Overview</a></li>
-                        <li><a href="#compare">Comparison Section</a></li>
-                        <li><a href="mailto:info@fincalc.pro">Partner with Us</a></li>
-                        <li><a href="pages/privacy.html">Privacy Summary</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul class="footer-links">
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="privacy.html" data-i18n="footer.privacy">Privacy Policy</a></li>
-                        <li><a href="terms.html" data-i18n="footer.terms">Terms of Service</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Follow Us</h4>
-                    <ul class="footer-links">
-                        <li><a href="#" rel="noopener">Twitter</a></li>
-                        <li><a href="#" rel="noopener">LinkedIn</a></li>
-                        <li><a href="#" rel="noopener">YouTube</a></li>
-                        <li><a href="#" rel="noopener">GitHub</a></li>
-                    </ul>
-                </div>
-            </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
             </div>
@@ -375,7 +333,7 @@
         function detectLanguage() {
             // Check if language is already saved in localStorage
             const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang) {
+            if (savedLang && ['en', 'pl', 'ru'].includes(savedLang)) {
                 return savedLang;
             }
 
@@ -383,21 +341,29 @@
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang && ['en', 'pl', 'ru'].includes(urlLang)) {
+                // Save URL language to localStorage for future visits
+                localStorage.setItem('preferredLanguage', urlLang);
                 return urlLang;
             }
 
-            // Auto-detect from browser language
-            const browserLang = navigator.language || navigator.userLanguage;
+            // Auto-detect from browser language with better detection
+            const browserLang = navigator.language || navigator.userLanguage || 'en';
             const langCode = browserLang.toLowerCase().split('-')[0];
 
-            // Language mapping rules
+            let detectedLang = 'en'; // Default fallback
+
+            // More comprehensive language detection
             if (langCode === 'pl') {
-                return 'pl'; // Polish → Polish
-            } else if (['ru', 'uk', 'be'].includes(langCode)) {
-                return 'ru'; // Russian/Ukrainian/Belarusian → Russian
-            } else {
-                return 'en'; // All others → English
+                detectedLang = 'pl'; // Polish
+            } else if (['ru', 'uk', 'be', 'kk', 'uz'].includes(langCode)) {
+                detectedLang = 'ru'; // Russian and related languages
+            } else if (['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'sv', 'da', 'no', 'fi'].includes(langCode)) {
+                detectedLang = 'en'; // Western European languages → English
             }
+
+            // Save detected language for future visits
+            localStorage.setItem('preferredLanguage', detectedLang);
+            return detectedLang;
         }
 
         // Initialize i18n
