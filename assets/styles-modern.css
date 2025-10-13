@@ -206,31 +206,101 @@ a:hover {
   color: var(--primary);
 }
 
-/* Language Switcher */
-.lang-switcher {
-  display: flex;
-  gap: var(--space-xs);
+/* Language Dropdown */
+.lang-dropdown {
+  position: relative;
   margin-left: var(--space-lg);
   padding-left: var(--space-lg);
   border-left: 1px solid var(--border);
 }
 
-.lang-btn {
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  font-size: 0.875rem;
-  font-weight: 600;
+.lang-dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xs) var(--space-md);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg-card);
   color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
   transition: all var(--transition-fast);
 }
 
-.lang-btn:hover {
-  background: var(--gray-100);
+.lang-dropdown-btn:hover {
+  background: var(--gray-50);
+  border-color: var(--gray-300);
+  color: var(--text-primary);
 }
 
-.lang-btn.active {
-  background: var(--primary);
-  color: var(--white);
+.lang-dropdown-btn svg:first-child {
+  color: var(--text-muted);
+}
+
+.lang-dropdown-btn svg:last-child {
+  color: var(--text-muted);
+  transition: transform var(--transition-fast);
+}
+
+.lang-dropdown-menu.show .lang-dropdown-btn svg:last-child {
+  transform: rotate(180deg);
+}
+
+.lang-dropdown-menu {
+  position: absolute;
+  top: calc(100% + var(--space-xs));
+  right: 0;
+  min-width: 140px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-8px);
+  transition: all var(--transition-fast);
+  z-index: 1000;
+}
+
+.lang-dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.lang-option {
+  display: block;
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.lang-option:hover {
+  background: var(--gray-50);
+  color: var(--text-primary);
+}
+
+.lang-option.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.lang-option:first-child {
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.lang-option:last-child {
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
 }
 
 /* Hero Section */

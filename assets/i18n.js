@@ -8,6 +8,7 @@ const translations = {
     'nav.articles': 'Articles',
     'nav.compare': 'Compare',
     'nav.about': 'About',
+    'nav.language': 'Language',
     
     // Hero
     'hero.title': 'Smart Financial Calculators',
@@ -509,6 +510,7 @@ const translations = {
     'nav.articles': 'Artykuły',
     'nav.compare': 'Porównaj',
     'nav.about': 'O nas',
+    'nav.language': 'Język',
     
     // Hero
     'hero.title': 'Inteligentne Kalkulatory Finansowe',
@@ -967,6 +969,7 @@ const translations = {
     'nav.articles': 'Статьи',
     'nav.compare': 'Сравнить',
     'nav.about': 'О нас',
+    'nav.language': 'Язык',
     
     // Hero
     'hero.title': 'Умные Финансовые Калькуляторы',
