@@ -273,7 +273,34 @@ a:hover {
   transform: translateY(0);
 }
 
-/* h3 styles are now in the calculator icons section below */
+.card:hover .card-icon {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--space-md);
+}
+
+.card-header h3 {
+  margin: 0;
+  flex: 1;
+}
+
+.card-icon {
+  color: var(--primary);
+  opacity: 0.7;
+  flex-shrink: 0;
+  margin-left: var(--space-md);
+  transition: all var(--transition-base);
+}
+
+.card h3 {
+  margin-bottom: var(--space-sm);
+}
 
 .card p {
   margin-bottom: var(--space-lg);
@@ -282,25 +309,6 @@ a:hover {
 
 .card .btn {
   margin-top: auto;
-}
-
-/* Calculator Icons */
-.calculator-icon {
-  color: var(--primary);
-  opacity: 0.8;
-  transition: opacity var(--transition-base);
-  margin-left: var(--space-xs);
-  vertical-align: middle;
-}
-
-.card:hover .calculator-icon {
-  opacity: 1;
-}
-
-.card h3 {
-  display: flex;
-  align-items: center;
-  gap: var(--space-xs);
 }
 
 /* Buttons */

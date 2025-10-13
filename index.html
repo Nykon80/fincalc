@@ -122,13 +122,18 @@
         <div class="grid">
             <!-- Compound Interest Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="calc.compound">
-                    Compound Interest
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M21 21V7a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z" stroke="currentColor" stroke-width="2"/>
-                        <path d="M3 7h18M12 3v4M8 12l2 2 4-4" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="calc.compound">Compound Interest</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- График роста с процентами -->
+                        <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 14l3-3 3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="7" cy="14" r="1.5" fill="currentColor"/>
+                        <circle cx="10" cy="11" r="1.5" fill="currentColor"/>
+                        <circle cx="13" cy="14" r="1.5" fill="currentColor"/>
+                        <circle cx="18" cy="9" r="1.5" fill="currentColor"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="calc.compound.desc">Calculate how your investments grow with compound interest</p>
                 <a href="calculators/compound-interest-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
@@ -140,15 +145,16 @@
             
             <!-- Loan Payment Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="calc.loan">
-                    Loan Payment
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <rect x="2" y="3" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
-                        <line x1="2" y1="8" x2="22" y2="8" stroke="currentColor" stroke-width="2"/>
-                        <line x1="6" y1="12" x2="8" y2="12" stroke="currentColor" stroke-width="2"/>
-                        <line x1="16" y1="12" x2="18" y2="12" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="calc.loan">Loan Payment</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Калькулятор с деньгами -->
+                        <rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M8 8h8M8 12h5" stroke-linecap="round"/>
+                        <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
+                        <path d="M16 1v3M8 1v3" stroke-linecap="round"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="calc.loan.desc">Find your monthly payment and total interest</p>
                 <a href="calculators/loan-payment-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
@@ -160,13 +166,16 @@
             
             <!-- Savings Goal Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="calc.savings">
-                    Savings Goal
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="calc.savings">Savings Goal</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Копилка/Цель -->
+                        <circle cx="12" cy="12" r="9" stroke-linecap="round"/>
+                        <circle cx="12" cy="12" r="3" stroke-linecap="round"/>
+                        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke-linecap="round"/>
+                        <path d="M12 9v6" stroke-linecap="round"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="calc.savings.desc">Plan your savings to reach financial goals</p>
                 <a href="calculators/savings-goal-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
@@ -178,13 +187,13 @@
             
             <!-- Mortgage Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="calc.mortgage">
-                    Mortgage Calculator
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" stroke="currentColor" stroke-width="2"/>
-                        <polyline points="9,22 9,12 15,12 15,22" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="calc.mortgage">Mortgage Calculator</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Дом -->
+                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="calc.mortgage.desc">Calculate mortgage payments and affordability</p>
                 <a href="calculators/mortgage-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
@@ -196,14 +205,16 @@
             
             <!-- Credit Card Payoff Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="calc.creditcard">
-                    Credit Card Payoff
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
-                        <line x1="1" y1="10" x2="23" y2="10" stroke="currentColor" stroke-width="2"/>
-                        <path d="M7 15h.01M11 15h.01" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="calc.creditcard">Credit Card Payoff</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Кредитная карта -->
+                        <rect x="3" y="6" width="18" height="12" rx="2" stroke-linecap="round"/>
+                        <path d="M3 10h18" stroke-linecap="round"/>
+                        <path d="M7 14h4" stroke-linecap="round"/>
+                        <circle cx="17" cy="14" r="1" fill="currentColor"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="calc.creditcard.desc">Create a payoff plan for credit card debt</p>
                 <a href="calculators/credit-card-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
@@ -215,13 +226,16 @@
             
             <!-- Investment ROI Calculator -->
             <article class="card fade-in">
-                <h3 data-i18n="card.roi.title">
-                    Investment ROI
-                    <svg class="calculator-icon" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <polyline points="23,6 13.5,15.5 8.5,10.5 1,18" stroke="currentColor" stroke-width="2"/>
-                        <polyline points="17,6 23,6 23,12" stroke="currentColor" stroke-width="2"/>
+                <div class="card-header">
+                    <h3 data-i18n="card.roi.title">Investment ROI</h3>
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <!-- Процент/ROI -->
+                        <circle cx="12" cy="12" r="9" stroke-linecap="round"/>
+                        <path d="M9 15l6-6" stroke-linecap="round"/>
+                        <circle cx="9" cy="9" r="1.5" fill="currentColor"/>
+                        <circle cx="15" cy="15" r="1.5" fill="currentColor"/>
                     </svg>
-                </h3>
+                </div>
                 <p data-i18n="card.roi.desc">Calculate return on investment and compare opportunities</p>
                 <a href="calculators/roi-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
