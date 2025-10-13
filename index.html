@@ -382,8 +382,17 @@
             const lang = detectLanguage();
 
             if (window.i18n) {
+                // Function to update language button text
+                function updateLanguageButton() {
+                    const langSpan = document.querySelector('#langDropdownBtn span[data-i18n="nav.language"]');
+                    if (langSpan && window.i18n) {
+                        langSpan.textContent = i18n.t('nav.language');
+                    }
+                }
+
                 // Set language and update page
                 i18n.setLanguage(lang);
+                updateLanguageButton();
 
                 // Language dropdown functionality
                 const dropdownBtn = document.getElementById('langDropdownBtn');
@@ -411,6 +420,9 @@
                         
                         // Set language
                         i18n.setLanguage(selectedLang);
+                        
+                        // Update language button text
+                        updateLanguageButton();
                         
                         // Close dropdown
                         dropdownMenu.classList.remove('show');
