@@ -104,7 +104,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index-modern.html" class="logo">
+                <a href="../index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -120,26 +120,20 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
                     <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn" id="langDropdownBtn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span data-i18n="nav.language">Language</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
                         </button>
-                        <div class="lang-dropdown-menu" id="langDropdownMenu">
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="pl">Polski</button>
-                            <button class="lang-option" data-lang="ru">Русский</button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                         </div>
                     </div>
                 </nav>
@@ -235,7 +229,7 @@
                             <th data-i18n="table.payment">Payment</th>
                             <th data-i18n="table.principal">Principal</th>
                             <th data-i18n="table.interest">Interest</th>
-                            <th data-i18n="table.remaining">Remaining Balance</th>
+                            <th data-i18n="table.remaining_balance">Remaining Balance</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -289,10 +283,10 @@
             const totalPayment = totalMonthly * numPayments;
             
             // Update results
-            document.getElementById('monthlyPayment').textContent = formatCurrency(totalMonthly);
-            document.getElementById('principal').textContent = formatCurrency(loanAmount);
-            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
-            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment);
+            document.getElementById('monthlyPayment').textContent = i18n.formatCurrency(totalMonthly);
+            document.getElementById('principal').textContent = i18n.formatCurrency(loanAmount);
+            document.getElementById('totalInterest').textContent = i18n.formatCurrency(totalInterest);
+            document.getElementById('totalPayment').textContent = i18n.formatCurrency(totalPayment);
             
             // Generate amortization schedule
             generateAmortizationSchedule(loanAmount, monthlyRate, numPayments, monthlyPI);
@@ -322,10 +316,10 @@
                     const row = document.createElement('tr');
                     row.innerHTML = `
                         <td><strong>${year}</strong></td>
-                        <td>${formatCurrency(yearPayment)}</td>
-                        <td style="color: var(--primary);">${formatCurrency(yearPrincipal)}</td>
-                        <td style="color: var(--warning);">${formatCurrency(yearInterest)}</td>
-                        <td><strong>${formatCurrency(Math.max(0, balance))}</strong></td>
+                        <td>${i18n.formatCurrency(yearPayment)}</td>
+                        <td style="color: var(--primary);">${i18n.formatCurrency(yearPrincipal)}</td>
+                        <td style="color: var(--warning);">${i18n.formatCurrency(yearInterest)}</td>
+                        <td><strong>${i18n.formatCurrency(Math.max(0, balance))}</strong></td>
                     `;
                     tbody.appendChild(row);
                     
@@ -340,24 +334,17 @@
             }
         }
         
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(amount);
-        }
-        
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
             calculate();
-            
+
             // Add input listeners
             document.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
+
         });
     </script>
 </body>

@@ -13,7 +13,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index-modern.html" class="logo">
+                <a href="../index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -29,16 +29,22 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index-modern.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
-                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
-                    <div class="lang-switcher">
-                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
-                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
-                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    <div class="lang-dropdown">
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                     </div>
+                </div>
                 </nav>
             </div>
         </div>

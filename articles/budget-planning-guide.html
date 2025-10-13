@@ -41,17 +41,18 @@
         }
         
         .article-content h2 {
-            font-size: 1.8rem;
+            font-size: 2rem;
             font-weight: 700;
-            margin: 2.5rem 0 1rem 0;
-            color: var(--primary);
+            margin: 3rem 0 1.5rem 0;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
         }
         
         .article-content h3 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin: 2rem 0 1rem 0;
-            color: var(--text-primary);
+            margin: 2.5rem 0 1rem 0;
+            color: var(--text-secondary);
         }
         
         .example-box {
@@ -292,6 +293,70 @@
             color: white;
         }
         
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            transition: transform var(--transition-base), box-shadow var(--transition-base);
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .tip-list {
+            display: grid;
+            gap: var(--space-md);
+            margin: var(--space-xl) 0;
+        }
+        
+        .tip-item {
+            display: flex;
+            gap: var(--space-md);
+            align-items: flex-start;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+        }
+        
+        .tip-item span {
+            font-size: 1.5rem;
+        }
+        
+        .cta-banner {
+            background: var(--primary);
+            color: white;
+            padding: var(--space-xl);
+            border-radius: var(--radius-xl);
+            display: grid;
+            gap: var(--space-md);
+            margin: 3rem 0;
+        }
+        
+        .cta-banner a {
+            align-self: start;
+        }
+        
         @media (max-width: 768px) {
             .pie-legend {
                 flex-direction: column;
@@ -312,7 +377,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index-modern.html" class="logo">
+                <a href="../index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -328,28 +393,22 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index-modern.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
-                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
                     <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn" id="langDropdownBtn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span data-i18n="nav.language">Language</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <div class="lang-dropdown-menu" id="langDropdownMenu">
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="pl">Polski</button>
-                            <button class="lang-option" data-lang="ru">Русский</button>
-                        </div>
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                     </div>
+                </div>
                 </nav>
             </div>
         </div>
@@ -367,187 +426,127 @@
 
         <div class="article-content">
             <p data-i18n="article.budget.intro">
-                A well-planned budget is the foundation of financial success. It helps you understand where your money goes, 
-                prioritize your spending, and work toward your financial goals with confidence.
-            </p>
-
-            <h2 data-i18n="article.budget.why.title">Why Budgeting Matters</h2>
-            <p data-i18n="article.budget.why.text">
-                Budgeting isn't about restricting yourself – it's about giving yourself permission to spend on what matters 
-                most while ensuring you're saving for the future.
+                Budgeting isn't about restriction; it's about giving yourself permission to spend on what matters most
+                while still saving for the future. Here's how to build a budget that actually works.
             </p>
 
             <div class="info-box">
-                <div class="info-title" data-i18n="article.budget.benefits.title">💡 Benefits of Budgeting</div>
-                <ul>
-                    <li data-i18n="article.budget.benefit1">Reduces financial stress and anxiety</li>
-                    <li data-i18n="article.budget.benefit2">Helps you reach financial goals faster</li>
-                    <li data-i18n="article.budget.benefit3">Prevents overspending and debt accumulation</li>
-                    <li data-i18n="article.budget.benefit4">Gives you control over your financial future</li>
-                </ul>
+                <div class="info-title" data-i18n="article.budget.why.title">Why Budgeting Matters</div>
+                <p data-i18n="article.budget.why.text">Budgeting isn't about restriction; it's about giving yourself permission to spend on what matters most while still saving for the future.</p>
+            </div>
+
+            <h2 data-i18n="article.budget.benefits.title">Benefits of Budgeting</h2>
+            <div class="cards-grid">
+                <article class="card">
+                    <h4 data-i18n="article.budget.benefit1">Reduces financial stress and anxiety</h4>
+                    <p data-i18n="article.budget.benefit1.desc">Knowing exactly where your money is going removes uncertainty and gives you peace of mind.</p>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.benefit2">Helps you reach financial goals faster</h4>
+                    <p data-i18n="article.budget.benefit2.desc">A clear plan lets you prioritize savings and debt payoff without guesswork.</p>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.benefit3">Prevents overspending and debt accumulation</h4>
+                    <p data-i18n="article.budget.benefit3.desc">When every dollar has a purpose, impulse spending becomes the exception—not the rule.</p>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.benefit4">Gives you control over your financial future</h4>
+                    <p data-i18n="article.budget.benefit4.desc">Budgeting is your roadmap—it tells your money where to go instead of wondering where it went.</p>
+                </article>
             </div>
 
             <h2 data-i18n="article.budget.methods.title">Popular Budgeting Methods</h2>
-            
-            <div class="budget-methods">
-                <div class="method-card">
-                    <h3 data-i18n="article.budget.method_50_30_20.title">🎯 50/30/20 Rule</h3>
-                    <div class="pie-chart"></div>
-                    <div class="pie-legend">
-                        <div class="legend-item">
-                            <div class="legend-color needs"></div>
-                            <span data-i18n="article.budget.needs">50% Needs</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color wants"></div>
-                            <span data-i18n="article.budget.wants">30% Wants</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color savings"></div>
-                            <span data-i18n="article.budget.savings">20% Savings</span>
-                        </div>
-                    </div>
-                    <p data-i18n="article.budget.method_50_30_20.desc">Simple and flexible approach that works for most people</p>
-                </div>
-
-                <div class="method-card">
-                    <h3 data-i18n="article.budget.method_zero.title">📊 Zero-Based Budget</h3>
-                    <p data-i18n="article.budget.method_zero.desc">Assign every dollar a purpose until your income minus expenses equals zero</p>
-                    <div class="budget-calculator">
-                        <div class="calc-row">
-                            <span data-i18n="article.budget.income">Monthly Income:</span>
-                            <span>$5,000</span>
-                        </div>
-                        <div class="calc-row">
-                            <span data-i18n="article.budget.expenses">Total Expenses:</span>
-                            <span>$4,000</span>
-                        </div>
-                        <div class="calc-row">
-                            <span data-i18n="article.budget.savings_goals">Savings Goals:</span>
-                            <span>$1,000</span>
-                        </div>
-                        <div class="calc-row">
-                            <span data-i18n="article.budget.remaining">Remaining:</span>
-                            <span>$0</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="method-card">
-                    <h3 data-i18n="article.budget.method_envelope.title">💰 Envelope Method</h3>
-                    <p data-i18n="article.budget.method_envelope.desc">Allocate cash for each spending category in separate envelopes</p>
-                    <div class="expense-categories">
-                        <div>
-                            <h4 data-i18n="article.budget.envelope.groceries">🛒 Groceries: $600</h4>
-                        </div>
-                        <div>
-                            <h4 data-i18n="article.budget.envelope.entertainment">🎬 Entertainment: $200</h4>
-                        </div>
-                        <div>
-                            <h4 data-i18n="article.budget.envelope.dining">🍽️ Dining Out: $300</h4>
-                        </div>
-                        <div>
-                            <h4 data-i18n="article.budget.envelope.transport">🚗 Transportation: $400</h4>
-                        </div>
-                    </div>
-                </div>
+            <div class="cards-grid">
+                <article class="card">
+                    <h4 data-i18n="article.budget.rule50.title">50/30/20 Rule</h4>
+                    <p data-i18n="article.budget.rule50.desc">Allocate 50% to needs, 30% to wants, and 20% to savings and debt payoff.</p>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.zero.title">Zero-Based Budget</h4>
+                    <p data-i18n="article.budget.zero.desc">Assign every dollar a job so income minus expenses equals zero.</p>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.envelope.title">Envelope Method</h4>
+                    <p data-i18n="article.budget.envelope.desc">Use physical or digital envelopes to control spending in each category.</p>
+                </article>
             </div>
 
             <h2 data-i18n="article.budget.categories.title">Essential Budget Categories</h2>
-            <p data-i18n="article.budget.categories.text">
-                Organize your expenses into clear categories to better understand your spending patterns.
-            </p>
-
-            <div class="expense-categories">
-                <div class="category-card">
-                    <h4 data-i18n="article.budget.fixed.title">🏠 Fixed Expenses</h4>
+            <div class="cards-grid">
+                <article class="card">
+                    <h4 data-i18n="article.budget.fixed.title">Fixed Expenses</h4>
                     <ul>
-                        <li data-i18n="article.budget.fixed.rent">Rent/Mortgage</li>
-                        <li data-i18n="article.budget.fixed.insurance">Insurance</li>
+                        <li data-i18n="article.budget.fixed.rent">Rent / Mortgage</li>
                         <li data-i18n="article.budget.fixed.utilities">Utilities</li>
+                        <li data-i18n="article.budget.fixed.insurance">Insurance</li>
                         <li data-i18n="article.budget.fixed.subscriptions">Subscriptions</li>
-                        <li data-i18n="article.budget.fixed.loans">Loan Payments</li>
                     </ul>
-                </div>
-
-                <div class="category-card">
-                    <h4 data-i18n="article.budget.variable.title">📈 Variable Expenses</h4>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.variable.title">Variable Expenses</h4>
                     <ul>
                         <li data-i18n="article.budget.variable.groceries">Groceries</li>
-                        <li data-i18n="article.budget.variable.gas">Gas</li>
+                        <li data-i18n="article.budget.variable.gas">Transportation</li>
                         <li data-i18n="article.budget.variable.dining">Dining Out</li>
-                        <li data-i18n="article.budget.variable.shopping">Shopping</li>
                         <li data-i18n="article.budget.variable.entertainment">Entertainment</li>
                     </ul>
-                </div>
-
-                <div class="category-card">
-                    <h4 data-i18n="article.budget.savings.title">💰 Savings & Goals</h4>
+                </article>
+                <article class="card">
+                    <h4 data-i18n="article.budget.savings.title">Savings & Goals</h4>
                     <ul>
                         <li data-i18n="article.budget.savings.emergency">Emergency Fund</li>
                         <li data-i18n="article.budget.savings.retirement">Retirement</li>
                         <li data-i18n="article.budget.savings.vacation">Vacation</li>
                         <li data-i18n="article.budget.savings.house">House Down Payment</li>
-                        <li data-i18n="article.budget.savings.education">Education</li>
                     </ul>
-                </div>
+                </article>
             </div>
 
             <h2 data-i18n="article.budget.tips.title">Pro Budgeting Tips</h2>
-
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip1.title">🎯 Start Small</h4>
-                    <p data-i18n="article.budget.tip1.desc">Begin with tracking expenses for one week to understand your spending patterns</p>
+            <div class="tip-list">
+                <div class="tip-item">
+                    <span>🎯</span>
+                    <div>
+                        <strong data-i18n="article.budget.tip1.title">Start Small</strong>
+                        <p data-i18n="article.budget.tip1.desc">Track expenses for one week to understand your current spending patterns before making drastic changes.</p>
+                    </div>
                 </div>
-
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip2.title">📱 Use Technology</h4>
-                    <p data-i18n="article.budget.tip2.desc">Budgeting apps can automate tracking and send spending alerts</p>
+                <div class="tip-item">
+                    <span>📱</span>
+                    <div>
+                        <strong data-i18n="article.budget.tip2.title">Use Technology</strong>
+                        <p data-i18n="article.budget.tip2.desc">Budgeting apps can automate tracking, sync across devices, and alert you when you're overspending.</p>
+                    </div>
                 </div>
-
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip3.title">🔄 Review Monthly</h4>
-                    <p data-i18n="article.budget.tip3.desc">Adjust your budget based on actual spending and changing circumstances</p>
+                <div class="tip-item">
+                    <span>🔄</span>
+                    <div>
+                        <strong data-i18n="article.budget.tip3.title">Review Monthly</strong>
+                        <p data-i18n="article.budget.tip3.desc">Adjust your budget based on actual spending and changing priorities to stay realistic.</p>
+                    </div>
                 </div>
-
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip4.title">🎁 Include Fun Money</h4>
-                    <p data-i18n="article.budget.tip4.desc">Budget for entertainment and personal spending to avoid feeling restricted</p>
+                <div class="tip-item">
+                    <span>🎁</span>
+                    <div>
+                        <strong data-i18n="article.budget.tip4.title">Include Fun Money</strong>
+                        <p data-i18n="article.budget.tip4.desc">Allow room for entertainment and personal spending so the budget feels sustainable.</p>
+                    </div>
                 </div>
-
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip5.title">⚡ Automate Savings</h4>
-                    <p data-i18n="article.budget.tip5.desc">Set up automatic transfers to savings accounts</p>
-                </div>
-
-                <div class="tip-card">
-                    <h4 data-i18n="article.budget.tip6.title">🎯 Be Realistic</h4>
-                    <p data-i18n="article.budget.tip6.desc">Set achievable spending limits based on your actual lifestyle</p>
+                <div class="tip-item">
+                    <span>⚡</span>
+                    <div>
+                        <strong data-i18n="article.budget.tip5.title">Automate Savings</strong>
+                        <p data-i18n="article.budget.tip5.desc">Automatic transfers ensure you consistently pay yourself first.</p>
+                    </div>
                 </div>
             </div>
 
-            <h2 data-i18n="article.budget.conclusion.title">Your Budget, Your Rules</h2>
-            <p data-i18n="article.budget.conclusion.text">
-                The best budget is one you'll actually follow. Start simple, be consistent, and adjust as needed. 
-                Remember, budgeting is a skill that improves with practice.
-            </p>
-
-            <div class="example-box">
-                <div class="example-title" data-i18n="article.budget.action.title">🚀 Take Action Today</div>
-                <ol>
-                    <li data-i18n="article.budget.action.step1">Calculate your monthly after-tax income</li>
-                    <li data-i18n="article.budget.action.step2">List all your fixed expenses</li>
-                    <li data-i18n="article.budget.action.step3">Track variable expenses for one week</li>
-                    <li data-i18n="article.budget.action.step4">Choose a budgeting method that fits your lifestyle</li>
-                    <li data-i18n="article.budget.action.step5">Set up automatic savings transfers</li>
-                </ol>
-            </div>
-
-            <div class="cta-section">
-                <h3 data-i18n="article.budget.cta.title">Ready to Start Budgeting?</h3>
-                <p data-i18n="article.budget.cta.text">Use our savings goal calculator to plan your financial future and see how budgeting can help you reach your dreams.</p>
-                <a href="../calculators/savings-goal-modern.html" class="btn-cta" data-i18n="article.budget.cta.button">Try Budget Calculator</a>
+            <div class="cta-banner">
+                <div>
+                    <h3 data-i18n="article.budget.cta.title">Ready to Start Budgeting?</h3>
+                    <p data-i18n="article.budget.cta.text">Use our savings goal calculator to plan your monthly contributions and stay on track.</p>
+                </div>
+                <a href="../calculators/savings-goal-modern.html" class="btn btn-secondary" data-i18n="article.budget.cta.button">Try Budget Calculator</a>
             </div>
         </div>
 

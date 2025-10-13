@@ -122,7 +122,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index-modern.html" class="logo">
+                <a href="../index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -138,26 +138,20 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
                     <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn" id="langDropdownBtn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span data-i18n="nav.language">Language</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
                         </button>
-                        <div class="lang-dropdown-menu" id="langDropdownMenu">
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="pl">Polski</button>
-                            <button class="lang-option" data-lang="ru">Русский</button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                         </div>
                     </div>
                 </nav>
@@ -320,11 +314,11 @@
     <script>
         let chart = null;
         
-        // Country presets with realistic rates and currencies
+        // Country presets with realistic rates
         const countryPresets = {
-            us: { rate: 7.0, currency: 'USD', initial: 10000, monthly: 500 },
-            eu: { rate: 4.5, currency: 'EUR', initial: 8000, monthly: 400 },
-            pl: { rate: 5.5, currency: 'PLN', initial: 30000, monthly: 1500 }
+            us: { rate: 7.0, initial: 10000, monthly: 500 },
+            eu: { rate: 4.5, initial: 8000, monthly: 400 },
+            pl: { rate: 5.5, initial: 30000, monthly: 1500 }
         };
         
         function setPreset(country) {
@@ -339,10 +333,10 @@
         
         function showMicroTip(tipKey) {
             const tips = {
-                'high_growth': 'Увеличьте ежемесячный взнос на $100, и вы достигнете цели на 2 года раньше!',
-                'time_power': 'Начав на 5 лет раньше, вы получите на 40% больше при том же взносе!',
-                'compound_magic': 'Ваши деньги удваиваются каждые 10 лет при текущей ставке!',
-                'frequency_boost': 'Переключение на ежемесячное начисление добавит $2,000 к итогу!'
+                'high_growth': i18n.t('tips.high_growth'),
+                'time_power': i18n.t('tips.time_power'),
+                'compound_magic': i18n.t('tips.compound_magic'),
+                'frequency_boost': i18n.t('tips.frequency_boost')
             };
             
             const tipElement = document.getElementById('microTips');
@@ -397,7 +391,7 @@
                     end: balance
                 });
                 
-                chartLabels.push(`Year ${year}`);
+                chartLabels.push(i18n.t('chart.year') + ' ' + year);
                 principalData.push(initial + (monthly * 12 * year));
                 interestData.push(balance - (initial + (monthly * 12 * year)));
             }
@@ -406,9 +400,9 @@
             const totalInterest = balance - totalInvested;
             
             // Update results
-            document.getElementById('total').textContent = formatCurrency(balance);
-            document.getElementById('invested').textContent = formatCurrency(totalInvested);
-            document.getElementById('interest').textContent = formatCurrency(totalInterest);
+            document.getElementById('total').textContent = i18n.formatCurrency(balance);
+            document.getElementById('invested').textContent = i18n.formatCurrency(totalInvested);
+            document.getElementById('interest').textContent = i18n.formatCurrency(totalInterest);
             
             // Update table
             updateTable(yearlyData);
@@ -425,16 +419,7 @@
                 showMicroTip('time_power');
             }
         }
-        
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(amount);
-        }
-        
+
         function updateTable(data) {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
@@ -444,10 +429,10 @@
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><strong>${row.year}</strong></td>
-                    <td>${formatCurrency(row.start)}</td>
-                    <td>${formatCurrency(row.contributions)}</td>
-                    <td style="color: var(--success);">${formatCurrency(row.interest)}</td>
-                    <td><strong>${formatCurrency(row.end)}</strong></td>
+                    <td>${i18n.formatCurrency(row.start)}</td>
+                    <td>${i18n.formatCurrency(row.contributions)}</td>
+                    <td style="color: var(--success);">${i18n.formatCurrency(row.interest)}</td>
+                    <td><strong>${i18n.formatCurrency(row.end)}</strong></td>
                 `;
                 tbody.appendChild(tr);
             });
@@ -466,13 +451,13 @@
                     labels: labels,
                     datasets: [
                         {
-                            label: 'Principal',
+                            label: i18n.t('table.contributions'),
                             data: principal,
                             backgroundColor: '#0066ff',
                             stack: 'total'
                         },
                         {
-                            label: 'Interest',
+                            label: i18n.t('table.interest'),
                             data: interest,
                             backgroundColor: '#00a86b',
                             stack: 'total'
@@ -484,12 +469,14 @@
                     maintainAspectRatio: false,
                     plugins: {
                         legend: {
-                            position: 'top',
+                            labels: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary')
+                            }
                         },
                         tooltip: {
                             callbacks: {
                                 label: function(context) {
-                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                    return context.dataset.label + ': ' + i18n.formatCurrency(context.parsed.y);
                                 }
                             }
                         }
@@ -497,13 +484,17 @@
                     scales: {
                         x: {
                             stacked: true,
+                            ticks: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary')
+                            }
                         },
                         y: {
                             stacked: true,
                             ticks: {
                                 callback: function(value) {
-                                    return formatCurrency(value);
-                                }
+                                    return i18n.formatCurrency(value);
+                                },
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary')
                             }
                         }
                     }
@@ -515,73 +506,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
             calculate();
-            
+
             // Add input listeners for real-time calculation
             document.querySelectorAll('input, select').forEach(input => {
                 input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
-            
-            // Language dropdown functionality
-            const dropdownBtn = document.getElementById('langDropdownBtn');
-            const dropdownMenu = document.getElementById('langDropdownMenu');
-            
-            if (dropdownBtn && dropdownMenu) {
-                // Function to update language button text
-                function updateLanguageButton() {
-                    const langSpan = document.querySelector('#langDropdownBtn span[data-i18n="nav.language"]');
-                    if (langSpan && window.i18n) {
-                        langSpan.textContent = i18n.t('nav.language');
-                    }
-                }
-                
-                // Toggle dropdown
-                dropdownBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    dropdownMenu.classList.toggle('show');
-                });
-                
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function() {
-                    dropdownMenu.classList.remove('show');
-                });
-                
-                // Language selection
-                document.querySelectorAll('.lang-option').forEach(option => {
-                    option.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const selectedLang = this.getAttribute('data-lang');
-                        
-                        // Save preference
-                        localStorage.setItem('preferredLanguage', selectedLang);
-                        
-                        // Set language
-                        i18n.setLanguage(selectedLang);
-                        i18n.updatePage();
-                        calculate(); // Recalculate to update dynamic content
-                        
-                        // Update language button text
-                        updateLanguageButton();
-                        
-                        // Close dropdown
-                        dropdownMenu.classList.remove('show');
-                        
-                        // Update active state
-                        document.querySelectorAll('.lang-option').forEach(opt => {
-                            opt.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                    });
-                    
-                    // Set initial active state
-                    if (option.getAttribute('data-lang') === i18n.currentLang) {
-                        option.classList.add('active');
-                    }
-                });
-                
-                // Update language button text on init
-                updateLanguageButton();
-            }
+
         });
     </script>
 </body>

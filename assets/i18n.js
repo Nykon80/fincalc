@@ -139,6 +139,7 @@ const translations = {
     'result.interest.total': 'Total Interest',
     'result.months': 'Months to Payoff',
     'result.years': 'Years to Payoff',
+    'result.years_label': 'years',
     'result.roi.percentage': 'ROI Percentage',
     'result.roi.amount': 'ROI Amount',
     'result.roi.annual': 'Annual ROI',
@@ -490,6 +491,7 @@ const translations = {
     'rating.good': '🟡 Good',
     'rating.fair': '🟠 Fair',
     'rating.poor': '🔴 Poor',
+    'rating.loss': '⚫ Loss',
     
     // Presets and Tips
     'preset.title': 'Quick Presets',
@@ -616,6 +618,7 @@ const translations = {
     'result.interest.total': 'Całkowite odsetki',
     'result.months': 'Miesięcy do spłaty',
     'result.years': 'Lat do spłaty',
+    'result.years_label': 'lat',
     'result.roi.percentage': 'Procent ROI',
     'result.roi.amount': 'Kwota ROI',
     'result.roi.annual': 'Roczny ROI',
@@ -789,7 +792,7 @@ const translations = {
     'article.investment.risk.high.desc': 'Pojedyncze Akcje, Kryptowaluty',
     'article.investment.risk.high.return': 'Potencjał: 10%+ zwrotu',
     'article.investment.risk.medium': 'Średnie Ryzyko',
-    'article.investment.risk.medium.desc': 'ETF Giełdy Papierów Wartościowych, REIT',
+    'article.investment.risk.medium.desc': 'ETF Giełdy Papierów Wartościowych, REITs',
     'article.investment.risk.medium.return': 'Potencjał: 6-10% zwrotu',
     'article.investment.risk.low': 'Niskie Ryzyko',
     'article.investment.risk.low.desc': 'Obligacje, Lokaty, Wysokodochodowe Oszczędności',
@@ -800,7 +803,7 @@ const translations = {
     'article.investment.diversification.portfolio': 'Zrównoważony portfel może obejmować:',
     'article.investment.diversification.stocks': '60% ETF Giełdy Papierów Wartościowych',
     'article.investment.diversification.bonds': '30% ETF Obligacji',
-    'article.investment.diversification.international': '10% Rynki Międzynarodowe',
+    'article.investment.diversification.international': '10% International Markets',
     'article.investment.start.title': 'Jak Zacząć Inwestować',
     'article.investment.start.text': 'Zacznij od tanich funduszy indeksowych lub ETF, które śledzą szerokie indeksy rynkowe. Zapewniają one natychmiastową dywersyfikację i historycznie przynosiły solidne długoterminowe zwroty.',
     'article.investment.steps.title': 'Twoje Pierwsze Kroki Inwestycyjne:',
@@ -922,6 +925,7 @@ const translations = {
     'rating.good': '🟡 Dobry',
     'rating.fair': '🟠 Przeciętny',
     'rating.poor': '🔴 Słaby',
+    'rating.loss': '⚫ Strata',
     
     // Complete Compound Interest Article translations
     'article.compound.what.title': 'Czym jest Procent Składany?',
@@ -1115,6 +1119,7 @@ const translations = {
     'result.required.monthly': 'Требуемый Ежемесячный Взнос',
     'result.principal': 'Основной Долг',
     'result.years': 'Лет до Погашения',
+    'result.years_label': 'лет',
     'result.months': 'Месяцев до Погашения',
     
     // Section titles
@@ -1217,7 +1222,7 @@ const translations = {
     'article.savings.smart.measurable': 'Измеримая:',
     'article.savings.smart.measurable.text': '15 000 $',
     'article.savings.smart.achievable': 'Достижимая:',
-    'article.savings.smart.achievable.text': 'Основанная на ваших доходах',
+    'article.savings.smart.achievable.text': 'Оparty на ваших доходах',
     'article.savings.smart.relevant': 'Актуальная:',
     'article.savings.smart.relevant.text': 'Финансовая безопасность',
     'article.savings.smart.timebound': 'Ограниченная по времени:',
@@ -1465,7 +1470,15 @@ const translations = {
     'rating.excellent': '🟢 Отлично',
     'rating.good': '🟡 Хорошо',
     'rating.fair': '🟠 Удовлетворительно',
-    'rating.poor': '🔴 Плохо'
+    'rating.poor': '🔴 Плохо',
+    'rating.loss': '⚫ Убыток',
+    'chart.year': 'Год',
+    'chart.month': 'Месяц',
+    'table.metric.roi': 'ROI',
+    'table.metric.annual_roi': 'Годовой ROI',
+    'table.metric.net_profit': 'Чистая прибыль',
+    'rating.positive': '🟢 Положительно',
+    'rating.negative': '🔴 Отрицательно'
   }
 };
 
@@ -1478,7 +1491,7 @@ class I18n {
   
   detectLanguage() {
     // Check localStorage first
-    const saved = localStorage.getItem('language');
+    const saved = localStorage.getItem('preferredLanguage');
     if (saved && translations[saved]) return saved;
     
     // Check browser language
@@ -1499,7 +1512,7 @@ class I18n {
   setLanguage(lang) {
     if (translations[lang]) {
       this.currentLang = lang;
-      localStorage.setItem('language', lang);
+      localStorage.setItem('preferredLanguage', lang);
       this.updatePage();
       this.updateURL();
     }
@@ -1525,10 +1538,16 @@ class I18n {
     // Update document language
     document.documentElement.lang = this.currentLang;
     
-    // Update active language button
-    document.querySelectorAll('.lang-btn').forEach(btn => {
-      btn.classList.toggle('active', btn.dataset.lang === this.currentLang);
-    });
+    // Update dropdown button text to current language
+    const dropdownBtnText = document.querySelector('.lang-btn-text');
+    if (dropdownBtnText) {
+      const langName = {
+        en: 'English',
+        pl: 'Polski',
+        ru: 'Русский'
+      };
+      dropdownBtnText.textContent = langName[this.currentLang];
+    }
   }
   
   updateURL() {

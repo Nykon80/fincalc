@@ -104,7 +104,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="../index-modern.html" class="logo">
+                <a href="../index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -120,26 +120,20 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
                     <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn" id="langDropdownBtn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span data-i18n="nav.language">Language</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
                         </button>
-                        <div class="lang-dropdown-menu" id="langDropdownMenu">
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="pl">Polski</button>
-                            <button class="lang-option" data-lang="ru">Русский</button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                         </div>
                     </div>
                 </nav>
@@ -273,12 +267,12 @@
             
             // Calculate annualized ROI
             const annualRoi = (Math.pow((finalValue / totalInvestment), 1 / timePeriod) - 1) * 100;
-            
+
             // Update results
             document.getElementById('roi').textContent = roi.toFixed(2) + '%';
             document.getElementById('annualRoi').textContent = annualRoi.toFixed(2) + '%';
-            document.getElementById('totalProfit').textContent = formatCurrency(totalProfit);
-            document.getElementById('netProfit').textContent = formatCurrency(netProfit);
+            document.getElementById('totalProfit').textContent = i18n.formatCurrency(totalProfit);
+            document.getElementById('netProfit').textContent = i18n.formatCurrency(netProfit);
             
             // Update comparison table
             updateComparisonTable(roi, annualRoi, totalProfit, netProfit);
@@ -291,8 +285,8 @@
             const metrics = [
                 { metric: i18n.t('result.roi'), value: roi.toFixed(2) + '%', rating: getRating(roi) },
                 { metric: i18n.t('result.annual_roi'), value: annualRoi.toFixed(2) + '%', rating: getRating(annualRoi) },
-                { metric: i18n.t('result.profit'), value: formatCurrency(totalProfit), rating: getRating(totalProfit) },
-                { metric: i18n.t('result.profit.net'), value: formatCurrency(netProfit), rating: getRating(netProfit) }
+                { metric: i18n.t('result.profit'), value: i18n.formatCurrency(totalProfit), rating: getRating(totalProfit) },
+                { metric: i18n.t('result.profit.net'), value: i18n.formatCurrency(netProfit), rating: getRating(netProfit) }
             ];
             
             metrics.forEach(row => {
@@ -311,16 +305,7 @@
             if (value >= 10) return i18n.t('rating.good');
             if (value >= 5) return i18n.t('rating.fair');
             if (value >= 0) return i18n.t('rating.poor');
-            return '⚫ Loss';
-        }
-        
-        function formatCurrency(amount) {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0
-            }).format(amount);
+            return i18n.t('rating.loss');
         }
         
         // Override i18n setLanguage to refresh calculations
@@ -335,11 +320,13 @@
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
             calculate();
-            
+
             // Add input listeners
             document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
+
         });
     </script>
 </body>

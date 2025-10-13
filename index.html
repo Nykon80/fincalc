@@ -43,7 +43,7 @@
     <header class="site-header">
         <div class="container">
             <div class="header-content">
-                <a href="index-modern.html" class="logo">
+                <a href="index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -59,28 +59,22 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="index-modern.html" class="nav-link active" data-i18n="nav.home">Home</a>
-                    <a href="index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
-                    <a href="index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
+                    <a href="index.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
                     
                     <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn" id="langDropdownBtn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                            <span data-i18n="nav.language">Language</span>
-                            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M2 4L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </button>
-                        <div class="lang-dropdown-menu" id="langDropdownMenu">
-                            <button class="lang-option" data-lang="en">English</button>
-                            <button class="lang-option" data-lang="pl">Polski</button>
-                            <button class="lang-option" data-lang="ru">Русский</button>
-                        </div>
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                     </div>
+                </div>
                 </nav>
             </div>
         </div>
@@ -213,9 +207,9 @@
         <div class="results-container">
             <p class="text-center">Compare interest rates, fees, and features of financial products in your region.</p>
             <div class="text-center mt-2">
-                <a href="compare/credit-cards.html" class="btn btn-success">Compare Credit Cards</a>
-                <a href="compare/savings-accounts.html" class="btn btn-success">Compare Savings Accounts</a>
-                <a href="compare/brokers.html" class="btn btn-success">Compare Brokers</a>
+                <button class="btn btn-success" disabled>Coming Soon</button>
+                <button class="btn btn-success" disabled>Coming Soon</button>
+                <button class="btn btn-success" disabled>Coming Soon</button>
             </div>
         </div>
     </section>
@@ -245,10 +239,10 @@
                 <div class="footer-section">
                     <h4>Resources</h4>
                     <ul class="footer-links">
-                        <li><a href="articles/index.html">All Articles</a></li>
-                        <li><a href="compare/index.html">Product Comparison</a></li>
-                        <li><a href="tools/index.html">More Tools</a></li>
-                        <li><a href="api/index.html">API Access</a></li>
+                        <li><a href="#articles">Articles Overview</a></li>
+                        <li><a href="#compare">Comparison Section</a></li>
+                        <li><a href="mailto:info@fincalc.pro">Partner with Us</a></li>
+                        <li><a href="pages/privacy.html">Privacy Summary</a></li>
                     </ul>
                 </div>
                 
@@ -292,7 +286,7 @@
     
     <!-- Scripts -->
     <script src="assets/i18n.js"></script>
-    <script src="assets/main-modern.js"></script>
+    <script src="assets/main.js"></script>
     <script>
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
@@ -382,63 +376,19 @@
             const lang = detectLanguage();
 
             if (window.i18n) {
-                // Function to update language button text
-                function updateLanguageButton() {
-                    const langSpan = document.querySelector('#langDropdownBtn span[data-i18n="nav.language"]');
-                    if (langSpan && window.i18n) {
-                        langSpan.textContent = i18n.t('nav.language');
-                    }
-                }
-
                 // Set language and update page
                 i18n.setLanguage(lang);
-                updateLanguageButton();
 
-                // Language dropdown functionality
-                const dropdownBtn = document.getElementById('langDropdownBtn');
-                const dropdownMenu = document.getElementById('langDropdownMenu');
-                
-                // Toggle dropdown
-                dropdownBtn.addEventListener('click', function(e) {
-                    e.stopPropagation();
-                    dropdownMenu.classList.toggle('show');
-                });
-
-                // Close dropdown when clicking outside
-                document.addEventListener('click', function() {
-                    dropdownMenu.classList.remove('show');
-                });
-
-                // Language selection
-                document.querySelectorAll('.lang-option').forEach(option => {
-                    option.addEventListener('click', function(e) {
-                        e.stopPropagation();
-                        const selectedLang = this.getAttribute('data-lang');
-                        
-                        // Save preference
-                        localStorage.setItem('preferredLanguage', selectedLang);
-                        
-                        // Set language
-                        i18n.setLanguage(selectedLang);
-                        
-                        // Update language button text
-                        updateLanguageButton();
-                        
-                        // Close dropdown
-                        dropdownMenu.classList.remove('show');
-                        
-                        // Update active state
-                        document.querySelectorAll('.lang-option').forEach(opt => {
-                            opt.classList.remove('active');
-                        });
-                        this.classList.add('active');
-                    });
-                    
-                    // Set initial active state
-                    if (option.getAttribute('data-lang') === lang) {
-                        option.classList.add('active');
+                // Update language buttons
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.getAttribute('data-lang') === lang) {
+                        btn.classList.add('active');
                     }
                 });
+
+                // Save language preference when user changes it (already handled by i18n.setLanguage())
+                // No additional event handlers needed since i18n.js handles localStorage saving
             }
         });
     </script>
