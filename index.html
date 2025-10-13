@@ -329,36 +329,36 @@
     <!-- Internationalization -->
     <script src="assets/i18n.js"></script>
     <script>
-        // Auto-detect language based on user's system
+        // Auto-detect language based on user's system (only on first visit)
         function detectLanguage() {
-            // Check if language is already saved in localStorage
+            // 1. Check if language is already saved (user visited before or changed language)
             const savedLang = localStorage.getItem('preferredLanguage');
             if (savedLang && ['en', 'pl', 'ru'].includes(savedLang)) {
                 return savedLang;
             }
 
-            // Check URL parameter
+            // 2. Check URL parameter (for direct links like ?lang=pl)
             const urlParams = new URLSearchParams(window.location.search);
             const urlLang = urlParams.get('lang');
             if (urlLang && ['en', 'pl', 'ru'].includes(urlLang)) {
-                // Save URL language to localStorage for future visits
+                // Save URL language as preference
                 localStorage.setItem('preferredLanguage', urlLang);
                 return urlLang;
             }
 
-            // Auto-detect from browser language with better detection
-            const browserLang = navigator.language || navigator.userLanguage || 'en';
+            // 3. First visit: Auto-detect from browser/system language
+            const browserLang = navigator.language || navigator.userLanguage;
             const langCode = browserLang.toLowerCase().split('-')[0];
 
             let detectedLang = 'en'; // Default fallback
 
-            // More comprehensive language detection
+            // Language mapping rules
             if (langCode === 'pl') {
-                detectedLang = 'pl'; // Polish
-            } else if (['ru', 'uk', 'be', 'kk', 'uz'].includes(langCode)) {
-                detectedLang = 'ru'; // Russian and related languages
-            } else if (['en', 'de', 'fr', 'es', 'it', 'pt', 'nl', 'sv', 'da', 'no', 'fi'].includes(langCode)) {
-                detectedLang = 'en'; // Western European languages → English
+                detectedLang = 'pl'; // Polish → Polish
+            } else if (['ru', 'uk', 'be'].includes(langCode)) {
+                detectedLang = 'ru'; // Russian/Ukrainian/Belarusian → Russian
+            } else {
+                detectedLang = 'en'; // All others → English
             }
 
             // Save detected language for future visits

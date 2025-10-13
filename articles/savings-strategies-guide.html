@@ -330,36 +330,8 @@
     <!-- Scripts -->
     <script src="../assets/i18n.js"></script>
     <script>
-        // Auto-detect language based on user's system (same as main page)
-        function detectLanguage() {
-            // Check if language is already saved in localStorage
-            const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang && ['en', 'pl', 'ru'].includes(savedLang)) {
-                return savedLang;
-            }
-
-            // Auto-detect from browser language
-            const browserLang = navigator.language || navigator.userLanguage || 'en';
-            const langCode = browserLang.toLowerCase().split('-')[0];
-
-            let detectedLang = 'en'; // Default fallback
-
-            if (langCode === 'pl') {
-                detectedLang = 'pl'; // Polish
-            } else if (['ru', 'uk', 'be', 'kk', 'uz'].includes(langCode)) {
-                detectedLang = 'ru'; // Russian and related languages
-            }
-
-            localStorage.setItem('preferredLanguage', detectedLang);
-            return detectedLang;
-        }
-
-        // Initialize language detection
         document.addEventListener('DOMContentLoaded', function() {
-            const lang = detectLanguage();
-            if (window.i18n) {
-                i18n.setLanguage(lang);
-            }
+            i18n.updatePage();
         });
     </script>
 </body>
