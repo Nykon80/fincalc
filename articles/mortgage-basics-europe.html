@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="article.mortgage.title">Mortgage Basics in Europe - FinCalc</title>
+    <meta name="description" content="Learn about mortgage structures, rates, and considerations for European homebuyers. Expert guide with regional insights.">
+    
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+        <article class="article-content">
+            <h1 data-i18n="article.mortgage.title">Mortgage Basics in Europe</h1>
+            
+            <div class="article-meta">
+                <span class="date">January 15, 2024</span>
+                <span class="read-time">6 min read</span>
+            </div>
+            
+            <p data-i18n="article.mortgage.p1">Mortgage structures vary by country, but fixed-rate loans are common.</p>
+            
+            <h2>European Mortgage Types</h2>
+            <ul>
+                <li><strong>Fixed-Rate:</strong> Interest rate remains constant throughout the loan term</li>
+                <li><strong>Variable-Rate:</strong> Interest rate can change based on market conditions</li>
+                <li><strong>Tracker:</strong> Interest rate follows a specific benchmark (e.g., ECB rate)</li>
+            </ul>
+            
+            <h2>Key Considerations</h2>
+            <p data-i18n="article.mortgage.p2">Consider taxes, insurance, and total monthly affordability.</p>
+            
+            <h2>Regional Differences</h2>
+            <ul>
+                <li><strong>Germany:</strong> Long-term fixed rates (10-30 years)</li>
+                <li><strong>France:</strong> Flexible repayment options</li>
+                <li><strong>Poland:</strong> Growing market with competitive rates</li>
+            </ul>
+            
+            <h2>Before You Apply</h2>
+            <p data-i18n="article.mortgage.p3">Compare offers and simulate scenarios before applying.</p>
+            
+            <div class="cta-box">
+                <h3>Calculate Your Mortgage</h3>
+                <a href="../calculators/mortgage-modern.html" class="btn btn-primary">Use Our Calculator</a>
+            </div>
+        </article>
+    </div>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+        });
+    </script>
+</body>
+</html>

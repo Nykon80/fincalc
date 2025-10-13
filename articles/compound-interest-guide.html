@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="article.compound.title">The Power of Compound Interest: Complete Guide</title>
+    <meta name="description" data-i18n="article.compound.desc" content="Learn how compound interest can transform your financial future. Complete guide with examples, strategies, and calculations.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .article-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem 0;
+            color: var(--primary);
+        }
+        
+        .article-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+        }
+        
+        .example-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--radius-md);
+        }
+        
+        .example-title {
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .key-takeaway {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: var(--radius-md);
+        }
+        
+        .calculator-cta {
+            background: var(--bg-card);
+            border: 2px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+        }
+        
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .comparison-table th {
+            background: var(--gray-100);
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <div class="container article-container">
+        <div class="article-header">
+            <h1 class="article-title" data-i18n="article.compound.title">The Power of Compound Interest: Complete Guide</h1>
+            <div class="article-meta">
+                <span data-i18n="article.meta.reading">5 min read</span> • 
+                <span data-i18n="article.meta.updated">Updated December 2024</span>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p data-i18n="article.compound.intro"></p>
+
+            <h2 data-i18n="article.compound.what.title"></h2>
+            <p data-i18n="article.compound.what.text"></p>
+
+            <div class="example-box">
+                <div class="example-title" data-i18n="article.compound.example.title"></div>
+                <p data-i18n="article.compound.example.text"></p>
+            </div>
+
+            <h2 data-i18n="article.compound.formula.title"></h2>
+            <p data-i18n="article.compound.formula.text"></p>
+            <ul>
+                <li data-i18n="article.compound.formula.a"></li>
+                <li data-i18n="article.compound.formula.p"></li>
+                <li data-i18n="article.compound.formula.r"></li>
+                <li data-i18n="article.compound.formula.n"></li>
+                <li data-i18n="article.compound.formula.t"></li>
+            </ul>
+
+            <h2 data-i18n="article.compound.power.title"></h2>
+            <p data-i18n="article.compound.power.text"></p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th data-i18n="article.compound.table.investor"></th>
+                        <th data-i18n="article.compound.table.age.start"></th>
+                        <th data-i18n="article.compound.table.monthly"></th>
+                        <th data-i18n="article.compound.table.years"></th>
+                        <th data-i18n="article.compound.table.total.invested"></th>
+                        <th data-i18n="article.compound.table.final"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td data-i18n="article.compound.table.early_bird"></td>
+                        <td>25</td>
+                        <td>$200</td>
+                        <td>40</td>
+                        <td>$96,000</td>
+                        <td>$525,000</td>
+                    </tr>
+                    <tr>
+                        <td data-i18n="article.compound.table.late_starter"></td>
+                        <td>35</td>
+                        <td>$300</td>
+                        <td>30</td>
+                        <td>$108,000</td>
+                        <td>$367,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p class="takeaway" data-i18n="article.compound.takeaway"></p>
+
+            <h2 data-i18n="article.compound.strategies.title"></h2>
+            
+            <h3 data-i18n="article.compound.strategy1.title"></h3>
+            <p data-i18n="article.compound.strategy1.text"></p>
+            
+            <h3 data-i18n="article.compound.strategy2.title"></h3>
+            <p data-i18n="article.compound.strategy2.text"></p>
+            
+            <h3 data-i18n="article.compound.strategy3.title"></h3>
+            <p data-i18n="article.compound.strategy3.text"></p>
+
+            <h3 data-i18n="article.compound.strategy4.title"></h3>
+            <p data-i18n="article.compound.strategy4.text"></p>
+
+            <div class="cta-section">
+                <h3 data-i18n="article.compound.cta.title"></h3>
+                <p data-i18n="article.compound.cta.text"></p>
+                <a href="../calculators/compound-interest-modern.html" class="btn-cta" data-i18n="article.compound.cta.button"></a>
+            </div>
+
+            <h2 data-i18n="article.compound.conclusion.title"></h2>
+            <p data-i18n="article.compound.conclusion.text"></p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+        });
+    </script>
+</body>
+</html>

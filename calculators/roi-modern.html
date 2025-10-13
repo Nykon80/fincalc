@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment ROI Calculator - FinCalc</title>
+    <meta name="description" content="Calculate return on investment (ROI) and compare investment opportunities. Professional ROI calculator with detailed analysis.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            margin-top: var(--space-xl);
+            border-collapse: collapse;
+        }
+        
+        .breakdown-table th {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .breakdown-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .breakdown-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Стили для блоков результатов */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            height: 100%;
+            min-height: 120px;
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        /* Цвета для значений */
+        #roi {
+            color: #0066ff;
+        }
+        
+        #annualRoi {
+            color: #555;
+        }
+        
+        #totalProfit {
+            color: #00a86b;
+        }
+        
+        #netProfit {
+            color: #0066ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calculator -->
+    <div class="container calculator-container">
+        <h1 data-i18n="roi.title">Investment ROI Calculator</h1>
+        <p class="mb-3" data-i18n="roi.description">Calculate return on investment and compare opportunities</p>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Input Form -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.investment">Investment Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.investment.initial">Initial Investment</label>
+                    <input type="number" class="form-input" id="initialInvestment" value="10000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.investment.final">Final Value</label>
+                    <input type="number" class="form-input" id="finalValue" value="15000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.investment.time">Investment Period (Years)</label>
+                    <input type="number" class="form-input" id="timePeriod" value="5" min="0.1" max="50" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.investment.costs">Additional Costs</label>
+                    <input type="number" class="form-input" id="additionalCosts" value="500" min="0" step="100">
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%;" onclick="calculate()">
+                    <span data-i18n="form.calculate">Calculate</span>
+                </button>
+            </div>
+            
+            <!-- Results -->
+            <div>
+                <div class="results-container">
+                    <h3 data-i18n="section.results">Results</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.roi">ROI (%)</div>
+                            <div class="result-value" id="roi">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.annual_roi">Annual ROI (%)</div>
+                            <div class="result-value" id="annualRoi">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.profit">Total Profit</div>
+                            <div class="result-value" id="totalProfit">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.profit.net">Net Profit</div>
+                            <div class="result-value" id="netProfit">$0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4 data-i18n="how_it_works.title">How It Works</h4>
+                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="how_it_works.text">
+                        ROI measures the efficiency of an investment by comparing the gain or loss relative to the cost.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Comparison Table -->
+        <div style="margin-top: 2rem;">
+            <h3 data-i18n="section.comparison">Investment Comparison</h3>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="comparisonTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.metric">Metric</th>
+                            <th data-i18n="table.value">Value</th>
+                            <th data-i18n="table.rating">Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Ad Slot -->
+        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); margin-top: 2rem;">
+            <!-- Google AdSense will go here -->
+            <small>Advertisement</small>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        function calculate() {
+            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
+            const finalValue = parseFloat(document.getElementById('finalValue').value) || 0;
+            const timePeriod = parseFloat(document.getElementById('timePeriod').value) || 1;
+            const additionalCosts = parseFloat(document.getElementById('additionalCosts').value) || 0;
+            
+            if (initialInvestment <= 0 || timePeriod <= 0) {
+                alert('Please enter valid investment amount and time period.');
+                return;
+            }
+            
+            const totalInvestment = initialInvestment + additionalCosts;
+            const totalProfit = finalValue - initialInvestment;
+            const netProfit = finalValue - totalInvestment;
+            
+            // Calculate ROI
+            const roi = (netProfit / totalInvestment) * 100;
+            
+            // Calculate annualized ROI
+            const annualRoi = (Math.pow((finalValue / totalInvestment), 1 / timePeriod) - 1) * 100;
+            
+            // Update results
+            document.getElementById('roi').textContent = roi.toFixed(2) + '%';
+            document.getElementById('annualRoi').textContent = annualRoi.toFixed(2) + '%';
+            document.getElementById('totalProfit').textContent = formatCurrency(totalProfit);
+            document.getElementById('netProfit').textContent = formatCurrency(netProfit);
+            
+            // Update comparison table
+            updateComparisonTable(roi, annualRoi, totalProfit, netProfit);
+        }
+        
+        function updateComparisonTable(roi, annualRoi, totalProfit, netProfit) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            const metrics = [
+                { metric: i18n.t('result.roi'), value: roi.toFixed(2) + '%', rating: getRating(roi) },
+                { metric: i18n.t('result.annual_roi'), value: annualRoi.toFixed(2) + '%', rating: getRating(annualRoi) },
+                { metric: i18n.t('result.profit'), value: formatCurrency(totalProfit), rating: getRating(totalProfit) },
+                { metric: i18n.t('result.profit.net'), value: formatCurrency(netProfit), rating: getRating(netProfit) }
+            ];
+            
+            metrics.forEach(row => {
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.metric}</strong></td>
+                    <td>${row.value}</td>
+                    <td>${row.rating}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function getRating(value) {
+            if (value >= 15) return i18n.t('rating.excellent');
+            if (value >= 10) return i18n.t('rating.good');
+            if (value >= 5) return i18n.t('rating.fair');
+            if (value >= 0) return i18n.t('rating.poor');
+            return '⚫ Loss';
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        // Override i18n setLanguage to refresh calculations
+        const originalSetLanguage = i18n.setLanguage.bind(i18n);
+        i18n.setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            // Recalculate to update the comparison table with new language
+            calculate();
+        };
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+            calculate();
+            
+            // Add input listeners
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('change', calculate);
+            });
+        });
+    </script>
+</body>
+</html>

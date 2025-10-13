@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mortgage Calculator - FinCalc</title>
+    <meta name="description" content="Calculate mortgage payments, total interest, and affordability. Professional mortgage calculator with amortization schedule.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            margin-top: var(--space-xl);
+            border-collapse: collapse;
+        }
+        
+        .breakdown-table th {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .breakdown-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .breakdown-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Стили для блоков результатов */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            height: 100%;
+            min-height: 120px;
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        /* Цвета для значений */
+        #monthlyPayment {
+            color: #0066ff;
+        }
+        
+        #principal {
+            color: #555;
+        }
+        
+        #totalInterest {
+            color: #ff9500;
+        }
+        
+        #totalPayment {
+            color: #0066ff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calculator -->
+    <div class="container calculator-container">
+        <h1 data-i18n="calc.mortgage">Mortgage Calculator</h1>
+        <p class="mb-3" data-i18n="calc.mortgage.desc">Calculate mortgage payments and affordability</p>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Input Form -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.mortgage">Mortgage Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.mortgage.price">Home Price</label>
+                    <input type="number" class="form-input" id="homePrice" value="300000" min="0" step="10000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.mortgage.down">Down Payment</label>
+                    <input type="number" class="form-input" id="downPayment" value="60000" min="0" step="5000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.loan.term">Loan Term (Years)</label>
+                    <select class="form-select" id="loanTerm">
+                        <option value="15">15 years</option>
+                        <option value="20">20 years</option>
+                        <option value="30" selected>30 years</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.loan.rate">Annual Interest Rate (%)</label>
+                    <input type="number" class="form-input" id="interestRate" value="4.5" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.mortgage.insurance">Insurance & Taxes</label>
+                    <input type="number" class="form-input" id="insuranceTaxes" value="300" min="0" step="50">
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%;" onclick="calculate()">
+                    <span data-i18n="form.calculate">Calculate</span>
+                </button>
+            </div>
+            
+            <!-- Results -->
+            <div>
+                <div class="results-container">
+                    <h3 data-i18n="section.results">Results</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.monthly">Monthly Payment</div>
+                            <div class="result-value" id="monthlyPayment">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.principal">Principal</div>
+                            <div class="result-value" id="principal">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.interest.total">Total Interest</div>
+                            <div class="result-value" id="totalInterest">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.total.payment">Total Payment</div>
+                            <div class="result-value" id="totalPayment">$0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4 data-i18n="section.info">How It Works</h4>
+                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.mortgage">
+                        Mortgage payments are typically fixed for the loan term. Consider additional costs like property taxes and insurance.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Amortization Table -->
+        <div style="margin-top: 2rem;">
+            <h3 data-i18n="section.breakdown">Amortization Schedule</h3>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="amortizationTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.year">Year</th>
+                            <th data-i18n="table.payment">Payment</th>
+                            <th data-i18n="table.principal">Principal</th>
+                            <th data-i18n="table.interest">Interest</th>
+                            <th data-i18n="table.remaining">Remaining Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Ad Slot -->
+        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); margin-top: 2rem;">
+            <!-- Google AdSense will go here -->
+            <small>Advertisement</small>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        function calculate() {
+            const homePrice = parseFloat(document.getElementById('homePrice').value) || 0;
+            const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
+            const loanTerm = parseInt(document.getElementById('loanTerm').value) || 30;
+            const interestRate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const insuranceTaxes = parseFloat(document.getElementById('insuranceTaxes').value) || 0;
+            
+            const loanAmount = homePrice - downPayment;
+            const monthlyRate = interestRate / 100 / 12;
+            const numPayments = loanTerm * 12;
+            
+            // Calculate monthly principal and interest
+            let monthlyPI = 0;
+            if (monthlyRate > 0) {
+                monthlyPI = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, numPayments)) / 
+                           (Math.pow(1 + monthlyRate, numPayments) - 1);
+            } else {
+                monthlyPI = loanAmount / numPayments;
+            }
+            
+            const totalMonthly = monthlyPI + insuranceTaxes;
+            const totalInterest = (monthlyPI * numPayments) - loanAmount;
+            const totalPayment = totalMonthly * numPayments;
+            
+            // Update results
+            document.getElementById('monthlyPayment').textContent = formatCurrency(totalMonthly);
+            document.getElementById('principal').textContent = formatCurrency(loanAmount);
+            document.getElementById('totalInterest').textContent = formatCurrency(totalInterest);
+            document.getElementById('totalPayment').textContent = formatCurrency(totalPayment);
+            
+            // Generate amortization schedule
+            generateAmortizationSchedule(loanAmount, monthlyRate, numPayments, monthlyPI);
+        }
+        
+        function generateAmortizationSchedule(loanAmount, monthlyRate, numPayments, monthlyPayment) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            let balance = loanAmount;
+            let year = 1;
+            let yearPrincipal = 0;
+            let yearInterest = 0;
+            let yearPayment = 0;
+            
+            for (let payment = 1; payment <= numPayments; payment++) {
+                const interestPayment = balance * monthlyRate;
+                const principalPayment = Math.min(monthlyPayment - interestPayment, balance);
+                
+                balance -= principalPayment;
+                yearPrincipal += principalPayment;
+                yearInterest += interestPayment;
+                yearPayment += monthlyPayment;
+                
+                // Show yearly summary
+                if (payment % 12 === 0 || payment === numPayments) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td><strong>${year}</strong></td>
+                        <td>${formatCurrency(yearPayment)}</td>
+                        <td style="color: var(--primary);">${formatCurrency(yearPrincipal)}</td>
+                        <td style="color: var(--warning);">${formatCurrency(yearInterest)}</td>
+                        <td><strong>${formatCurrency(Math.max(0, balance))}</strong></td>
+                    `;
+                    tbody.appendChild(row);
+                    
+                    // Reset yearly totals
+                    yearPrincipal = 0;
+                    yearInterest = 0;
+                    yearPayment = 0;
+                    year++;
+                }
+                
+                if (balance <= 0) break;
+            }
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+            calculate();
+            
+            // Add input listeners
+            document.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('change', calculate);
+            });
+        });
+    </script>
+</body>
+</html>

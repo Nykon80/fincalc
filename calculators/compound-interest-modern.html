@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compound Interest Calculator - FinCalc</title>
+    <meta name="description" content="Calculate compound interest on your investments. See how your money grows over time with our professional calculator.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .calculator-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-top: var(--space-xl);
+            height: 400px;
+        }
+        
+        .info-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            margin-top: var(--space-xl);
+            border-collapse: collapse;
+        }
+        
+        .breakdown-table th {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .breakdown-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .breakdown-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Стили для блоков результатов */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            height: 100%;
+            min-height: 120px;
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        /* Цвета для значений */
+        #total {
+            color: #0066ff;
+        }
+        
+        #invested {
+            color: #555;
+        }
+        
+        #interest {
+            color: #00a86b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calculator -->
+    <div class="container calculator-container">
+        <h1 data-i18n="calc.compound">Compound Interest Calculator</h1>
+        <p class="mb-3" data-i18n="calc.compound.desc">Calculate how your investments grow with compound interest</p>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Input Form -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.investment">Investment Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.initial">Initial Amount</label>
+                    <input type="number" class="form-input" id="initial" value="10000" min="0" step="100">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.monthly">Monthly Contribution</label>
+                    <input type="number" class="form-input" id="monthly" value="500" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
+                    <input type="number" class="form-input" id="rate" value="7" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="label.compound_frequency">Compound Frequency</label>
+                    <select class="form-select" id="frequency">
+                        <option value="1" data-i18n="frequency.annually">Annually</option>
+                        <option value="4" data-i18n="frequency.quarterly">Quarterly</option>
+                        <option value="12" selected data-i18n="frequency.monthly">Monthly</option>
+                        <option value="365" data-i18n="frequency.daily">Daily</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.years">Time Period (Years)</label>
+                    <input type="number" class="form-input" id="years" value="10" min="1" max="50" step="1">
+                </div>
+                
+                <!-- Auto-calculation on input change -->
+            </div>
+            
+            <!-- Results -->
+            <div>
+                <div class="results-container">
+                    <h3 data-i18n="section.results">Results</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.total">Total Amount</div>
+                            <div class="result-value" id="total">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.invested">Total Invested</div>
+                            <div class="result-value" id="invested">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.interest">Interest Earned</div>
+                            <div class="result-value" id="interest">$0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Country Presets -->
+                <div class="preset-box" style="background: var(--primary-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-lg);">
+                    <h4 style="margin-bottom: var(--space-sm);" data-i18n="section.presets">Quick Presets</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-sm);">
+                        <button class="btn btn-secondary btn-sm" onclick="setPreset('us')" data-i18n="preset.us">US Market</button>
+                        <button class="btn btn-secondary btn-sm" onclick="setPreset('eu')" data-i18n="preset.eu">EU Market</button>
+                        <button class="btn btn-secondary btn-sm" onclick="setPreset('pl')" data-i18n="preset.pl">Poland</button>
+                    </div>
+                </div>
+
+                <!-- Micro Tips -->
+                <div class="micro-tips" id="microTips" style="background: var(--success-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-lg); display: none;">
+                    <h4 style="color: var(--success); margin-bottom: var(--space-sm);">💡 <span data-i18n="label.smart_tip">Smart Tip</span></h4>
+                    <p style="margin: 0; color: var(--text-primary);" id="tipContent"></p>
+                </div>
+
+                <div class="info-box">
+                    <h4 data-i18n="section.info">How It Works</h4>
+                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.compound">
+                        Compound interest is calculated on the initial principal and accumulated interest from previous periods. 
+                        This creates exponential growth over time.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart -->
+        <div class="chart-container">
+            <h3 data-i18n="section.chart">Growth Chart</h3>
+            <canvas id="growthChart"></canvas>
+        </div>
+        
+        <!-- Yearly Breakdown Table -->
+        <div style="margin-top: 2rem;">
+            <h3 data-i18n="section.breakdown">Yearly Breakdown</h3>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="breakdownTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.year">Year</th>
+                            <th data-i18n="table.starting_balance">Starting Balance</th>
+                            <th data-i18n="table.contributions">Contributions</th>
+                            <th data-i18n="table.interest">Interest Earned</th>
+                            <th data-i18n="table.ending_balance">Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Ad Slot -->
+        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); margin-top: 2rem;">
+            <!-- Google AdSense will go here -->
+            <small>Advertisement</small>
+        </div>
+        
+        <!-- Related Articles -->
+        <div style="margin-top: 3rem;">
+            <h3 data-i18n="section.related">Related Articles</h3>
+            <div class="grid">
+                <article class="card">
+                    <h4>The Power of Compound Interest</h4>
+                    <p>Learn why starting early makes a huge difference in your investment returns.</p>
+                    <a href="../articles/power-of-compound-interest.html" class="btn btn-secondary">Read More</a>
+                </article>
+                <article class="card">
+                    <h4>Best High-Yield Savings Accounts</h4>
+                    <p>Compare the best savings accounts with competitive interest rates.</p>
+                    <a href="../compare/savings-accounts.html" class="btn btn-secondary">Compare Now</a>
+                </article>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart = null;
+        
+        // Country presets with realistic rates and currencies
+        const countryPresets = {
+            us: { rate: 7.0, currency: 'USD', initial: 10000, monthly: 500 },
+            eu: { rate: 4.5, currency: 'EUR', initial: 8000, monthly: 400 },
+            pl: { rate: 5.5, currency: 'PLN', initial: 30000, monthly: 1500 }
+        };
+        
+        function setPreset(country) {
+            const preset = countryPresets[country];
+            if (preset) {
+                document.getElementById('initial').value = preset.initial;
+                document.getElementById('monthly').value = preset.monthly;
+                document.getElementById('rate').value = preset.rate;
+                calculate();
+            }
+        }
+        
+        function showMicroTip(tipKey) {
+            const tips = {
+                'high_growth': 'Увеличьте ежемесячный взнос на $100, и вы достигнете цели на 2 года раньше!',
+                'time_power': 'Начав на 5 лет раньше, вы получите на 40% больше при том же взносе!',
+                'compound_magic': 'Ваши деньги удваиваются каждые 10 лет при текущей ставке!',
+                'frequency_boost': 'Переключение на ежемесячное начисление добавит $2,000 к итогу!'
+            };
+            
+            const tipElement = document.getElementById('microTips');
+            const contentElement = document.getElementById('tipContent');
+            
+            if (tips[tipKey]) {
+                contentElement.textContent = tips[tipKey];
+                tipElement.style.display = 'block';
+                
+                // Hide after 10 seconds
+                setTimeout(() => {
+                    tipElement.style.display = 'none';
+                }, 10000);
+            }
+        }
+        
+        function calculate() {
+            const initial = parseFloat(document.getElementById('initial').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthly').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value) || 0;
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const frequency = parseInt(document.getElementById('frequency').value) || 12;
+            
+            // Calculate compound interest
+            const r = rate / 100 / frequency;
+            const n = years * frequency;
+            
+            let balance = initial;
+            const yearlyData = [];
+            const chartLabels = [];
+            const principalData = [];
+            const interestData = [];
+            
+            for (let year = 0; year <= years; year++) {
+                const yearStart = balance;
+                let yearInterest = 0;
+                let yearContributions = 0;
+                
+                if (year > 0) {
+                    for (let month = 0; month < 12; month++) {
+                        balance = balance * (1 + rate/100/12) + monthly;
+                        yearContributions += monthly;
+                    }
+                    yearInterest = balance - yearStart - yearContributions;
+                }
+                
+                yearlyData.push({
+                    year: year,
+                    start: yearStart,
+                    contributions: yearContributions,
+                    interest: yearInterest,
+                    end: balance
+                });
+                
+                chartLabels.push(`Year ${year}`);
+                principalData.push(initial + (monthly * 12 * year));
+                interestData.push(balance - (initial + (monthly * 12 * year)));
+            }
+            
+            const totalInvested = initial + (monthly * 12 * years);
+            const totalInterest = balance - totalInvested;
+            
+            // Update results
+            document.getElementById('total').textContent = formatCurrency(balance);
+            document.getElementById('invested').textContent = formatCurrency(totalInvested);
+            document.getElementById('interest').textContent = formatCurrency(totalInterest);
+            
+            // Update table
+            updateTable(yearlyData);
+            
+            // Update chart
+            updateChart(chartLabels, principalData, interestData);
+            
+            // Show relevant micro-tips based on calculation
+            if (rate >= 6 && years >= 10) {
+                showMicroTip('compound_magic');
+            } else if (monthly < 300 && totalInterest > initial) {
+                showMicroTip('high_growth');
+            } else if (years < 5) {
+                showMicroTip('time_power');
+            }
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        function updateTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                if (row.year === 0) return;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.year}</strong></td>
+                    <td>${formatCurrency(row.start)}</td>
+                    <td>${formatCurrency(row.contributions)}</td>
+                    <td style="color: var(--success);">${formatCurrency(row.interest)}</td>
+                    <td><strong>${formatCurrency(row.end)}</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function updateChart(labels, principal, interest) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Principal',
+                            data: principal,
+                            backgroundColor: '#0066ff',
+                            stack: 'total'
+                        },
+                        {
+                            label: 'Interest',
+                            data: interest,
+                            backgroundColor: '#00a86b',
+                            stack: 'total'
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            stacked: true,
+                        },
+                        y: {
+                            stacked: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+            calculate();
+            
+            // Add input listeners for real-time calculation
+            document.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', calculate);
+                input.addEventListener('change', calculate);
+            });
+        });
+    </script>
+</body>
+</html>

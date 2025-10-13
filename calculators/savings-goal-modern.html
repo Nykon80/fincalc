@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savings Goal Calculator - FinCalc</title>
+    <meta name="description" content="Plan your savings to reach financial goals. Calculate required monthly savings, timeline, and growth projections.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .calculator-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-top: var(--space-xl);
+            height: 400px;
+        }
+        
+        .info-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            margin-top: var(--space-xl);
+            border-collapse: collapse;
+        }
+        
+        .breakdown-table th {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .breakdown-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .breakdown-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Стили для блоков результатов */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            height: 100%;
+            min-height: 120px;
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        /* Цвета для значений */
+        #totalAmount {
+            color: #0066ff;
+        }
+        
+        #totalInvested {
+            color: #555;
+        }
+        
+        #interestEarned {
+            color: #00a86b;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calculator -->
+    <div class="container calculator-container">
+        <h1 data-i18n="calc.savings">Savings Goal Calculator</h1>
+        <p class="mb-3" data-i18n="calc.savings.desc">Plan your savings to reach financial goals</p>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Input Form -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.savings_details">Savings Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.savings.goal">Savings Goal</label>
+                    <input type="number" class="form-input" id="savingsGoal" value="50000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.savings.current">Current Savings</label>
+                    <input type="number" class="form-input" id="currentSavings" value="10000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.savings.monthly">Monthly Contribution</label>
+                    <input type="number" class="form-input" id="monthlyContribution" value="500" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
+                    <input type="number" class="form-input" id="interestRate" value="5" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.years">Time Period (Years)</label>
+                    <input type="number" class="form-input" id="timePeriod" value="10" min="1" max="50" step="1">
+                </div>
+                
+                <button class="btn btn-primary" style="width: 100%;" onclick="calculate()">
+                    <span data-i18n="form.calculate">Calculate</span>
+                </button>
+            </div>
+            
+            <!-- Results -->
+            <div>
+                <div class="results-container">
+                    <h3 data-i18n="section.results">Results</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.total">Total Amount</div>
+                            <div class="result-value" id="totalAmount">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.invested">Total Invested</div>
+                            <div class="result-value" id="totalInvested">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.interest">Interest Earned</div>
+                            <div class="result-value" id="interestEarned">$0</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="info-box">
+                    <h4 data-i18n="section.info">How It Works</h4>
+                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.savings">
+                        Regular contributions combined with compound interest can help you reach your financial goals faster than you might expect.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Progress Chart -->
+        <div class="chart-container">
+            <h3 data-i18n="section.chart">Savings Progress</h3>
+            <canvas id="savingsChart"></canvas>
+        </div>
+        
+        <!-- Yearly Breakdown Table -->
+        <div style="margin-top: 2rem;">
+            <h3 data-i18n="section.breakdown">Yearly Breakdown</h3>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="breakdownTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.year">Year</th>
+                            <th data-i18n="table.balance.start">Starting Balance</th>
+                            <th data-i18n="table.contributions">Contributions</th>
+                            <th data-i18n="table.interest">Interest Earned</th>
+                            <th data-i18n="table.balance.end">Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <!-- Ad Slot -->
+        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); margin-top: 2rem;">
+            <!-- Google AdSense will go here -->
+            <small>Advertisement</small>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart = null;
+        
+        function calculate() {
+            const goal = parseFloat(document.getElementById('savingsGoal').value) || 0;
+            const current = parseFloat(document.getElementById('currentSavings').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthlyContribution').value) || 0;
+            const rate = parseFloat(document.getElementById('interestRate').value) || 0;
+            const years = parseInt(document.getElementById('timePeriod').value) || 0;
+            
+            // Calculate compound interest
+            const monthlyRate = rate / 100 / 12;
+            const months = years * 12;
+            
+            let balance = current;
+            const yearlyData = [];
+            const chartLabels = [];
+            const balanceData = [];
+            const contributionsData = [];
+            
+            for (let year = 0; year <= years; year++) {
+                const yearStart = balance;
+                let yearInterest = 0;
+                let yearContributions = 0;
+                
+                if (year > 0) {
+                    for (let month = 0; month < 12; month++) {
+                        balance = balance * (1 + monthlyRate) + monthly;
+                        yearContributions += monthly;
+                    }
+                    yearInterest = balance - yearStart - yearContributions;
+                }
+                
+                yearlyData.push({
+                    year: year,
+                    start: yearStart,
+                    contributions: yearContributions,
+                    interest: yearInterest,
+                    end: balance
+                });
+                
+                chartLabels.push(`Year ${year}`);
+                balanceData.push(balance);
+                contributionsData.push(current + (monthly * 12 * year));
+            }
+            
+            const totalInvested = current + (monthly * 12 * years);
+            const totalInterest = balance - totalInvested;
+            
+            // Update results
+            document.getElementById('totalAmount').textContent = formatCurrency(balance);
+            document.getElementById('totalInvested').textContent = formatCurrency(totalInvested);
+            document.getElementById('interestEarned').textContent = formatCurrency(totalInterest);
+            
+            // Update table
+            updateTable(yearlyData);
+            
+            // Update chart
+            updateChart(chartLabels, balanceData, contributionsData);
+        }
+        
+        function updateTable(data) {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            data.forEach(row => {
+                if (row.year === 0) return;
+                const tr = document.createElement('tr');
+                tr.innerHTML = `
+                    <td><strong>${row.year}</strong></td>
+                    <td>${formatCurrency(row.start)}</td>
+                    <td>${formatCurrency(row.contributions)}</td>
+                    <td style="color: var(--success);">${formatCurrency(row.interest)}</td>
+                    <td><strong>${formatCurrency(row.end)}</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function updateChart(labels, balance, contributions) {
+            const ctx = document.getElementById('savingsChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Total Balance',
+                            data: balance,
+                            borderColor: '#0066ff',
+                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        },
+                        {
+                            label: 'Total Contributions',
+                            data: contributions,
+                            borderColor: '#00a86b',
+                            backgroundColor: 'rgba(0, 168, 107, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Time'
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function formatCurrency(amount) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+            }).format(amount);
+        }
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+            calculate();
+            
+            // Add input listeners
+            document.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('change', calculate);
+            });
+        });
+    </script>
+</body>
+</html>

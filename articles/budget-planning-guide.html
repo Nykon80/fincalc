@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="article.budget.title">Budget Planning: Master Your Money Management</title>
+    <meta name="description" data-i18n="article.budget.desc" content="Create a realistic budget that works for your lifestyle. Learn proven budgeting methods and tools to take control of your finances.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .article-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .article-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .article-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .article-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+        
+        .article-content {
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+        
+        .article-content h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 2.5rem 0 1rem 0;
+            color: var(--primary);
+        }
+        
+        .article-content h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            color: var(--text-primary);
+        }
+        
+        .example-box {
+            background: var(--primary-light);
+            border: 1px solid var(--primary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .example-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        .info-box {
+            background: var(--success-light);
+            border: 1px solid var(--success);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .info-title {
+            font-weight: 600;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+        }
+        
+        .budget-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .method-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .method-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--success));
+        }
+        
+        .method-card h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .method-card p {
+            flex-grow: 1;
+        }
+        
+        .pie-chart {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            margin: 2rem auto;
+            position: relative;
+            background: conic-gradient(
+                var(--primary) 0% 50%,
+                var(--success) 50% 80%,
+                #feca57 80% 100%
+            );
+        }
+        
+        .pie-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 2px;
+        }
+        
+        .needs { background: var(--primary); }
+        .wants { background: var(--success); }
+        .savings { background: #feca57; }
+        
+        .budget-calculator {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .calc-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .calc-row:last-child {
+            border-bottom: none;
+            font-weight: 600;
+            color: var(--primary);
+        }
+        
+        .expense-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .category-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+        }
+        
+        .category-card h4 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .category-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .category-card li {
+            padding: 0.25rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        
+        .category-card li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .tip-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border-left: 4px solid var(--success);
+        }
+        
+        .tip-card h4 {
+            color: var(--success);
+            margin-bottom: 1rem;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .cta-section h3 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+        
+        .btn-cta {
+            background: white;
+            color: var(--primary);
+            padding: 0.75rem 2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-block;
+            margin-top: 1rem;
+            transition: var(--transition-base);
+        }
+        
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            margin: 3rem 0;
+            padding: 2rem 0;
+            border-top: 1px solid var(--border);
+        }
+        
+        .nav-btn {
+            background: var(--gray-100);
+            color: var(--text-primary);
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            transition: var(--transition-base);
+        }
+        
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .pie-legend {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+            
+            .calc-row {
+                flex-direction: column;
+                gap: 0.5rem;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index-modern.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index-modern.html" class="nav-link" data-i18n="nav.home">Home</a>
+                    <a href="../index-modern.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
+                    <a href="../index-modern.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
+                    <a href="../index-modern.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    
+                    <div class="lang-switcher">
+                        <button class="lang-btn" data-lang="en" onclick="i18n.setLanguage('en')">EN</button>
+                        <button class="lang-btn" data-lang="pl" onclick="i18n.setLanguage('pl')">PL</button>
+                        <button class="lang-btn" data-lang="ru" onclick="i18n.setLanguage('ru')">RU</button>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <div class="container article-container">
+        <div class="article-header">
+            <h1 class="article-title" data-i18n="article.budget.title">Budget Planning: Master Your Money Management</h1>
+            <div class="article-meta">
+                <span data-i18n="article.meta.reading">5 min read</span> • 
+                <span data-i18n="article.meta.updated">Updated December 2024</span>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p data-i18n="article.budget.intro">
+                A well-planned budget is the foundation of financial success. It helps you understand where your money goes, 
+                prioritize your spending, and work toward your financial goals with confidence.
+            </p>
+
+            <h2 data-i18n="article.budget.why.title">Why Budgeting Matters</h2>
+            <p data-i18n="article.budget.why.text">
+                Budgeting isn't about restricting yourself – it's about giving yourself permission to spend on what matters 
+                most while ensuring you're saving for the future.
+            </p>
+
+            <div class="info-box">
+                <div class="info-title" data-i18n="article.budget.benefits.title">💡 Benefits of Budgeting</div>
+                <ul>
+                    <li data-i18n="article.budget.benefit1">Reduces financial stress and anxiety</li>
+                    <li data-i18n="article.budget.benefit2">Helps you reach financial goals faster</li>
+                    <li data-i18n="article.budget.benefit3">Prevents overspending and debt accumulation</li>
+                    <li data-i18n="article.budget.benefit4">Gives you control over your financial future</li>
+                </ul>
+            </div>
+
+            <h2 data-i18n="article.budget.methods.title">Popular Budgeting Methods</h2>
+            
+            <div class="budget-methods">
+                <div class="method-card">
+                    <h3 data-i18n="article.budget.method_50_30_20.title">🎯 50/30/20 Rule</h3>
+                    <div class="pie-chart"></div>
+                    <div class="pie-legend">
+                        <div class="legend-item">
+                            <div class="legend-color needs"></div>
+                            <span data-i18n="article.budget.needs">50% Needs</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color wants"></div>
+                            <span data-i18n="article.budget.wants">30% Wants</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color savings"></div>
+                            <span data-i18n="article.budget.savings">20% Savings</span>
+                        </div>
+                    </div>
+                    <p data-i18n="article.budget.method_50_30_20.desc">Simple and flexible approach that works for most people</p>
+                </div>
+
+                <div class="method-card">
+                    <h3 data-i18n="article.budget.method_zero.title">📊 Zero-Based Budget</h3>
+                    <p data-i18n="article.budget.method_zero.desc">Assign every dollar a purpose until your income minus expenses equals zero</p>
+                    <div class="budget-calculator">
+                        <div class="calc-row">
+                            <span data-i18n="article.budget.income">Monthly Income:</span>
+                            <span>$5,000</span>
+                        </div>
+                        <div class="calc-row">
+                            <span data-i18n="article.budget.expenses">Total Expenses:</span>
+                            <span>$4,000</span>
+                        </div>
+                        <div class="calc-row">
+                            <span data-i18n="article.budget.savings_goals">Savings Goals:</span>
+                            <span>$1,000</span>
+                        </div>
+                        <div class="calc-row">
+                            <span data-i18n="article.budget.remaining">Remaining:</span>
+                            <span>$0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="method-card">
+                    <h3 data-i18n="article.budget.method_envelope.title">💰 Envelope Method</h3>
+                    <p data-i18n="article.budget.method_envelope.desc">Allocate cash for each spending category in separate envelopes</p>
+                    <div class="expense-categories">
+                        <div>
+                            <h4 data-i18n="article.budget.envelope.groceries">🛒 Groceries: $600</h4>
+                        </div>
+                        <div>
+                            <h4 data-i18n="article.budget.envelope.entertainment">🎬 Entertainment: $200</h4>
+                        </div>
+                        <div>
+                            <h4 data-i18n="article.budget.envelope.dining">🍽️ Dining Out: $300</h4>
+                        </div>
+                        <div>
+                            <h4 data-i18n="article.budget.envelope.transport">🚗 Transportation: $400</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <h2 data-i18n="article.budget.categories.title">Essential Budget Categories</h2>
+            <p data-i18n="article.budget.categories.text">
+                Organize your expenses into clear categories to better understand your spending patterns.
+            </p>
+
+            <div class="expense-categories">
+                <div class="category-card">
+                    <h4 data-i18n="article.budget.fixed.title">🏠 Fixed Expenses</h4>
+                    <ul>
+                        <li data-i18n="article.budget.fixed.rent">Rent/Mortgage</li>
+                        <li data-i18n="article.budget.fixed.insurance">Insurance</li>
+                        <li data-i18n="article.budget.fixed.utilities">Utilities</li>
+                        <li data-i18n="article.budget.fixed.subscriptions">Subscriptions</li>
+                        <li data-i18n="article.budget.fixed.loans">Loan Payments</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <h4 data-i18n="article.budget.variable.title">📈 Variable Expenses</h4>
+                    <ul>
+                        <li data-i18n="article.budget.variable.groceries">Groceries</li>
+                        <li data-i18n="article.budget.variable.gas">Gas</li>
+                        <li data-i18n="article.budget.variable.dining">Dining Out</li>
+                        <li data-i18n="article.budget.variable.shopping">Shopping</li>
+                        <li data-i18n="article.budget.variable.entertainment">Entertainment</li>
+                    </ul>
+                </div>
+
+                <div class="category-card">
+                    <h4 data-i18n="article.budget.savings.title">💰 Savings & Goals</h4>
+                    <ul>
+                        <li data-i18n="article.budget.savings.emergency">Emergency Fund</li>
+                        <li data-i18n="article.budget.savings.retirement">Retirement</li>
+                        <li data-i18n="article.budget.savings.vacation">Vacation</li>
+                        <li data-i18n="article.budget.savings.house">House Down Payment</li>
+                        <li data-i18n="article.budget.savings.education">Education</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2 data-i18n="article.budget.tips.title">Pro Budgeting Tips</h2>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip1.title">🎯 Start Small</h4>
+                    <p data-i18n="article.budget.tip1.desc">Begin with tracking expenses for one week to understand your spending patterns</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip2.title">📱 Use Technology</h4>
+                    <p data-i18n="article.budget.tip2.desc">Budgeting apps can automate tracking and send spending alerts</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip3.title">🔄 Review Monthly</h4>
+                    <p data-i18n="article.budget.tip3.desc">Adjust your budget based on actual spending and changing circumstances</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip4.title">🎁 Include Fun Money</h4>
+                    <p data-i18n="article.budget.tip4.desc">Budget for entertainment and personal spending to avoid feeling restricted</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip5.title">⚡ Automate Savings</h4>
+                    <p data-i18n="article.budget.tip5.desc">Set up automatic transfers to savings accounts</p>
+                </div>
+
+                <div class="tip-card">
+                    <h4 data-i18n="article.budget.tip6.title">🎯 Be Realistic</h4>
+                    <p data-i18n="article.budget.tip6.desc">Set achievable spending limits based on your actual lifestyle</p>
+                </div>
+            </div>
+
+            <h2 data-i18n="article.budget.conclusion.title">Your Budget, Your Rules</h2>
+            <p data-i18n="article.budget.conclusion.text">
+                The best budget is one you'll actually follow. Start simple, be consistent, and adjust as needed. 
+                Remember, budgeting is a skill that improves with practice.
+            </p>
+
+            <div class="example-box">
+                <div class="example-title" data-i18n="article.budget.action.title">🚀 Take Action Today</div>
+                <ol>
+                    <li data-i18n="article.budget.action.step1">Calculate your monthly after-tax income</li>
+                    <li data-i18n="article.budget.action.step2">List all your fixed expenses</li>
+                    <li data-i18n="article.budget.action.step3">Track variable expenses for one week</li>
+                    <li data-i18n="article.budget.action.step4">Choose a budgeting method that fits your lifestyle</li>
+                    <li data-i18n="article.budget.action.step5">Set up automatic savings transfers</li>
+                </ol>
+            </div>
+
+            <div class="cta-section">
+                <h3 data-i18n="article.budget.cta.title">Ready to Start Budgeting?</h3>
+                <p data-i18n="article.budget.cta.text">Use our savings goal calculator to plan your financial future and see how budgeting can help you reach your dreams.</p>
+                <a href="../calculators/savings-goal-modern.html" class="btn-cta" data-i18n="article.budget.cta.button">Try Budget Calculator</a>
+            </div>
+        </div>
+
+        <!-- Article Navigation -->
+        <div class="article-nav">
+            <a href="../articles/debt-management-guide.html" class="nav-btn" data-i18n="article.previous">← Debt Management</a>
+            <a href="../articles/compound-interest-guide.html" class="nav-btn" data-i18n="article.next">Compound Interest →</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.updatePage();
+        });
+    </script>
+</body>
+</html>
