@@ -336,11 +336,38 @@
     <!-- Internationalization -->
     <script src="assets/i18n.js"></script>
     <script>
+        // Auto-detect language based on user's system
+        function detectLanguage() {
+            // Check if language is already saved in localStorage
+            const savedLang = localStorage.getItem('preferredLanguage');
+            if (savedLang) {
+                return savedLang;
+            }
+
+            // Check URL parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            if (urlLang && ['en', 'pl', 'ru'].includes(urlLang)) {
+                return urlLang;
+            }
+
+            // Auto-detect from browser language
+            const browserLang = navigator.language || navigator.userLanguage;
+            const langCode = browserLang.toLowerCase().split('-')[0];
+
+            // Language mapping rules
+            if (langCode === 'pl') {
+                return 'pl'; // Polish → Polish
+            } else if (['ru', 'uk', 'be'].includes(langCode)) {
+                return 'ru'; // Russian/Ukrainian/Belarusian → Russian
+            } else {
+                return 'en'; // All others → English
+            }
+        }
+
         // Initialize i18n
         document.addEventListener('DOMContentLoaded', function() {
-            // Set initial language from URL parameter or default to 'en'
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || 'en';
+            const lang = detectLanguage();
 
             if (window.i18n) {
                 // Set language and update page
@@ -352,6 +379,14 @@
                     if (btn.getAttribute('data-lang') === lang) {
                         btn.classList.add('active');
                     }
+                });
+
+                // Save language preference when user changes it
+                document.querySelectorAll('.lang-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const selectedLang = this.getAttribute('data-lang');
+                        localStorage.setItem('preferredLanguage', selectedLang);
+                    });
                 });
             }
         });
