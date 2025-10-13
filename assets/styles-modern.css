@@ -286,6 +286,29 @@ a:hover {
   margin-top: auto;
 }
 
+/* Calculator Icons */
+.calculator-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-sm);
+}
+
+.calculator-icon {
+  color: var(--primary);
+  flex-shrink: 0;
+  opacity: 0.8;
+  transition: opacity var(--transition-base);
+}
+
+.card:hover .calculator-icon {
+  opacity: 1;
+}
+
+.calculator-header h3 {
+  margin: 0;
+}
+
 /* Buttons */
 .btn {
   display: inline-flex;
