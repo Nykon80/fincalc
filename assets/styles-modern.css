@@ -899,35 +899,70 @@ section[id] {
 
   /* Header mobile optimization */
   .site-header {
-    padding: var(--space-md) 0;
+    padding: var(--space-sm) 0;
+    position: sticky;
+    top: 0;
+    background-color: var(--bg-primary);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
   }
 
   .header-content {
-    flex-direction: column;
-    gap: var(--space-md);
-    align-items: stretch;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
   }
 
   .logo {
-    align-self: center;
+    flex-shrink: 0;
   }
 
-  .lang-dropdown {
-    margin-left: 0;
-    align-self: center;
+  .logo span {
+    display: none; /* Hide text on mobile */
   }
 
-  /* Navigation mobile */
+  /* Navigation mobile - compact horizontal */
   .nav-menu {
-    flex-direction: column;
-    gap: var(--space-sm);
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    gap: var(--space-xs);
+    align-items: center;
+    overflow-x: auto;
+    flex: 1;
+    justify-content: center;
+    padding: 0 var(--space-sm);
   }
 
   .nav-menu a {
-    padding: var(--space-sm) var(--space-md);
-    border-radius: var(--radius-md);
-    background-color: var(--gray-100);
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: var(--radius-sm);
+    background-color: transparent;
+    font-size: 0.875rem;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: auto;
+  }
+
+  .nav-menu a:hover,
+  .nav-menu a.active {
+    background-color: var(--primary-light);
+    color: var(--primary);
+  }
+
+  /* Language dropdown mobile */
+  .lang-dropdown {
+    margin-left: 0;
+    flex-shrink: 0;
+  }
+
+  .lang-dropdown-btn {
+    padding: var(--space-xs) var(--space-sm);
+    font-size: 0.875rem;
+  }
+
+  .lang-dropdown-btn .lang-btn-text {
+    display: none; /* Hide text, show only globe icon */
   }
 
   /* Hero section mobile */
@@ -1126,6 +1161,25 @@ section[id] {
 
   .result-value {
     font-size: 1.25rem;
+  }
+
+  /* Extra compact navigation for small screens */
+  .nav-menu {
+    gap: 0.25rem;
+    padding: 0;
+  }
+
+  .nav-menu a {
+    padding: 0.25rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .lang-dropdown-btn {
+    padding: 0.25rem 0.5rem;
+  }
+
+  .site-header {
+    padding: 0.5rem 0;
   }
 }
 
