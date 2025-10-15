@@ -355,8 +355,24 @@
             document.getElementById('loanSummaryLabel').textContent = i18n.t('result.years');
         }
         
+        // Override i18n setLanguage to refresh calculations
+        const originalSetLanguage = i18n.setLanguage.bind(i18n);
+        i18n.setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            // Recalculate to update currency formatting
+            updateResultLabels();
+            calculate();
+        };
+        
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
+            // Set language from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const currentLang = langFromUrl || savedLang || 'en';
+            
+            i18n.setLanguage(currentLang);
             i18n.updatePage();
             updateResultLabels();
             calculate();

@@ -138,10 +138,10 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home" onclick="i18n.navigateTo(event, '../index.html')">Home</a>
+                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators" onclick="i18n.navigateTo(event, '../index.html#calculators')">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles" onclick="i18n.navigateTo(event, '../index.html#articles')">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare" onclick="i18n.navigateTo(event, '../index.html#compare')">Compare</a>
                     
                     <div class="lang-dropdown">
                         <button class="lang-dropdown-btn">
@@ -221,22 +221,6 @@
                         </div>
                     </div>
                 </div>
-                
-                <!-- Country Presets -->
-                <div class="preset-box" style="background: var(--primary-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-lg);">
-                    <h4 style="margin-bottom: var(--space-sm);" data-i18n="section.presets">Quick Presets</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: var(--space-sm);">
-                        <button class="btn btn-secondary btn-sm" onclick="setPreset('us')" data-i18n="preset.us">US Market</button>
-                        <button class="btn btn-secondary btn-sm" onclick="setPreset('eu')" data-i18n="preset.eu">EU Market</button>
-                        <button class="btn btn-secondary btn-sm" onclick="setPreset('pl')" data-i18n="preset.pl">Poland</button>
-                    </div>
-                </div>
-
-                <!-- Micro Tips -->
-                <div class="micro-tips" id="microTips" style="background: var(--success-light); border-radius: var(--radius-md); padding: var(--space-md); margin-bottom: var(--space-lg); display: none;">
-                    <h4 style="color: var(--success); margin-bottom: var(--space-sm);">💡 <span data-i18n="label.smart_tip">Smart Tip</span></h4>
-                    <p style="margin: 0; color: var(--text-primary);" id="tipContent"></p>
-                </div>
 
                 <div class="info-box">
                     <h4 data-i18n="section.info">How It Works</h4>
@@ -286,14 +270,14 @@
             <h3 data-i18n="section.related">Related Articles</h3>
             <div class="grid">
                 <article class="card">
-                    <h4>The Power of Compound Interest</h4>
-                    <p>Learn why starting early makes a huge difference in your investment returns.</p>
-                    <a href="../articles/power-of-compound-interest.html" class="btn btn-secondary">Read More</a>
+                    <h4 data-i18n="related.compound.title">The Power of Compound Interest</h4>
+                    <p data-i18n="related.compound.desc">Learn why starting early makes a huge difference in your investment returns.</p>
+                    <a href="../articles/power-of-compound-interest.html" class="btn btn-secondary" data-i18n="related.compound.cta">Read More</a>
                 </article>
                 <article class="card">
-                    <h4>Best High-Yield Savings Accounts</h4>
-                    <p>Compare the best savings accounts with competitive interest rates.</p>
-                    <a href="../compare/savings-accounts.html" class="btn btn-secondary">Compare Now</a>
+                    <h4 data-i18n="related.savings.title">Best High-Yield Savings Accounts</h4>
+                    <p data-i18n="related.savings.desc">Compare the best savings accounts with competitive interest rates.</p>
+                    <a href="../compare/savings-accounts.html" class="btn btn-secondary" data-i18n="related.savings.cta">Compare Now</a>
                 </article>
             </div>
         </div>
@@ -322,45 +306,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         let chart = null;
-        
-        // Country presets with realistic rates
-        const countryPresets = {
-            us: { rate: 7.0, initial: 10000, monthly: 500 },
-            eu: { rate: 4.5, initial: 8000, monthly: 400 },
-            pl: { rate: 5.5, initial: 30000, monthly: 1500 }
-        };
-        
-        function setPreset(country) {
-            const preset = countryPresets[country];
-            if (preset) {
-                document.getElementById('initial').value = preset.initial;
-                document.getElementById('monthly').value = preset.monthly;
-                document.getElementById('rate').value = preset.rate;
-                calculate();
-            }
-        }
-        
-        function showMicroTip(tipKey) {
-            const tips = {
-                'high_growth': i18n.t('tips.high_growth'),
-                'time_power': i18n.t('tips.time_power'),
-                'compound_magic': i18n.t('tips.compound_magic'),
-                'frequency_boost': i18n.t('tips.frequency_boost')
-            };
-            
-            const tipElement = document.getElementById('microTips');
-            const contentElement = document.getElementById('tipContent');
-            
-            if (tips[tipKey]) {
-                contentElement.textContent = tips[tipKey];
-                tipElement.style.display = 'block';
-                
-                // Hide after 10 seconds
-                setTimeout(() => {
-                    tipElement.style.display = 'none';
-                }, 10000);
-            }
-        }
         
         function calculate() {
             const initial = parseFloat(document.getElementById('initial').value) || 0;
@@ -419,14 +364,6 @@
             // Update chart
             updateChart(chartLabels, principalData, interestData);
             
-            // Show relevant micro-tips based on calculation
-            if (rate >= 6 && years >= 10) {
-                showMicroTip('compound_magic');
-            } else if (monthly < 300 && totalInterest > initial) {
-                showMicroTip('high_growth');
-            } else if (years < 5) {
-                showMicroTip('time_power');
-            }
         }
 
         function updateTable(data) {
@@ -511,8 +448,23 @@
             });
         }
         
+        // Override i18n setLanguage to refresh calculations
+        const originalSetLanguage = i18n.setLanguage.bind(i18n);
+        i18n.setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            // Recalculate to update currency formatting
+            calculate();
+        };
+        
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
+            // Set language from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const currentLang = langFromUrl || savedLang || 'en';
+            
+            i18n.setLanguage(currentLang);
             i18n.updatePage();
             calculate();
 

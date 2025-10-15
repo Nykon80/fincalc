@@ -42,6 +42,49 @@ const translations = {
     'form.calculate': 'Calculate',
     'form.reset': 'Reset',
     
+    // Related articles
+    'related.compound.title': 'The Power of Compound Interest',
+    'related.compound.desc': 'Learn why starting early makes a huge difference in your investment returns.',
+    'related.compound.cta': 'Read More',
+    'related.savings.title': 'Best High-Yield Savings Accounts',
+    'related.savings.desc': 'Compare the best savings accounts with competitive interest rates.',
+    'related.savings.cta': 'Compare Now',
+
+    // ROI Calculator labels
+    'form.investment.costs': 'Additional Costs',
+    'form.investment.time': 'Investment Period (Years)',
+    'result.roi': 'ROI (%)',
+    'result.annual_roi': 'Annual ROI (%)',
+    'result.profit': 'Total Profit',
+    'result.profit.net': 'Net Profit',
+    'section.comparison': 'Investment Analysis & Comparison',
+    'table.metric': 'Metric',
+    'table.value': 'Value',
+    'table.rating': 'Rating',
+    'rating.excellent': '🟢 Excellent',
+    'rating.good': '🟡 Good',
+    'rating.fair': '🟠 Fair',
+    'rating.poor': '🔴 Poor',
+    'rating.loss': '⚫ Loss',
+
+    // Risk scale labels
+    'form.risk.level': 'Risk Level (1-10)',
+    'form.inflation.rate': 'Expected Inflation (%)',
+    'result.real_roi': 'Real ROI (Inflation-adjusted)',
+    'result.risk_adjusted_roi': 'Risk-adjusted ROI',
+    'form.risk.scale.split.0': 'Conservative',
+    'form.risk.scale.split.1': 'Balanced',
+    'form.risk.scale.split.2': 'Aggressive',
+    'table.description': 'Description',
+
+    // ROI descriptions
+    'roi.description.total': 'Total return on investment including all costs',
+    'roi.description.annual': 'Annualized return rate over the investment period',
+    'roi.description.real': 'ROI adjusted for inflation - shows real purchasing power growth',
+    'roi.description.risk': 'ROI adjusted for risk level - higher risk reduces effective return',
+    'roi.description.total_profit': 'Total profit before deducting investment costs',
+    'roi.description.net_profit': 'Net profit after all costs and expenses',
+
     // Additional form labels
     'form.loan.amount': 'Loan Amount',
     'form.loan.term': 'Loan Term (Years)',
@@ -310,7 +353,153 @@ const translations = {
     'article.investment.cta.title': 'Calculate Your Investment Growth',
     'article.investment.cta.text': 'See how your investments could grow over time with our compound interest calculator.',
     'article.investment.cta.button': 'Try Investment Calculator',
-    
+
+    // English article hero section
+    'article.investment.hero.tag': '2025 Outlook',
+    'article.investment.hero.title': 'Invest With Clarity in the US Market',
+    'article.investment.hero.subtitle': 'Track US trends, compare banking offers in America, and build a resilient portfolio that fits your goals.',
+    'article.investment.hero.cta': 'Plan Growth Scenario',
+    'article.investment.hero.updated': 'Data verified: September 2025',
+    'article.investment.meta.reading': '8 min read',
+    'article.investment.meta.updated': 'Updated October 2025',
+
+    // US-specific content (English version)
+    'article.investment.metrics.title.en': 'US Capital Markets',
+    'article.investment.metrics.subtitle.en': 'Key US market indicators every investor should track.',
+    'article.investment.metrics.stocks.label.en': 'S&P 500 5-Year Return',
+    'article.investment.metrics.stocks.value.en': '11.8% (S&P 500, 2019-2024)',
+    'article.investment.metrics.stocks.note.en': 'Source: S&P Global, Q3 2024',
+    'article.investment.metrics.bonds.label.en': '10-Year Treasury Yield',
+    'article.investment.metrics.bonds.value.en': '4.2% (US Treasury)',
+    'article.investment.metrics.bonds.note.en': 'Current yield on 10-year government bonds',
+    'article.investment.metrics.inflation.label.en': 'Core Inflation Rate',
+    'article.investment.metrics.inflation.value.en': '3.1% (CPI, YoY)',
+    'article.investment.metrics.inflation.note.en': 'Federal Reserve target: 2%',
+
+    'article.investment.regions.title.en': 'US Banking and Investment Landscape',
+    'article.investment.regions.subtitle.en': 'Current rates, brokers, and investment opportunities available for US investors.',
+    'article.investment.regions.banks.title.en': 'Major US Banks',
+    'article.investment.regions.banks.savings.en': 'High-Yield Savings:',
+    'article.investment.regions.banks.cd.en': 'CD Rates (12-month):',
+    'article.investment.regions.brokers.title.en': 'Top US Brokers',
+    'article.investment.regions.brokers.commission.en': 'Commission:',
+    'article.investment.regions.brokers.minimum.en': 'Minimum Deposit:',
+    'article.investment.regions.investments.title.en': 'Investment Options',
+    'article.investment.regions.investments.etf.en': 'ETF Expense Ratios:',
+    'article.investment.regions.investments.401k.en': '401(k) Match:',
+    'article.investment.regions.note.title.en': 'How to use US investment opportunities',
+    'article.investment.regions.note.text.en': 'Check broker registration with SEC and FINRA before opening accounts. Confirm FDIC insurance for deposit products and SIPC protection for securities.',
+
+    'article.investment.portfolios.title.en': 'Model Portfolios for US Investors',
+    'article.investment.portfolios.subtitle.en': 'US asset allocation strategies for different risk profiles and time horizons.',
+
+    'article.investment.portfolios.conservative.title.en': 'Conservative Portfolio (0-3 years)',
+    'article.investment.portfolios.conservative.desc.en': 'Focus on capital preservation and liquidity for short-term goals.',
+    'article.investment.portfolios.conservative.line1.en': '50% high-yield savings (4.5-5.2%)',
+    'article.investment.portfolios.conservative.line2.en': '30% short-term Treasury bonds',
+    'article.investment.portfolios.conservative.line3.en': '20% money market funds',
+
+    'article.investment.portfolios.balanced.title.en': 'Balanced Portfolio (3-7 years)',
+    'article.investment.portfolios.balanced.desc.en': 'Mix of US stocks and bonds for moderate growth.',
+    'article.investment.portfolios.balanced.line1.en': '15% cash and savings',
+    'article.investment.portfolios.balanced.line2.en': '45% US large-cap stocks (S&P 500)',
+    'article.investment.portfolios.balanced.line3.en': '25% US bonds (Treasury/Corporate)',
+    'article.investment.portfolios.balanced.line4.en': '15% international stocks',
+
+    'article.investment.portfolios.growth.title.en': 'Growth Portfolio (7+ years)',
+    'article.investment.portfolios.growth.desc.en': 'Higher allocation to stocks for long-term wealth building.',
+    'article.investment.portfolios.growth.line1.en': '75% US stocks (broad market)',
+    'article.investment.portfolios.growth.line2.en': '15% small-cap growth stocks',
+    'article.investment.portfolios.growth.line3.en': '10% Treasury bonds for rebalancing',
+
+    // Regional Banking & Investment Data (October 2025)
+    'article.investment.hero.tag': '2025 Outlook',
+    'article.investment.hero.title': 'Invest With Clarity in Any Market',
+    'article.investment.hero.subtitle': 'Track global trends, compare regional banking offers, and build a resilient portfolio that fits your goals.',
+    'article.investment.meta.updated': 'Updated October 2025',
+    'article.investment.hero.cta': 'Plan Growth Scenario',
+    'article.investment.hero.updated': 'Data verified: September 2025',
+
+    'article.investment.metrics.title': 'Global Market Snapshot',
+    'article.investment.metrics.subtitle': 'Headline numbers every long-term investor should watch this year.',
+    'article.investment.metrics.stocks.label': 'Global equities 5-year CAGR',
+    'article.investment.metrics.stocks.value': '8.7% (MSCI ACWI, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Source: MSCI Quarterly Fact Sheet, Q3 2025',
+    'article.investment.metrics.bonds.label': 'Global aggregate bond yield',
+    'article.investment.metrics.bonds.value': '3.6% (Bloomberg Global Agg)',
+    'article.investment.metrics.bonds.note': 'Investment-grade weighted yield, September 2025',
+    'article.investment.metrics.inflation.label': 'Advanced economy inflation outlook',
+    'article.investment.metrics.inflation.value': '3.1% (IMF WEO 2025)',
+    'article.investment.metrics.inflation.note': 'Projection for US, Euro Area, UK',
+
+    'article.investment.principles.title': 'Build Your Investment Framework',
+    'article.investment.principles.subtitle': 'Start with purpose, protect liquidity, automate contributions.',
+    'article.investment.principles.goal.title': 'Clarify goals by horizon',
+    'article.investment.principles.goal.text': 'Document target amounts for near-term (≤2y), medium (3-7y), and long-term (10+y) objectives with responsible currency.',
+    'article.investment.principles.goal.point1': 'Assign each goal a base currency and inflation assumption.',
+    'article.investment.principles.goal.point2': 'Define minimum required return to stay on track.',
+    'article.investment.principles.reserve.title': 'Ring-fence a safety reserve',
+    'article.investment.principles.reserve.text': 'Hold 3-6 months of expenses in insured cash products before increasing market exposure.',
+    'article.investment.principles.reserve.point1': 'Separate emergency cash from brokerage balances.',
+    'article.investment.principles.reserve.point2': 'Use laddered deposits or money-market funds for yield.',
+    'article.investment.principles.automation.title': 'Automate disciplined investing',
+    'article.investment.principles.automation.text': 'Schedule recurring transfers on payday and rebalance quarterly to target weights.',
+    'article.investment.principles.automation.point1': 'Enable fractional ETF investing where available.',
+    'article.investment.principles.automation.point2': 'Review contribution levels after salary changes.',
+
+    'article.investment.regions.title': 'Regional Spotlights: Banking & Broker Trends',
+    'article.investment.regions.subtitle': 'Compare real offers by language locale to optimize fees, tax breaks, and yields.',
+
+    // United States - USD
+    'article.investment.regions.us.title': 'United States — USD',
+    'article.investment.regions.us.yield': 'High-yield savings APY: 4.25–5.00% (FDIC, Sep 2025)',
+    'article.investment.regions.us.point1': 'Brokerage leaders: Vanguard, Fidelity, Charles Schwab with $0 ETF commissions.',
+    'article.investment.regions.us.point2': 'Retirement wrappers: Roth IRA limit $7,000 (<50) / $8,500 (50+) for tax-free growth.',
+    'article.investment.regions.us.point3': 'Cash management: Ally, SoFi, Marcus offer FDIC-insured accounts above 4.3% APY.',
+
+    // Poland - PLN
+    'article.investment.regions.pl.title': 'Polska — PLN',
+    'article.investment.regions.pl.yield': 'Lokaty 6M: 5.5–6.1% (NBP, wrzesień 2025)',
+    'article.investment.regions.pl.point1': 'Brokerzy: mBank, XTB, Pekao oferują dostęp do GPW i ETF-ów UE.',
+    'article.investment.regions.pl.point2': 'Tarcze podatkowe: IKE/IKZE limit 20 805 zł (IKE) i 10 764 zł (IKZE) w 2025 r.',
+    'article.investment.regions.pl.point3': 'Depozyty promocyjne: PKO BP, Santander, Bank Millennium >5.5% przy nowych środkach.',
+
+    // Russia - RUB
+    'article.investment.regions.ru.title': 'Россия — ₽',
+    'article.investment.regions.ru.yield': 'Накопительные счета: 10.5–12% (ЦБ РФ, сентябрь 2025)',
+    'article.investment.regions.ru.point1': 'Брокеры: Тинькофф Инвестиции, ВТБ, Сбер обеспечивают доступ к Мосбирже и OFZ.',
+    'article.investment.regions.ru.point2': 'Налоговые льготы: ИИС типа А возврат НДФЛ до 52 000 ₽ ежегодно.',
+    'article.investment.regions.ru.point3': 'Депозиты 1–3 года: Совкомбанк, Альфа-Банк, Райффайзен 11–12% при онлайн-открытии.',
+
+    'article.investment.regions.note.title': 'How to use local offers',
+    'article.investment.regions.note.text': 'Check regulator registers (SEC, KNF, ЦБ РФ) before opening accounts and confirm insurance coverage (FDIC, BFG, АСВ).',
+
+    'article.investment.portfolios.title': 'Model Portfolios by Risk Profile',
+    'article.investment.portfolios.subtitle': 'Blend global equities, bonds, and cash to match each timeframe.',
+
+    'article.investment.portfolios.conservative.title': 'Capital Preservation (0–3 years)',
+    'article.investment.portfolios.conservative.text': 'Focus on stability and liquidity for short-term goals.',
+    'article.investment.portfolios.conservative.line1': '40% insured cash / money market',
+    'article.investment.portfolios.conservative.line2': '40% short-term government bonds',
+    'article.investment.portfolios.conservative.line3': '20% diversified income ETFs',
+
+    'article.investment.portfolios.balanced.title': 'Balanced Growth (3–7 years)',
+    'article.investment.portfolios.balanced.text': 'Mix income and appreciation while managing drawdowns.',
+    'article.investment.portfolios.balanced.line1': '20% cash & T-bills buffer',
+    'article.investment.portfolios.balanced.line2': '40% global equities (US + developed ex-US)',
+    'article.investment.portfolios.balanced.line3': '30% investment-grade bonds',
+    'article.investment.portfolios.balanced.line4': '10% diversifiers (REITs, commodities)',
+
+    'article.investment.portfolios.growth.title': 'Long-Term Growth (10+ years)',
+    'article.investment.portfolios.growth.text': 'Maximize equity exposure with disciplined rebalancing.',
+    'article.investment.portfolios.growth.line1': '70% global equities (broad ETFs)',
+    'article.investment.portfolios.growth.line2': '20% emerging markets & thematic tilts',
+    'article.investment.portfolios.growth.line3': '10% bonds for opportunistic rebalancing',
+
+    'article.investment.cta.title': 'Stress-Test Your Plan',
+    'article.investment.cta.text': 'Simulate returns and monthly deposits with our compound interest calculator to confirm your target wealth path.',
+    'article.investment.disclaimer': 'Information is educational, not individualized investment advice. Verify rates with providers before committing funds.',
+
     // Debt Management Article
     'article.debt.title': 'Debt Management: Take Control of Your Financial Future',
     'article.debt.desc': 'Learn effective strategies to pay off debt faster, reduce interest costs, and regain financial freedom with proven debt management techniques.',
@@ -493,16 +682,6 @@ const translations = {
     'rating.poor': '🔴 Poor',
     'rating.loss': '⚫ Loss',
     
-    // Presets and Tips
-    'preset.title': 'Quick Presets',
-    'preset.us': 'US Market',
-    'preset.eu': 'EU Market', 
-    'preset.pl': 'Poland',
-    'tips.title': 'Smart Tip',
-    'tips.high_growth': 'Increase your monthly contribution by $100 and reach your goal 2 years earlier!',
-    'tips.time_power': 'Starting 5 years earlier would give you 40% more with the same contribution!',
-    'tips.compound_magic': 'Your money doubles every 10 years at the current rate!',
-    'tips.frequency_boost': 'Switching to monthly compounding adds $2,000 to your total!'
   },
   
   pl: {
@@ -781,6 +960,10 @@ const translations = {
     'article.investment.intro': 'Inwestowanie może wydawać się onieśmielające, ale jest to jedno z najpotężniejszych narzędzi do budowania długoterminowego bogactwa. Ten przewodnik omawia podstawowe koncepcje, które każdy inwestor powinien zrozumieć przed rozpoczęciem.',
     'article.investment.why.title': 'Dlaczego Warto Inwestować?',
     'article.investment.why.text': 'Inflacja z czasem obniża siłę nabywczą pieniądza. Podczas gdy konta oszczędnościowe chronią kapitał, inwestycje pomagają pieniądzom rosnąć szybciej niż inflacja, budując prawdziwe bogactwo.',
+    'article.investment.chart.title': 'Wzrost Pieniędzy: Oszczędności vs Inwestycje (10 Lat)',
+    'article.investment.chart.savings': 'Konto Oszczędnościowe<br>11,051 $',
+    'article.investment.chart.stocks': 'Giełda Papierów Wartościowych<br>19,672 $',
+    'article.investment.chart.note': 'Na podstawie 10 000 $ początkowej inwestycji, 1% oprocentowania oszczędności vs 7% zwrotu z rynku',
     'article.investment.risk.title': 'Zrozumienie Ryzyka i Zysku',
     'article.investment.risk.text': 'Wszystkie inwestycje niosą ze sobą pewne ryzyko, ale ryzyko i potencjalny zysk są ze sobą powiązane. Zazwyczaj inwestycje o wyższym ryzyku oferują wyższe potencjalne zwroty w dłuższej perspektywie.',
     'article.investment.pyramid.title': 'Piramida Ryzyka Inwestycyjnego',
@@ -822,7 +1005,136 @@ const translations = {
     'article.investment.cta.title': 'Oblicz Wzrost Swoich Inwestycji',
     'article.investment.cta.text': 'Zobacz, jak twoje inwestycje mogą rosnąć z czasem dzięki naszemu kalkulatorowi procentu składanego.',
     'article.investment.cta.button': 'Wypróbuj Kalkulator Inwestycyjny',
-    
+
+    // Polish Regional Banking & Investment Data (October 2025)
+    'article.investment.hero.tag': 'Prognoza 2025',
+    'article.investment.hero.title': 'Inwestuj z Klarownością na Każdym Rynku',
+    'article.investment.hero.subtitle': 'Śledź globalne trendy, porównuj oferty bankowe w regionie i buduj odporne portfolio dostosowane do Twoich celów.',
+    'article.investment.meta.updated': 'Aktualizacja: październik 2025',
+    'article.investment.hero.cta': 'Zaplanuj Scenariusz Wzrostu',
+    'article.investment.hero.updated': 'Dane zweryfikowane: wrzesień 2025',
+
+    'article.investment.metrics.title': 'Globalny Przegląd Rynku',
+    'article.investment.metrics.subtitle': 'Kluczowe liczby, które każdy długoterminowy inwestor powinien obserwować w tym roku.',
+    'article.investment.metrics.stocks.label': 'Średnia roczna stopa zwrotu z akcji globalnych (5 lat)',
+    'article.investment.metrics.stocks.value': '8,7% (MSCI ACWI, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Źródło: MSCI Quarterly Fact Sheet, Q3 2025',
+    'article.investment.metrics.bonds.label': 'Średnia rentowność obligacji globalnych',
+    'article.investment.metrics.bonds.value': '3,6% (Bloomberg Global Agg)',
+    'article.investment.metrics.bonds.note': 'Średnia rentowność obligacji inwestycyjnych, wrzesień 2025',
+    'article.investment.metrics.inflation.label': 'Prognoza inflacji w gospodarkach rozwiniętych',
+    'article.investment.metrics.inflation.value': '3,1% (IMF WEO 2025)',
+    'article.investment.metrics.inflation.note': 'Prognoza dla USA, Strefy Euro, Wielka Brytania',
+
+    'article.investment.principles.title': 'Zbuduj Swoją Ramę Inwestycyjną',
+    'article.investment.principles.subtitle': 'Zacznij od celu, chroń płynność, automatyzuj składki.',
+    'article.investment.principles.goal.title': 'Wyjaśnij cele według horyzontu',
+    'article.investment.principles.goal.text': 'Udokumentuj docelowe kwoty dla celów krótkoterminowych (≤2l), średnioterminowych (3-7l) i długoterminowych (10+l) z odpowiedzialną walutą.',
+    'article.investment.principles.goal.point1': 'Przypisz każdemu celowi walutę bazową i założenie inflacji.',
+    'article.investment.principles.goal.point2': 'Zdefiniuj minimalną wymaganą stopę zwrotu, aby pozostać na ścieżce.',
+    'article.investment.principles.reserve.title': 'Wyodrębnij rezerwę bezpieczeństwa',
+    'article.investment.principles.reserve.text': 'Trzymaj 3-6 miesięcy wydatków w ubezpieczonych produktach gotówkowych przed zwiększeniem ekspozycji na rynek.',
+    'article.investment.principles.reserve.point1': 'Oddziel gotówkę awaryjną od sald maklerskich.',
+    'article.investment.principles.reserve.point2': 'Użyj drabinkowych depozytów lub funduszy rynku pieniężnego dla rentowności.',
+    'article.investment.principles.automation.title': 'Automatyzuj zdyscyplinowane inwestowanie',
+    'article.investment.principles.automation.text': 'Zaplanuj powtarzające się transfery w dniu wypłaty i równoważ kwartalnie do docelowych wag.',
+    'article.investment.principles.automation.point1': 'Włącz inwestowanie ułamkowe ETF tam, gdzie dostępne.',
+    'article.investment.principles.automation.point2': 'Przejrzyj poziomy składek po zmianach wynagrodzenia.',
+
+    'article.investment.regions.title': 'Regionalne Spotkania: Trendy Bankowe i Maklerskie',
+    'article.investment.regions.subtitle': 'Porównaj rzeczywiste oferty według lokalizacji językowej, aby zoptymalizować opłaty, ulgi podatkowe i rentowności.',
+
+    // United States - USD (Polish)
+    'article.investment.regions.us.title': 'Stany Zjednoczone — USD',
+    'article.investment.regions.us.yield': 'Wysokodochodowe oszczędności APY: 4,25–5,00% (FDIC, wrz 2025)',
+    'article.investment.regions.us.point1': 'Liderzy maklerscy: Vanguard, Fidelity, Charles Schwab z prowizjami ETF $0.',
+    'article.investment.regions.us.point2': 'Obudowy emerytalne: Limit Roth IRA $7,000 (<50) / $8,500 (50+) dla wzrostu bez podatku.',
+    'article.investment.regions.us.point3': 'Zarządzanie gotówką: Ally, SoFi, Marcus oferują konta ubezpieczone FDIC powyżej 4,3% APY.',
+
+    // Poland - PLN
+    'article.investment.regions.pl.title': 'Polska — PLN',
+    'article.investment.regions.pl.yield': 'Lokaty 6M: 5,5–6,1% (NBP, wrzesień 2025)',
+    'article.investment.regions.pl.point1': 'Brokerzy: mBank, XTB, Pekao oferują dostęp do GPW i ETF UE.',
+    'article.investment.regions.pl.point2': 'Tarcze podatkowe: Limit IKE/IKZE 20 805 zł (IKE) i 10 764 zł (IKZE) w 2025 r.',
+    'article.investment.regions.pl.point3': 'Depozyty promocyjne: PKO BP, Santander, Bank Millennium >5,5% przy nowych środkach.',
+
+    // Russia - RUB (Polish)
+    'article.investment.regions.ru.title': 'Rosja — ₽',
+    'article.investment.regions.ru.yield': 'Konta oszczędnościowe: 10,5–12% (CBR, wrzesień 2025)',
+    'article.investment.regions.ru.point1': 'Brokerzy: Tinkoff Investments, VTB, Sber zapewniają dostęp do Moskiewskiej Giełdy i OFZ.',
+    'article.investment.regions.ru.point2': 'Ulgi podatkowe: IIS typu A zwrot podatku dochodowego do 52 000 ₽ rocznie.',
+    'article.investment.regions.ru.point3': 'Depozyty 1–3 lata: Sovcombank, Alfa-Bank, Raiffeisen 11–12% przy otwarciu online.',
+
+    'article.investment.regions.note.title': 'Jak korzystać z ofert lokalnych',
+    'article.investment.regions.note.text': 'Sprawdź rejestry regulatorów (SEC, KNF, CBR) przed otwarciem kont i potwierdź pokrycie ubezpieczeniowe (FDIC, BFG, ASV).',
+
+    'article.investment.portfolios.title': 'Modele Portfeli według Profilu Ryzyka',
+    'article.investment.portfolios.subtitle': 'Połącz akcje globalne, obligacje i gotówkę, aby dopasować do każdego horyzontu czasowego.',
+
+    'article.investment.portfolios.conservative.title': 'Zachowanie Kapitału (0–3 lata)',
+    'article.investment.portfolios.conservative.text': 'Skup się na stabilności i płynności dla celów krótkoterminowych.',
+    'article.investment.portfolios.conservative.line1': '40% ubezpieczona gotówka / rynek pieniężny',
+    'article.investment.portfolios.conservative.line2': '40% krótkoterminowe obligacje rządowe',
+    'article.investment.portfolios.conservative.line3': '20% zdywersyfikowane ETF dochodowe',
+
+    'article.investment.portfolios.balanced.title': 'Zrównoważony Wzrost (3–7 lat)',
+    'article.investment.portfolios.balanced.text': 'Mieszaj dochód i aprecjację, zarządzając spadkami.',
+    'article.investment.portfolios.balanced.line1': '20% gotówka i bony skarbowe jako bufor',
+    'article.investment.portfolios.balanced.line2': '40% akcje globalne (USA + rozwinięte poza USA)',
+    'article.investment.portfolios.balanced.line3': '30% obligacje inwestycyjne',
+    'article.investment.portfolios.balanced.line4': '10% dywersyfikatory (REIT, towary)',
+
+    'article.investment.portfolios.growth.title': 'Długoterminowy Wzrost (10+ lat)',
+    'article.investment.portfolios.growth.text': 'Maksymalizuj ekspozycję na akcje z zdyscyplinowanym równoważeniem.',
+    'article.investment.portfolios.growth.line1': '70% akcje globalne (szerokie ETF)',
+    'article.investment.portfolios.growth.line2': '20% rynki wschodzące i nachylenia tematyczne',
+    'article.investment.portfolios.growth.line3': '10% obligacje do oportunistycznego równoważenia',
+
+    'article.investment.cta.title': 'Przetestuj Swój Plan pod Stresem',
+    'article.investment.cta.text': 'Symuluj zwroty i miesięczne depozyty z naszym kalkulatorem procentu składanego, aby potwierdzić ścieżkę docelowego bogactwa.',
+    'article.investment.disclaimer': 'Informacje są edukacyjne, nie indywidualna rada inwestycyjna. Zweryfikuj stawki z dostawcami przed zobowiązaniem środków.',
+
+    // Polish-specific content (Polish version)
+    'article.investment.metrics.title.pl': 'Polski Rynek Kapitałowy',
+    'article.investment.metrics.subtitle.pl': 'Kluczowe wskaźniki polskiego rynku, które powinien monitorować każdy inwestor.',
+    'article.investment.metrics.stocks.label.pl': 'Indeks WIG20 5-letnia CAGR',
+    'article.investment.metrics.stocks.value.pl': '6.8% (GPW, 2019-2024)',
+    'article.investment.metrics.stocks.note.pl': 'Źródło: Giełda Papierów Wartościowych w Warszawie, Q3 2025',
+    'article.investment.metrics.bonds.label.pl': 'Polskie obligacje 10-letnie',
+    'article.investment.metrics.bonds.value.pl': '5,2% (Ministerstwo Finansów)',
+    'article.investment.metrics.bonds.note.pl': 'Aktualna rentowność obligacji skarbowych, wrzesień 2025',
+    'article.investment.metrics.inflation.label.pl': 'Inflacja w Polsce',
+    'article.investment.metrics.inflation.value.pl': '4.1% (GUS)',
+    'article.investment.metrics.inflation.note.pl': 'Prognoza Narodowego Banku Polskiego na 2025',
+
+    'article.investment.regions.title.pl': 'Polski Krajobraz Bankowy i Inwestycyjny',
+    'article.investment.regions.subtitle.pl': 'Aktualne stawki, brokerzy i możliwości inwestycyjne na polskim rynku.',
+    'article.investment.regions.pl.yield.pl': 'Lokaty 6M: 5.5–6.1% (NBP, wrzesień 2025)',
+    'article.investment.regions.note.title.pl': 'Jak korzystać z polskich ofert',
+    'article.investment.regions.note.text.pl': 'Sprawdź rejestr regulatora KNF przed otwarciem kont i potwierdź ubezpieczenie BFG dla produktów depozytowych.',
+
+    'article.investment.portfolios.title.pl': 'Modele Portfeli dla Polskich Inwestorów',
+    'article.investment.portfolios.subtitle.pl': 'Polskie strategie alokacji dostosowane do różnych profili ryzyka i horyzontów czasowych.',
+
+    'article.investment.portfolios.conservative.title.pl': 'Portfel Konserwatywny (0–3 lata)',
+    'article.investment.portfolios.conservative.text.pl': 'Skupienie na ochronie kapitału i płynności dla krótkoterminowych celów.',
+    'article.investment.portfolios.conservative.line1.pl': '50% lokaty bankowe (5.5–6.1%)',
+    'article.investment.portfolios.conservative.line2.pl': '30% krótkoterminowe obligacje skarbowe',
+    'article.investment.portfolios.conservative.line3.pl': '20% fundusze pieniężne',
+
+    'article.investment.portfolios.balanced.title.pl': 'Portfel Zrównoważony (3–7 lat)',
+    'article.investment.portfolios.balanced.text.pl': 'Połączenie polskich akcji i obligacji dla umiarkowanego wzrostu.',
+    'article.investment.portfolios.balanced.line1.pl': '15% gotówka i lokaty',
+    'article.investment.portfolios.balanced.line2.pl': '45% polskie blue chipy (WIG20)',
+    'article.investment.portfolios.balanced.line3.pl': '30% polskie obligacje korporacyjne',
+    'article.investment.portfolios.balanced.line4.pl': '10% REIT-y i surowce',
+
+    'article.investment.portfolios.growth.title.pl': 'Portfel Wzrostowy (10+ lat)',
+    'article.investment.portfolios.growth.text.pl': 'Maksymalizacja ekspozycji na polskie akcje dla długoterminowego budowania majątku.',
+    'article.investment.portfolios.growth.line1.pl': '75% polskie akcje (szeroki rynek)',
+    'article.investment.portfolios.growth.line2.pl': '15% małe spółki z GPW',
+    'article.investment.portfolios.growth.line3.pl': '10% obligacje dla równoważenia',
+
     // Budget Planning Article - Polish
     'article.budget.title': 'Planowanie Budżetu: Opanuj Zarządzanie Pieniędzmi',
     'article.budget.desc': 'Stwórz realistyczny budżet, który pasuje do Twojego stylu życia. Poznaj sprawdzone metody i narzędzia budżetowania, aby przejąć kontrolę nad swoimi finansami.',
@@ -897,6 +1209,14 @@ const translations = {
     'article.budget.cta.text': 'Użyj naszego kalkulatora celów oszczędnościowych, aby zaplanować swoją przyszłość finansową i zobaczyć, jak budżetowanie może pomóc Ci osiągnąć marzenia.',
     'article.budget.cta.button': 'Wypróbuj Kalkulator Budżetowy',
     
+    // Related articles - Polish
+    'related.compound.title': 'Siła Procentu Składanego',
+    'related.compound.desc': 'Dowiedz się, dlaczego wczesny start robi ogromną różnicę w zwrotach inwestycyjnych.',
+    'related.compound.cta': 'Czytaj więcej',
+    'related.savings.title': 'Najlepsze Wysoko-Dochodowe Konta Oszczędnościowe',
+    'related.savings.desc': 'Porównaj najlepsze konta oszczędnościowe z konkurencyjnymi stopami procentowymi.',
+    'related.savings.cta': 'Porównaj teraz',
+    
     // ROI Calculator - Polish
     'roi.title': 'Kalkulator ROI Inwestycji',
     'roi.description': 'Oblicz zwrot z inwestycji (ROI) i rentowność swoich inwestycji.',
@@ -904,6 +1224,21 @@ const translations = {
     'form.investment.initial': 'Inwestycja Początkowa:',
     'form.investment.final': 'Końcowa Wartość Inwestycji:',
     'form.investment.time': 'Okres Inwestycji (Lata):',
+    'form.investment.costs': 'Dodatkowe Koszty:',
+    'form.risk.level': 'Poziom Ryzyka (1-10)',
+    'form.inflation.rate': 'Oczekiwana Inflacja (%):',
+    'result.real_roi': 'Realny ROI (z uwzględnieniem inflacji)',
+    'result.risk_adjusted_roi': 'ROI z uwzględnieniem ryzyka',
+    'form.risk.scale.split.0': 'Konserwatywny',
+    'form.risk.scale.split.1': 'Zrównoważony',
+    'form.risk.scale.split.2': 'Agresywny',
+    'table.description': 'Opis',
+    'roi.description.total': 'Całkowita rentowność inwestycji uwzględniająca wszystkie koszty',
+    'roi.description.annual': 'Roczna stopa zwrotu w okresie inwestycji',
+    'roi.description.real': 'ROI z uwzględnieniem inflacji - pokazuje rzeczywisty wzrost siły nabywczej',
+    'roi.description.risk': 'ROI z uwzględnieniem poziomu ryzyka - wyższe ryzyko obniża efektywną stopę zwrotu',
+    'roi.description.total_profit': 'Całkowity zysk przed potrąceniem kosztów inwestycji',
+    'roi.description.net_profit': 'Zysk netto po wszystkich kosztach i wydatkach',
     'form.investment.costs': 'Koszty Związane (np. opłaty, podatki):',
     'form.calculate': 'Oblicz',
     'section.results': 'Wyniki',
@@ -1042,6 +1377,39 @@ const translations = {
     'table.ending_balance': 'Конечный баланс',
     'table.month': 'Месяц',
     'table.payment': 'Платеж',
+
+    // ROI Calculator labels - Russian
+    'form.investment.costs': 'Дополнительные затраты',
+    'form.investment.time': 'Период инвестиций (лет)',
+    'result.roi': 'ROI (%)',
+    'result.annual_roi': 'Годовой ROI (%)',
+    'result.profit': 'Общая прибыль',
+    'result.profit.net': 'Чистая прибыль',
+    'section.comparison': 'Анализ и сравнение инвестиций',
+    'table.metric': 'Показатель',
+    'table.value': 'Значение',
+    'table.rating': 'Рейтинг',
+    'rating.excellent': '🟢 Отличный',
+    'rating.good': '🟡 Хороший',
+    'rating.fair': '🟠 Удовлетворительный',
+    'rating.poor': '🔴 Плохой',
+    'rating.loss': '⚫ Убыток',
+    'form.risk.level': 'Уровень риска (1-10)',
+    'form.inflation.rate': 'Ожидаемая инфляция (%)',
+    'result.real_roi': 'Реальный ROI (с учетом инфляции)',
+    'result.risk_adjusted_roi': 'ROI с учетом риска',
+    'form.risk.scale.split.0': 'Консервативный',
+    'form.risk.scale.split.1': 'Сбалансированный',
+    'form.risk.scale.split.2': 'Агрессивный',
+    'table.description': 'Описание',
+
+    // ROI descriptions - Russian
+    'roi.description.total': 'Общая рентабельность инвестиций с учетом всех затрат',
+    'roi.description.annual': 'Годовая норма доходности за период инвестирования',
+    'roi.description.real': 'ROI с учетом инфляции - показывает реальный рост покупательной способности',
+    'roi.description.risk': 'ROI с учетом уровня риска - более высокий риск снижает эффективную доходность',
+    'roi.description.total_profit': 'Общая прибыль до вычета инвестиционных затрат',
+    'roi.description.net_profit': 'Чистая прибыль после всех затрат и расходов',
     
     // Frequency options
     'frequency.annually': 'Ежегодно',
@@ -1061,6 +1429,22 @@ const translations = {
     // Labels
     'label.compound_frequency': 'Частота Начисления',
     'label.smart_tip': 'Умный Совет',
+    
+    // Smart tip messages
+    'tip.doubles_10y': 'Ваши деньги удваиваются каждые 10 лет при текущей ставке!',
+    
+    // Preset buttons
+    'preset.us_market': 'Рынок США',
+    'preset.eu_market': 'Рынок ЕС',
+    'preset.poland': 'Польша',
+    
+    // Related articles
+    'related.compound.title': 'Сила Сложного Процента',
+    'related.compound.desc': 'Узнайте, почему ранний старт создает огромную разницу в доходности инвестиций.',
+    'related.compound.cta': 'Читать далее',
+    'related.savings.title': 'Лучшие Высокодоходные Сберегательные Счета',
+    'related.savings.desc': 'Сравните лучшие сберегательные счета с конкурентными процентными ставками.',
+    'related.savings.cta': 'Сравнить сейчас',
     
     // Info texts
     'info.compound': 'Сложный процент рассчитывается на основе первоначальной суммы и накопленных процентов за предыдущие периоды. Это создает экспоненциальный рост со временем.',
@@ -1323,10 +1707,10 @@ const translations = {
     'article.investment.intro': 'Инвестирование может показаться пугающим, но это один из самых мощных инструментов для создания долгосрочного богатства. В этом руководстве рассматриваются основные концепции, которые должен понимать каждый инвестор перед началом.',
     'article.investment.why.title': 'Почему Стоит Инвестировать?',
     'article.investment.why.text': 'Инфляция со временем снижает покупательную способность денег. Хотя сберегательные счета сохраняют капитал, инвестиции помогают вашим деньгам расти быстрее инфляции, создавая реальное богатство.',
-    'article.investment.chart.title': 'Рост Денег: Сбережения против Инвестиций (10 лет)',
-    'article.investment.chart.savings': 'Сберегательный Счет<br>$11,051',
-    'article.investment.chart.stocks': 'Фондовый Рынок<br>$19,672',
-    'article.investment.chart.note': 'На основе $10,000 первоначальных инвестиций, 1% ставка сбережений против 7% рыночной доходности',
+    'article.investment.growth.title': 'Рост Денег: Сбережения против Инвестиций (10 лет)',
+    'article.investment.growth.savings': 'Сберегательный Счет',
+    'article.investment.growth.market': 'Фондовый Рынок',
+    'article.investment.growth.note': 'На основе 10 000 $ первоначальных инвестиций, 1% ставки сбережений против 7% рыночной доходности',
     'article.investment.risk.title': 'Понимание Риска и Доходности',
     'article.investment.risk.text': 'Все инвестиции несут определенный риск, но риск и потенциальная доходность связаны. Как правило, более рискованные инвестиции предлагают более высокую потенциальную доходность в долгосрочной перспективе.',
     'article.investment.pyramid.title': 'Пирамида Инвестиционных Рисков',
@@ -1336,6 +1720,10 @@ const translations = {
     'article.investment.risk.medium': 'Средний Риск',
     'article.investment.risk.medium.desc': 'ETF Фондового Рынка, REIT',
     'article.investment.risk.medium.return': 'Потенциал: 6-10% доходности',
+    'article.investment.chart.title': 'Рост Денег: Сбережения vs Инвестиции (10 Лет)',
+    'article.investment.chart.savings': 'Сберегательный Счет<br>11,051 $',
+    'article.investment.chart.stocks': 'Фондовый Рынок<br>19,672 $',
+    'article.investment.chart.note': 'На основе 10,000 $ начальной инвестиции, 1% ставка сбережений vs 7% доходность рынка',
     'article.investment.risk.low': 'Низкий Риск',
     'article.investment.risk.low.desc': 'Облигации, Депозиты, Высокодоходные Сбережения',
     'article.investment.risk.low.return': 'Потенциал: 1-5% доходности',
@@ -1368,7 +1756,136 @@ const translations = {
     'article.investment.cta.title': 'Рассчитайте Рост Ваших Инвестиций',
     'article.investment.cta.text': 'Посмотрите, как ваши инвестиции могут расти со временем с помощью нашего калькулятора сложного процента.',
     'article.investment.cta.button': 'Попробовать Инвестиционный Калькулятор',
-    
+
+    // Russian Regional Banking & Investment Data (October 2025)
+    'article.investment.hero.tag': 'Прогноз 2025',
+    'article.investment.hero.title': 'Инвестируйте с Ясностью на Любом Рынке',
+    'article.investment.hero.subtitle': 'Отслеживайте глобальные тенденции, сравнивайте банковские предложения в регионе и создавайте устойчивое портфолио, соответствующее вашим целям.',
+    'article.investment.meta.updated': 'Обновлено: октябрь 2025',
+    'article.investment.hero.cta': 'Запланировать Сценарий Роста',
+    'article.investment.hero.updated': 'Данные проверены: сентябрь 2025',
+
+    'article.investment.metrics.title': 'Глобальный Обзор Рынка',
+    'article.investment.metrics.subtitle': 'Ключевые показатели, которые должен отслеживать каждый долгосрочный инвестор в этом году.',
+    'article.investment.metrics.stocks.label': 'Среднегодовая доходность глобальных акций (5 лет)',
+    'article.investment.metrics.stocks.value': '8,7% (MSCI ACWI, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Источник: MSCI Quarterly Fact Sheet, Q3 2025',
+    'article.investment.metrics.bonds.label': 'Средняя доходность глобальных облигаций',
+    'article.investment.metrics.bonds.value': '3,6% (Bloomberg Global Agg)',
+    'article.investment.metrics.bonds.note': 'Средневзвешенная доходность инвестиционных облигаций, сентябрь 2025',
+    'article.investment.metrics.inflation.label': 'Прогноз инфляции в развитых экономиках',
+    'article.investment.metrics.inflation.value': '3,1% (МВФ WEO 2025)',
+    'article.investment.metrics.inflation.note': 'Прогноз для США, Еврозоны, Великобритании',
+
+    'article.investment.principles.title': 'Создайте Свою Инвестиционную Систему',
+    'article.investment.principles.subtitle': 'Начните с цели, защитите ликвидность, автоматизируйте взносы.',
+    'article.investment.principles.goal.title': 'Определите цели по горизонту',
+    'article.investment.principles.goal.text': 'Зафиксируйте целевые суммы для краткосрочных (≤2г), среднесрочных (3-7л) и долгосрочных (10+л) целей с ответственностью за валюту.',
+    'article.investment.principles.goal.point1': 'Назначьте каждой цели базовую валюту и предположение об инфляции.',
+    'article.investment.principles.goal.point2': 'Определите минимальную требуемую доходность, чтобы оставаться на пути.',
+    'article.investment.principles.reserve.title': 'Выделите резерв безопасности',
+    'article.investment.principles.reserve.text': 'Держите 3-6 месяцев расходов в застрахованных денежных продуктах перед увеличением рыночной экспозиции.',
+    'article.investment.principles.reserve.point1': 'Отделите аварийную наличность от брокерских балансов.',
+    'article.investment.principles.reserve.point2': 'Используйте лестничные депозиты или фонды денежного рынка для доходности.',
+    'article.investment.principles.automation.title': 'Автоматизируйте дисциплинированное инвестирование',
+    'article.investment.principles.automation.text': 'Запланируйте повторяющиеся переводы в день зарплаты и перебалансируйте ежеквартально до целевых весов.',
+    'article.investment.principles.automation.point1': 'Включите дробное инвестирование ETF там, где доступно.',
+    'article.investment.principles.automation.point2': 'Просмотрите уровни взносов после изменений зарплаты.',
+
+    'article.investment.regions.title': 'Региональные Акценты: Банковские и Брокерские Тренды',
+    'article.investment.regions.subtitle': 'Сравните реальные предложения по языковой локали, чтобы оптимизировать комиссии, налоговые льготы и доходность.',
+
+    // United States - USD (Russian)
+    'article.investment.regions.us.title': 'Соединенные Штаты — USD',
+    'article.investment.regions.us.yield': 'Высокодоходные сбережения APY: 4,25–5,00% (FDIC, сен 2025)',
+    'article.investment.regions.us.point1': 'Брокерские лидеры: Vanguard, Fidelity, Charles Schwab с комиссиями ETF $0.',
+    'article.investment.regions.us.point2': 'Пенсионные оболочки: Лимит Roth IRA $7000 (<50) / $8500 (50+) для роста без налогов.',
+    'article.investment.regions.us.point3': 'Управление наличностью: Ally, SoFi, Marcus предлагают счета FDIC выше 4,3% APY.',
+
+    // Poland - PLN (Russian)
+    'article.investment.regions.pl.title': 'Польша — PLN',
+    'article.investment.regions.pl.yield': 'Депозиты 6M: 5,5–6,1% (NBP, сентябрь 2025)',
+    'article.investment.regions.pl.point1': 'Брокеры: mBank, XTB, Pekao предоставляют доступ к GPW и ETF ЕС.',
+    'article.investment.regions.pl.point2': 'Налоговые щиты: Лимит IKE/IKZE 20 805 zł (IKE) и 10 764 zł (IKZE) в 2025 г.',
+    'article.investment.regions.pl.point3': 'Промо-депозиты: PKO BP, Santander, Bank Millennium >5,5% при новых средствах.',
+
+    // Russia - RUB
+    'article.investment.regions.ru.title': 'Россия — ₽',
+    'article.investment.regions.ru.yield': 'Накопительные счета: 10,5–12% (ЦБ РФ, сентябрь 2025)',
+    'article.investment.regions.ru.point1': 'Брокеры: Тинькофф Инвестиции, ВТБ, Сбер обеспечивают доступ к Мосбирже и ОФЗ.',
+    'article.investment.regions.ru.point2': 'Налоговые льготы: ИИС типа А возврат НДФЛ до 52 000 ₽ ежегодно.',
+    'article.investment.regions.ru.point3': 'Депозиты 1–3 года: Совкомбанк, Альфа-Банк, Райффайзен 11–12% при онлайн-открытии.',
+
+    'article.investment.regions.note.title': 'Как использовать локальные предложения',
+    'article.investment.regions.note.text': 'Проверьте реестры регуляторов (SEC, KNF, ЦБ РФ) перед открытием счетов и подтвердите страховое покрытие (FDIC, BFG, АСВ).',
+
+    'article.investment.portfolios.title': 'Модельные Портфели по Профилю Риска',
+    'article.investment.portfolios.subtitle': 'Сочетайте глобальные акции, облигации и наличность для соответствия каждому временному горизонту.',
+
+    'article.investment.portfolios.conservative.title': 'Сохранение Капитала (0–3 года)',
+    'article.investment.portfolios.conservative.text': 'Фокус на стабильности и ликвидности для краткосрочных целей.',
+    'article.investment.portfolios.conservative.line1': '40% застрахованная наличность / денежный рынок',
+    'article.investment.portfolios.conservative.line2': '40% краткосрочные государственные облигации',
+    'article.investment.portfolios.conservative.line3': '20% диверсифицированные доходные ETF',
+
+    'article.investment.portfolios.balanced.title': 'Сбалансированный Рост (3–7 лет)',
+    'article.investment.portfolios.balanced.text': 'Сочетайте доход и рост, управляя просадками.',
+    'article.investment.portfolios.balanced.line1': '20% наличность и казначейские векселя как буфер',
+    'article.investment.portfolios.balanced.line2': '40% глобальные акции (США + развитые за пределами США)',
+    'article.investment.portfolios.balanced.line3': '30% инвестиционные облигации',
+    'article.investment.portfolios.balanced.line4': '10% диверсификаторы (REIT, товары)',
+
+    'article.investment.portfolios.growth.title': 'Долгосрочный Рост (10+ лет)',
+    'article.investment.portfolios.growth.text': 'Максимизируйте экспозицию на акции с дисциплинированной ребалансировкой.',
+    'article.investment.portfolios.growth.line1': '70% глобальные акции (широкие ETF)',
+    'article.investment.portfolios.growth.line2': '20% развивающиеся рынки и тематические наклоны',
+    'article.investment.portfolios.growth.line3': '10% облигации для оппортунистической ребалансировки',
+
+    'article.investment.cta.title': 'Протестируйте Свой План под Стрессом',
+    'article.investment.cta.text': 'Симулируйте доходность и ежемесячные депозиты с нашим калькулятором сложного процента, чтобы подтвердить путь к целевому богатству.',
+    'article.investment.disclaimer': 'Информация носит образовательный характер, не является индивидуальной инвестиционной рекомендацией. Проверьте ставки у провайдеров перед вложением средств.',
+
+    // Russian-specific content (Russian version)
+    'article.investment.metrics.title.ru': 'Российский Рынок Капитала',
+    'article.investment.metrics.subtitle.ru': 'Ключевые показатели российского рынка, которые должен отслеживать каждый инвестор.',
+    'article.investment.metrics.stocks.label.ru': 'Индекс Мосбиржи 5-летняя доходность',
+    'article.investment.metrics.stocks.value.ru': '11,2% (Мосбиржа, 2019-2024)',
+    'article.investment.metrics.stocks.note.ru': 'Источник: Московская биржа, Q3 2025',
+    'article.investment.metrics.bonds.label.ru': 'ОФЗ 10-летние облигации',
+    'article.investment.metrics.bonds.value.ru': '10,8% (Минфин РФ)',
+    'article.investment.metrics.bonds.note.ru': 'Текущая доходность ОФЗ, сентябрь 2025',
+    'article.investment.metrics.inflation.label.ru': 'Инфляция в России',
+    'article.investment.metrics.inflation.value.ru': '6,5% (Росстат)',
+    'article.investment.metrics.inflation.note.ru': 'Прогноз Банка России на 2025 год',
+
+    'article.investment.regions.title.ru': 'Российский Банковский и Инвестиционный Ландшафт',
+    'article.investment.regions.subtitle.ru': 'Актуальные ставки, брокеры и инвестиционные возможности на российском рынке.',
+    'article.investment.regions.ru.yield.ru': 'Накопительные счета: 10.5–12% (ЦБ РФ, сентябрь 2025)',
+    'article.investment.regions.note.title.ru': 'Как использовать российские предложения',
+    'article.investment.regions.note.text.ru': 'Проверьте реестр регулятора ЦБ РФ перед открытием счетов и подтвердите страховое покрытие АСВ для депозитных продуктов.',
+
+    'article.investment.portfolios.title.ru': 'Модельные Портфели для Российских Инвесторов',
+    'article.investment.portfolios.subtitle.ru': 'Российские стратегии распределения активов для разных профилей риска и горизонтов.',
+
+    'article.investment.portfolios.conservative.title.ru': 'Консервативный Портфель (0–3 года)',
+    'article.investment.portfolios.conservative.text.ru': 'Фокус на сохранении капитала и ликвидности для краткосрочных целей.',
+    'article.investment.portfolios.conservative.line1.ru': '50% накопительные счета (10.5–12%)',
+    'article.investment.portfolios.conservative.line2.ru': '30% краткосрочные ОФЗ',
+    'article.investment.portfolios.conservative.line3.ru': '20% банковские депозиты',
+
+    'article.investment.portfolios.balanced.title.ru': 'Сбалансированный Портфель (3–7 лет)',
+    'article.investment.portfolios.balanced.text.ru': 'Сочетание российских акций и облигаций для умеренного роста.',
+    'article.investment.portfolios.balanced.line1.ru': '15% наличность и накопительные счета',
+    'article.investment.portfolios.balanced.line2.ru': '45% российские blue chip (Мосбиржа)',
+    'article.investment.portfolios.balanced.line3.ru': '30% корпоративные облигации РФ',
+    'article.investment.portfolios.balanced.line4.ru': '10% REIT и commodities',
+
+    'article.investment.portfolios.growth.title.ru': 'Агрессивный Портфель (10+ лет)',
+    'article.investment.portfolios.growth.text.ru': 'Максимальная экспозиция на российские акции для долгосрочного роста.',
+    'article.investment.portfolios.growth.line1.ru': '75% российские акции (широкий рынок)',
+    'article.investment.portfolios.growth.line2.ru': '15% акции второго эшелона',
+    'article.investment.portfolios.growth.line3.ru': '10% ОФЗ для ребалансировки',
+
     // Budget Planning Article
     'article.budget.title': 'Планирование Бюджета: Овладейте Управлением Деньгами',
     'article.budget.desc': 'Создайте реалистичный бюджет, который соответствует вашему образу жизни. Изучите проверенные методы и инструменты составления бюджета, чтобы взять под контроль свои финансы.',
@@ -1486,22 +2003,34 @@ class I18n {
   }
   
   detectLanguage() {
-    // Check localStorage first
     const saved = localStorage.getItem('preferredLanguage');
-    if (saved && translations[saved]) return saved;
-    
-    // Check browser language
-    const browserLang = navigator.language.slice(0, 2).toLowerCase();
-    if (translations[browserLang]) return browserLang;
-    
-    // Check Accept-Language header languages
-    const languages = navigator.languages;
-    for (let lang of languages) {
-      const code = lang.slice(0, 2).toLowerCase();
-      if (translations[code]) return code;
+    if (saved && translations[saved]) {
+      return saved;
     }
-    
-    // Default to English
+
+    const urlLang = new URLSearchParams(window.location.search).get('lang');
+    if (urlLang && translations[urlLang]) {
+      localStorage.setItem('preferredLanguage', urlLang);
+      return urlLang;
+    }
+
+    const isMultilingualPage = document.documentElement.dataset.multilingual === 'true';
+
+    if (!isMultilingualPage) {
+      const htmlLang = document.documentElement.lang;
+      if (htmlLang && translations[htmlLang]) {
+        localStorage.setItem('preferredLanguage', htmlLang);
+        return htmlLang;
+      }
+    }
+
+    const browserLang = (navigator.language || navigator.userLanguage).slice(0, 2).toLowerCase();
+    if (translations[browserLang]) {
+      localStorage.setItem('preferredLanguage', browserLang);
+      return browserLang;
+    }
+
+    localStorage.setItem('preferredLanguage', 'en');
     return 'en';
   }
   
@@ -1582,6 +2111,16 @@ class I18n {
       ru: 'ru-RU'
     };
     return locales[this.currentLang] || 'en-US';
+  }
+
+  navigateTo(event, baseUrl) {
+    event.preventDefault();
+    const lang = localStorage.getItem('preferredLanguage') || 'en';
+
+    const url = new URL(baseUrl, window.location.href);
+    url.searchParams.set('lang', lang);
+
+    window.location.href = url.toString();
   }
 }
 

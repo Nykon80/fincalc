@@ -30,10 +30,17 @@
             font-weight: 600;
             border-bottom: 2px solid var(--border);
         }
-        
+
         .breakdown-table td {
             padding: var(--space-md);
             border-bottom: 1px solid var(--border);
+        }
+
+        .breakdown-table th:nth-child(4),
+        .breakdown-table td:nth-child(4) {
+            width: 40%;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
         }
         
         .breakdown-table tr:hover {
@@ -80,6 +87,35 @@
             align-items: flex-end;
             justify-content: center;
         }
+
+        /* Risk level slider styling */
+        .form-input[type="range"] {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: var(--gray-200);
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .form-input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+        }
+
+        .form-input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            cursor: pointer;
+            border: none;
+        }
         
         /* Цвета для значений */
         #roi {
@@ -96,6 +132,14 @@
         
         #netProfit {
             color: #0066ff;
+        }
+
+        #realRoi {
+            color: #ff9500;
+        }
+
+        #riskAdjustedRoi {
+            color: #ff3b30;
         }
     </style>
 </head>
@@ -167,10 +211,27 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="form.investment.costs">Additional Costs</label>
+                    <label class="form-label" data-i18n="form.investment.costs">Associated Costs (e.g., fees, taxes):</label>
                     <input type="number" class="form-input" id="additionalCosts" value="500" min="0" step="100">
                 </div>
-                
+
+                <!-- Risk Assessment -->
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.risk.level">Risk Level (1-10)</label>
+                    <input type="range" class="form-input" id="riskLevel" value="5" min="1" max="10" step="1">
+                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
+                        <span data-i18n="form.risk.scale.split.0">Conservative</span>
+                        <span data-i18n="form.risk.scale.split.1">Balanced</span>
+                        <span data-i18n="form.risk.scale.split.2">Aggressive</span>
+                    </div>
+                </div>
+
+                <!-- Inflation Rate -->
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.inflation.rate">Expected Inflation (%)</label>
+                    <input type="number" class="form-input" id="inflationRate" value="3" min="0" max="20" step="0.1">
+                </div>
+
                 <button class="btn btn-primary" style="width: 100%;" onclick="calculate()">
                     <span data-i18n="form.calculate">Calculate</span>
                 </button>
@@ -197,6 +258,14 @@
                             <div class="result-label" data-i18n="result.profit.net">Net Profit</div>
                             <div class="result-value" id="netProfit">$0</div>
                         </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.real_roi">Real ROI (Inflation-adjusted)</div>
+                            <div class="result-value" id="realRoi">0%</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.risk_adjusted_roi">Risk-adjusted ROI</div>
+                            <div class="result-value" id="riskAdjustedRoi">0%</div>
+                        </div>
                     </div>
                 </div>
                 
@@ -211,7 +280,7 @@
         
         <!-- Comparison Table -->
         <div style="margin-top: 2rem;">
-            <h3 data-i18n="section.comparison">Investment Comparison</h3>
+            <h3 data-i18n="section.comparison">Investment Analysis & Comparison</h3>
             <div style="overflow-x: auto;">
                 <table class="breakdown-table" id="comparisonTable">
                     <thead>
@@ -219,6 +288,7 @@
                             <th data-i18n="table.metric">Metric</th>
                             <th data-i18n="table.value">Value</th>
                             <th data-i18n="table.rating">Rating</th>
+                            <th data-i18n="table.description">Description</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -261,59 +331,105 @@
             const finalValue = parseFloat(document.getElementById('finalValue').value) || 0;
             const timePeriod = parseFloat(document.getElementById('timePeriod').value) || 1;
             const additionalCosts = parseFloat(document.getElementById('additionalCosts').value) || 0;
-            
+            const riskLevel = parseInt(document.getElementById('riskLevel').value) || 5;
+            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 3;
+
             if (initialInvestment <= 0 || timePeriod <= 0) {
                 alert('Please enter valid investment amount and time period.');
                 return;
             }
-            
+
             const totalInvestment = initialInvestment + additionalCosts;
             const totalProfit = finalValue - initialInvestment;
             const netProfit = finalValue - totalInvestment;
-            
+
             // Calculate ROI
             const roi = (netProfit / totalInvestment) * 100;
-            
+
             // Calculate annualized ROI
             const annualRoi = (Math.pow((finalValue / totalInvestment), 1 / timePeriod) - 1) * 100;
+
+            // Calculate inflation-adjusted ROI (Real ROI)
+            const realRoi = annualRoi - inflationRate;
+
+            // Calculate risk-adjusted ROI (Sharpe-like ratio, simplified)
+            // Higher risk should reduce the effective ROI
+            const riskAdjustment = (riskLevel - 5) * 0.5; // -2% to +2% adjustment based on risk level
+            const riskAdjustedRoi = annualRoi - riskAdjustment;
 
             // Update results
             document.getElementById('roi').textContent = roi.toFixed(2) + '%';
             document.getElementById('annualRoi').textContent = annualRoi.toFixed(2) + '%';
             document.getElementById('totalProfit').textContent = i18n.formatCurrency(totalProfit);
             document.getElementById('netProfit').textContent = i18n.formatCurrency(netProfit);
-            
+            document.getElementById('realRoi').textContent = realRoi.toFixed(2) + '%';
+            document.getElementById('riskAdjustedRoi').textContent = riskAdjustedRoi.toFixed(2) + '%';
+
             // Update comparison table
-            updateComparisonTable(roi, annualRoi, totalProfit, netProfit);
+            updateComparisonTable(roi, annualRoi, realRoi, riskAdjustedRoi, totalProfit, netProfit);
         }
         
-        function updateComparisonTable(roi, annualRoi, totalProfit, netProfit) {
+        function updateComparisonTable(roi, annualRoi, realRoi, riskAdjustedRoi, totalProfit, netProfit) {
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
-            
+
             const metrics = [
-                { metric: i18n.t('result.roi'), value: roi.toFixed(2) + '%', rating: getRating(roi) },
-                { metric: i18n.t('result.annual_roi'), value: annualRoi.toFixed(2) + '%', rating: getRating(annualRoi) },
-                { metric: i18n.t('result.profit'), value: i18n.formatCurrency(totalProfit), rating: getRating(totalProfit) },
-                { metric: i18n.t('result.profit.net'), value: i18n.formatCurrency(netProfit), rating: getRating(netProfit) }
+                {
+                    metric: i18n.t('result.roi'),
+                    value: roi.toFixed(2) + '%',
+                    rating: getRating(roi),
+                    description: i18n.t('roi.description.total')
+                },
+                {
+                    metric: i18n.t('result.annual_roi'),
+                    value: annualRoi.toFixed(2) + '%',
+                    rating: getRating(annualRoi),
+                    description: i18n.t('roi.description.annual')
+                },
+                {
+                    metric: i18n.t('result.real_roi'),
+                    value: realRoi.toFixed(2) + '%',
+                    rating: getRating(realRoi),
+                    description: i18n.t('roi.description.real')
+                },
+                {
+                    metric: i18n.t('result.risk_adjusted_roi'),
+                    value: riskAdjustedRoi.toFixed(2) + '%',
+                    rating: getRating(riskAdjustedRoi),
+                    description: i18n.t('roi.description.risk')
+                },
+                {
+                    metric: i18n.t('result.profit'),
+                    value: i18n.formatCurrency(totalProfit),
+                    rating: getRating(totalProfit),
+                    description: i18n.t('roi.description.total_profit')
+                },
+                {
+                    metric: i18n.t('result.profit.net'),
+                    value: i18n.formatCurrency(netProfit),
+                    rating: getRating(netProfit),
+                    description: i18n.t('roi.description.net_profit')
+                }
             ];
-            
+
             metrics.forEach(row => {
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
                     <td><strong>${row.metric}</strong></td>
                     <td>${row.value}</td>
                     <td>${row.rating}</td>
+                    <td>${row.description}</td>
                 `;
                 tbody.appendChild(tr);
             });
         }
         
         function getRating(value) {
-            if (value >= 15) return i18n.t('rating.excellent');
-            if (value >= 10) return i18n.t('rating.good');
-            if (value >= 5) return i18n.t('rating.fair');
-            if (value >= 0) return i18n.t('rating.poor');
+            const absValue = Math.abs(value);
+            if (absValue >= 15) return i18n.t('rating.excellent');
+            if (absValue >= 10) return i18n.t('rating.good');
+            if (absValue >= 5) return i18n.t('rating.fair');
+            if (absValue >= 0) return i18n.t('rating.poor');
             return i18n.t('rating.loss');
         }
         
@@ -327,6 +443,13 @@
         
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
+            // Set language from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const currentLang = langFromUrl || savedLang || 'en';
+            
+            i18n.setLanguage(currentLang);
             i18n.updatePage();
             calculate();
 

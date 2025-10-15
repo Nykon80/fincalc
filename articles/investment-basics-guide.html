@@ -3,254 +3,266 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</title>
-    <meta name="description" data-i18n="article.investment.desc" content="Learn the fundamentals of investing, from risk management to portfolio diversification. Start your investment journey with confidence.">
-    
+    <title>Investment Basics: Your Path to Financial Growth</title>
+    <meta name="description" content="Current 2025 playbook with US market data, step-by-step strategy and modern visualizations.">
+
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+
     <style>
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 0;
+        .article-page {
+            padding-bottom: var(--space-3xl);
         }
-        
-        .article-header {
-            text-align: center;
-            margin-bottom: 3rem;
+
+        .article-hero {
+            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(0, 168, 107, 0.08) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-3xl) 0 var(--space-2xl);
         }
-        
-        .article-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
+
+        .article-hero__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(0, 102, 255, 0.12);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
         }
-        
-        .article-meta {
+
+        .article-hero__subtitle {
+            max-width: 720px;
+            margin-top: var(--space-md);
             color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
+            font-size: 1.175rem;
         }
-        
-        .article-content {
-            line-height: 1.7;
-            font-size: 1.1rem;
+
+        .article-meta {
+            margin-top: var(--space-lg);
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            align-items: center;
         }
-        
-        .article-content h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 2.5rem 0 1rem 0;
-            color: var(--primary);
+
+        .article-hero__actions {
+            margin-top: var(--space-xl);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
         }
-        
-        .article-content h3 {
-            font-size: 1.4rem;
+
+        .data-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .section-header {
+            max-width: 760px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-header p {
+            margin-top: var(--space-sm);
+            font-size: 1.05rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            border: 1px solid rgba(0, 102, 255, 0.12);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
             font-weight: 600;
-            margin: 2rem 0 1rem 0;
             color: var(--text-primary);
+            font-size: 0.95rem;
         }
-        
-        .example-box {
-            background: var(--primary-light);
-            border: 1px solid var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .example-title {
-            font-weight: 600;
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
             color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-box {
-            background: var(--success-light);
-            border: 1px solid var(--success);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .info-title {
-            font-weight: 600;
-            color: var(--success);
-            margin-bottom: 0.5rem;
-        }
-        
-        .comparison-chart {
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .chart-bars {
-            display: flex;
-            justify-content: center;
-            align-items: end;
-            height: 200px;
-            margin: 2rem 0;
-        }
-        
-        .bar-group {
-            display: flex;
-            gap: 2rem;
-            align-items: end;
-        }
-        
-        .bar {
-            width: 80px;
-            background: linear-gradient(135deg, var(--primary), var(--success));
-            border-radius: var(--radius-sm) var(--radius-sm) 0 0;
-            position: relative;
-            display: flex;
-            align-items: end;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-        }
-        
-        .bar-label {
-            position: absolute;
-            bottom: 10px;
-            text-align: center;
-            font-size: 0.8rem;
             line-height: 1.2;
         }
-        
-        .risk-pyramid {
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin: 2rem 0;
+
+        .metric-note {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: auto;
         }
-        
-        .pyramid-level {
-            margin: 1rem 0;
-            padding: 1rem;
-            border-radius: var(--radius-md);
-            text-align: center;
-        }
-        
-        .high-risk {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a52);
-            color: white;
-        }
-        
-        .medium-risk {
-            background: linear-gradient(135deg, #feca57, #ff9ff3);
-            color: var(--text-primary);
-        }
-        
-        .low-risk {
-            background: linear-gradient(135deg, var(--success), #48cae4);
-            color: white;
-        }
-        
-        .step-guide {
+
+        .region-grid {
             display: grid;
-            gap: 1.5rem;
-            margin: 2rem 0;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
         }
-        
-        .step {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--bg-card);
+
+        .region-card {
+            padding: var(--space-xl);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
         }
-        
-        .step-number {
-            background: var(--primary);
-            color: white;
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 50%;
+
+        .region-card h3 {
+            color: var(--primary);
+            margin-bottom: var(--space-md);
+            font-size: 1.1rem;
+        }
+
+        .rate-item {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            flex-shrink: 0;
+            justify-content: space-between;
+            margin-bottom: var(--space-sm);
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border);
         }
-        
-        .step-content h4 {
+
+        .rate-item:last-child {
+            border-bottom: none;
+        }
+
+        .rate-value {
+            font-weight: 600;
+            color: var(--success);
+        }
+
+        .region-note {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin: var(--space-xl) 0;
+        }
+
+        .region-note h4 {
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: var(--space-sm);
         }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
-            color: white;
-            padding: 2rem;
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .portfolio-card {
+            padding: var(--space-xl);
+            border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            text-align: center;
-            margin: 3rem 0;
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
         }
-        
-        .cta-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-cta {
-            background: white;
+
+        .portfolio-card h3 {
             color: var(--primary);
-            padding: 0.75rem 2rem;
+            margin-bottom: var(--space-md);
+        }
+
+        .allocation-list {
+            list-style: none;
+            padding: 0;
+            margin-top: var(--space-md);
+        }
+
+        .allocation-list li {
+            padding: var(--space-sm) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .allocation-list li:last-child {
+            border-bottom: none;
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--white);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+            margin: var(--space-3xl) 0;
+        }
+
+        .cta-card h3,
+        .cta-card p {
+            color: var(--white);
+        }
+
+        .btn-cta {
+            background: var(--white);
+            color: var(--primary);
+            padding: var(--space-md) var(--space-xl);
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition-base);
         }
-        
+
         .btn-cta:hover {
+            background: var(--gray-100);
+            color: var(--primary);
             transform: translateY(-2px);
             box-shadow: var(--shadow-lg);
         }
-        
+
+        .cta-card small {
+            display: block;
+            margin-top: var(--space-lg);
+            color: rgba(255, 255, 255, 0.85);
+            font-size: 0.85rem;
+        }
+
         .article-nav {
             display: flex;
             justify-content: space-between;
-            margin: 3rem 0;
-            padding: 2rem 0;
+            margin: var(--space-3xl) 0;
+            padding: var(--space-xl) 0;
             border-top: 1px solid var(--border);
         }
-        
+
         .nav-btn {
             background: var(--gray-100);
             color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
+            padding: var(--space-md) var(--space-lg);
             border-radius: var(--radius-md);
             text-decoration: none;
             font-weight: 500;
             transition: var(--transition-base);
         }
-        
+
         .nav-btn:hover {
             background: var(--primary);
             color: white;
-        }
-        
-        .highlight-box {
-            background: var(--primary-light);
-            border-left: 4px solid var(--primary);
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
-        }
-        
-        .highlight-box h3 {
-            color: var(--primary);
-            margin-bottom: 1rem;
         }
     </style>
 </head>
@@ -296,153 +308,158 @@
         </div>
     </header>
 
-    <!-- Article -->
-    <div class="container article-container">
-        <div class="article-header">
-            <h1 class="article-title" data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</h1>
-            <div class="article-meta">
-                <span data-i18n="article.meta.reading">5 min read</span> • 
-                <span data-i18n="article.meta.updated">Updated December 2024</span>
-            </div>
-        </div>
+    <main class="article-page">
+        <section class="article-hero">
+            <div class="container">
+                <span class="article-hero__tag" data-i18n="article.investment.hero.tag">2025 Outlook</span>
+                <h1 class="article-title" data-i18n="article.investment.hero.title">Invest With Clarity in the US Market</h1>
+                <p class="article-hero__subtitle" data-i18n="article.investment.hero.subtitle">Track US trends, compare banking offers in America, and build a resilient portfolio that fits your goals.</p>
 
-        <div class="article-content">
-            <p data-i18n="article.investment.intro">
-                Investing can seem intimidating, but it's one of the most powerful tools for building long-term wealth. 
-                This guide covers the essential concepts every investor should understand before getting started.
-            </p>
-
-            <h2 data-i18n="article.investment.why.title">Why Invest?</h2>
-            <p data-i18n="article.investment.why.text">
-                Inflation erodes the purchasing power of money over time. While savings accounts preserve capital, 
-                investments help your money grow faster than inflation, building real wealth.
-            </p>
-
-            <div class="comparison-chart">
-                <h3 data-i18n="article.investment.chart.title">Money Growth: Savings vs Investment (10 Years)</h3>
-                <div class="chart-bars">
-                    <div class="bar-group">
-                        <div class="bar" style="height: 30%;">
-                            <span class="bar-label" data-i18n="article.investment.chart.savings">Savings Account<br>$11,051</span>
-                        </div>
-                        <div class="bar" style="height: 100%;">
-                            <span class="bar-label" data-i18n="article.investment.chart.stocks">Stock Market<br>$19,672</span>
-                        </div>
-                    </div>
+                <div class="article-meta">
+                    <span data-i18n="article.investment.meta.reading">8 min read</span> •
+                    <span data-i18n="article.investment.meta.updated">Updated October 2025</span>
                 </div>
-                <p class="chart-note" data-i18n="article.investment.chart.note">Based on $10,000 initial investment, 1% savings rate vs 7% market return</p>
-            </div>
 
-            <h2 data-i18n="article.investment.risk.title">Understanding Risk and Reward</h2>
-            <p data-i18n="article.investment.risk.text">
-                All investments carry some risk, but risk and potential reward are related. Generally, higher-risk 
-                investments offer higher potential returns over the long term.
-            </p>
-
-            <div class="risk-pyramid">
-                <h3 data-i18n="article.investment.pyramid.title">Investment Risk Pyramid</h3>
-                <div class="pyramid-level high-risk">
-                    <strong data-i18n="article.investment.risk.high">High Risk</strong><br>
-                    <span data-i18n="article.investment.risk.high.desc">Individual Stocks, Crypto</span><br>
-                    <em data-i18n="article.investment.risk.high.return">Potential: 10%+ returns</em>
-                </div>
-                <div class="pyramid-level medium-risk">
-                    <strong data-i18n="article.investment.risk.medium">Medium Risk</strong><br>
-                    <span data-i18n="article.investment.risk.medium.desc">Stock Market ETFs, REITs</span><br>
-                    <em data-i18n="article.investment.risk.medium.return">Potential: 6-10% returns</em>
-                </div>
-                <div class="pyramid-level low-risk">
-                    <strong data-i18n="article.investment.risk.low">Low Risk</strong><br>
-                    <span data-i18n="article.investment.risk.low.desc">Bonds, CDs, High-Yield Savings</span><br>
-                    <em data-i18n="article.investment.risk.low.return">Potential: 1-5% returns</em>
+                <div class="article-hero__actions">
+                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary">
+                        <span data-i18n="article.investment.hero.cta">Plan Growth Scenario</span>
+                    </a>
+                    <span class="data-badge" data-i18n="article.investment.hero.updated">Data verified: September 2025</span>
                 </div>
             </div>
+        </section>
 
-            <h2 data-i18n="article.investment.diversification.title">The Power of Diversification</h2>
-            <p data-i18n="article.investment.diversification.text">
-                Don't put all your eggs in one basket. Diversifying across different asset classes, sectors, 
-                and geographic regions can reduce overall portfolio risk.
-            </p>
-
-            <div class="info-box">
-                <div class="info-title" data-i18n="article.investment.diversification.example">📊 Diversification Example</div>
-                <p data-i18n="article.investment.diversification.portfolio">A balanced portfolio might include:</p>
-                <ul>
-                    <li data-i18n="article.investment.diversification.stocks">60% Stock Market ETFs</li>
-                    <li data-i18n="article.investment.diversification.bonds">30% Bond ETFs</li>
-                    <li data-i18n="article.investment.diversification.international">10% International Markets</li>
-                </ul>
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.metrics.title.en">US Capital Markets</h2>
+                <p data-i18n="article.investment.metrics.subtitle.en">Key US market indicators every investor should track.</p>
             </div>
 
-            <h2 data-i18n="article.investment.start.title">How to Start Investing</h2>
-            <p data-i18n="article.investment.start.text">
-                Begin with low-cost index funds or ETFs that track broad market indices. These provide instant 
-                diversification and have historically delivered solid long-term returns.
-            </p>
+            <div class="metric-grid">
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.stocks.label.en">S&P 500 5-Year Return</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.stocks.value.en">11.8% (S&P 500, 2019-2024)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.stocks.note.en">Source: S&P Global, Q3 2024</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.bonds.label.en">10-Year Treasury Yield</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.bonds.value.en">4.2% (US Treasury)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.bonds.note.en">Current yield on 10-year government bonds</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.inflation.label.en">Core Inflation Rate</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.inflation.value.en">3.1% (CPI, YoY)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.inflation.note.en">Federal Reserve target: 2%</small>
+                </article>
+            </div>
+        </section>
 
-            <div class="step-guide">
-                <h3 data-i18n="article.investment.steps.title">Your First Investment Steps:</h3>
-                <div class="step">
-                    <span class="step-number">1</span>
-                    <div class="step-content">
-                        <h4 data-i18n="article.investment.step1.title">Open an Investment Account</h4>
-                        <p data-i18n="article.investment.step1.desc">Choose a reputable brokerage with low fees</p>
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.regions.title.en">US Banking and Investment Landscape</h2>
+                <p data-i18n="article.investment.regions.subtitle.en">Current rates, brokers, and investment opportunities available for US investors.</p>
+            </div>
+
+            <div class="region-grid">
+                <div class="region-card">
+                    <h3 data-i18n="article.investment.regions.banks.title.en">Major US Banks</h3>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.banks.savings.en">High-Yield Savings:</span>
+                        <span class="rate-value">4.5-5.2%</span>
+                    </div>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.banks.cd.en">CD Rates (12-month):</span>
+                        <span class="rate-value">4.8-5.5%</span>
                     </div>
                 </div>
-                <div class="step">
-                    <span class="step-number">2</span>
-                    <div class="step-content">
-                        <h4 data-i18n="article.investment.step2.title">Start with Index Funds</h4>
-                        <p data-i18n="article.investment.step2.desc">Look for funds that track the S&P 500 or total market</p>
+                <div class="region-card">
+                    <h3 data-i18n="article.investment.regions.brokers.title.en">Top US Brokers</h3>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.brokers.commission.en">Commission:</span>
+                        <span class="rate-value">$0</span>
+                    </div>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.brokers.minimum.en">Minimum Deposit:</span>
+                        <span class="rate-value">$0</span>
                     </div>
                 </div>
-                <div class="step">
-                    <span class="step-number">3</span>
-                    <div class="step-content">
-                        <h4 data-i18n="article.investment.step3.title">Invest Regularly</h4>
-                        <p data-i18n="article.investment.step3.desc">Set up automatic monthly investments</p>
+                <div class="region-card">
+                    <h3 data-i18n="article.investment.regions.investments.title.en">Investment Options</h3>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.investments.etf.en">ETF Expense Ratios:</span>
+                        <span class="rate-value">0.03-0.15%</span>
                     </div>
-                </div>
-                <div class="step">
-                    <span class="step-number">4</span>
-                    <div class="step-content">
-                        <h4 data-i18n="article.investment.step4.title">Stay the Course</h4>
-                        <p data-i18n="article.investment.step4.desc">Don't panic during market downturns</p>
+                    <div class="rate-item">
+                        <span data-i18n="article.investment.regions.investments.401k.en">401(k) Match:</span>
+                        <span class="rate-value">Up to 6%</span>
                     </div>
                 </div>
             </div>
 
-            <h2 data-i18n="article.investment.conclusion.title">Time in the Market Beats Timing the Market</h2>
-            <p data-i18n="article.investment.conclusion.text">
-                The key to successful investing is starting early and staying consistent. Don't try to time the market 
-                – focus on time in the market instead.
-            </p>
+            <div class="region-note">
+                <h4 data-i18n="article.investment.regions.note.title.en">How to use US investment opportunities</h4>
+                <p data-i18n="article.investment.regions.note.text.en">Check broker registration with SEC and FINRA before opening accounts. Confirm FDIC insurance for deposit products and SIPC protection for securities.</p>
+            </div>
+        </section>
 
-            <div class="highlight-box">
-                <h3 data-i18n="article.investment.takeaways.title">💡 Key Takeaways</h3>
-                <ul>
-                    <li data-i18n="article.investment.takeaway1">Start investing as early as possible</li>
-                    <li data-i18n="article.investment.takeaway2">Diversify your investments</li>
-                    <li data-i18n="article.investment.takeaway3">Keep fees low with index funds</li>
-                    <li data-i18n="article.investment.takeaway4">Invest regularly, regardless of market conditions</li>
-                    <li data-i18n="article.investment.takeaway5">Think long-term (10+ years)</li>
-                </ul>
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.portfolios.title.en">Model Portfolios for US Investors</h2>
+                <p data-i18n="article.investment.portfolios.subtitle.en">US asset allocation strategies for different risk profiles and time horizons.</p>
             </div>
 
-            <div class="cta-section">
+            <div class="portfolio-grid">
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.conservative.title.en">Conservative Portfolio (0-3 years)</h3>
+                    <p data-i18n="article.investment.portfolios.conservative.desc.en">Focus on capital preservation and liquidity for short-term goals.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.conservative.line1.en">50% high-yield savings (4.5-5.2%)</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line2.en">30% short-term Treasury bonds</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line3.en">20% money market funds</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.balanced.title.en">Balanced Portfolio (3-7 years)</h3>
+                    <p data-i18n="article.investment.portfolios.balanced.desc.en">Mix of US stocks and bonds for moderate growth.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.balanced.line1.en">15% cash and savings</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line2.en">45% US large-cap stocks (S&P 500)</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line3.en">25% US bonds (Treasury/Corporate)</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line4.en">15% international stocks</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.growth.title.en">Growth Portfolio (7+ years)</h3>
+                    <p data-i18n="article.investment.portfolios.growth.desc.en">Higher allocation to stocks for long-term wealth building.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.growth.line1.en">75% US stocks (broad market)</li>
+                        <li data-i18n="article.investment.portfolios.growth.line2.en">15% small-cap growth stocks</li>
+                        <li data-i18n="article.investment.portfolios.growth.line3.en">10% Treasury bonds for rebalancing</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="cta-card">
                 <h3 data-i18n="article.investment.cta.title">Calculate Your Investment Growth</h3>
                 <p data-i18n="article.investment.cta.text">See how your investments could grow over time with our compound interest calculator.</p>
-                <a href="../calculators/compound-interest-modern.html" class="btn-cta" data-i18n="article.investment.cta.button">Try Investment Calculator</a>
+                <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-cta" data-i18n="article.investment.cta.button">Try Investment Calculator</a>
+                <small data-i18n="footer.disclaimer">Financial calculators for informational purposes only</small>
             </div>
-        </div>
+        </section>
 
         <!-- Article Navigation -->
-        <div class="article-nav">
-            <a href="debt-management-guide.html" class="nav-btn" data-i18n="article.previous">Previous Article</a>
-            <a href="roi-investment-guide.html" class="nav-btn" data-i18n="article.next">Next Article</a>
-            <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
+        <div class="container">
+            <div class="article-nav">
+                <a href="debt-management-guide.html" onclick="i18n.navigateTo(event, 'debt-management-guide.html')" class="nav-btn" data-i18n="article.previous">Previous Article</a>
+                <a href="roi-investment-guide.html" onclick="i18n.navigateTo(event, 'roi-investment-guide.html')" class="nav-btn" data-i18n="article.next">Next Article</a>
+                <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
+            </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="site-footer">
@@ -466,6 +483,8 @@
     <script src="../assets/i18n.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Set language to English for this page
+            i18n.setLanguage('en');
             i18n.updatePage();
         });
     </script>

@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Основы Инвестирования: Ваш Путь к Финансовому Росту</title>
+    <meta name="description" content="Актуальный 2025 гид с российскими рыночными данными, стратегия шаг за шагом и современные визуализации.">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .article-page {
+            padding-bottom: var(--space-3xl);
+        }
+
+        .article-hero {
+            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(0, 168, 107, 0.08) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-3xl) 0 var(--space-2xl);
+        }
+
+        .article-hero__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(0, 102, 255, 0.12);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        .article-hero__subtitle {
+            max-width: 720px;
+            margin-top: var(--space-md);
+            color: var(--text-secondary);
+            font-size: 1.175rem;
+        }
+
+        .article-meta {
+            margin-top: var(--space-lg);
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            align-items: center;
+        }
+
+        .article-hero__actions {
+            margin-top: var(--space-xl);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .data-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .section-header {
+            max-width: 760px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-header p {
+            margin-top: var(--space-sm);
+            font-size: 1.05rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            border: 1px solid rgba(0, 102, 255, 0.12);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-note {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            border: 1px solid rgba(0, 168, 107, 0.18);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .principle-card h3 {
+            color: var(--success);
+        }
+
+        .principle-card ul {
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .principle-card ul li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .region-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            padding: var(--space-xl);
+            border: 1px solid rgba(0, 168, 107, 0.18);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .region-card__header {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .region-yield {
+            font-weight: 600;
+            color: var(--success);
+            font-size: 0.95rem;
+            background: var(--success-light);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+        }
+
+        .region-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        .region-list li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .region-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .region-note {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .portfolio-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .allocation-list {
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .allocation-list li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--white);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-card h3,
+        .cta-card p {
+            color: var(--white);
+        }
+
+        .cta-card .btn-cta {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .cta-card small {
+            display: block;
+            margin-top: var(--space-lg);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-md);
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            padding: var(--space-sm) var(--space-lg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            text-align: center;
+            flex: 1;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .article-hero {
+                padding: var(--space-2xl) 0 var(--space-xl);
+            }
+
+            .article-hero__subtitle {
+                font-size: 1.05rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article-nav {
+                flex-direction: column;
+            }
+
+            .metric-grid,
+            .principles-grid,
+            .region-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+
+                <nav class="nav-menu">
+                    <a href="../index.html" class="nav-link">Главная</a>
+                    <a href="../index.html#calculators" class="nav-link">Калькуляторы</a>
+                    <a href="../index.html#articles" class="nav-link active">Статьи</a>
+                    <a href="../index.html#compare" class="nav-link">Сравнение</a>
+
+                    <div class="lang-dropdown">
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text">Язык</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="investment-basics-guide.html">English</a>
+                            <a href="investment-basics-guide-pl.html">Polski</a>
+                            <a href="investment-basics-guide-ru.html">Русский</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-page">
+        <section class="article-hero">
+            <div class="container">
+                <span class="article-hero__tag">Прогноз 2025</span>
+                <h1 class="article-title">Инвестируйте с Ясностью на Российском Рынке</h1>
+                <p class="article-hero__subtitle">Отслеживайте тенденции российского рынка, сравнивайте банковские предложения в России и создавайте устойчивое портфолио для российских инвесторов.</p>
+
+                <div class="article-meta">
+                    <span>8 мин чтения</span>
+                    <span>•</span>
+                    <span>Обновлено: октябрь 2025</span>
+                </div>
+
+                <div class="article-hero__actions">
+                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary">
+                        <span>Запланировать Сценарий Роста</span>
+                    </a>
+                    <span class="data-badge">Данные проверены: сентябрь 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.metrics.title.ru">Российский Рынок Капитала</h2>
+                <p data-i18n="article.investment.metrics.subtitle.ru">Ключевые показатели российского рынка, которые должен отслеживать каждый инвестор.</p>
+            </div>
+
+            <div class="metric-grid">
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.stocks.label.ru">Индекс Мосбиржи 5-летняя доходность</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.stocks.value.ru">11,2% (Мосбиржа, 2019-2024)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.stocks.note.ru">Источник: Московская биржа, Q3 2025</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.bonds.label.ru">ОФЗ 10-летние облигации</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.bonds.value.ru">10,8% (Минфин РФ)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.bonds.note.ru">Текущая доходность ОФЗ, сентябрь 2025</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.inflation.label.ru">Инфляция в России</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.inflation.value.ru">6,5% (Росстат)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.inflation.note.ru">Прогноз Банка России на 2025 год</small>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2>Создайте Свою Инвестиционную Систему</h2>
+                <p>Начните с цели, защитите ликвидность, автоматизируйте взносы.</p>
+            </div>
+
+            <div class="principles-grid">
+                <article class="principle-card">
+                    <h3>Определите цели по горизонту</h3>
+                    <p>Зафиксируйте целевые суммы для краткосрочных (≤2г), среднесрочных (3-7л) и долгосрочных (10+л) целей с ответственностью за валюту.</p>
+                    <ul>
+                        <li>Назначьте каждой цели базовую валюту и предположение об инфляции.</li>
+                        <li>Определите минимальную требуемую доходность, чтобы оставаться на пути.</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>Выделите резерв безопасности</h3>
+                    <p>Держите 3-6 месяцев расходов в застрахованных денежных продуктах перед увеличением рыночной экспозиции.</p>
+                    <ul>
+                        <li>Отделите аварийную наличность от брокерских балансов.</li>
+                        <li>Используйте лестничные депозиты или фонды денежного рынка для доходности.</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>Автоматизируйте дисциплинированное инвестирование</h3>
+                    <p>Запланируйте повторяющиеся переводы в день зарплаты и перебалансируйте ежеквартально до целевых весов.</p>
+                    <ul>
+                        <li>Включите дробное инвестирование ETF там, где доступно.</li>
+                        <li>Просмотрите уровни взносов после изменений зарплаты.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.regions.title.ru">Российский Банковский и Инвестиционный Ландшафт</h2>
+                <p data-i18n="article.investment.regions.subtitle.ru">Актуальные ставки, брокеры и инвестиционные возможности на российском рынке.</p>
+            </div>
+
+            <div class="region-grid">
+                <article class="region-card">
+                    <div class="region-card__header">
+                        <h3>Россия — ₽</h3>
+                        <span class="region-yield" data-i18n="article.investment.regions.ru.yield.ru">Накопительные счета: 10.5–12% (ЦБ РФ, сентябрь 2025)</span>
+                    </div>
+                    <ul class="region-list">
+                        <li>Брокеры: Тинькофф Инвестиции, ВТБ, Сбер обеспечивают доступ к Мосбирже и ОФЗ.</li>
+                        <li>Налоговые льготы: ИИС типа А возврат НДФЛ до 52 000 ₽ ежегодно.</li>
+                        <li>Депозиты 1–3 года: Совкомбанк, Альфа-Банк, Райффайзен 11–12% при онлайн-открытии.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="region-note">
+                <h4 data-i18n="article.investment.regions.note.title.ru">Как использовать российские предложения</h4>
+                <p data-i18n="article.investment.regions.note.text.ru">Проверьте реестр регулятора ЦБ РФ перед открытием счетов и подтвердите страховое покрытие АСВ для депозитных продуктов.</p>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.portfolios.title.ru">Модельные Портфели для Российских Инвесторов</h2>
+                <p data-i18n="article.investment.portfolios.subtitle.ru">Российские стратегии распределения активов для разных профилей риска и горизонтов.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.conservative.title.ru">Консервативный Портфель (0–3 года)</h3>
+                    <p data-i18n="article.investment.portfolios.conservative.text.ru">Фокус на сохранении капитала и ликвидности для краткосрочных целей.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.conservative.line1.ru">50% накопительные счета (10.5–12%)</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line2.ru">30% краткосрочные ОФЗ</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line3.ru">20% банковские депозиты</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.balanced.title.ru">Сбалансированный Портфель (3–7 лет)</h3>
+                    <p data-i18n="article.investment.portfolios.balanced.text.ru">Сочетание российских акций и облигаций для умеренного роста.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.balanced.line1.ru">15% наличность и накопительные счета</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line2.ru">45% российские blue chip (Мосбиржа)</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line3.ru">30% корпоративные облигации РФ</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line4.ru">10% REIT и commodities</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.growth.title.ru">Агрессивный Портфель (10+ лет)</h3>
+                    <p data-i18n="article.investment.portfolios.growth.text.ru">Максимальная экспозиция на российские акции для долгосрочного роста.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.growth.line1.ru">75% российские акции (широкий рынок)</li>
+                        <li data-i18n="article.investment.portfolios.growth.line2.ru">15% акции второго эшелона</li>
+                        <li data-i18n="article.investment.portfolios.growth.line3.ru">10% ОФЗ для ребалансировки</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="cta-card">
+                <h3>Протестируйте Свой План под Стрессом</h3>
+                <p>Симулируйте доходность и ежемесячные депозиты с нашим калькулятором сложного процента, чтобы подтвердить путь к целевому богатству.</p>
+                <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-cta">Открыть Калькулятор</a>
+                <small>Информация носит образовательный характер, не является индивидуальной инвестиционной рекомендацией. Проверьте ставки у провайдеров перед вложением средств.</small>
+            </div>
+        </section>
+
+        <!-- Article Navigation -->
+        <div class="container">
+            <div class="article-nav">
+                <a href="debt-management-guide.html" onclick="i18n.navigateTo(event, 'debt-management-guide.html')" class="nav-btn">Предыдущая Статья</a>
+                <a href="roi-investment-guide.html" onclick="i18n.navigateTo(event, 'roi-investment-guide.html')" class="nav-btn">Следующая Статья</a>
+                <a href="../index.html#articles" class="nav-btn">К Статьям</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span>Финансовые калькуляторы для информационных целей</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LW2KKBR4L2');
+    </script>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set language to Russian for this page
+            i18n.setLanguage('ru');
+            i18n.updatePage();
+        });
+    </script>
+</body>
+</html>

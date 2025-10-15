@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Podstawy Inwestowania: Twoja Ścieżka do Wzrostu Finansowego</title>
+    <meta name="description" content="Aktualny 2025 playbook z polskimi danymi rynkowymi, strategia krok po kroku i nowoczesne wizualizacje.">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        .article-page {
+            padding-bottom: var(--space-3xl);
+        }
+
+        .article-hero {
+            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(0, 168, 107, 0.08) 100%);
+            border-bottom: 1px solid var(--border);
+            padding: var(--space-3xl) 0 var(--space-2xl);
+        }
+
+        .article-hero__tag {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-full);
+            background: rgba(0, 102, 255, 0.12);
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+        }
+
+        .article-hero__subtitle {
+            max-width: 720px;
+            margin-top: var(--space-md);
+            color: var(--text-secondary);
+            font-size: 1.175rem;
+        }
+
+        .article-meta {
+            margin-top: var(--space-lg);
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            align-items: center;
+        }
+
+        .article-hero__actions {
+            margin-top: var(--space-xl);
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-md);
+            align-items: center;
+        }
+
+        .data-badge {
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+            background: var(--gray-100);
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .section-header {
+            max-width: 760px;
+            margin-bottom: var(--space-xl);
+        }
+
+        .section-header p {
+            margin-top: var(--space-sm);
+            font-size: 1.05rem;
+        }
+
+        .metric-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .metric-card {
+            padding: var(--space-xl);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            border: 1px solid rgba(0, 102, 255, 0.12);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .metric-label {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-muted);
+        }
+
+        .metric-value {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .metric-note {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .principles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .principle-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            border: 1px solid rgba(0, 168, 107, 0.18);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .principle-card h3 {
+            color: var(--success);
+        }
+
+        .principle-card ul {
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .principle-card ul li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .region-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            padding: var(--space-xl);
+            border: 1px solid rgba(0, 168, 107, 0.18);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .region-card__header {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .region-yield {
+            font-weight: 600;
+            color: var(--success);
+            font-size: 0.95rem;
+            background: var(--success-light);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+        }
+
+        .region-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        .region-list li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .region-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .region-note {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .portfolio-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .allocation-list {
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+        }
+
+        .allocation-list li {
+            margin-bottom: var(--space-xs);
+        }
+
+        .cta-card {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2xl);
+            color: var(--white);
+            text-align: center;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .cta-card h3,
+        .cta-card p {
+            color: var(--white);
+        }
+
+        .cta-card .btn-cta {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .cta-card small {
+            display: block;
+            margin-top: var(--space-lg);
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.85rem;
+        }
+
+        .article-nav {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-md);
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border);
+        }
+
+        .nav-btn {
+            padding: var(--space-sm) var(--space-lg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            text-align: center;
+            flex: 1;
+        }
+
+        .nav-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .article-hero {
+                padding: var(--space-2xl) 0 var(--space-xl);
+            }
+
+            .article-hero__subtitle {
+                font-size: 1.05rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article-nav {
+                flex-direction: column;
+            }
+
+            .metric-grid,
+            .principles-grid,
+            .region-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+
+                <nav class="nav-menu">
+                    <a href="../index.html" class="nav-link">Strona główna</a>
+                    <a href="../index.html#calculators" class="nav-link">Kalkulatory</a>
+                    <a href="../index.html#articles" class="nav-link active">Artykuły</a>
+                    <a href="../index.html#compare" class="nav-link">Porównaj</a>
+
+                    <div class="lang-dropdown">
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text">Język</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="investment-basics-guide.html" data-lang="en">English</a>
+                            <a href="investment-basics-guide-pl.html" data-lang="pl" class="active">Polski</a>
+                            <a href="investment-basics-guide-ru.html" data-lang="ru">Русский</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="article-page">
+        <section class="article-hero">
+            <div class="container">
+                <span class="article-hero__tag">Prognoza 2025</span>
+                <h1 class="article-title">Inwestuj z klarownością na polskim rynku</h1>
+                <p class="article-hero__subtitle">Śledź krajowe trendy, porównuj oferty banków w Polsce i buduj odporne portfolio dopasowane do swoich celów.</p>
+
+                <div class="article-meta">
+                    <span>8 min czytania</span>
+                    <span>•</span>
+                    <span>Aktualizacja: październik 2025</span>
+                </div>
+
+                <div class="article-hero__actions">
+                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary">
+                        <span>Zaplanuj scenariusz wzrostu</span>
+                    </a>
+                    <span class="data-badge">Dane zweryfikowane: wrzesień 2025</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.metrics.title.pl">Polski Rynek Kapitałowy</h2>
+                <p data-i18n="article.investment.metrics.subtitle.pl">Najważniejsze wskaźniki polskiego rynku, które warto śledzić w tym roku.</p>
+            </div>
+
+            <div class="metric-grid">
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.stocks.label.pl">Indeks WIG20 5-letnia CAGR</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.stocks.value.pl">6.8% (GPW, 2019-2024)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.stocks.note.pl">Źródło: Giełda Papierów Wartościowych w Warszawie, Q3 2025</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.bonds.label.pl">Polskie obligacje 10-letnie</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.bonds.value.pl">5,2% (Ministerstwo Finansów)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.bonds.note.pl">Aktualna rentowność obligacji skarbowych, wrzesień 2025</small>
+                </article>
+                <article class="metric-card">
+                    <span class="metric-label" data-i18n="article.investment.metrics.inflation.label.pl">Inflacja w Polsce</span>
+                    <span class="metric-value" data-i18n="article.investment.metrics.inflation.value.pl">4.1% (GUS)</span>
+                    <small class="metric-note" data-i18n="article.investment.metrics.inflation.note.pl">Prognoza Narodowego Banku Polskiego na 2025</small>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2>Zbuduj swoją ramę inwestycyjną</h2>
+                <p>Zacznij od celu, chroń płynność, automatyzuj regularne wpłaty.</p>
+            </div>
+
+            <div class="principles-grid">
+                <article class="principle-card">
+                    <h3>Ustal cele według horyzontu</h3>
+                    <p>Zapisz kwoty docelowe dla celów krótkoterminowych (≤2 lata), średnioterminowych (3–7 lat) i długoterminowych (10+ lat) wraz z walutą bazową.</p>
+                    <ul>
+                        <li>Przypisz każdemu celowi walutę bazową i założenia inflacyjne.</li>
+                        <li>Zdefiniuj minimalną wymaganą stopę zwrotu, aby utrzymać kurs.</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>Wyodrębnij rezerwę bezpieczeństwa</h3>
+                    <p>Zachowaj 3–6 miesięcy wydatków w ubezpieczonych produktach gotówkowych zanim zwiększysz ekspozycję na rynek.</p>
+                    <ul>
+                        <li>Oddziel środki awaryjne od rachunków maklerskich.</li>
+                        <li>Wykorzystuj lokaty progresywne lub fundusze rynku pieniężnego dla dodatkowego zysku.</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>Zautomatyzuj inwestowanie</h3>
+                    <p>Ustaw cykliczne przelewy w dniu wypłaty i równoważ portfel co kwartał do docelowych wag.</p>
+                    <ul>
+                        <li>Korzystaj z możliwości nabywania ułamkowych jednostek ETF, jeśli broker je oferuje.</li>
+                        <li>Aktualizuj wysokość wpłat po każdej podwyżce wynagrodzenia.</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.regions.title.pl">Polski Krajobraz Bankowy i Inwestycyjny</h2>
+                <p data-i18n="article.investment.regions.subtitle.pl">Aktualne stawki, brokerzy i możliwości inwestycyjne dostępne dla inwestorów w Polsce.</p>
+            </div>
+
+            <div class="region-grid">
+                <article class="region-card">
+                    <div class="region-card__header">
+                        <h3>Polska — PLN</h3>
+                        <span class="region-yield">Lokaty 6M: 5,5–6,1% (NBP, wrzesień 2025)</span>
+                    </div>
+                    <ul class="region-list">
+                        <li>Brokerzy: mBank, XTB, Pekao oferują dostęp do GPW i ETF-ów UE.</li>
+                        <li>Tarcze podatkowe: limity IKE/IKZE 20 805 zł (IKE) i 10 764 zł (IKZE) w 2025 r.</li>
+                        <li>Depozyty promocyjne: PKO BP, Santander, Bank Millennium powyżej 5,5% dla nowych środków.</li>
+                    </ul>
+                </article>
+            </div>
+
+            <div class="region-note">
+                <h4 data-i18n="article.investment.regions.note.title.pl">Jak korzystać z polskich ofert</h4>
+                <p data-i18n="article.investment.regions.note.text.pl">Sprawdź rejestr regulatora KNF przed otwarciem kont i potwierdź ubezpieczenie BFG dla produktów depozytowych.</p>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="section-header">
+                <h2 data-i18n="article.investment.portfolios.title.pl">Modele Portfeli dla Polskich Inwestorów</h2>
+                <p data-i18n="article.investment.portfolios.subtitle.pl">Polskie strategie alokacji dopasowane do różnych profili ryzyka i horyzontów czasowych.</p>
+            </div>
+
+            <div class="portfolio-grid">
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.conservative.title.pl">Portfel Konserwatywny (0–3 lata)</h3>
+                    <p data-i18n="article.investment.portfolios.conservative.text.pl">Skupienie na ochronie kapitału i płynności dla krótkoterminowych celów.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.conservative.line1.pl">50% lokaty bankowe (5,5–6,1%)</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line2.pl">30% krótkoterminowe obligacje skarbowe</li>
+                        <li data-i18n="article.investment.portfolios.conservative.line3.pl">20% fundusze rynku pieniężnego</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.balanced.title.pl">Portfel Zrównoważony (3–7 lat)</h3>
+                    <p data-i18n="article.investment.portfolios.balanced.text.pl">Połączenie polskich akcji i obligacji dla umiarkowanego wzrostu.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.balanced.line1.pl">15% gotówka i lokaty</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line2.pl">45% polskie blue chipy (WIG20)</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line3.pl">30% polskie obligacje korporacyjne</li>
+                        <li data-i18n="article.investment.portfolios.balanced.line4.pl">10% REIT-y i surowce</li>
+                    </ul>
+                </article>
+
+                <article class="portfolio-card">
+                    <h3 data-i18n="article.investment.portfolios.growth.title.pl">Portfel Wzrostowy (10+ lat)</h3>
+                    <p data-i18n="article.investment.portfolios.growth.text.pl">Maksymalizacja ekspozycji na polskie akcje dla długoterminowego budowania majątku.</p>
+                    <ul class="allocation-list">
+                        <li data-i18n="article.investment.portfolios.growth.line1.pl">75% polskie akcje (szeroki rynek)</li>
+                        <li data-i18n="article.investment.portfolios.growth.line2.pl">15% małe spółki z GPW</li>
+                        <li data-i18n="article.investment.portfolios.growth.line3.pl">10% obligacje dla równoważenia</li>
+                    </ul>
+                </article>
+            </div>
+        </section>
+
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="cta-card">
+                <h3>Przetestuj swój plan</h3>
+                <p>Symuluj wyniki i miesięczne wpłaty w naszym kalkulatorze procentu składanego, aby potwierdzić ścieżkę do celu.</p>
+                <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-cta">Otwórz kalkulator</a>
+                <small>Informacje mają charakter edukacyjny. Zweryfikuj stawki u dostawców przed ulokowaniem środków.</small>
+            </div>
+        </section>
+
+        <!-- Article Navigation -->
+        <div class="container">
+            <div class="article-nav">
+                <a href="debt-management-guide.html" onclick="i18n.navigateTo(event, 'debt-management-guide.html')" class="nav-btn">Poprzedni artykuł</a>
+                <a href="roi-investment-guide.html" onclick="i18n.navigateTo(event, 'roi-investment-guide.html')" class="nav-btn">Następny artykuł</a>
+                <a href="../index.html#articles" class="nav-btn">Powrót do artykułów</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span>Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LW2KKBR4L2');
+    </script>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set language to Polish for this page
+            i18n.setLanguage('pl');
+            i18n.updatePage();
+        });
+    </script>
+</body>
+</html>

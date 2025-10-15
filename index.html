@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-multilingual="true">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -135,7 +135,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.compound.desc">Calculate how your investments grow with compound interest</p>
-                <a href="calculators/compound-interest-modern.html" class="btn btn-primary">
+                <a href="calculators/compound-interest-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/compound-interest-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -156,7 +156,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.loan.desc">Find your monthly payment and total interest</p>
-                <a href="calculators/loan-payment-modern.html" class="btn btn-primary">
+                <a href="calculators/loan-payment-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/loan-payment-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -177,7 +177,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.savings.desc">Plan your savings to reach financial goals</p>
-                <a href="calculators/savings-goal-modern.html" class="btn btn-primary">
+                <a href="calculators/savings-goal-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/savings-goal-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -195,7 +195,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.mortgage.desc">Calculate mortgage payments and affordability</p>
-                <a href="calculators/mortgage-modern.html" class="btn btn-primary">
+                <a href="calculators/mortgage-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/mortgage-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -216,7 +216,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.creditcard.desc">Create a payoff plan for credit card debt</p>
-                <a href="calculators/credit-card-modern.html" class="btn btn-primary">
+                <a href="calculators/credit-card-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/credit-card-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -237,7 +237,7 @@
                     </svg>
                 </div>
                 <p data-i18n="card.roi.desc">Calculate return on investment and compare opportunities</p>
-                <a href="calculators/roi-modern.html" class="btn btn-primary">
+                <a href="calculators/roi-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/roi-modern.html')">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -260,7 +260,7 @@
             <article class="card">
                 <h3 data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</h3>
                 <p data-i18n="article.investment.desc">Learn the fundamentals of investing, from risk management to portfolio diversification. Start your investment journey with confidence.</p>
-                <a href="articles/investment-basics-guide.html" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
+                <a href="articles/investment-basics-guide.html" onclick="redirectToLocalizedArticle(event, 'investment-basics-guide')" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
             </article>
             
             <article class="card">
@@ -341,8 +341,12 @@
             // Add smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    if (!href || href === '#') {
+                        return;
+                    }
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const target = document.querySelector(href);
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
@@ -377,68 +381,42 @@
             localStorage.setItem('cookiesAccepted', 'false');
             document.getElementById('cookie-banner').style.display = 'none';
         }
-    </script>
 
-    <!-- Internationalization -->
-    <script src="assets/i18n.js"></script>
-    <script>
-        // Auto-detect language based on user's system (only on first visit)
-        function detectLanguage() {
-            // 1. Check if language is already saved (user visited before or changed language)
+        function redirectToLocalizedArticle(event, articleName) {
+            event.preventDefault();
+
+            // Get user's preferred language
             const savedLang = localStorage.getItem('preferredLanguage');
-            if (savedLang && ['en', 'pl', 'ru'].includes(savedLang)) {
-                return savedLang;
+            const urlLang = new URLSearchParams(window.location.search).get('lang');
+
+            let lang = savedLang || urlLang;
+
+            // If no saved language, detect from browser
+            if (!lang) {
+                const browserLang = navigator.language || navigator.userLanguage;
+                const langCode = browserLang.toLowerCase().split('-')[0];
+
+                if (langCode === 'pl') {
+                    lang = 'pl';
+                } else if (['ru', 'uk', 'be'].includes(langCode)) {
+                    lang = 'ru';
+                } else {
+                    lang = 'en';
+                }
             }
 
-            // 2. Check URL parameter (for direct links like ?lang=pl)
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlLang = urlParams.get('lang');
-            if (urlLang && ['en', 'pl', 'ru'].includes(urlLang)) {
-                // Save URL language as preference
-                localStorage.setItem('preferredLanguage', urlLang);
-                return urlLang;
+            // Redirect to appropriate localized version
+            let redirectUrl = `articles/${articleName}.html`;
+            if (lang === 'pl') {
+                redirectUrl = `articles/${articleName}-pl.html`;
+            } else if (lang === 'ru') {
+                redirectUrl = `articles/${articleName}-ru.html`;
             }
 
-            // 3. First visit: Auto-detect from browser/system language
-            const browserLang = navigator.language || navigator.userLanguage;
-            const langCode = browserLang.toLowerCase().split('-')[0];
-
-            let detectedLang = 'en'; // Default fallback
-
-            // Language mapping rules
-            if (langCode === 'pl') {
-                detectedLang = 'pl'; // Polish → Polish
-            } else if (['ru', 'uk', 'be'].includes(langCode)) {
-                detectedLang = 'ru'; // Russian/Ukrainian/Belarusian → Russian
-            } else {
-                detectedLang = 'en'; // All others → English
-            }
-
-            // Save detected language for future visits
-            localStorage.setItem('preferredLanguage', detectedLang);
-            return detectedLang;
+            window.location.href = redirectUrl;
         }
-
-        // Initialize i18n
-        document.addEventListener('DOMContentLoaded', function() {
-            const lang = detectLanguage();
-
-            if (window.i18n) {
-                // Set language and update page
-                i18n.setLanguage(lang);
-
-                // Update language buttons
-                document.querySelectorAll('.lang-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if (btn.getAttribute('data-lang') === lang) {
-                        btn.classList.add('active');
-                    }
-                });
-
-                // Save language preference when user changes it (already handled by i18n.setLanguage())
-                // No additional event handlers needed since i18n.js handles localStorage saving
-            }
-        });
     </script>
+
+
 </body>
 </html>
