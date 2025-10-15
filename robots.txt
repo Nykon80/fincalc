@@ -1,7 +1,21 @@
 User-agent: *
 Allow: /
-Sitemap: /sitemap.xml
 
+# Sitemap
+Sitemap: https://nykon80.github.io/fincalc/sitemap.xml
 
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
 
+# Disallow admin or private areas (if any)
+# Disallow: /admin/
+# Disallow: /private/
 
+# Allow all calculators and articles
+Allow: /calculators/
+Allow: /articles/
+Allow: /pages/
+
+# Allow assets
+Allow: /assets/
+Allow: /favicon.svg
