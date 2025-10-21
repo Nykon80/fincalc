@@ -120,6 +120,7 @@ const translations = {
 
     // New keys for share section
     'article.investment.share.title': 'Loved this? Share with Friends!',
+    'article.investment.share.subtitle': 'Help others discover the power of smart investing.',
     'article.investment.share.twitter': 'Share on Twitter',
     'article.investment.share.facebook': 'Share on Facebook',
 
@@ -1484,6 +1485,7 @@ const translations = {
 
     // New keys for share section
     'article.investment.share.title': 'Podobało się? Podziel się z Przyjaciółmi!',
+    'article.investment.share.subtitle': 'Pomóż innym odkryć moc inteligentnego inwestowania.',
     'article.investment.share.twitter': 'Udostępnij na Twitterze',
     'article.investment.share.facebook': 'Udostępnij na Facebooku',
 
@@ -2286,6 +2288,7 @@ const translations = {
 
     // New keys for share section
     'article.investment.share.title': 'Понравилось? Поделитесь с Друзьями!',
+    'article.investment.share.subtitle': 'Помогите другим открыть для себя силу умных инвестиций.',
     'article.investment.share.twitter': 'Поделиться в Twitter',
     'article.investment.share.facebook': 'Поделиться в Facebook',
 
