@@ -1485,7 +1485,7 @@ const translations = {
 
     // New keys for share section
     'article.investment.share.title': 'Podobało się? Podziel się z Przyjaciółmi!',
-    'article.investment.share.subtitle': 'Pomóż innym odkryć moc inteligentnego inwestowania.',
+    'article.investment.share.subtitle': 'Pomóż innym odkryć siłę mądrego inwestowania.',
     'article.investment.share.twitter': 'Udostępnij na Twitterze',
     'article.investment.share.facebook': 'Udostępnij na Facebooku',
 
@@ -2288,7 +2288,7 @@ const translations = {
 
     // New keys for share section
     'article.investment.share.title': 'Понравилось? Поделитесь с Друзьями!',
-    'article.investment.share.subtitle': 'Помогите другим открыть для себя силу умных инвестиций.',
+    'article.investment.share.subtitle': 'Помогите другим открыть силу умного инвестирования.',
     'article.investment.share.twitter': 'Поделиться в Twitter',
     'article.investment.share.facebook': 'Поделиться в Facebook',
 
