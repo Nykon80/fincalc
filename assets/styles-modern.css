@@ -1216,3 +1216,105 @@ section[id] {
     image-rendering: crisp-edges;
   }
 }
+
+/* Regional Banking Cards */
+.region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-lg);
+  margin: var(--space-xl) 0;
+}
+
+.region-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  transition: all var(--transition-base);
+}
+
+.region-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.region-card h3 {
+  color: var(--primary);
+  margin-bottom: var(--space-lg);
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.rate-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-md);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.rate-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.rate-value {
+  color: var(--success);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.rate-link {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 0.8rem;
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  background: var(--primary-light);
+  transition: all var(--transition-base);
+}
+
+.rate-link:hover {
+  background: var(--primary);
+  color: var(--white);
+  text-decoration: none;
+}
+
+.region-note {
+  background: var(--gray-50);
+  border-left: 4px solid var(--primary);
+  padding: var(--space-lg);
+  margin-top: var(--space-xl);
+  border-radius: var(--radius-md);
+}
+
+.region-note h4 {
+  color: var(--primary);
+  margin-bottom: var(--space-sm);
+  font-size: 1rem;
+}
+
+.region-note p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* Mobile adjustments for regional cards */
+@media (max-width: 768px) {
+  .region-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+  
+  .rate-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+  
+  .rate-link {
+    align-self: flex-end;
+  }
+}
