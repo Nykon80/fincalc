@@ -583,11 +583,18 @@
     </script>
 
     <!-- Scripts -->
-    <script src="../assets/i18n.js?v=202510212350"></script>
+    <script src="../assets/i18n.js?v=202510212300"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Set language to English for this page
-            i18n.setLanguage('en');
+            // Detect language from URL parameter or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            
+            let lang = urlLang || savedLang || 'en';
+            
+            // Set the detected language
+            i18n.setLanguage(lang);
             i18n.updatePage();
         });
     </script>
