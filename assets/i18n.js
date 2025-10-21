@@ -81,6 +81,47 @@ const translations = {
     'rating.fair': '🟠 Fair',
     'rating.poor': '🔴 Poor',
     'rating.loss': '⚫ Loss',
+    
+    // New keys for stories section
+    'article.investment.stories.title': 'Real Stories: From Zero to Investor Hero',
+    'article.investment.stories.subtitle': 'See how ordinary people turned small investments into life-changing wealth – and how you can too.',
+    'article.investment.stories.john.title': 'John\'s Journey: $10K to $50K in 5 Years',
+    'article.investment.stories.john.text': 'John, a teacher from California, started with a simple S&P 500 ETF. With consistent monthly investments of $200 and 8% average returns, he built a nest egg. Tip for beginners: Start small, stay consistent.',
+    'article.investment.stories.maria.title': 'Maria\'s Smart Move: Beating Inflation',
+    'article.investment.stories.maria.text': 'Maria from New York switched from savings (2% rate) to bonds and stocks. In 3 years, her portfolio grew 25%. Pro tip for experienced: Diversify to hedge against 3% inflation.',
+
+    // New keys for visuals section
+    'article.investment.visuals.title': 'Visual Guide: Your Money\'s Growth Potential',
+    'article.investment.visuals.subtitle': 'See the power of compounding in action.',
+
+    // New keys for quiz section
+    'article.investment.quiz.title': 'Quick Quiz: Are You Investment-Ready?',
+    'article.investment.quiz.subtitle': 'Answer these 3 questions to gauge your strategy (for beginners and pros).',
+    'article.investment.quiz.q1': 'What\'s your risk tolerance? (Low: Bonds; High: Stocks)',
+    'article.investment.quiz.q2': 'How long until you need the money? (Short: Savings; Long: Growth portfolio)',
+    'article.investment.quiz.q3': 'Diversified? (Mix assets to reduce risk)',
+    'article.investment.quiz.cta': 'Score yourself: 3/3? You\'re ready! Share your results in comments.',
+
+    // New keys for action section
+    'article.investment.action.title': 'Your Next Steps: Turn Knowledge Into Action',
+    'article.investment.action.subtitle': 'Don\'t let this information sit idle. Here\'s how to start your investment journey today.',
+    'article.investment.action.step1.title': 'Step 1: Calculate Your Starting Point',
+    'article.investment.action.step1.text': 'Use our compound interest calculator to see how even $100/month can grow over 10 years.',
+    'article.investment.action.step1.button': 'Try Calculator',
+    'article.investment.action.step2.title': 'Step 2: Set Your Savings Goal',
+    'article.investment.action.step2.text': 'Define how much you want to save and by when. Our savings goal calculator will show you the monthly amount needed.',
+    'article.investment.action.step2.button': 'Set Goal',
+    'article.investment.action.step3.title': 'Step 3: Research Investment Options',
+    'article.investment.action.step3.text': 'Check official sources: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (US), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Poland), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Russia).',
+    'article.investment.action.step3.button': 'Calculate ROI',
+    'article.investment.motivation.title': 'Remember: Every Expert Was Once a Beginner',
+    'article.investment.motivation.text': 'John and Maria didn\'t start with thousands. They started with knowledge, consistency, and small amounts. You can too.',
+    'article.investment.motivation.button': 'Start Your Investment Journey Today',
+
+    // New keys for share section
+    'article.investment.share.title': 'Loved this? Share with Friends!',
+    'article.investment.share.twitter': 'Share on Twitter',
+    'article.investment.share.facebook': 'Share on Facebook',
 
     // Risk scale labels
     'form.risk.level': 'Risk Level (1-10)',
@@ -457,6 +498,86 @@ const translations = {
     'article.investment.principles.reserve.text': 'Hold 3-6 months of expenses in insured cash products before increasing market exposure.',
     'article.investment.principles.reserve.point1': 'Separate emergency cash from brokerage balances.',
     'article.investment.principles.reserve.point2': 'Use laddered deposits or money-market funds for yield.',
+
+    'article.investment.regions.title': 'Regional Spotlights: Banking & Broker Trends',
+    'article.investment.regions.subtitle': 'Compare real offers by language locale to optimize fees, tax breaks, and yields.',
+
+    // United States - USD
+    'article.investment.regions.us.title': 'United States — USD',
+    'article.investment.regions.us.yield': 'High-yield savings APY: 4.25–5.00% (FDIC, Sep 2025)',
+    'article.investment.regions.us.point1': 'Brokerage leaders: Vanguard, Fidelity, Charles Schwab with $0 ETF commissions.',
+    'article.investment.regions.us.point2': 'Retirement wrappers: Roth IRA limit $7,000 (<50) / $8,500 (50+) for tax-free growth.',
+    'article.investment.regions.us.point3': 'Cash management: Ally, SoFi, Marcus offer FDIC-insured accounts above 4.3% APY.',
+
+    // Poland - PLN
+    'article.investment.regions.pl.title': 'Polska — PLN',
+    'article.investment.regions.pl.yield': 'Lokaty 6M: 5.5–6.1% (NBP, wrzesień 2025)',
+    'article.investment.regions.pl.point1': 'Brokerzy: mBank, XTB, Pekao oferują dostęp do GPW i ETF-ów UE.',
+    'article.investment.regions.pl.point2': 'Tarcze podatkowe: IKE/IKZE limit 20 805 zł (IKE) i 10 764 zł (IKZE) w 2025 r.',
+    'article.investment.regions.pl.point3': 'Depozyty promocyjne: PKO BP, Santander, Bank Millennium >5.5% przy nowych środkach.',
+
+    // Russia - RUB
+    'article.investment.regions.ru.title': 'Россия — ₽',
+    'article.investment.regions.ru.yield': 'Накопительные счета: 10.5–12% (ЦБ РФ, сентябрь 2025)',
+    'article.investment.regions.ru.point1': 'Брокеры: Тинькофф Инвестиции, ВТБ, Сбер обеспечивают доступ к Мосбирже и OFZ.',
+    'article.investment.regions.ru.point2': 'Налоговые льготы: ИИС типа А возврат НДФЛ до 52 000 ₽ ежегодно.',
+    'article.investment.regions.ru.point3': 'Депозиты 1–3 года: Совкомбанк, Альфа-Банк, Райффайзен 11–12% при онлайн-открытии.',
+
+    'article.investment.regions.note.title': 'How to use local offers',
+    'article.investment.regions.note.text': 'Check regulator registers (SEC, KNF, ЦБ РФ) before opening accounts and confirm insurance coverage (FDIC, BFG, АСВ).',
+
+    'article.investment.portfolios.title': 'Model Portfolios by Risk Profile',
+    'article.investment.portfolios.subtitle': 'Blend global equities, bonds, and cash to match each timeframe.',
+
+    'article.investment.portfolios.conservative.title': 'Capital Preservation (0–3 years)',
+    'article.investment.portfolios.conservative.text': 'Focus on stability and liquidity for short-term goals.',
+    'article.investment.portfolios.conservative.line1': '40% insured cash / money market',
+    'article.investment.portfolios.conservative.line2': '40% short-term government bonds',
+    'article.investment.portfolios.conservative.line3': '20% diversified income ETFs',
+
+    'article.investment.portfolios.balanced.title': 'Balanced Growth (3–7 years)',
+    'article.investment.portfolios.balanced.text': 'Mix income and appreciation while managing drawdowns.',
+    'article.investment.portfolios.balanced.line1': '20% cash & T-bills buffer',
+    'article.investment.portfolios.balanced.line2': '40% global equities (US + developed ex-US)',
+    'article.investment.portfolios.balanced.line3': '30% investment-grade bonds',
+    'article.investment.portfolios.balanced.line4': '10% diversifiers (REITs, commodities)',
+
+    'article.investment.portfolios.growth.title': 'Long-Term Growth (10+ years)',
+    'article.investment.portfolios.growth.text': 'Maximize equity exposure with disciplined rebalancing.',
+    'article.investment.portfolios.growth.line1': '70% global equities (broad ETFs)',
+    'article.investment.portfolios.growth.line2': '20% emerging markets & thematic tilts',
+    'article.investment.portfolios.growth.line3': '10% bonds for opportunistic rebalancing',
+
+    // Regional Banking & Investment Data (October 2025)
+    'article.investment.hero.tag': '2025 Outlook',
+    'article.investment.hero.title': 'Invest With Clarity in Any Market',
+    'article.investment.hero.subtitle': 'Track global trends, compare regional banking offers, and build a resilient portfolio that fits your goals.',
+    'article.investment.meta.updated': 'Updated October 2025',
+    'article.investment.hero.cta': 'Plan Growth Scenario',
+    'article.investment.hero.updated': 'Data verified: September 2025',
+
+    'article.investment.metrics.title': 'Global Market Snapshot',
+    'article.investment.metrics.subtitle': 'Headline numbers every long-term investor should watch this year.',
+    'article.investment.metrics.stocks.label': 'Global equities 5-year CAGR',
+    'article.investment.metrics.stocks.value': '8.7% (MSCI ACWI, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Source: MSCI Quarterly Fact Sheet, Q3 2025',
+    'article.investment.metrics.bonds.label': 'Global aggregate bond yield',
+    'article.investment.metrics.bonds.value': '3.6% (Bloomberg Global Agg)',
+    'article.investment.metrics.bonds.note': 'Investment-grade weighted yield, September 2025',
+    'article.investment.metrics.inflation.label': 'Advanced economy inflation outlook',
+    'article.investment.metrics.inflation.value': '3.1% (IMF WEO 2025)',
+    'article.investment.metrics.inflation.note': 'Projection for US, Euro Area, UK',
+
+    'article.investment.principles.title': 'Build Your Investment Framework',
+    'article.investment.principles.subtitle': 'Start with purpose, protect liquidity, automate contributions.',
+    'article.investment.principles.goal.title': 'Clarify goals by horizon',
+    'article.investment.principles.goal.text': 'Document target amounts for near-term (≤2y), medium (3-7y), and long-term (10+y) objectives with responsible currency.',
+    'article.investment.principles.goal.point1': 'Assign each goal a base currency and inflation assumption.',
+    'article.investment.principles.goal.point2': 'Define minimum required return to stay on track.',
+    'article.investment.principles.reserve.title': 'Ring-fence a safety reserve',
+    'article.investment.principles.reserve.text': 'Hold 3-6 months of expenses in insured cash products before increasing market exposure.',
+    'article.investment.principles.reserve.point1': 'Separate emergency cash from brokerage balances.',
+    'article.investment.principles.reserve.point2': 'Use laddered deposits or money-market funds for yield.',
     'article.investment.principles.automation.title': 'Automate disciplined investing',
     'article.investment.principles.automation.text': 'Schedule recurring transfers on payday and rebalance quarterly to target weights.',
     'article.investment.principles.automation.point1': 'Enable fractional ETF investing where available.',
@@ -695,8 +816,7 @@ const translations = {
     'rating.good': '🟡 Good',
     'rating.fair': '🟠 Fair',
     'rating.poor': '🔴 Poor',
-    'rating.loss': '⚫ Loss',
-    
+    'rating.loss': '⚫ Loss'
   },
   
   pl: {
@@ -1324,7 +1444,97 @@ const translations = {
     'article.compound.cta.text': 'Użyj naszego kalkulatora procentu składanego, aby zobaczyć, jak Twoje inwestycje mogą rosnąć w czasie.',
     'article.compound.cta.button': 'Wypróbuj Kalkulator',
     'article.compound.conclusion.title': 'Podsumowanie',
-    'article.compound.conclusion.text': 'Procent składany to potężne narzędzie budowania bogactwa, które nagradza cierpliwość i konsekwencję. Kluczem jest rozpoczęcie jak najwcześniej, regularne wpłacanie i pozwolenie czasowi na zrobienie swojej magii. Pamiętaj: najlepszy czas na posadzenie drzewa był 20 lat temu. Drugi najlepszy czas to teraz.'
+    'article.compound.conclusion.text': 'Procent składany to potężne narzędzie budowania bogactwa, które nagradza cierpliwość i konsekwencję. Kluczem jest rozpoczęcie jak najwcześniej, regularne wpłacanie i pozwolenie czasowi na zrobienie swojej magii. Pamiętaj: najlepszy czas na posadzenie drzewa był 20 lat temu. Drugi najlepszy czas to teraz.',
+    
+    // New keys for stories section
+    'article.investment.stories.title': 'Prawdziwe Historie: Od Zera do Bohatera Inwestycji',
+    'article.investment.stories.subtitle': 'Zobacz, jak zwykli ludzie zamienili małe inwestycje w zmieniające życie bogactwo – i jak ty też możesz.',
+    'article.investment.stories.john.title': 'Podróż Johna: Od 10 tys. USD do 50 tys. USD w 5 Lat',
+    'article.investment.stories.john.text': 'John, nauczyciel z Kalifornii, zaczął od prostego ETF S&P 500. Z konsekwentnymi miesięcznymi inwestycjami 200 USD i średnim zwrotem 8%, zbudował gniazdko. Wskazówka dla początkujących: Zaczynaj małym, bądź konsekwentny.',
+    'article.investment.stories.maria.title': 'Sprytny Ruch Marii: Pokonanie Inflacji',
+    'article.investment.stories.maria.text': 'Maria z Nowego Jorku przeszła z oszczędności (2% oprocentowanie) na obligacje i akcje. W 3 lata jej portfel urósł o 25%. Wskazówka dla doświadczonych: Dywersyfikuj, aby zabezpieczyć się przed 3% inflacją.',
+
+    // New keys for visuals section
+    'article.investment.visuals.title': 'Przewodnik Wizualny: Potencjał Wzrostu Twoich Pieniędzy',
+    'article.investment.visuals.subtitle': 'Zobacz siłę procentu składanego w akcji.',
+
+    // New keys for quiz section
+    'article.investment.quiz.title': 'Szybki Quiz: Czy Jesteś Gotowy na Inwestycje?',
+    'article.investment.quiz.subtitle': 'Odpowiedz na te 3 pytania, aby ocenić swoją strategię (dla początkujących i profesjonalistów).',
+    'article.investment.quiz.q1': 'Jaka jest twoja tolerancja ryzyka? (Niska: Obligacje; Wysoka: Akcje)',
+    'article.investment.quiz.q2': 'Jak długo do momentu, gdy będziesz potrzebować pieniędzy? (Krótko: Oszczędności; Długo: Portfel wzrostu)',
+    'article.investment.quiz.q3': 'Zdywersyfikowany? (Mieszaj aktywa, aby zmniejszyć ryzyko)',
+    'article.investment.quiz.cta': 'Oceń siebie: 3/3? Jesteś gotowy! Podziel się wynikami w komentarzach.',
+
+    // New keys for action section
+    'article.investment.action.title': 'Twoje Następne Kroki: Zamień Wiedzę w Działanie',
+    'article.investment.action.subtitle': 'Nie pozwól, aby te informacje pozostały bezczynne. Oto jak rozpocząć swoją podróż inwestycyjną już dziś.',
+    'article.investment.action.step1.title': 'Krok 1: Oblicz Swój Punkt Startowy',
+    'article.investment.action.step1.text': 'Użyj naszego kalkulatora procentu składanego, aby zobaczyć, jak nawet 100 USD miesięcznie może rosnąć przez 10 lat.',
+    'article.investment.action.step1.button': 'Wypróbuj Kalkulator',
+    'article.investment.action.step2.title': 'Krok 2: Ustaw Swój Cel Oszczędnościowy',
+    'article.investment.action.step2.text': 'Określ, ile chcesz zaoszczędzić i do kiedy. Nasz kalkulator celów oszczędnościowych pokaże Ci potrzebną miesięczną kwotę.',
+    'article.investment.action.step2.button': 'Ustaw Cel',
+    'article.investment.action.step3.title': 'Krok 3: Zbadaj Opcje Inwestycyjne',
+    'article.investment.action.step3.text': 'Sprawdź oficjalne źródła: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (USA), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Polska), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Rosja).',
+    'article.investment.action.step3.button': 'Oblicz ROI',
+    'article.investment.motivation.title': 'Pamiętaj: Każdy Ekspert Był Kiedyś Początkującym',
+    'article.investment.motivation.text': 'John i Maria nie zaczynali od tysięcy. Zaczynali od wiedzy, konsekwencji i małych kwot. Ty też możesz.',
+    'article.investment.motivation.button': 'Rozpocznij Swoją Podróż Inwestycyjną Dziś',
+
+    // New keys for share section
+    'article.investment.share.title': 'Podobało się? Podziel się z Przyjaciółmi!',
+    'article.investment.share.twitter': 'Udostępnij na Twitterze',
+    'article.investment.share.facebook': 'Udostępnij na Facebooku',
+
+    // Regional Investment Data - Polish Version
+    'article.investment.metrics.title': 'Rynki Kapitałowe Europy',
+    'article.investment.metrics.subtitle': 'Kluczowe wskaźniki, które powinieneś śledzić jako polski inwestor.',
+    'article.investment.metrics.stocks.label': 'Zwrot STOXX 600 (5 lat)',
+    'article.investment.metrics.stocks.value': '9.2% (STOXX 600, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Źródło: STOXX, wrzesień 2025',
+    'article.investment.metrics.bonds.label': 'Rentowność obligacji skarbowych 10-letnich',
+    'article.investment.metrics.bonds.value': '3.8% (Obligacje polskie)',
+    'article.investment.metrics.bonds.note': 'Aktualna rentowność obligacji rządowych',
+    'article.investment.metrics.inflation.label': 'Stopa inflacji w Polsce',
+    'article.investment.metrics.inflation.value': '2.8% (CPI, r/r)',
+    'article.investment.metrics.inflation.note': 'Cel NBP: 2.5%',
+
+    'article.investment.regions.title': 'Polski Krajobraz Bankowy i Inwestycyjny',
+    'article.investment.regions.subtitle': 'Aktualne stawki, brokerzy i możliwości inwestycyjne dla polskich inwestorów.',
+    'article.investment.regions.banks.title': 'Główne Banki Polskie',
+    'article.investment.regions.banks.savings': 'Lokaty bieżące:',
+    'article.investment.regions.banks.cd': 'Lokaty 6-miesięczne:',
+    'article.investment.regions.brokers.title': 'Czołowi Brokerzy Polscy',
+    'article.investment.regions.brokers.commission': 'Prowizja:',
+    'article.investment.regions.brokers.minimum': 'Depozyt minimalny:',
+    'article.investment.regions.investments.title': 'Możliwości Inwestycyjne',
+    'article.investment.regions.investments.etf': 'Koszty ETF:',
+    'article.investment.regions.investments.401k': 'IKE Limit:',
+    'article.investment.regions.note.title': 'Jak korzystać z polskich możliwości inwestycyjnych',
+    'article.investment.regions.note.text': 'Sprawdź rejestr brokerów w KNF przed otwarciem konta. Potwierdź ubezpieczenie depozytów (BFG) i ochronę papierów wartościowych.',
+
+    'article.investment.portfolios.title': 'Portfele Wzorcowe dla Polskich Inwestorów',
+    'article.investment.portfolios.subtitle': 'Strategie alokacji dla różnych profili ryzyka i horyzontów czasowych.',
+
+    'article.investment.portfolios.conservative.title': 'Portfel Konserwatywny (0-3 lata)',
+    'article.investment.portfolios.conservative.desc': 'Skupienie na ochronie kapitału i płynności dla krótkoterminowych celów.',
+    'article.investment.portfolios.conservative.line1': '50% lokaty bankowe (5.2-5.8%)',
+    'article.investment.portfolios.conservative.line2': '30% obligacje skarbowe',
+    'article.investment.portfolios.conservative.line3': '20% fundusze rynku pieniężnego',
+
+    'article.investment.portfolios.balanced.title': 'Portfel Zbilansowany (3-7 lat)',
+    'article.investment.portfolios.balanced.desc': 'Mix akcji i obligacji dla umiarkowanego wzrostu.',
+    'article.investment.portfolios.balanced.line1': '15% gotówka i oszczędności',
+    'article.investment.portfolios.balanced.line2': '45% akcje europejskie (STOXX 600)',
+    'article.investment.portfolios.balanced.line3': '25% obligacje (rządowe/korporacyjne)',
+    'article.investment.portfolios.balanced.line4': '15% akcje międzynarodowe',
+
+    'article.investment.portfolios.growth.title': 'Portfel Wzrostu (7+ lat)',
+    'article.investment.portfolios.growth.desc': 'Wyższa alokacja akcji dla długoterminowego budowania majątku.',
+    'article.investment.portfolios.growth.line1': '75% akcje (polski rynek i UE)',
+    'article.investment.portfolios.growth.line2': '15% akcje wzrostu',
+    'article.investment.portfolios.growth.line3': '10% obligacje do rebalansowania'
   },
   
   ru: {
@@ -1904,7 +2114,7 @@ const translations = {
     'article.investment.metrics.inflation.note.ru': 'Прогноз Банка России на 2025 год',
 
     'article.investment.regions.title.ru': 'Российский Банковский и Инвестиционный Ландшафт',
-    'article.investment.regions.subtitle.ru': 'Актуальные ставки, брокеры и инвестиционные возможности на российском рынке.',
+    'article.investment.regions.subtitle.ru': 'Актуальные ставки, брокеры и инвестиционные возможности для российских инвесторов.',
     'article.investment.regions.ru.yield.ru': 'Накопительные счета: 10.5–12% (ЦБ РФ, сентябрь 2025)',
     'article.investment.regions.note.title.ru': 'Как использовать российские предложения',
     'article.investment.regions.note.text.ru': 'Проверьте реестр регулятора ЦБ РФ перед открытием счетов и подтвердите страховое покрытие АСВ для депозитных продуктов.',
@@ -2036,7 +2246,97 @@ const translations = {
     'table.metric.annual_roi': 'Годовой ROI',
     'table.metric.net_profit': 'Чистая прибыль',
     'rating.positive': '🟢 Положительно',
-    'rating.negative': '🔴 Отрицательно'
+    'rating.negative': '🔴 Отрицательно',
+    
+    // New keys for stories section
+    'article.investment.stories.title': 'Реальные Истории: От Нуля до Героя Инвестиций',
+    'article.investment.stories.subtitle': 'Посмотрите, как обычные люди превратили небольшие инвестиции в изменяющее жизнь богатство – и как вы тоже можете.',
+    'article.investment.stories.john.title': 'Путь Джона: От 10 тыс. USD до 50 тыс. USD за 5 Лет',
+    'article.investment.stories.john.text': 'Джон, учитель из Калифорнии, начал с простого ETF S&P 500. С последовательными ежемесячными инвестициями 200 USD и средней отдачей 8%, он накопил гнездышко. Совет для новичков: Начинайте с малого, будьте последовательны.',
+    'article.investment.stories.maria.title': 'Умный Ход Марии: Победа над Инфляцией',
+    'article.investment.stories.maria.text': 'Мария из Нью-Йорка перешла с сбережений (2% ставка) на облигации и акции. За 3 года ее портфель вырос на 25%. Совет для опытных: Диверсифицируйте, чтобы защититься от 3% инфляции.',
+
+    // New keys for visuals section
+    'article.investment.visuals.title': 'Визуальное Руководство: Потенциал Роста Ваших Денег',
+    'article.investment.visuals.subtitle': 'Посмотрите силу сложного процента в действии.',
+
+    // New keys for quiz section
+    'article.investment.quiz.title': 'Быстрый Квиз: Готовы ли Вы к Инвестициям?',
+    'article.investment.quiz.subtitle': 'Ответьте на эти 3 вопроса, чтобы оценить свою стратегию (для новичков и профессионалов).',
+    'article.investment.quiz.q1': 'Какова ваша толерантность к риску? (Низкая: Облигации; Высокая: Акции)',
+    'article.investment.quiz.q2': 'Сколько времени до того, как вам понадобятся деньги? (Коротко: Сбережения; Долго: Портфель роста)',
+    'article.investment.quiz.q3': 'Диверсифицированы? (Смешивайте активы, чтобы снизить риск)',
+    'article.investment.quiz.cta': 'Оцените себя: 3/3? Вы готовы! Поделитесь результатами в комментариях.',
+
+    // New keys for action section
+    'article.investment.action.title': 'Ваши Следующие Шаги: Превратите Знания в Действия',
+    'article.investment.action.subtitle': 'Не позволяйте этой информации оставаться бездейственной. Вот как начать свое инвестиционное путешествие уже сегодня.',
+    'article.investment.action.step1.title': 'Шаг 1: Рассчитайте Свою Стартовую Точку',
+    'article.investment.action.step1.text': 'Используйте наш калькулятор сложного процента, чтобы увидеть, как даже 100 USD в месяц могут вырасти за 10 лет.',
+    'article.investment.action.step1.button': 'Попробовать Калькулятор',
+    'article.investment.action.step2.title': 'Шаг 2: Установите Свою Цель Сбережений',
+    'article.investment.action.step2.text': 'Определите, сколько вы хотите накопить и к какому сроку. Наш калькулятор целей сбережений покажет нужную месячную сумму.',
+    'article.investment.action.step2.button': 'Установить Цель',
+    'article.investment.action.step3.title': 'Шаг 3: Исследуйте Инвестиционные Опции',
+    'article.investment.action.step3.text': 'Проверьте официальные источники: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (США), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Польша), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Россия).',
+    'article.investment.action.step3.button': 'Рассчитать ROI',
+    'article.investment.motivation.title': 'Помните: Каждый Эксперт Когда-то Был Новичком',
+    'article.investment.motivation.text': 'Джон и Мария не начинали с тысяч. Они начинали со знаний, последовательности и небольших сумм. Вы тоже можете.',
+    'article.investment.motivation.button': 'Начните Свое Инвестиционное Путешествие Сегодня',
+
+    // New keys for share section
+    'article.investment.share.title': 'Понравилось? Поделитесь с Друзьями!',
+    'article.investment.share.twitter': 'Поделиться в Twitter',
+    'article.investment.share.facebook': 'Поделиться в Facebook',
+
+    // Regional Investment Data - Russian Version
+    'article.investment.metrics.title': 'Финансовые Рынки России',
+    'article.investment.metrics.subtitle': 'Ключевые показатели, которые должен отслеживать каждый инвестор.',
+    'article.investment.metrics.stocks.label': 'Индекс MOEX (5 лет)',
+    'article.investment.metrics.stocks.value': '8.5% (IMOEX, 2019-2024)',
+    'article.investment.metrics.stocks.note': 'Источник: MOEX, сентябрь 2025',
+    'article.investment.metrics.bonds.label': 'Доходность OFZ 10-летних',
+    'article.investment.metrics.bonds.value': '7.2% (ОФЗ-ПД)',
+    'article.investment.metrics.bonds.note': 'Текущая доходность государственных облигаций',
+    'article.investment.metrics.inflation.label': 'Инфляция в России',
+    'article.investment.metrics.inflation.value': '3.9% (ИПЦ, г/г)',
+    'article.investment.metrics.inflation.note': 'Цель ЦБ РФ: 4%',
+
+    'article.investment.regions.title': 'Российский Банковский и Инвестиционный Ландшафт',
+    'article.investment.regions.subtitle': 'Актуальные ставки, брокеры и инвестиционные возможности для российских инвесторов.',
+    'article.investment.regions.banks.title': 'Крупные Российские Банки',
+    'article.investment.regions.banks.savings': 'Депозиты срочные:',
+    'article.investment.regions.banks.cd': 'Депозиты 6-месячные:',
+    'article.investment.regions.brokers.title': 'Топовые Российские Брокеры',
+    'article.investment.regions.brokers.commission': 'Комиссия:',
+    'article.investment.regions.brokers.minimum': 'Минимальный депозит:',
+    'article.investment.regions.investments.title': 'Возможности Инвестирования',
+    'article.investment.regions.investments.etf': 'Комиссии ETF:',
+    'article.investment.regions.investments.401k': 'Лимит ИИС:',
+    'article.investment.regions.note.title': 'Как использовать российские инвестиционные возможности',
+    'article.investment.regions.note.text': 'Проверьте регистрацию брокера в ЦБ РФ перед открытием счета. Убедитесь в наличии страховки депозитов (АСВ) и защиты ценных бумаг.',
+
+    'article.investment.portfolios.title': 'Модельные Портфели для Российских Инвесторов',
+    'article.investment.portfolios.subtitle': 'Стратегии распределения активов для разных профилей риска и горизонтов.',
+
+    'article.investment.portfolios.conservative.title': 'Консервативный Портфель (0-3 года)',
+    'article.investment.portfolios.conservative.desc': 'Сосредоточение на сохранении капитала и ликвидности для краткосрочных целей.',
+    'article.investment.portfolios.conservative.line1': '50% депозиты банков (10.5-12%)',
+    'article.investment.portfolios.conservative.line2': '30% государственные облигации (ОФЗ)',
+    'article.investment.portfolios.conservative.line3': '20% фонды денежного рынка',
+
+    'article.investment.portfolios.balanced.title': 'Сбалансированный Портфель (3-7 лет)',
+    'article.investment.portfolios.balanced.desc': 'Смешивание акций и облигаций для умеренного роста.',
+    'article.investment.portfolios.balanced.line1': '15% наличные и сбережения',
+    'article.investment.portfolios.balanced.line2': '45% российские акции (Мосбиржа)',
+    'article.investment.portfolios.balanced.line3': '25% облигации (государственные/корпоративные)',
+    'article.investment.portfolios.balanced.line4': '15% международные акции',
+
+    'article.investment.portfolios.growth.title': 'Портфель Роста (7+ лет)',
+    'article.investment.portfolios.growth.desc': 'Высокая доля акций для долгосрочного накопления капитала.',
+    'article.investment.portfolios.growth.line1': '75% российские акции (широкий рынок)',
+    'article.investment.portfolios.growth.line2': '15% акции роста',
+    'article.investment.portfolios.growth.line3': '10% облигации для ребалансировки'
   }
 };
 
@@ -2096,7 +2396,7 @@ class I18n {
     // Update all elements with data-i18n attribute
     document.querySelectorAll('[data-i18n]').forEach(element => {
       const key = element.getAttribute('data-i18n');
-      element.textContent = this.t(key);
+      element.innerHTML = this.t(key);
     });
     
     // Update all elements with data-i18n-placeholder attribute
@@ -2174,3 +2474,4 @@ const i18n = new I18n();
 
 // Export for use in other scripts
 window.i18n = i18n;
+
