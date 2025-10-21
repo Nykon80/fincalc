@@ -42,6 +42,16 @@ const translations = {
     'form.calculate': 'Calculate',
     'form.reset': 'Reset',
     
+    // Additional form labels
+    'LABEL.COMPOUND_FREQUENCY': 'Compound Frequency',
+    'LABEL.PAYMENT_FREQUENCY': 'Payment Frequency',
+    'RESULT.MONTHLY.PAYMENT': 'Monthly Payment',
+    
+    // Table headers
+    'TABLE.STARTING_BALANCE': 'Starting Balance',
+    'TABLE.ENDING_BALANCE': 'Ending Balance',
+    'TABLE.REMAINING_BALANCE': 'Remaining Balance',
+    
     // Related articles
     'related.compound.title': 'The Power of Compound Interest',
     'related.compound.desc': 'Learn why starting early makes a huge difference in your investment returns.',
@@ -49,6 +59,11 @@ const translations = {
     'related.savings.title': 'Best High-Yield Savings Accounts',
     'related.savings.desc': 'Compare the best savings accounts with competitive interest rates.',
     'related.savings.cta': 'Compare Now',
+    
+    // Compare section
+    'compare.title': 'Compare Financial Products',
+    'compare.subtitle': 'Compare interest rates, fees, and features of financial products in your region.',
+    'compare.coming_soon': 'Coming Soon',
 
     // ROI Calculator labels
     'form.investment.costs': 'Additional Costs',
@@ -725,6 +740,16 @@ const translations = {
     'form.calculate': 'Oblicz',
     'form.reset': 'Wyczyść',
     
+    // Additional form labels
+    'LABEL.COMPOUND_FREQUENCY': 'Częstotliwość kapitalizacji',
+    'LABEL.PAYMENT_FREQUENCY': 'Częstotliwość płatności',
+    'RESULT.MONTHLY.PAYMENT': 'Miesięczna rata',
+    
+    // Table headers
+    'TABLE.STARTING_BALANCE': 'Saldo początkowe',
+    'TABLE.ENDING_BALANCE': 'Saldo końcowe',
+    'TABLE.REMAINING_BALANCE': 'Pozostałe saldo',
+    
     // Section headers
     'section.investment': 'Szczegóły inwestycji',
     'section.loan': 'Szczegóły kredytu',
@@ -1217,6 +1242,11 @@ const translations = {
     'related.savings.desc': 'Porównaj najlepsze konta oszczędnościowe z konkurencyjnymi stopami procentowymi.',
     'related.savings.cta': 'Porównaj teraz',
     
+    // Compare section - Polish
+    'compare.title': 'Porównaj Produkty Finansowe',
+    'compare.subtitle': 'Porównaj stopy procentowe, opłaty i funkcje produktów finansowych w Twoim regionie.',
+    'compare.coming_soon': 'Wkrótce',
+    
     // ROI Calculator - Polish
     'roi.title': 'Kalkulator ROI Inwestycji',
     'roi.description': 'Oblicz zwrot z inwestycji (ROI) i rentowność swoich inwestycji.',
@@ -1347,6 +1377,16 @@ const translations = {
     'form.initial_investment': 'Первоначальные инвестиции',
     'form.final_value': 'Конечная стоимость',
     'form.investment_period': 'Период инвестирования (годы)',
+    
+    // Additional form labels
+    'LABEL.COMPOUND_FREQUENCY': 'Частота начисления',
+    'LABEL.PAYMENT_FREQUENCY': 'Частота платежей',
+    'RESULT.MONTHLY.PAYMENT': 'Ежемесячный платеж',
+    
+    // Table headers
+    'TABLE.STARTING_BALANCE': 'Начальный баланс',
+    'TABLE.ENDING_BALANCE': 'Конечный баланс',
+    'TABLE.REMAINING_BALANCE': 'Остающийся баланс',
 
     // Results
     'result.total': 'Общая сумма',
@@ -1445,6 +1485,11 @@ const translations = {
     'related.savings.title': 'Лучшие Высокодоходные Сберегательные Счета',
     'related.savings.desc': 'Сравните лучшие сберегательные счета с конкурентными процентными ставками.',
     'related.savings.cta': 'Сравнить сейчас',
+    
+    // Compare section - Russian
+    'compare.title': 'Сравнить Финансовые Продукты',
+    'compare.subtitle': 'Сравните процентные ставки, комиссии и функции финансовых продуктов в вашем регионе.',
+    'compare.coming_soon': 'Скоро',
     
     // Info texts
     'info.compound': 'Сложный процент рассчитывается на основе первоначальной суммы и накопленных процентов за предыдущие периоды. Это создает экспоненциальный рост со временем.',

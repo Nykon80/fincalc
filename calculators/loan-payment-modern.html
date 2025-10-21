@@ -163,7 +163,7 @@
                 </div>
                 
                 <div class="form-group">
-                    <label class="form-label" data-i18n="label.payment_frequency">Payment Frequency</label>
+                    <label class="form-label" data-i18n="LABEL.PAYMENT_FREQUENCY">Payment Frequency</label>
                     <select class="form-select" id="paymentFrequency">
                         <option value="12" selected data-i18n="payment.monthly">Monthly</option>
                         <option value="26" data-i18n="payment.biweekly">Bi-weekly</option>
@@ -182,7 +182,7 @@
                     <h3 data-i18n="section.results">Results</h3>
                     <div class="results-grid">
                         <div class="result-item">
-                            <div class="result-label" id="monthlyPaymentLabel" data-i18n="result.monthly.payment">Monthly Payment</div>
+                            <div class="result-label" id="monthlyPaymentLabel" data-i18n="RESULT.MONTHLY.PAYMENT">Monthly Payment</div>
                             <div class="result-value" id="monthlyPayment">$0</div>
                         </div>
                         <div class="result-item">
@@ -220,7 +220,7 @@
                             <th data-i18n="table.payment">Payment</th>
                             <th data-i18n="table.principal">Principal</th>
                             <th data-i18n="table.interest">Interest</th>
-                            <th data-i18n="table.remaining_balance">Remaining Balance</th>
+                            <th data-i18n="TABLE.REMAINING_BALANCE">Remaining Balance</th>
                         </tr>
                     </thead>
                     <tbody id="tableBody">
@@ -268,9 +268,10 @@
             const monthlyRate = interestRate / 100 / 12;
             const totalPayments = loanTerm * 12;
             
-            // Calculate monthly payment
+            // Calculate monthly payment using PMT formula
             let monthlyPayment = 0;
             if (monthlyRate > 0) {
+                // PMT formula: P * [r(1+r)^n] / [(1+r)^n - 1]
                 monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) / 
                                (Math.pow(1 + monthlyRate, totalPayments) - 1);
             } else {
@@ -349,7 +350,7 @@
         }
 
         function updateResultLabels() {
-            document.getElementById('monthlyPaymentLabel').textContent = i18n.t('result.monthly.payment');
+            document.getElementById('monthlyPaymentLabel').textContent = i18n.t('RESULT.MONTHLY.PAYMENT');
             document.getElementById('totalPaymentLabel').textContent = i18n.t('result.total.payment');
             document.getElementById('totalInterestLabel').textContent = i18n.t('result.interest.total');
             document.getElementById('loanSummaryLabel').textContent = i18n.t('result.years');
