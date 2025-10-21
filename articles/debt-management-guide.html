@@ -206,28 +206,6 @@
             box-shadow: var(--shadow-lg);
         }
         
-        .article-nav {
-            display: flex;
-            justify-content: space-between;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-        }
-        
-        .nav-btn {
-            background: var(--gray-100);
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition-base);
-        }
-        
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
         
         .checklist {
             background: var(--gray-50);
@@ -509,7 +487,10 @@
             </div>
         </div>
 
-        <!-- Article Navigation -->
+    </div>
+
+    <!-- Article Navigation - Moved to bottom -->
+    <div class="container" style="margin-top: var(--space-3xl); text-align: center;">
         <div class="article-nav">
             <a href="../articles/savings-strategies-guide.html" class="nav-btn" data-i18n="article.previous">Previous Article</a>
             <a href="../articles/investment-basics-guide.html" class="nav-btn" data-i18n="article.next">Next Article</a>
