@@ -501,22 +501,22 @@
             </div>
 
             <div class="action-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl);">
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm);">
+                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
                     <h3 data-i18n="article.investment.action.step1.title">Step 1: Calculate Your Starting Point</h3>
-                    <p data-i18n="article.investment.action.step1.text">Use our compound interest calculator to see how even $100/month can grow over 10 years.</p>
-                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step1.button">Try Calculator</a>
+                    <p data-i18n="article.investment.action.step1.text" style="flex-grow: 1;">Use our compound interest calculator to see how even $100/month can grow over 10 years.</p>
+                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step1.button" style="margin-top: auto; align-self: flex-start;">Try Calculator</a>
                 </div>
 
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm);">
+                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
                     <h3 data-i18n="article.investment.action.step2.title">Step 2: Set Your Savings Goal</h3>
-                    <p data-i18n="article.investment.action.step2.text">Define how much you want to save and by when. Our savings goal calculator will show you the monthly amount needed.</p>
-                    <a href="../calculators/savings-goal-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step2.button">Set Goal</a>
+                    <p data-i18n="article.investment.action.step2.text" style="flex-grow: 1;">Define how much you want to save and by when. Our savings goal calculator will show you the monthly amount needed.</p>
+                    <a href="../calculators/savings-goal-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step2.button" style="margin-top: auto; align-self: flex-start;">Set Goal</a>
                 </div>
 
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm);">
+                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
                     <h3 data-i18n="article.investment.action.step3.title">Step 3: Research Investment Options</h3>
-                    <p data-i18n="article.investment.action.step3.text">Check official sources: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (US), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Poland), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Russia).</p>
-                    <a href="../calculators/roi-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step3.button">Calculate ROI</a>
+                    <p data-i18n="article.investment.action.step3.text" style="flex-grow: 1;">Check official sources: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (US), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Poland), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Russia).</p>
+                    <a href="../calculators/roi-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step3.button" style="margin-top: auto; align-self: flex-start;">Calculate ROI</a>
                 </div>
             </div>
 
@@ -540,9 +540,9 @@
             <small style="display: block; text-align: center; margin-top: var(--space-sm);">Image by Unsplash - Free to use</small>
         </div>
 
-        <!-- Article Navigation - Moved to bottom -->
-        <div class="container" style="margin-top: var(--space-3xl); text-align: center;">
-            <div class="article-nav" style="display: flex; justify-content: center; gap: var(--space-md); flex-wrap: wrap;">
+        <!-- Article Navigation - moved to bottom -->
+        <div class="container" style="margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border);">
+            <div class="article-nav" style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
                 <a href="debt-management-guide.html" onclick="i18n.navigateTo(event, 'debt-management-guide.html')" class="nav-btn" data-i18n="article.previous">Previous Article</a>
                 <a href="roi-investment-guide.html" onclick="i18n.navigateTo(event, 'roi-investment-guide.html')" class="nav-btn" data-i18n="article.next">Next Article</a>
                 <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
