@@ -225,9 +225,9 @@
                             <span class="lang-btn-text" data-i18n="nav.language">Language</span>
                         </button>
                         <div class="lang-dropdown-content">
-                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                            <a href="#" onclick="i18n.setLanguage('en'); calculate(); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); calculate(); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); calculate(); return false;">Русский</a>
                         </div>
                     </div>
                 </nav>
@@ -568,15 +568,7 @@
             
             i18n.setLanguage(currentLang);
             i18n.updatePage();
-            updateRegionalDefaults();
             calculate();
-            
-            // Override i18n.setLanguage to call updateRegionalDefaults
-            const originalSetLanguage = i18n.setLanguage;
-            i18n.setLanguage = function(lang) {
-                originalSetLanguage.call(this, lang);
-                updateRegionalDefaults();
-            };
         });
         
         function updateRegionalDefaults() {
@@ -587,9 +579,6 @@
             document.getElementById('annualRate').value = defaults.typicalRates.avg;
             document.getElementById('regionalHint').textContent = defaults.rateHint;
             document.getElementById('taxHint').textContent = defaults.taxHint;
-            
-            // Recalculate with new defaults
-            calculate();
         }
         
         function toggleRateType() {
