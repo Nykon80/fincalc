@@ -16,12 +16,12 @@ const translations = {
     
     // Calculator names
     'calc.compound': 'Compound Interest',
+    'calc.deposit': 'Extended Deposit Calculator',
     'calc.loan': 'Loan Payment',
     'calc.savings': 'Savings Goal',
     'calc.mortgage': 'Mortgage Calculator',
     'calc.creditcard': 'Credit Card Payoff',
     'calc.roi': 'ROI Calculator',
-    'calc.deposit': 'Advanced Deposit',
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Investment ROI',
@@ -29,12 +29,12 @@ const translations = {
 
     // Calculator descriptions
     'calc.compound.desc': 'Calculate how your investments grow with compound interest',
+    'calc.deposit.desc': 'Calculate deposit growth with capitalization, additions, withdrawals, and tax',
     'calc.loan.desc': 'Find your monthly payment and total interest',
     'calc.savings.desc': 'Plan your savings to reach financial goals',
     'calc.mortgage.desc': 'Calculate mortgage payments and affordability',
     'calc.creditcard.desc': 'Create a payoff plan for credit card debt',
     'calc.roi.desc': 'Calculate return on investment and profitability',
-    'calc.deposit.desc': 'Calculate deposit with capitalization, contributions, withdrawals and tax',
     
     // Form labels
     'form.initial': 'Initial Amount',
@@ -43,6 +43,70 @@ const translations = {
     'form.years': 'Time Period (Years)',
     'form.calculate': 'Calculate',
     'form.reset': 'Reset',
+    
+    // Deposit calculator specific labels
+    'form.capitalization': 'Capitalization',
+    'form.deposit.start': 'Deposit Start Date',
+    'form.term': 'Term',
+    'form.addition.amount': 'Addition Amount',
+    'form.addition.frequency': 'Frequency',
+    'form.withdrawal.amount': 'Withdrawal Amount',
+    'form.withdrawal.frequency': 'Frequency',
+    'form.tax.resident': 'Tax Resident Status',
+    'form.early.date': 'Closure Date',
+    'form.early.rate': 'Early Closure Rate (%)',
+    
+    // Capitalization options
+    'capitalization.none': 'None',
+    'capitalization.monthly': 'Monthly',
+    'capitalization.quarterly': 'Quarterly',
+    'capitalization.annually': 'Annually',
+    'capitalization.daily': 'Daily',
+    
+    // Units
+    'unit.months': 'Months',
+    'unit.years': 'Years',
+    'unit.days': 'Days',
+    
+    // Sections
+    'section.deposit': 'Deposit Details',
+    'section.advanced': 'Advanced Options',
+    'section.additions': 'Deposit Additions',
+    'section.withdrawals': 'Partial Withdrawals',
+    'section.tax': 'Tax Settings',
+    'section.early': 'Early Closure',
+    
+    // Enable/disable toggles
+    'enable.additions': 'Enable Periodic Additions',
+    'enable.withdrawals': 'Enable Partial Withdrawals',
+    'enable.early': 'Enable Early Closure Scenario',
+    
+    // Tax
+    'tax.resident.yes': 'Yes (Resident)',
+    'tax.resident.no': 'No (Non-Resident)',
+    'tax.warning': 'Tax will be calculated automatically based on your resident status and regional regulations.',
+    
+    // Results
+    'result.tax': 'Tax Withheld',
+    
+    // Buttons
+    'button.yearly': 'Yearly View',
+    'button.monthly': 'Monthly View',
+    'button.export': 'Export to Excel',
+    
+    // Info
+    'info.deposit': 'This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, tax withholding, and early closure scenarios. See the detailed breakdown table below for month-by-month progression.',
+    
+    // Table
+    'table.period': 'Period',
+    'table.balance.start': 'Starting Balance',
+    'table.balance.end': 'Ending Balance',
+    'table.additions': 'Additions',
+    'table.withdrawals': 'Withdrawals',
+    'table.tax': 'Tax',
+    
+    // Chart
+    'chart.month': 'Month',
     
     // Additional form labels
     'LABEL.COMPOUND_FREQUENCY': 'Compound Frequency',
@@ -831,60 +895,7 @@ const translations = {
     'rating.good': '🟡 Good',
     'rating.fair': '🟠 Fair',
     'rating.poor': '🔴 Poor',
-    'rating.loss': '⚫ Loss',
-    
-    // Advanced Deposit Calculator
-    'deposit.title': 'Advanced Deposit Calculator',
-    'deposit.subtitle': 'Calculate deposit profitability with capitalization, contributions, withdrawals, and tax accounting',
-    'deposit.basic_params': 'Basic Parameters',
-    'deposit.initial_amount': 'Initial Amount',
-    'deposit.currency': 'Currency',
-    'deposit.start_date': 'Start Date',
-    'deposit.term_days': 'Term (days)',
-    'deposit.interest_rate': 'Interest Rate',
-    'deposit.rate_type': 'Rate Type',
-    'deposit.fixed_rate': 'Fixed Rate',
-    'deposit.progressive_rate': 'Progressive Rate',
-    'deposit.annual_rate': 'Annual Rate (%)',
-    'deposit.add_rate': 'Add Rate',
-    'deposit.capitalization': 'Capitalization & Payment Frequency',
-    'deposit.enable_capitalization': 'Enable Interest Capitalization',
-    'deposit.payment_frequency': 'Payment Frequency',
-    'deposit.end_of_term': 'End of Term',
-    'deposit.contributions': 'Regular Contributions',
-    'deposit.enable_contributions': 'Enable Regular Contributions',
-    'deposit.contribution_amount': 'Amount',
-    'deposit.contribution_frequency': 'Frequency',
-    'deposit.withdrawals': 'Partial Withdrawals',
-    'deposit.enable_withdrawals': 'Enable Partial Withdrawals',
-    'deposit.withdrawal_amount': 'Amount',
-    'deposit.withdrawal_frequency': 'Frequency',
-    'deposit.tax': 'Tax',
-    'deposit.tax_resident': 'Tax Status',
-    'deposit.tax_resident_yes': 'Tax Resident',
-    'deposit.tax_resident_no': 'Non-Resident',
-    'deposit.tax_resident_none': 'No Tax',
-    'deposit.early_closure': 'Early Closure',
-    'deposit.enable_early_closure': 'Calculate Early Closure',
-    'deposit.closure_date': 'Closure Date',
-    'deposit.closure_rate': 'Early Closure Rate (%)',
-    'deposit.final_balance': 'Final Balance',
-    'deposit.total_interest': 'Total Interest',
-    'deposit.total_tax': 'Total Tax',
-    'deposit.net_profit': 'Net Profit',
-    'deposit.balance_chart': 'Balance Growth',
-    'deposit.comparison_chart': 'Comparison Chart',
-    'deposit.detailed_table': 'Detailed Monthly Breakdown',
-    'deposit.month': 'Month',
-    'deposit.start_balance': 'Start Balance',
-    'deposit.interest_accrued': 'Interest',
-    'deposit.total': 'TOTAL:',
-    'deposit.principal': 'Principal',
-    'deposit.end_balance': 'End Balance',
-    'currency.usd': 'USD',
-    'currency.pln': 'PLN',
-    'currency.rub': 'RUB',
-    'chart.month': 'Month'
+    'rating.loss': '⚫ Loss'
   },
   
   pl: {
@@ -902,12 +913,12 @@ const translations = {
     
     // Calculator names
     'calc.compound': 'Procent składany',
+    'calc.deposit': 'Rozszerzony Kalkulator Lokat',
     'calc.loan': 'Rata kredytu',
     'calc.savings': 'Cel oszczędnościowy',
     'calc.mortgage': 'Kalkulator hipoteczny',
     'calc.creditcard': 'Spłata karty kredytowej',
     'calc.roi': 'Kalkulator ROI',
-    'calc.deposit': 'Zaawansowany Depozyt',
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Inwestycyjny ROI',
@@ -915,12 +926,12 @@ const translations = {
 
     // Calculator descriptions
     'calc.compound.desc': 'Oblicz, jak rosną Twoje inwestycje z procentem składanym',
+    'calc.deposit.desc': 'Oblicz wzrost lokaty z kapitalizacją, wpłatami, wypłatami i podatkiem',
     'calc.loan.desc': 'Znajdź miesięczną ratę i całkowite odsetki',
     'calc.savings.desc': 'Zaplanuj oszczędności, aby osiągnąć cele finansowe',
     'calc.mortgage.desc': 'Oblicz raty hipoteczne i zdolność kredytową',
     'calc.creditcard.desc': 'Stwórz plan spłaty zadłużenia karty kredytowej',
     'calc.roi.desc': 'Oblicz zwrot z inwestycji i rentowność',
-    'calc.deposit.desc': 'Oblicz depozyt z kapitalizacją, wpłatami, wypłatami i podatkiem',
     
     // Form labels
     'form.initial': 'Kwota początkowa',
@@ -1617,60 +1628,7 @@ const translations = {
     'article.investment.portfolios.growth.desc': 'Wyższa alokacja akcji dla długoterminowego budowania majątku.',
     'article.investment.portfolios.growth.line1': '75% akcje (polski rynek i UE)',
     'article.investment.portfolios.growth.line2': '15% akcje wzrostu',
-    'article.investment.portfolios.growth.line3': '10% obligacje do rebalansowania',
-    
-    // Advanced Deposit Calculator
-    'deposit.title': 'Zaawansowany Kalkulator Depozytów',
-    'deposit.subtitle': 'Oblicz zyskowność depozytu z kapitalizacją, wpłatami, wypłatami i rozliczeniem podatkowym',
-    'deposit.basic_params': 'Parametry Podstawowe',
-    'deposit.initial_amount': 'Kwota Początkowa',
-    'deposit.currency': 'Waluta',
-    'deposit.start_date': 'Data Rozpoczęcia',
-    'deposit.term_days': 'Okres (dni)',
-    'deposit.interest_rate': 'Oprocentowanie',
-    'deposit.rate_type': 'Typ Stawki',
-    'deposit.fixed_rate': 'Stawka Stała',
-    'deposit.progressive_rate': 'Stawka Progresywna',
-    'deposit.annual_rate': 'Roczna Stawka (%)',
-    'deposit.add_rate': 'Dodaj Stawkę',
-    'deposit.capitalization': 'Kapitalizacja i Częstotliwość Wypłat',
-    'deposit.enable_capitalization': 'Włącz Kapitalizację Odsetek',
-    'deposit.payment_frequency': 'Częstotliwość Wypłat',
-    'deposit.end_of_term': 'Na Koniec Okresu',
-    'deposit.contributions': 'Regularne Wpłaty',
-    'deposit.enable_contributions': 'Włącz Regularne Wpłaty',
-    'deposit.contribution_amount': 'Kwota',
-    'deposit.contribution_frequency': 'Częstotliwość',
-    'deposit.withdrawals': 'Częściowe Wypłaty',
-    'deposit.enable_withdrawals': 'Włącz Częściowe Wypłaty',
-    'deposit.withdrawal_amount': 'Kwota',
-    'deposit.withdrawal_frequency': 'Częstotliwość',
-    'deposit.tax': 'Podatek',
-    'deposit.tax_resident': 'Status Podatkowy',
-    'deposit.tax_resident_yes': 'Rezydent Podatkowy',
-    'deposit.tax_resident_no': 'Nierezydent',
-    'deposit.tax_resident_none': 'Bez Podatku',
-    'deposit.early_closure': 'Przedterminowe Zamknięcie',
-    'deposit.enable_early_closure': 'Oblicz Przedterminowe Zamknięcie',
-    'deposit.closure_date': 'Data Zamknięcia',
-    'deposit.closure_rate': 'Stawka Przedterminowa (%)',
-    'deposit.final_balance': 'Końcowe Saldo',
-    'deposit.total_interest': 'Łączne Odsetki',
-    'deposit.total_tax': 'Łączny Podatek',
-    'deposit.net_profit': 'Zysk Netto',
-    'deposit.balance_chart': 'Wzrost Salda',
-    'deposit.comparison_chart': 'Wykres Porównawczy',
-    'deposit.detailed_table': 'Szczegółowa Rozbijka Miesięczna',
-    'deposit.month': 'Miesiąc',
-    'deposit.start_balance': 'Saldo Początkowe',
-    'deposit.interest_accrued': 'Odsetki',
-    'deposit.total': 'SUMA:',
-    'deposit.principal': 'Kapitał Główny',
-    'deposit.end_balance': 'Saldo Końcowe',
-    'currency.usd': 'USD',
-    'currency.pln': 'PLN',
-    'currency.rub': 'RUB',
-    'chart.month': 'Miesiąc'
+    'article.investment.portfolios.growth.line3': '10% obligacje do rebalansowania'
   },
   
   ru: {
@@ -1688,12 +1646,12 @@ const translations = {
     
     // Calculator names
     'calc.compound': 'Сложный процент',
+    'calc.deposit': 'Расширенный Калькулятор Вкладов',
     'calc.loan': 'Платеж по кредиту',
     'calc.savings': 'Сберегательная цель',
     'calc.mortgage': 'Ипотечный калькулятор',
     'calc.creditcard': 'Погашение кредитной карты',
     'calc.roi': 'Калькулятор ROI',
-    'calc.deposit': 'Расширенный Вклад',
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Инвестиционный ROI',
@@ -1701,12 +1659,12 @@ const translations = {
 
     // Calculator descriptions
     'calc.compound.desc': 'Рассчитайте, как ваши инвестиции растут со временем благодаря сложному проценту',
+    'calc.deposit.desc': 'Рассчитайте рост вклада с капитализацией, пополнениями, снятиями и налогом',
     'calc.loan.desc': 'Определите свой ежемесячный платеж и общую сумму процентов',
     'calc.savings.desc': 'Планируйте свои сбережения для достижения ваших финансовых целей',
     'calc.mortgage.desc': 'Оцените свои ипотечные платежи и доступность жилья',
     'calc.creditcard.desc': 'Разработайте стратегию погашения задолженности по кредитной карте',
     'calc.roi.desc': 'Рассчитайте рентабельность и доходность ваших инвестиций',
-    'calc.deposit.desc': 'Рассчитайте вклад с капитализацией, пополнениями, снятиями и учетом налогов',
     
     // Form labels
     'form.initial': 'Начальная сумма',
@@ -2487,60 +2445,7 @@ const translations = {
     'article.investment.portfolios.growth.desc': 'Высокая доля акций для долгосрочного накопления капитала.',
     'article.investment.portfolios.growth.line1': '75% российские акции (широкий рынок)',
     'article.investment.portfolios.growth.line2': '15% акции роста',
-    'article.investment.portfolios.growth.line3': '10% облигации для ребалансировки',
-    
-    // Advanced Deposit Calculator
-    'deposit.title': 'Расширенный Калькулятор Вкладов',
-    'deposit.subtitle': 'Рассчитайте доходность вклада с капитализацией, пополнениями, снятиями и учетом налогов',
-    'deposit.basic_params': 'Основные Параметры',
-    'deposit.initial_amount': 'Начальная Сумма',
-    'deposit.currency': 'Валюта',
-    'deposit.start_date': 'Дата Открытия',
-    'deposit.term_days': 'Срок (дней)',
-    'deposit.interest_rate': 'Процентная Ставка',
-    'deposit.rate_type': 'Тип Ставки',
-    'deposit.fixed_rate': 'Фиксированная Ставка',
-    'deposit.progressive_rate': 'Прогрессивная Ставка',
-    'deposit.annual_rate': 'Годовая Ставка (%)',
-    'deposit.add_rate': 'Добавить Ставку',
-    'deposit.capitalization': 'Капитализация и Частота Выплат',
-    'deposit.enable_capitalization': 'Включить Капитализацию Процентов',
-    'deposit.payment_frequency': 'Частота Выплат',
-    'deposit.end_of_term': 'В Конец Срока',
-    'deposit.contributions': 'Регулярные Пополнения',
-    'deposit.enable_contributions': 'Включить Регулярные Пополнения',
-    'deposit.contribution_amount': 'Сумма',
-    'deposit.contribution_frequency': 'Частота',
-    'deposit.withdrawals': 'Частичные Снятия',
-    'deposit.enable_withdrawals': 'Включить Частичные Снятия',
-    'deposit.withdrawal_amount': 'Сумма',
-    'deposit.withdrawal_frequency': 'Частота',
-    'deposit.tax': 'Налог',
-    'deposit.tax_resident': 'Налоговый Статус',
-    'deposit.tax_resident_yes': 'Налоговый Резидент',
-    'deposit.tax_resident_no': 'Нерезидент',
-    'deposit.tax_resident_none': 'Без Налога',
-    'deposit.early_closure': 'Досрочное Закрытие',
-    'deposit.enable_early_closure': 'Рассчитать Досрочное Закрытие',
-    'deposit.closure_date': 'Дата Закрытия',
-    'deposit.closure_rate': 'Ставка при Досрочном Закрытии (%)',
-    'deposit.final_balance': 'Итоговый Остаток',
-    'deposit.total_interest': 'Общие Проценты',
-    'deposit.total_tax': 'Общий Налог',
-    'deposit.net_profit': 'Чистая Прибыль',
-    'deposit.balance_chart': 'Рост Остатка',
-    'deposit.comparison_chart': 'Сравнительный График',
-    'deposit.detailed_table': 'Детальная Разбивка по Месяцам',
-    'deposit.month': 'Месяц',
-    'deposit.start_balance': 'Начальный Остаток',
-    'deposit.interest_accrued': 'Проценты',
-    'deposit.total': 'ИТОГО:',
-    'deposit.principal': 'Основной Долг',
-    'deposit.end_balance': 'Конечный Остаток',
-    'currency.usd': 'USD',
-    'currency.pln': 'PLN',
-    'currency.rub': 'RUB',
-    'chart.month': 'Месяц'
+    'article.investment.portfolios.growth.line3': '10% облигации для ребалансировки'
   }
 };
 
