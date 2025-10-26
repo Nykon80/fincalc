@@ -64,6 +64,16 @@ const translations = {
     'compare.title': 'Compare Financial Products',
     'compare.subtitle': 'Compare interest rates, fees, and features of financial products in your region.',
     'compare.coming_soon': 'Coming Soon',
+    
+    // Advanced Calculator Settings
+    'calculator.advanced.show': 'Show Advanced Settings',
+    'calculator.advanced.hide': 'Hide Advanced Settings',
+    'calculator.advanced.title': 'Advanced Settings',
+    'calculator.advanced.tax': 'Tax Rate (%)',
+    'calculator.advanced.tax.hint': 'Leave 0 if tax-free',
+    'calculator.advanced.regular_deposits': 'Enable Regular Deposits',
+    'calculator.advanced.early_withdrawal': 'Consider Early Withdrawal',
+    'table.tax': 'Tax Paid',
 
     // ROI Calculator labels
     'form.investment.costs': 'Additional Costs',
@@ -1380,6 +1390,16 @@ const translations = {
     'compare.subtitle': 'Porównaj stopy procentowe, opłaty i funkcje produktów finansowych w Twoim regionie.',
     'compare.coming_soon': 'Wkrótce',
     
+    // Advanced Calculator Settings - Polish
+    'calculator.advanced.show': 'Pokaż Ustawienia Zaawansowane',
+    'calculator.advanced.hide': 'Ukryj Ustawienia Zaawansowane',
+    'calculator.advanced.title': 'Ustawienia Zaawansowane',
+    'calculator.advanced.tax': 'Stawka Podatkowa (%)',
+    'calculator.advanced.tax.hint': 'Zostaw 0 jeśli zwolnione z podatku',
+    'calculator.advanced.regular_deposits': 'Włącz Regularne Wpłaty',
+    'calculator.advanced.early_withdrawal': 'Uwzględnij Wcześniejszą Wypłatę',
+    'table.tax': 'Zapłacony Podatek',
+    
     // ROI Calculator - Polish
     'roi.title': 'Kalkulator ROI Inwestycji',
     'roi.description': 'Oblicz zwrot z inwestycji (ROI) i rentowność swoich inwestycji.',
@@ -1726,6 +1746,16 @@ const translations = {
     'compare.title': 'Сравнить Финансовые Продукты',
     'compare.subtitle': 'Сравните процентные ставки, комиссии и функции финансовых продуктов в вашем регионе.',
     'compare.coming_soon': 'Скоро',
+    
+    // Advanced Calculator Settings - Russian
+    'calculator.advanced.show': 'Показать Расширенные Настройки',
+    'calculator.advanced.hide': 'Скрыть Расширенные Настройки',
+    'calculator.advanced.title': 'Расширенные Настройки',
+    'calculator.advanced.tax': 'Ставка Налога (%)',
+    'calculator.advanced.tax.hint': 'Оставьте 0 если освобождено от налога',
+    'calculator.advanced.regular_deposits': 'Включить Регулярные Пополнения',
+    'calculator.advanced.early_withdrawal': 'Учесть Досрочное Снятие',
+    'table.tax': 'Уплаченный Налог',
     
     // Info texts
     'info.compound': 'Сложный процент рассчитывается на основе первоначальной суммы и накопленных процентов за предыдущие периоды. Это создает экспоненциальный рост со временем.',
