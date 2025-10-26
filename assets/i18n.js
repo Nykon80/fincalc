@@ -1007,6 +1007,30 @@ const translations = {
     'form.payment.biweekly': 'Co dwa tygodnie',
     'form.payment.weekly': 'Tygodniowo',
     
+    // Deposit calculator specific labels
+    'form.capitalization': 'Kapitalizacja',
+    'form.deposit.start': 'Data rozpoczęcia lokaty',
+    'form.term': 'Okres',
+    'form.addition.amount': 'Kwota wpłaty',
+    'form.addition.frequency': 'Częstotliwość',
+    'form.withdrawal.amount': 'Kwota wypłaty',
+    'form.withdrawal.frequency': 'Częstotliwość',
+    'form.tax.resident': 'Status rezydenta podatkowego',
+    'form.early.date': 'Data zamknięcia',
+    'form.early.rate': 'Stopa przy przedterminowym zamknięciu (%)',
+    
+    // Capitalization options
+    'capitalization.none': 'Brak',
+    'capitalization.monthly': 'Miesięczna',
+    'capitalization.quarterly': 'Kwartalna',
+    'capitalization.annually': 'Roczna',
+    'capitalization.daily': 'Dzienna',
+    
+    // Units
+    'unit.months': 'Miesiące',
+    'unit.years': 'Lata',
+    'unit.days': 'Dni',
+    
     // Deposit calculator specific translations
     'enable.additions': 'Włącz okresowe wpłaty',
     'enable.withdrawals': 'Włącz częściowe wypłaty',
@@ -1785,6 +1809,30 @@ const translations = {
     'frequency.monthly': 'Ежемесячно',
     'frequency.daily': 'Ежедневно',
     
+    // Deposit calculator specific labels
+    'form.capitalization': 'Капитализация',
+    'form.deposit.start': 'Дата начала вклада',
+    'form.term': 'Срок',
+    'form.addition.amount': 'Сумма пополнения',
+    'form.addition.frequency': 'Частота',
+    'form.withdrawal.amount': 'Сумма снятия',
+    'form.withdrawal.frequency': 'Частота',
+    'form.tax.resident': 'Налоговый статус',
+    'form.early.date': 'Дата закрытия',
+    'form.early.rate': 'Ставка при досрочном закрытии (%)',
+    
+    // Capitalization options
+    'capitalization.none': 'Без капитализации',
+    'capitalization.monthly': 'Ежемесячная',
+    'capitalization.quarterly': 'Ежеквартальная',
+    'capitalization.annually': 'Ежегодная',
+    'capitalization.daily': 'Ежедневная',
+    
+    // Units
+    'unit.months': 'Месяцы',
+    'unit.years': 'Годы',
+    'unit.days': 'Дни',
+    
     // Deposit calculator specific translations
     'enable.additions': 'Включить периодические пополнения',
     'enable.withdrawals': 'Включить частичные снятия',
@@ -2131,10 +2179,10 @@ const translations = {
     'article.investment.step3.title': 'Инвестируйте Регулярно',
     'article.investment.step3.desc': 'Настройте автоматические ежемесячные инвестиции',
     'article.investment.step4.title': 'Держитесь Курса',
-    'article.investment.step4.desc': 'Не паникуйте во время рыночных спадов',
-    'article.investment.conclusion.title': 'Время на Рынке Побеждает Попытки Угадать Время Рынка',
-    'article.investment.conclusion.text': 'Ключ к успешному инвестированию — начать рано и оставаться последовательным. Не пытайтесь угадать время рынка — сосредоточьтесь на времени, проведенном на рынке.',
-    'article.investment.takeaways.title': '💡 Ключевые Выводы',
+    'article.investment.step4.desc': 'Nie panikuj podczas spadków rynkowych',
+    'article.investment.conclusion.title': 'Czas na Rynku Pokonuje Próby Wyczucia Czasu Rynku',
+    'article.investment.conclusion.text': 'Kluczem do udanego inwestowania jest wczesne rozpoczęcie i konsekwencja. Nie próbuj wyczuwać czasu rynku – skup się na czasie spędzonym na rynku.',
+    'article.investment.takeaways.title': '💡 Kluczowe Wnioski',
     'article.investment.takeaway1': 'Начинайте инвестировать как можно раньше',
     'article.investment.takeaway2': 'Диверсифицируйте свои инвестиции',
     'article.investment.takeaway3': 'Держите комиссии низкими с индексными фондами',
