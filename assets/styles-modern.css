@@ -1318,3 +1318,68 @@ section[id] {
     align-self: flex-end;
   }
 }
+
+/* Contribution fields block */
+.contribution-fields {
+  margin-top: var(--space-sm);
+  padding: var(--space-md);
+  background: var(--gray-50);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+/* Toggle buttons for details */
+.toggle-group {
+  display: inline-flex;
+  gap: var(--space-xs);
+  background: var(--gray-100);
+  padding: var(--space-xs);
+  border-radius: var(--radius-md);
+}
+
+.btn-toggle {
+  border: 1px solid transparent;
+  background: transparent;
+  padding: 0.5rem 1.25rem;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+}
+
+.btn-toggle:hover {
+  background: rgba(0, 102, 255, 0.1);
+}
+
+.btn-toggle.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.details-section {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  background: var(--bg-card);
+}
+
+.details-section table {
+  font-size: 0.9rem;
+}
+
+.details-section tbody tr:nth-child(even) {
+  background: var(--gray-50);
+}
+
+.details-section tbody tr:hover {
+  background: rgba(0, 168, 107, 0.08);
+}
+
+#effectiveRate {
+  color: var(--primary);
+}
+
+#tax {
+  color: var(--danger, #cc3300);
+}
