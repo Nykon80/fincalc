@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extended Deposit Calculator - FinCalc</title>
+    <meta name="description" content="Advanced deposit calculator with capitalization, periodic additions, partial withdrawals, tax calculation, and progressive rates. Calculate your deposit growth accurately.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        .calculator-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 0;
+        }
+        
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-top: var(--space-xl);
+            height: 400px;
+        }
+        
+        .info-box {
+            background: var(--primary-light);
+            border-left: 4px solid var(--primary);
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin: var(--space-lg) 0;
+        }
+        
+        .info-box h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .breakdown-table {
+            width: 100%;
+            margin-top: var(--space-xl);
+            border-collapse: collapse;
+        }
+        
+        .breakdown-table th {
+            background: var(--gray-100);
+            padding: var(--space-md);
+            text-align: left;
+            font-weight: 600;
+            border-bottom: 2px solid var(--border);
+        }
+        
+        .breakdown-table td {
+            padding: var(--space-md);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .breakdown-table tr:hover {
+            background: var(--gray-50);
+        }
+        
+        /* Results Grid */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            text-align: center;
+            height: 100%;
+            min-height: 120px;
+        }
+        
+        .result-label {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+            line-height: 1;
+            flex-grow: 1;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+        }
+        
+        /* Цвета для значений */
+        #total {
+            color: #0066ff;
+        }
+        
+        #invested {
+            color: #555;
+        }
+        
+        #interest {
+            color: #00a86b;
+        }
+        
+        #tax {
+            color: #ff6b6b;
+        }
+        
+        /* Advanced Options Section */
+        .advanced-section {
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-top: var(--space-lg);
+        }
+        
+        .advanced-section h4 {
+            color: var(--primary);
+            margin-bottom: var(--space-md);
+        }
+        
+        .subsection {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+        }
+        
+        .subsection h5 {
+            color: var(--text-primary);
+            margin-bottom: var(--space-sm);
+            font-size: 0.95rem;
+        }
+        
+        /* Tax Warning Box */
+        .tax-warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: var(--space-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--space-md);
+        }
+        
+        .tax-warning p {
+            margin: 0;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home" onclick="i18n.navigateTo(event, '../index.html')">Home</a>
+                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators" onclick="i18n.navigateTo(event, '../index.html#calculators')">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles" onclick="i18n.navigateTo(event, '../index.html#articles')">Articles</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare" onclick="i18n.navigateTo(event, '../index.html#compare')">Compare</a>
+                    
+                    <div class="lang-dropdown">
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Calculator -->
+    <div class="container calculator-container">
+        <h1 data-i18n="calc.deposit">Extended Deposit Calculator</h1>
+        <p class="mb-3" data-i18n="calc.deposit.desc">Calculate deposit growth with capitalization, additions, withdrawals, and tax</p>
+        
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
+            <!-- Input Form -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.deposit">Deposit Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.initial">Initial Amount</label>
+                    <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
+                    <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
+                    <select class="form-select" id="capitalization">
+                        <option value="none" data-i18n="capitalization.none">None</option>
+                        <option value="monthly" selected data-i18n="capitalization.monthly">Monthly</option>
+                        <option value="quarterly" data-i18n="capitalization.quarterly">Quarterly</option>
+                        <option value="annually" data-i18n="capitalization.annually">Annually</option>
+                        <option value="daily" data-i18n="capitalization.daily">Daily</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.deposit.start">Deposit Start Date</label>
+                    <input type="date" class="form-input" id="startDate" value="">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.term">Term</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">
+                        <select class="form-select" id="termUnit" style="flex: 1;">
+                            <option value="months" selected data-i18n="unit.months">Months</option>
+                            <option value="years" data-i18n="unit.years">Years</option>
+                            <option value="days" data-i18n="unit.days">Days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <!-- Advanced Options Section -->
+                <div class="advanced-section">
+                    <h4 data-i18n="section.advanced">Advanced Options</h4>
+                    
+                    <!-- Deposit Additions -->
+                    <div class="subsection">
+                        <h5 data-i18n="section.additions">Deposit Additions</h5>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="enableAdditions">
+                                <span data-i18n="enable.additions">Enable Periodic Additions</span>
+                            </label>
+                        </div>
+                        <div id="additionsConfig" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.addition.amount">Addition Amount</label>
+                                <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.addition.frequency">Frequency</label>
+                                <select class="form-select" id="additionFrequency">
+                                    <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
+                                    <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
+                                    <option value="annually" data-i18n="frequency.annually">Annually</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Partial Withdrawals -->
+                    <div class="subsection">
+                        <h5 data-i18n="section.withdrawals">Partial Withdrawals</h5>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="enableWithdrawals">
+                                <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
+                            </label>
+                        </div>
+                        <div id="withdrawalsConfig" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.withdrawal.amount">Withdrawal Amount</label>
+                                <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.withdrawal.frequency">Frequency</label>
+                                <select class="form-select" id="withdrawalFrequency">
+                                    <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
+                                    <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
+                                    <option value="annually" data-i18n="frequency.annually">Annually</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tax Settings -->
+                    <div class="subsection">
+                        <h5 data-i18n="section.tax">Tax Settings</h5>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
+                            <select class="form-select" id="taxResident">
+                                <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
+                                <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
+                            </select>
+                        </div>
+                        <div class="tax-warning" id="taxWarning" style="display: none;">
+                            <p data-i18n="tax.warning"></p>
+                        </div>
+                    </div>
+                    
+                    <!-- Early Closure -->
+                    <div class="subsection">
+                        <h5 data-i18n="section.early">Early Closure</h5>
+                        <div class="form-group">
+                            <label>
+                                <input type="checkbox" id="enableEarlyClosure">
+                                <span data-i18n="enable.early">Enable Early Closure Scenario</span>
+                            </label>
+                        </div>
+                        <div id="earlyClosureConfig" style="display: none;">
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.early.date">Closure Date</label>
+                                <input type="date" class="form-input" id="earlyClosureDate" value="">
+                            </div>
+                            <div class="form-group">
+                                <label class="form-label" data-i18n="form.early.rate">Early Closure Rate (%)</label>
+                                <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Results -->
+            <div>
+                <div class="results-container">
+                    <h3 data-i18n="section.results">Results</h3>
+                    <div class="results-grid">
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.total">Final Amount</div>
+                            <div class="result-value" id="total">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.invested">Total Deposited</div>
+                            <div class="result-value" id="invested">$0</div>
+                        </div>
+                        <div class="result-item">
+                            <div class="result-label" data-i18n="result.interest">Interest Earned</div>
+                            <div class="result-value" id="interest">$0</div>
+                        </div>
+                        <div class="result-item" id="taxResult" style="display: none;">
+                            <div class="result-label" data-i18n="result.tax">Tax Withheld</div>
+                            <div class="result-value" id="tax">$0</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-box">
+                    <h4 data-i18n="section.info">How It Works</h4>
+                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.deposit">
+                        This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, 
+                        tax withholding, and early closure scenarios. See the detailed breakdown table below for month-by-month progression.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Chart -->
+        <div class="chart-container">
+            <h3 data-i18n="section.chart">Growth Chart</h3>
+            <canvas id="growthChart"></canvas>
+        </div>
+        
+        <!-- Detailed Breakdown Table -->
+        <div style="margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" id="toggleView" data-i18n="button.yearly">Yearly View</button>
+                    <button class="btn btn-secondary" id="exportExcel" data-i18n="button.export">Export to Excel</button>
+                </div>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="breakdownTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.period">Period</th>
+                            <th data-i18n="table.balance.start">Starting Balance</th>
+                            <th data-i18n="table.additions">Additions</th>
+                            <th data-i18n="table.withdrawals">Withdrawals</th>
+                            <th data-i18n="table.interest">Interest</th>
+                            <th data-i18n="table.tax">Tax</th>
+                            <th data-i18n="table.balance.end">Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LW2KKBR4L2');
+    </script>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        let chart = null;
+        let detailedData = [];
+        let viewMode = 'yearly'; // 'yearly' or 'monthly'
+        
+        // Regional defaults (3-a: Auto-populate by locale)
+        const regionalDefaults = {
+            en: {
+                currency: 'USD',
+                defaultRate: 4.5,
+                taxRate: { resident: 0, nonResident: 0 }, // US varies by state
+                dateFormat: 'MM/DD/YYYY'
+            },
+            pl: {
+                currency: 'PLN',
+                defaultRate: 5.5,
+                taxRate: { resident: 0.19, nonResident: 0.19 }, // Belka tax
+                dateFormat: 'DD.MM.YYYY'
+            },
+            ru: {
+                currency: 'RUB',
+                defaultRate: 10.5,
+                taxRate: { resident: 0.13, nonResident: 0.30 }, // NDFL
+                dateFormat: 'DD.MM.YYYY'
+            }
+        };
+        
+        function initializeRegionalDefaults() {
+            const lang = i18n.currentLang || 'en';
+            const defaults = regionalDefaults[lang];
+            
+            // Set default rate
+            document.getElementById('rate').value = defaults.defaultRate;
+            
+            // Set today's date as start date
+            const today = new Date();
+            const dateStr = today.toISOString().split('T')[0];
+            document.getElementById('startDate').value = dateStr;
+            
+            calculate();
+        }
+        
+        function calculate() {
+            const initial = parseFloat(document.getElementById('initial').value) || 0;
+            const rate = parseFloat(document.getElementById('rate').value) || 0;
+            const capitalization = document.getElementById('capitalization').value;
+            const startDate = new Date(document.getElementById('startDate').value);
+            const termValue = parseInt(document.getElementById('termValue').value) || 0;
+            const termUnit = document.getElementById('termUnit').value;
+            
+            // Get tax settings
+            const isTaxResident = document.getElementById('taxResident').value === 'yes';
+            const lang = i18n.currentLang || 'en';
+            const taxRate = regionalDefaults[lang].taxRate[isTaxResident ? 'resident' : 'nonResident'];
+            
+            // Advanced options
+            const enableAdditions = document.getElementById('enableAdditions').checked;
+            const additionAmount = parseFloat(document.getElementById('additionAmount').value) || 0;
+            const additionFrequency = document.getElementById('additionFrequency').value;
+            
+            const enableWithdrawals = document.getElementById('enableWithdrawals').checked;
+            const withdrawalAmount = parseFloat(document.getElementById('withdrawalAmount').value) || 0;
+            const withdrawalFrequency = document.getElementById('withdrawalFrequency').value;
+            
+            const enableEarlyClosure = document.getElementById('enableEarlyClosure').checked;
+            const earlyClosureDate = new Date(document.getElementById('earlyClosureDate').value);
+            const earlyClosureRate = parseFloat(document.getElementById('earlyClosureRate').value) || 0;
+            
+            // Convert term to days
+            let totalDays = 0;
+            if (termUnit === 'days') {
+                totalDays = termValue;
+            } else if (termUnit === 'months') {
+                totalDays = termValue * 30;
+            } else if (termUnit === 'years') {
+                totalDays = termValue * 365;
+            }
+            
+            // Capitalization frequency mapping
+            const capFreq = {
+                'none': Infinity,
+                'monthly': 30,
+                'quarterly': 90,
+                'annually': 365,
+                'daily': 1
+            };
+            const capInterval = capFreq[capitalization];
+            
+            // Calculate deposit progression
+            let balance = initial;
+            detailedData = [];
+            const chartLabels = [];
+            const balanceData = [];
+            const principalData = [];
+            const interestData = [];
+            const taxData = [];
+            
+            let totalDeposited = initial;
+            let totalInterest = 0;
+            let totalTax = 0;
+            let accumulatedInterest = 0;
+            
+            for (let day = 0; day <= totalDays; day++) {
+                const currentDate = new Date(startDate);
+                currentDate.setDate(currentDate.getDate() + day);
+                
+                // Check for additions
+                if (enableAdditions && day > 0) {
+                    let shouldAdd = false;
+                    if (additionFrequency === 'monthly' && day % 30 === 0) shouldAdd = true;
+                    if (additionFrequency === 'quarterly' && day % 90 === 0) shouldAdd = true;
+                    if (additionFrequency === 'annually' && day % 365 === 0) shouldAdd = true;
+                    
+                    if (shouldAdd) {
+                        balance += additionAmount;
+                        totalDeposited += additionAmount;
+                    }
+                }
+                
+                // Check for withdrawals
+                if (enableWithdrawals && day > 0) {
+                    let shouldWithdraw = false;
+                    if (withdrawalFrequency === 'monthly' && day % 30 === 0) shouldWithdraw = true;
+                    if (withdrawalFrequency === 'quarterly' && day % 90 === 0) shouldWithdraw = true;
+                    if (withdrawalFrequency === 'annually' && day % 365 === 0) shouldWithdraw = true;
+                    
+                    if (shouldWithdraw && balance >= withdrawalAmount) {
+                        balance -= withdrawalAmount;
+                    }
+                }
+                
+                // Daily interest calculation
+                const dailyRate = rate / 100 / 365;
+                const dayInterest = balance * dailyRate;
+                accumulatedInterest += dayInterest;
+                
+                // Capitalization check
+                if (day > 0 && day % capInterval === 0) {
+                    balance += accumulatedInterest;
+                    totalInterest += accumulatedInterest;
+                    
+                    // Calculate tax on interest
+                    const taxOnInterest = accumulatedInterest * taxRate;
+                    totalTax += taxOnInterest;
+                    balance -= taxOnInterest;
+                    
+                    accumulatedInterest = 0;
+                }
+                
+                // Store monthly data for chart
+                if (day % 30 === 0 || day === totalDays) {
+                    const month = Math.floor(day / 30);
+                    detailedData.push({
+                        period: month,
+                        date: new Date(currentDate),
+                        startBalance: balance - accumulatedInterest,
+                        additions: enableAdditions && (additionFrequency === 'monthly' || (additionFrequency === 'quarterly' && day % 90 === 0) || (additionFrequency === 'annually' && day % 365 === 0)) ? additionAmount : 0,
+                        withdrawals: enableWithdrawals && (withdrawalFrequency === 'monthly' || (withdrawalFrequency === 'quarterly' && day % 90 === 0) || (withdrawalFrequency === 'annually' && day % 365 === 0)) ? withdrawalAmount : 0,
+                        interest: accumulatedInterest,
+                        tax: accumulatedInterest * taxRate,
+                        endBalance: balance
+                    });
+                    
+                    chartLabels.push(i18n.t('chart.month') + ' ' + month);
+                    balanceData.push(balance);
+                    principalData.push(totalDeposited);
+                    interestData.push(totalInterest);
+                    taxData.push(totalTax);
+                }
+            }
+            
+            // Handle remaining accumulated interest
+            if (accumulatedInterest > 0) {
+                balance += accumulatedInterest;
+                totalInterest += accumulatedInterest;
+                const taxOnInterest = accumulatedInterest * taxRate;
+                totalTax += taxOnInterest;
+                balance -= taxOnInterest;
+            }
+            
+            // Update results
+            document.getElementById('total').textContent = i18n.formatCurrency(balance);
+            document.getElementById('invested').textContent = i18n.formatCurrency(totalDeposited);
+            document.getElementById('interest').textContent = i18n.formatCurrency(totalInterest);
+            
+            // Show/hide tax result
+            if (totalTax > 0) {
+                document.getElementById('taxResult').style.display = 'flex';
+                document.getElementById('tax').textContent = i18n.formatCurrency(totalTax);
+                document.getElementById('taxWarning').style.display = 'block';
+            } else {
+                document.getElementById('taxResult').style.display = 'none';
+                document.getElementById('taxWarning').style.display = 'none';
+            }
+            
+            // Update table
+            updateTable();
+            
+            // Update chart
+            updateChart(chartLabels, balanceData, principalData, interestData, taxData);
+        }
+        
+        function updateTable() {
+            const tbody = document.getElementById('tableBody');
+            tbody.innerHTML = '';
+            
+            const displayData = viewMode === 'yearly' 
+                ? getYearlyData(detailedData)
+                : detailedData;
+            
+            displayData.forEach(row => {
+                const tr = document.createElement('tr');
+                const periodLabel = viewMode === 'yearly' 
+                    ? i18n.t('table.year') + ' ' + row.period
+                    : i18n.t('chart.month') + ' ' + row.period;
+                
+                tr.innerHTML = `
+                    <td><strong>${periodLabel}</strong></td>
+                    <td>${i18n.formatCurrency(row.startBalance)}</td>
+                    <td style="color: var(--primary);">${i18n.formatCurrency(row.additions)}</td>
+                    <td style="color: var(--warning);">${i18n.formatCurrency(row.withdrawals)}</td>
+                    <td style="color: var(--success);">${i18n.formatCurrency(row.interest)}</td>
+                    <td style="color: var(--danger);">${i18n.formatCurrency(row.tax)}</td>
+                    <td><strong>${i18n.formatCurrency(row.endBalance)}</strong></td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+        
+        function getYearlyData(monthlyData) {
+            const yearlyData = [];
+            let yearData = null;
+            
+            monthlyData.forEach(row => {
+                const year = Math.floor(row.period / 12);
+                
+                if (!yearlyData[year]) {
+                    yearlyData[year] = {
+                        period: year,
+                        startBalance: row.startBalance,
+                        additions: 0,
+                        withdrawals: 0,
+                        interest: 0,
+                        tax: 0,
+                        endBalance: row.endBalance
+                    };
+                }
+                
+                yearlyData[year].additions += row.additions;
+                yearlyData[year].withdrawals += row.withdrawals;
+                yearlyData[year].interest += row.interest;
+                yearlyData[year].tax += row.tax;
+                yearlyData[year].endBalance = row.endBalance;
+            });
+            
+            return yearlyData.filter(d => d !== undefined);
+        }
+        
+        function updateChart(labels, balance, principal, interest, tax) {
+            const ctx = document.getElementById('growthChart').getContext('2d');
+            
+            if (chart) {
+                chart.destroy();
+            }
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: i18n.t('table.balance.end'),
+                            data: balance,
+                            borderColor: '#0066ff',
+                            backgroundColor: 'rgba(0, 102, 255, 0.1)',
+                            fill: true,
+                            tension: 0.4
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-primary')
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + i18n.formatCurrency(context.parsed.y);
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            ticks: {
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary')
+                            }
+                        },
+                        y: {
+                            ticks: {
+                                callback: function(value) {
+                                    return i18n.formatCurrency(value);
+                                },
+                                color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary')
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function exportToExcel() {
+            // Generate CSV for Excel
+            let csv = 'Period,Start Balance,Additions,Withdrawals,Interest,Tax,End Balance\n';
+            
+            const displayData = viewMode === 'yearly' 
+                ? getYearlyData(detailedData)
+                : detailedData;
+            
+            displayData.forEach(row => {
+                csv += `${row.period},${row.startBalance},${row.additions},${row.withdrawals},${row.interest},${row.tax},${row.endBalance}\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'deposit_calculation.csv';
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+        
+        // Toggle advanced options display
+        document.getElementById('enableAdditions').addEventListener('change', function() {
+            document.getElementById('additionsConfig').style.display = this.checked ? 'block' : 'none';
+            calculate();
+        });
+        
+        document.getElementById('enableWithdrawals').addEventListener('change', function() {
+            document.getElementById('withdrawalsConfig').style.display = this.checked ? 'block' : 'none';
+            calculate();
+        });
+        
+        document.getElementById('enableEarlyClosure').addEventListener('change', function() {
+            document.getElementById('earlyClosureConfig').style.display = this.checked ? 'block' : 'none';
+            calculate();
+        });
+        
+        // Toggle view mode
+        document.getElementById('toggleView').addEventListener('click', function() {
+            viewMode = viewMode === 'yearly' ? 'monthly' : 'yearly';
+            this.textContent = viewMode === 'yearly' ? i18n.t('button.monthly') : i18n.t('button.yearly');
+            updateTable();
+        });
+        
+        // Export to Excel
+        document.getElementById('exportExcel').addEventListener('click', exportToExcel);
+        
+        // Override i18n setLanguage to refresh calculations
+        const originalSetLanguage = i18n.setLanguage.bind(i18n);
+        i18n.setLanguage = function(lang) {
+            originalSetLanguage(lang);
+            // Recalculate to update currency formatting
+            calculate();
+        };
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set language from URL or localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            const langFromUrl = urlParams.get('lang');
+            const savedLang = localStorage.getItem('preferredLanguage');
+            const currentLang = langFromUrl || savedLang || 'en';
+            
+            i18n.setLanguage(currentLang);
+            i18n.updatePage();
+            
+            // Initialize regional defaults
+            initializeRegionalDefaults();
+
+            // Add input listeners for real-time calculation
+            document.querySelectorAll('input, select').forEach(input => {
+                input.addEventListener('input', calculate);
+                input.addEventListener('change', calculate);
+            });
+        });
+    </script>
+</body>
+</html>
+
