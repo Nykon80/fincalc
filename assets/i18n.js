@@ -1007,6 +1007,14 @@ const translations = {
     'form.payment.biweekly': 'Co dwa tygodnie',
     'form.payment.weekly': 'Tygodniowo',
     
+    // Deposit calculator specific translations
+    'enable.additions': 'Włącz okresowe wpłaty',
+    'enable.withdrawals': 'Włącz częściowe wypłaty',
+    'enable.early': 'Włącz scenariusz przedterminowego zamknięcia',
+    'tax.resident.yes': 'Tak (Rezydent)',
+    'tax.resident.no': 'Nie (Nierezydent)',
+    'tax.warning': 'Podatek zostanie obliczony automatycznie na podstawie Twojego statusu rezydenta i przepisów regionalnych.',
+    
     // Section headers
     'section.investment': 'Szczegóły inwestycji',
     'section.deposit': 'Szczegóły Lokaty',
@@ -1776,6 +1784,14 @@ const translations = {
     'frequency.quarterly': 'Ежеквартально',  
     'frequency.monthly': 'Ежемесячно',
     'frequency.daily': 'Ежедневно',
+    
+    // Deposit calculator specific translations
+    'enable.additions': 'Включить периодические пополнения',
+    'enable.withdrawals': 'Включить частичные снятия',
+    'enable.early': 'Включить сценарий досрочного закрытия',
+    'tax.resident.yes': 'Да (Резидент)',
+    'tax.resident.no': 'Нет (Нерезидент)',
+    'tax.warning': 'Налог будет рассчитан автоматически на основе вашего статуса резидента и региональных норм.',
     
     // Sections
     'section.investment': 'Детали Инвестиции',
