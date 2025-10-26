@@ -2033,7 +2033,7 @@ const translations = {
     'article.debt.personal_loan.title': 'Потребительский Кредит',
     'article.debt.personal_loan.feature1': 'Фиксированный платеж и ставка',
     'article.debt.personal_loan.feature2': 'Срок 3-7 лет',
-    'article.debt.personal_loan.feature3': 'Процентные ставки: 6-36%',
+    'article.debt.personal_loan.feature3': 'Опроцентованние: 6-36%',
     'article.debt.balance_transfer.title': 'Перевод Баланса',
     'article.debt.balance_transfer.feature1': 'Вводные предложения 0% годовых',
     'article.debt.balance_transfer.feature2': 'Комиссия за перевод: 3-5%',
@@ -2350,7 +2350,7 @@ const translations = {
     'article.investment.stories.john.title': 'Путь Джона: От 10 тыс. USD до 50 тыс. USD за 5 Лет',
     'article.investment.stories.john.text': 'Джон, учитель из Калифорнии, начал с простого ETF S&P 500. С последовательными ежемесячными инвестициями 200 USD и средней отдачей 8%, он накопил гнездышко. Совет для новичков: Начинайте с малого, будьте последовательны.',
     'article.investment.stories.maria.title': 'Умный Ход Марии: Победа над Инфляцией',
-    'article.investment.stories.maria.text': 'Мария из Нью-Йорка перешла с сбережений (2% ставка) на облигации и акции. За 3 года ее портфель вырос на 25%. Совет для опытных: Диверсифицируйте, чтобы защититься от 3% инфляции.',
+    'article.investment.stories.maria.text': 'Мария из Нью-Йорка перешла с сбережений (2% опроцентованние) на облигации и акции. За 3 года ее портфель вырос на 25%. Совет для опытных: Диверсифицируйте, чтобы защититься от 3% инфляции.',
 
     // New keys for visuals section
     'article.investment.visuals.title': 'Визуальное Руководство: Потенциал Роста Ваших Денег',
