@@ -175,55 +175,31 @@
                 </div>
                 
                 <div class="form-group">
+                    <label class="form-label" data-i18n="form.monthly">Monthly Contribution</label>
+                    <input type="number" class="form-input" id="monthly" value="500" min="0" step="50">
+                </div>
+                
+                <div class="form-group">
                     <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
                     <input type="number" class="form-input" id="rate" value="7" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="LABEL.COMPOUND_FREQUENCY">Compound Frequency</label>
+                    <select class="form-select" id="frequency">
+                        <option value="1" data-i18n="frequency.annually">Annually</option>
+                        <option value="4" data-i18n="frequency.quarterly">Quarterly</option>
+                        <option value="12" selected data-i18n="frequency.monthly">Monthly</option>
+                        <option value="365" data-i18n="frequency.daily">Daily</option>
+                    </select>
                 </div>
                 
                 <div class="form-group">
                     <label class="form-label" data-i18n="form.years">Time Period (Years)</label>
                     <input type="number" class="form-input" id="years" value="10" min="1" max="50" step="1">
                 </div>
-
-                <div class="form-group">
-                    <label class="form-label" data-i18n="LABEL.CAPITALIZATION">Capitalization Frequency</label>
-                    <select class="form-select" id="capitalization">
-                        <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
-                        <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
-                        <option value="yearly" data-i18n="frequency.annually">Annually</option>
-                        <option value="end" data-i18n="frequency.end">At maturity</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label">
-                        <input type="checkbox" id="enableContributions">
-                        <span data-i18n="LABEL.CONTRIBUTIONS">Regular Contributions</span>
-                    </label>
-                    <div id="contributionsFields" class="contribution-fields" style="display: none;">
-                        <div class="form-group" style="margin-bottom: var(--space-sm);">
-                            <label class="form-label" data-i18n="form.contribution_amount">Contribution amount</label>
-                            <input type="number" class="form-input" id="contributionAmount" value="200" min="0" step="10">
-                        </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label class="form-label" data-i18n="form.contribution_frequency">Contribution frequency</label>
-                            <select class="form-select" id="contributionFrequency">
-                                <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
-                                <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
-                                <option value="yearly" data-i18n="frequency.annually">Annually</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="form-label" data-i18n="LABEL.TAX">Tax Rate</label>
-                    <select class="form-select" id="taxRate">
-                        <option value="0">0%</option>
-                        <option value="13">13%</option>
-                        <option value="30">30%</option>
-                    </select>
-                    <small class="form-hint" data-i18n="hint.tax">Choose resident rate (13%) or non-resident (30%) for Russian taxes.</small>
-                </div>
+                
+                <!-- Auto-calculation on input change -->
             </div>
             
             <!-- Results -->
@@ -243,18 +219,7 @@
                             <div class="result-label" data-i18n="result.interest">Interest Earned</div>
                             <div class="result-value" id="interest">$0</div>
                         </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.tax">Tax Paid</div>
-                            <div class="result-value" id="tax">$0</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.effective_rate">Effective Annual Return</div>
-                            <div class="result-value" id="effectiveRate">0%</div>
-                        </div>
                     </div>
-                    <button class="btn btn-secondary" id="toggleDetails" style="margin-top: var(--space-lg);">
-                        <span data-i18n="button.show_details">Show Detailed Breakdown</span>
-                    </button>
                 </div>
 
                 <div class="info-box">
@@ -274,31 +239,24 @@
         </div>
         
         <!-- Yearly Breakdown Table -->
-        <div class="details-section" id="detailedBreakdown" style="display: none; margin-top: 2rem;">
-            <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
-            <div class="toggle-group" style="margin-bottom: var(--space-md);">
-                <button class="btn-toggle active" data-view="yearly" data-i18n="toggle.yearly">By Year</button>
-                <button class="btn-toggle" data-view="period" data-i18n="toggle.period">By Period</button>
-            </div>
-            <div class="breakdown-wrapper" style="overflow-x: auto;">
-                <table class="breakdown-table" id="detailedTable">
+        <div style="margin-top: 2rem;">
+            <h3 data-i18n="section.breakdown">Yearly Breakdown</h3>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="breakdownTable">
                     <thead>
                         <tr>
-                            <th data-i18n="table.period">Period</th>
+                            <th data-i18n="table.year">Year</th>
                             <th data-i18n="TABLE.STARTING_BALANCE">Starting Balance</th>
                             <th data-i18n="table.contributions">Contributions</th>
-                            <th data-i18n="table.gross_interest">Gross Interest</th>
-                            <th data-i18n="table.tax">Tax</th>
-                            <th data-i18n="table.net_interest">Net Interest</th>
+                            <th data-i18n="table.interest">Interest Earned</th>
                             <th data-i18n="TABLE.ENDING_BALANCE">Ending Balance</th>
                         </tr>
                     </thead>
-                    <tbody id="detailedTableBody">
+                    <tbody id="tableBody">
                         <!-- Populated by JavaScript -->
                     </tbody>
                 </table>
             </div>
-            <button class="btn btn-secondary" id="exportExcel" style="margin-top: var(--space-lg);" data-i18n="button.export_excel">Export to Excel</button>
         </div>
         
         <!-- Ad Slot -->
@@ -348,177 +306,86 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         let chart = null;
-        let currentView = 'yearly';
-        let periodBreakdown = [];
-        let yearlyBreakdown = [];
-        
-        function getPeriodsPerYear(option) {
-            switch (option) {
-                case 'monthly':
-                    return 12;
-                case 'quarterly':
-                    return 4;
-                case 'yearly':
-                case 'end':
-                    return 1;
-                default:
-                    return 12;
-            }
-        }
-        
-        function formatPercent(value) {
-            return new Intl.NumberFormat(i18n.getLocale(), {
-                minimumFractionDigits: 2,
-                maximumFractionDigits: 2
-            }).format(value) + '%';
-        }
         
         function calculate() {
             const initial = parseFloat(document.getElementById('initial').value) || 0;
+            const monthly = parseFloat(document.getElementById('monthly').value) || 0;
             const rate = parseFloat(document.getElementById('rate').value) || 0;
-            const yearsInput = parseFloat(document.getElementById('years').value) || 0;
-            const capitalization = document.getElementById('capitalization').value;
-            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-            const contributionsEnabled = document.getElementById('enableContributions').checked;
-            const contributionAmount = contributionsEnabled ? (parseFloat(document.getElementById('contributionAmount').value) || 0) : 0;
-            const contributionFrequency = contributionsEnabled ? document.getElementById('contributionFrequency').value : 'monthly';
+            const years = parseInt(document.getElementById('years').value) || 0;
+            const frequency = parseInt(document.getElementById('frequency').value) || 12;
             
-            const periodsPerYear = getPeriodsPerYear(capitalization);
-            const contributionPeriodsPerYear = getPeriodsPerYear(contributionFrequency);
-            const contributionStep = contributionsEnabled ? Math.max(1, Math.round(periodsPerYear / contributionPeriodsPerYear)) : Infinity;
-            const totalPeriods = Math.max(1, Math.round(yearsInput * periodsPerYear));
-            const actualYears = totalPeriods / periodsPerYear;
+            // Calculate compound interest
+            const r = rate / 100 / frequency;
+            const n = years * frequency;
             
             let balance = initial;
-            let totalInvested = initial;
-            let grossInterestTotal = 0;
-            let taxTotal = 0;
-            let netInterestTotal = 0;
+            const yearlyData = [];
+            const chartLabels = [];
+            const principalData = [];
+            const interestData = [];
             
-            periodBreakdown = [];
-            yearlyBreakdown = [];
-            
-            let yearContribution = 0;
-            let yearGrossInterest = 0;
-            let yearTax = 0;
-            let yearStartBalance = balance;
-            
-            for (let period = 1; period <= totalPeriods; period++) {
-                const startBalance = balance;
-                let contribution = 0;
-                if (contributionsEnabled && contributionAmount > 0 && period % contributionStep === 0) {
-                    contribution = contributionAmount;
-                    balance += contribution;
-                    totalInvested += contribution;
-                    yearContribution += contribution;
-                }
+            for (let year = 0; year <= years; year++) {
+                const yearStart = balance;
+                let yearInterest = 0;
+                let yearContributions = 0;
                 
-                let grossInterest = 0;
-                if (rate > 0) {
-                    if (capitalization === 'end') {
-                        if (period === totalPeriods) {
-                            grossInterest = balance * (rate / 100) * actualYears;
-                        }
-                    } else {
-                        grossInterest = balance * (rate / 100) / periodsPerYear;
+                if (year > 0) {
+                    for (let month = 0; month < 12; month++) {
+                        balance = balance * (1 + rate/100/12) + monthly;
+                        yearContributions += monthly;
                     }
+                    yearInterest = balance - yearStart - yearContributions;
                 }
-                const taxAmount = grossInterest * (taxRate / 100);
-                const netInterest = grossInterest - taxAmount;
-                balance += netInterest;
                 
-                grossInterestTotal += grossInterest;
-                taxTotal += taxAmount;
-                netInterestTotal += netInterest;
-                yearGrossInterest += grossInterest;
-                yearTax += taxAmount;
-                
-                periodBreakdown.push({
-                    period,
-                    startBalance,
-                    contribution,
-                    grossInterest,
-                    tax: taxAmount,
-                    netInterest,
-                    endBalance: balance
+                yearlyData.push({
+                    year: year,
+                    start: yearStart,
+                    contributions: yearContributions,
+                    interest: yearInterest,
+                    end: balance
                 });
                 
-                if (period % periodsPerYear === 0 || period === totalPeriods) {
-                    const yearNumber = Math.ceil(period / periodsPerYear);
-                    yearlyBreakdown.push({
-                        year: yearNumber,
-                        startBalance: yearStartBalance,
-                        contributions: yearContribution,
-                        grossInterest: yearGrossInterest,
-                        tax: yearTax,
-                        netInterest: yearGrossInterest - yearTax,
-                        endBalance: balance
-                    });
-                    yearContribution = 0;
-                    yearGrossInterest = 0;
-                    yearTax = 0;
-                    yearStartBalance = balance;
-                }
+                chartLabels.push(i18n.t('chart.year') + ' ' + year);
+                principalData.push(initial + (monthly * 12 * year));
+                interestData.push(balance - (initial + (monthly * 12 * year)));
             }
             
-            const totalBalance = balance;
-            const totalNetInterest = netInterestTotal;
-            const effectiveAnnualReturn = totalInvested > 0 && actualYears > 0 ? (totalNetInterest / totalInvested) / actualYears * 100 : 0;
+            const totalInvested = initial + (monthly * 12 * years);
+            const totalInterest = balance - totalInvested;
             
-            document.getElementById('total').textContent = i18n.formatCurrency(totalBalance);
+            // Update results
+            document.getElementById('total').textContent = i18n.formatCurrency(balance);
             document.getElementById('invested').textContent = i18n.formatCurrency(totalInvested);
-            document.getElementById('interest').textContent = i18n.formatCurrency(totalNetInterest);
-            document.getElementById('tax').textContent = i18n.formatCurrency(taxTotal);
-            document.getElementById('effectiveRate').textContent = formatPercent(effectiveAnnualReturn);
+            document.getElementById('interest').textContent = i18n.formatCurrency(totalInterest);
             
-            renderDetailedTable(currentView);
-            updateChart(yearlyBreakdown, totalInvested, totalBalance);
+            // Update table
+            updateTable(yearlyData);
+            
+            // Update chart
+            updateChart(chartLabels, principalData, interestData);
+            
         }
-        
-        function renderDetailedTable(view) {
-            const tbody = document.getElementById('detailedTableBody');
+
+        function updateTable(data) {
+            const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
-            const rows = view === 'period' ? periodBreakdown : yearlyBreakdown;
             
-            rows.forEach(item => {
+            data.forEach(row => {
+                if (row.year === 0) return;
                 const tr = document.createElement('tr');
-                if (view === 'period') {
-                    tr.innerHTML = `
-                        <td><strong>${item.period}</strong></td>
-                        <td>${i18n.formatCurrency(item.startBalance)}</td>
-                        <td>${i18n.formatCurrency(item.contribution)}</td>
-                        <td>${i18n.formatCurrency(item.grossInterest)}</td>
-                        <td>${i18n.formatCurrency(item.tax)}</td>
-                        <td style="color: var(--success);">${i18n.formatCurrency(item.netInterest)}</td>
-                        <td>${i18n.formatCurrency(item.endBalance)}</td>
-                    `;
-                } else {
-                    tr.innerHTML = `
-                        <td><strong>${item.year}</strong></td>
-                        <td>${i18n.formatCurrency(item.startBalance)}</td>
-                        <td>${i18n.formatCurrency(item.contributions)}</td>
-                        <td>${i18n.formatCurrency(item.grossInterest)}</td>
-                        <td>${i18n.formatCurrency(item.tax)}</td>
-                        <td style="color: var(--success);">${i18n.formatCurrency(item.netInterest)}</td>
-                        <td>${i18n.formatCurrency(item.endBalance)}</td>
-                    `;
-                }
+                tr.innerHTML = `
+                    <td><strong>${row.year}</strong></td>
+                    <td>${i18n.formatCurrency(row.start)}</td>
+                    <td>${i18n.formatCurrency(row.contributions)}</td>
+                    <td style="color: var(--success);">${i18n.formatCurrency(row.interest)}</td>
+                    <td><strong>${i18n.formatCurrency(row.end)}</strong></td>
+                `;
                 tbody.appendChild(tr);
             });
         }
         
-        function updateChart(yearlyData) {
+        function updateChart(labels, principal, interest) {
             const ctx = document.getElementById('growthChart').getContext('2d');
-            const labels = yearlyData.map(item => `${i18n.t('chart.year')} ${item.year}`);
-            let cumulativeInvested = parseFloat(document.getElementById('initial').value) || 0;
-            const investedData = [];
-            const interestData = [];
-            
-            yearlyData.forEach(item => {
-                cumulativeInvested += item.contributions;
-                investedData.push(cumulativeInvested);
-                interestData.push(Math.max(0, item.endBalance - cumulativeInvested));
-            });
             
             if (chart) {
                 chart.destroy();
@@ -531,13 +398,13 @@
                     datasets: [
                         {
                             label: i18n.t('table.contributions'),
-                            data: investedData,
+                            data: principal,
                             backgroundColor: '#0066ff',
                             stack: 'total'
                         },
                         {
                             label: i18n.t('table.interest'),
-                            data: interestData,
+                            data: interest,
                             backgroundColor: '#00a86b',
                             stack: 'total'
                         }
@@ -581,61 +448,17 @@
             });
         }
         
-        function toggleDetailsSection() {
-            const section = document.getElementById('detailedBreakdown');
-            const toggleBtn = document.getElementById('toggleDetails');
-            const isHidden = section.style.display === 'none';
-            section.style.display = isHidden ? 'block' : 'none';
-            toggleBtn.querySelector('span').textContent = isHidden ? i18n.t('button.hide_details') : i18n.t('button.show_details');
-        }
-        
-        function exportToCSV() {
-            const rows = currentView === 'period' ? periodBreakdown : yearlyBreakdown;
-            if (!rows.length) {
-                return;
-            }
-            const headers = [
-                i18n.t('table.period'),
-                i18n.t('TABLE.STARTING_BALANCE'),
-                i18n.t('table.contributions'),
-                i18n.t('table.gross_interest'),
-                i18n.t('table.tax'),
-                i18n.t('table.net_interest'),
-                i18n.t('TABLE.ENDING_BALANCE')
-            ];
-            const csvRows = [headers.join(',')];
-            rows.forEach(item => {
-                const periodLabel = currentView === 'period' ? item.period : item.year;
-                csvRows.push([
-                    periodLabel,
-                    item.startBalance,
-                    item.contribution ?? item.contributions,
-                    item.grossInterest,
-                    item.tax,
-                    item.netInterest,
-                    item.endBalance
-                ].join(','));
-            });
-            const blob = new Blob([csvRows.join('\n')], { type: 'text/csv;charset=utf-8;' });
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'compound-interest-breakdown.csv';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        }
-        
         // Override i18n setLanguage to refresh calculations
         const originalSetLanguage = i18n.setLanguage.bind(i18n);
         i18n.setLanguage = function(lang) {
             originalSetLanguage(lang);
+            // Recalculate to update currency formatting
             calculate();
-            renderDetailedTable(currentView);
         };
         
+        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
+            // Set language from URL or localStorage
             const urlParams = new URLSearchParams(window.location.search);
             const langFromUrl = urlParams.get('lang');
             const savedLang = localStorage.getItem('preferredLanguage');
@@ -643,32 +466,14 @@
             
             i18n.setLanguage(currentLang);
             i18n.updatePage();
-            
-            const contributionsSwitch = document.getElementById('enableContributions');
-            const contributionFields = document.getElementById('contributionsFields');
-            contributionsSwitch.addEventListener('change', () => {
-                contributionFields.style.display = contributionsSwitch.checked ? 'block' : 'none';
-                calculate();
-            });
-            
+            calculate();
+
+            // Add input listeners for real-time calculation
             document.querySelectorAll('input, select').forEach(input => {
                 input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
-            
-            document.getElementById('toggleDetails').addEventListener('click', toggleDetailsSection);
-            document.querySelectorAll('.btn-toggle').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    document.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
-                    this.classList.add('active');
-                    currentView = this.getAttribute('data-view');
-                    renderDetailedTable(currentView);
-                });
-            });
-            
-            document.getElementById('exportExcel').addEventListener('click', exportToCSV);
-            
-            calculate();
+
         });
     </script>
 </body>
