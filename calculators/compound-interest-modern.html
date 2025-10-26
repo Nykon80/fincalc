@@ -199,50 +199,6 @@
                     <input type="number" class="form-input" id="years" value="10" min="1" max="50" step="1">
                 </div>
                 
-                <!-- Advanced Settings Toggle -->
-                <div class="form-group">
-                    <button type="button" class="btn btn-secondary" id="toggleAdvanced" onclick="toggleAdvancedSettings()" data-i18n="calculator.advanced.show">Show Advanced Settings</button>
-                </div>
-                
-                <!-- Advanced Settings (Hidden by default) -->
-                <div id="advancedSettings" style="display: none; margin-top: 1rem; padding: 1rem; background: var(--gray-50); border-radius: var(--radius-md);">
-                    <h4 data-i18n="calculator.advanced.title">Advanced Settings</h4>
-                    
-                    <!-- Tax Settings -->
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="calculator.advanced.tax">Tax Rate (%)</label>
-                        <input type="number" class="form-input" id="taxRate" value="0" min="0" max="50" step="0.1">
-                        <small class="form-text" data-i18n="calculator.advanced.tax.hint">Leave 0 if tax-free</small>
-                    </div>
-                    
-                    <!-- Regular Deposits -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <input type="checkbox" id="enableRegularDeposits" onchange="toggleRegularDeposits()"> 
-                            <span data-i18n="calculator.advanced.regular_deposits">Enable Regular Deposits</span>
-                        </label>
-                        <div id="regularDepositsSettings" style="display: none; margin-top: 0.5rem;">
-                            <input type="number" class="form-input" id="regularDepositAmount" value="0" min="0" step="100" placeholder="Amount">
-                            <select class="form-select" id="regularDepositFrequency" style="margin-top: 0.5rem;">
-                                <option value="1" data-i18n="frequency.monthly">Monthly</option>
-                                <option value="3" data-i18n="frequency.quarterly">Quarterly</option>
-                                <option value="12" data-i18n="frequency.annually">Annually</option>
-                            </select>
-                        </div>
-                    </div>
-                    
-                    <!-- Early Withdrawal Penalty -->
-                    <div class="form-group">
-                        <label class="form-label">
-                            <input type="checkbox" id="enableEarlyWithdrawal"> 
-                            <span data-i18n="calculator.advanced.early_withdrawal">Consider Early Withdrawal</span>
-                        </label>
-                        <div id="earlyWithdrawalSettings" style="display: none; margin-top: 0.5rem;">
-                            <input type="number" class="form-input" id="earlyWithdrawalPenalty" value="0" min="0" max="100" step="0.1" placeholder="Penalty %">
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- Auto-calculation on input change -->
             </div>
             
@@ -293,7 +249,6 @@
                             <th data-i18n="TABLE.STARTING_BALANCE">Starting Balance</th>
                             <th data-i18n="table.contributions">Contributions</th>
                             <th data-i18n="table.interest">Interest Earned</th>
-                            <th data-i18n="table.tax" id="taxColumnHeader" style="display: none;">Tax Paid</th>
                             <th data-i18n="TABLE.ENDING_BALANCE">Ending Balance</th>
                         </tr>
                     </thead>
@@ -352,42 +307,12 @@
     <script>
         let chart = null;
         
-        function toggleAdvancedSettings() {
-            const advancedSection = document.getElementById('advancedSettings');
-            const toggleBtn = document.getElementById('toggleAdvanced');
-            
-            if (advancedSection.style.display === 'none') {
-                advancedSection.style.display = 'block';
-                toggleBtn.textContent = i18n.t('calculator.advanced.hide');
-            } else {
-                advancedSection.style.display = 'none';
-                toggleBtn.textContent = i18n.t('calculator.advanced.show');
-            }
-        }
-        
-        function toggleRegularDeposits() {
-            const regularDepositsCheckbox = document.getElementById('enableRegularDeposits');
-            const regularDepositsSettings = document.getElementById('regularDepositsSettings');
-            
-            if (regularDepositsCheckbox.checked) {
-                regularDepositsSettings.style.display = 'block';
-            } else {
-                regularDepositsSettings.style.display = 'none';
-            }
-        }
-        
         function calculate() {
             const initial = parseFloat(document.getElementById('initial').value) || 0;
             const monthly = parseFloat(document.getElementById('monthly').value) || 0;
             const rate = parseFloat(document.getElementById('rate').value) || 0;
             const years = parseInt(document.getElementById('years').value) || 0;
             const frequency = parseInt(document.getElementById('frequency').value) || 12;
-            
-            // Advanced settings
-            const taxRate = parseFloat(document.getElementById('taxRate').value) || 0;
-            const enableRegularDeposits = document.getElementById('enableRegularDeposits').checked;
-            const regularDepositAmount = enableRegularDeposits ? parseFloat(document.getElementById('regularDepositAmount').value) || 0 : 0;
-            const regularDepositFrequency = enableRegularDeposits ? parseInt(document.getElementById('regularDepositFrequency').value) : 1;
             
             // Calculate compound interest
             const r = rate / 100 / frequency;
@@ -398,43 +323,17 @@
             const chartLabels = [];
             const principalData = [];
             const interestData = [];
-            let totalTaxPaid = 0;
             
             for (let year = 0; year <= years; year++) {
                 const yearStart = balance;
                 let yearInterest = 0;
                 let yearContributions = 0;
-                let yearTax = 0;
                 
                 if (year > 0) {
                     for (let month = 0; month < 12; month++) {
-                        const monthStart = balance;
-                        
-                        // Calculate interest for the month
-                        const monthlyInterest = balance * (rate / 100 / 12);
-                        
-                        // Add regular deposit if enabled
-                        if (enableRegularDeposits && regularDepositFrequency === 1) {
-                            balance += regularDepositAmount;
-                            yearContributions += regularDepositAmount;
-                        }
-                        
-                        // Compound the interest
-                        balance += monthlyInterest;
-                        
-                        // Add monthly contribution
-                        balance += monthly;
+                        balance = balance * (1 + rate/100/12) + monthly;
                         yearContributions += monthly;
-                        
-                        // Calculate tax on interest earned this month
-                        if (taxRate > 0) {
-                            const taxAmount = monthlyInterest * (taxRate / 100);
-                            balance -= taxAmount;
-                            yearTax += taxAmount;
-                            totalTaxPaid += taxAmount;
-                        }
                     }
-                    
                     yearInterest = balance - yearStart - yearContributions;
                 }
                 
@@ -443,16 +342,15 @@
                     start: yearStart,
                     contributions: yearContributions,
                     interest: yearInterest,
-                    tax: yearTax,
                     end: balance
                 });
                 
                 chartLabels.push(i18n.t('chart.year') + ' ' + year);
-                principalData.push(initial + (monthly * 12 * year) + (enableRegularDeposits ? regularDepositAmount * 12 * year : 0));
-                interestData.push(balance - (initial + (monthly * 12 * year) + (enableRegularDeposits ? regularDepositAmount * 12 * year : 0)));
+                principalData.push(initial + (monthly * 12 * year));
+                interestData.push(balance - (initial + (monthly * 12 * year)));
             }
             
-            const totalInvested = initial + (monthly * 12 * years) + (enableRegularDeposits ? regularDepositAmount * 12 * years : 0);
+            const totalInvested = initial + (monthly * 12 * years);
             const totalInterest = balance - totalInvested;
             
             // Update results
@@ -472,34 +370,16 @@
             const tbody = document.getElementById('tableBody');
             tbody.innerHTML = '';
             
-            // Check if tax column should be shown
-            const showTaxColumn = data.some(row => row.tax > 0);
-            const taxColumnHeader = document.getElementById('taxColumnHeader');
-            
-            if (showTaxColumn) {
-                taxColumnHeader.style.display = '';
-            } else {
-                taxColumnHeader.style.display = 'none';
-            }
-            
             data.forEach(row => {
                 if (row.year === 0) return;
                 const tr = document.createElement('tr');
-                
-                let html = `
+                tr.innerHTML = `
                     <td><strong>${row.year}</strong></td>
                     <td>${i18n.formatCurrency(row.start)}</td>
                     <td>${i18n.formatCurrency(row.contributions)}</td>
                     <td style="color: var(--success);">${i18n.formatCurrency(row.interest)}</td>
+                    <td><strong>${i18n.formatCurrency(row.end)}</strong></td>
                 `;
-                
-                if (showTaxColumn) {
-                    html += `<td style="color: var(--danger);">${i18n.formatCurrency(row.tax)}</td>`;
-                }
-                
-                html += `<td><strong>${i18n.formatCurrency(row.end)}</strong></td>`;
-                
-                tr.innerHTML = html;
                 tbody.appendChild(tr);
             });
         }
@@ -592,17 +472,6 @@
             document.querySelectorAll('input, select').forEach(input => {
                 input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
-            });
-            
-            // Add event listeners for advanced settings
-            document.getElementById('enableEarlyWithdrawal').addEventListener('change', function() {
-                const earlyWithdrawalSettings = document.getElementById('earlyWithdrawalSettings');
-                if (this.checked) {
-                    earlyWithdrawalSettings.style.display = 'block';
-                } else {
-                    earlyWithdrawalSettings.style.display = 'none';
-                }
-                calculate();
             });
 
         });
