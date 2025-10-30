@@ -1071,6 +1071,19 @@
             
             // Initialize regional defaults
             initializeRegionalDefaults();
+            
+            // Add scroll event listeners to show scrollbar when scrolling
+            const scrollableCards = document.querySelectorAll('.deposit-details-card, .additional-options-card, .tax-settings-card, .info-card');
+            scrollableCards.forEach(card => {
+                let scrollTimeout;
+                card.addEventListener('scroll', function() {
+                    card.classList.add('scrolling');
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(() => {
+                        card.classList.remove('scrolling');
+                    }, 1000);
+                });
+            });
 
             // Add input listeners for real-time calculation
             document.querySelectorAll('input, select').forEach(input => {
