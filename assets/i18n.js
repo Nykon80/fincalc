@@ -55,7 +55,7 @@ const translations = {
     'form.tax.resident': 'Tax Resident Status',
     'form.tax.rate': 'Tax Rate (%)',
     'form.early.date': 'Closure Date',
-    'form.early.rate': 'Early Closure Rate (%)',
+    'form.early.rate': 'Early Rate (%)',
     
     // Capitalization options
     'capitalization.none': 'None',
@@ -1020,7 +1020,7 @@ const translations = {
     'form.tax.resident': 'Status rezydenta podatkowego',
     'form.tax.rate': 'Stawka Podatkowa (%)',
     'form.early.date': 'Data zamknięcia',
-    'form.early.rate': 'Stopa przy przedterminowym zamknięciu (%)',
+    'form.early.rate': 'Stawka (%)',
     
     // Capitalization options
     'capitalization.none': 'Brak',
@@ -1842,7 +1842,7 @@ const translations = {
     'form.tax.resident': 'Налоговый статус',
     'form.tax.rate': 'Налоговая ставка (%)',
     'form.early.date': 'Дата закрытия',
-    'form.early.rate': 'Ставка при досрочном закрытии (%)',
+    'form.early.rate': 'Ставка (%)',
     
     // Capitalization options
     'capitalization.none': 'Без капитализации',
