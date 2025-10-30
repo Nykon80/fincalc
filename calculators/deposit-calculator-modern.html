@@ -450,11 +450,11 @@
                 <!-- Right Side Cards - Single unified card -->
                 <div class="calculator-right-side-cards">
                     <div class="card additional-options-card">
-                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.3rem; font-size: 0.95rem; margin-top: 0;">Additional Options</h5>
+                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.4rem; font-size: 0.95rem; margin-top: 0;">Additional Options</h5>
                         
                         <!-- Deposit Additions -->
-                        <div style="margin-bottom: 0.2rem;">
-                            <div class="form-group" style="margin-bottom: 0.1rem;">
+                        <div style="margin-bottom: 0.25rem;">
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableAdditions" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.additions">Enable Periodic Additions</span>
@@ -477,8 +477,8 @@
                         </div>
                         
                         <!-- Partial Withdrawals -->
-                        <div style="margin-bottom: 0.2rem;">
-                            <div class="form-group" style="margin-bottom: 0.1rem;">
+                        <div style="margin-bottom: 0.25rem;">
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableWithdrawals" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
@@ -501,16 +501,16 @@
                         </div>
                         
                         <!-- Tax Settings -->
-                        <div style="margin-top: 0.2rem; padding-top: 0.2rem; border-top: 1px solid var(--border); margin-bottom: 0.2rem;">
+                        <div style="margin-top: 0.25rem; padding-top: 0.25rem; border-top: 1px solid var(--border); margin-bottom: 0.25rem;">
                             <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end; gap: 0.5rem;">
                                 <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.75rem; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; padding-bottom: 0.35rem;">Tax Rate (%)</label>
-                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.35rem; flex: 1; box-sizing: border-box; height: 32px;">
+                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="flex: 1; height: 32px;">
                             </div>
                         </div>
                         
                         <!-- Early Closure -->
-                        <div style="margin-top: 0.2rem; padding-top: 0.2rem; border-top: 1px solid var(--border);">
-                            <div class="form-group" style="margin-bottom: 0.1rem;">
+                        <div style="margin-top: 0.25rem; padding-top: 0.25rem; border-top: 1px solid var(--border);">
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableEarlyClosure" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.early">Enable Early Closure Scenario</span>
@@ -518,11 +518,11 @@
                             </div>
                             <div id="earlyClosureConfig" style="display: flex; gap: 0.5rem; align-items: flex-end;">
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.7rem; margin-bottom: 0.1rem; display: block; line-height: 1.2; max-width: 90px;">Closure Date</label>
+                                    <label class="form-label early-date-label" data-i18n="form.early.date" style="font-size: 0.75rem; margin-bottom: 0.1rem; display: block; line-height: 1.2;"></label>
                                     <input type="date" class="form-input" id="earlyClosureDate" value="" style="width: 100%; height: 32px;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
-                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.7rem; margin-bottom: 0.1rem; display: block; line-height: 1.2; max-width: 100px;">Early Closure Rate (%)</label>
+                                    <label class="form-label early-rate-label" data-i18n="form.early.rate" style="font-size: 0.75rem; margin-bottom: 0.1rem; display: block; line-height: 1.2;"></label>
                                     <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="width: 100%; height: 32px;">
                                 </div>
                             </div>
@@ -977,12 +977,90 @@
         // Export to Excel
         document.getElementById('exportExcel').addEventListener('click', exportToExcel);
         
+        // Function to split labels into two lines
+        function splitLabelsIntoTwoLines() {
+            const dateLabel = document.querySelector('.early-date-label');
+            const rateLabel = document.querySelector('.early-rate-label');
+            
+            if (dateLabel) {
+                const text = dateLabel.textContent.trim();
+                // Split logic for different languages
+                let line1, line2;
+                if (text.includes('закрытия') || text.includes('Closure Date')) {
+                    // Russian or English
+                    if (text.includes('закрытия')) {
+                        line1 = 'Дата';
+                        line2 = 'закрытия';
+                    } else {
+                        line1 = 'Closure';
+                        line2 = 'Date';
+                    }
+                } else if (text.includes('zamknięcia')) {
+                    // Polish
+                    line1 = 'Data';
+                    line2 = 'zamknięcia';
+                } else {
+                    // Default: split at space if possible
+                    const words = text.split(' ');
+                    if (words.length >= 2) {
+                        line1 = words.slice(0, Math.floor(words.length / 2)).join(' ');
+                        line2 = words.slice(Math.floor(words.length / 2)).join(' ');
+                    } else {
+                        // If only one word, try to split it
+                        const mid = Math.floor(text.length / 2);
+                        line1 = text.substring(0, mid);
+                        line2 = text.substring(mid);
+                    }
+                }
+                dateLabel.innerHTML = `<span style="display: block;">${line1}</span><span style="display: block;">${line2}</span>`;
+            }
+            
+            if (rateLabel) {
+                const text = rateLabel.textContent.trim();
+                let line1, line2;
+                if (text.includes('досрочном') || text.includes('Early Closure')) {
+                    // Russian or English
+                    if (text.includes('досрочном')) {
+                        line1 = 'Ставка при';
+                        line2 = 'досрочном закрытии (%)';
+                    } else {
+                        line1 = 'Early Closure';
+                        line2 = 'Rate (%)';
+                    }
+                } else if (text.includes('przedterminowym')) {
+                    // Polish
+                    line1 = 'Stopa przy';
+                    line2 = 'przedterminowym zamknięciu (%)';
+                } else {
+                    // Default: split at space
+                    const words = text.split(' ');
+                    if (words.length >= 3) {
+                        line1 = words.slice(0, Math.floor(words.length * 0.6)).join(' ');
+                        line2 = words.slice(Math.floor(words.length * 0.6)).join(' ');
+                    } else {
+                        line1 = words[0] || '';
+                        line2 = words.slice(1).join(' ') || '';
+                    }
+                }
+                rateLabel.innerHTML = `<span style="display: block;">${line1}</span><span style="display: block;">${line2}</span>`;
+            }
+        }
+        
         // Override i18n setLanguage to refresh calculations
         const originalSetLanguage = i18n.setLanguage.bind(i18n);
         i18n.setLanguage = function(lang) {
             originalSetLanguage(lang);
+            i18n.updatePage();
+            splitLabelsIntoTwoLines(); // Split labels after translation
             // Recalculate to update currency formatting
             calculate();
+        };
+        
+        // Also override updatePage to include label splitting
+        const originalUpdatePage = i18n.updatePage.bind(i18n);
+        i18n.updatePage = function() {
+            originalUpdatePage();
+            splitLabelsIntoTwoLines();
         };
         
         // Initialize on load
@@ -994,7 +1072,6 @@
             const currentLang = langFromUrl || savedLang || 'en';
             
             i18n.setLanguage(currentLang);
-            i18n.updatePage();
             
             // Initialize regional defaults
             initializeRegionalDefaults();
