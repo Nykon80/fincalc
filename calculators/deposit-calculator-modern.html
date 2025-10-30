@@ -17,51 +17,38 @@
             padding: 2rem 0;
         }
         
-        .calculator-form {
+        .calculator-form.card {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
         }
         
-        .calculator-form h3 {
-            margin-top: 0;
-            margin-bottom: var(--space-lg);
-            font-size: 1.25rem;
-        }
-        
-        .calculator-form h4 {
+        .calculator-form.card h3,
+        .calculator-form.card h4,
+        .calculator-form.card h5 {
             margin-top: 0;
             margin-bottom: var(--space-md);
             font-size: 1.1rem;
-        }
-        
-        .calculator-form h5 {
-            margin-top: var(--space-md);
-            margin-bottom: var(--space-sm);
-            font-size: 0.95rem;
             font-weight: 600;
-            color: var(--text-secondary);
         }
         
-        .form-group {
-            margin-bottom: var(--space-md);
+        .calculator-form.card h3 {
+            font-size: 1.25rem;
         }
         
-        .form-group:last-child {
-            margin-bottom: 0;
+        .calculator-form.card h5 {
+            font-size: 1rem;
+            margin-bottom: var(--space-sm);
         }
         
         .subsection {
             margin-bottom: var(--space-md);
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--border);
         }
         
         .subsection:last-child {
             margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
         }
         
         .chart-container {
@@ -78,13 +65,39 @@
             border-left: 4px solid var(--primary);
             padding: var(--space-md);
             border-radius: var(--radius-md);
-            margin: var(--space-lg) 0;
+        }
+        
+        .info-box.card {
+            background: var(--primary-light);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--primary);
         }
         
         .info-box h4 {
             color: var(--primary);
             margin-bottom: var(--space-sm);
-            font-size: 1rem;
+            margin-top: 0;
+        }
+        
+        .results-container.card {
+            background: #E8F4FD;
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .results-container h3 {
+            margin-top: 0;
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group {
+            margin-bottom: var(--space-md);
+        }
+        
+        .form-group:last-child {
+            margin-bottom: 0;
         }
         
         .breakdown-table {
@@ -208,26 +221,6 @@
             color: #856404;
             font-size: 0.9rem;
         }
-        
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .calculator-container {
-                padding: 1rem 0;
-            }
-            
-            .grid {
-                grid-template-columns: 1fr !important;
-                gap: 1rem !important;
-            }
-            
-            .calculator-form {
-                padding: var(--space-md);
-            }
-            
-            .results-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
     </style>
 </head>
 <body>
@@ -277,54 +270,54 @@
         <h1 data-i18n="calc.deposit">Extended Deposit Calculator</h1>
         <p class="mb-3" data-i18n="calc.deposit.desc">Calculate deposit growth with capitalization, additions, withdrawals, and tax</p>
         
-        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-            <!-- Left Column: Two Input Cards -->
-            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-                <!-- Card 1: Deposit Details -->
-                <div class="calculator-form">
-                    <h3 data-i18n="section.deposit">Deposit Details</h3>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="form.initial">Initial Amount</label>
-                        <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
-                        <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
-                        <select class="form-select" id="capitalization">
-                            <option value="none" data-i18n="capitalization.none">None</option>
-                            <option value="monthly" selected data-i18n="capitalization.monthly">Monthly</option>
-                            <option value="quarterly" data-i18n="capitalization.quarterly">Quarterly</option>
-                            <option value="annually" data-i18n="capitalization.annually">Annually</option>
-                            <option value="daily" data-i18n="capitalization.daily">Daily</option>
-                        </select>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="form.deposit.start">Deposit Start Date</label>
-                        <input type="date" class="form-input" id="startDate" value="">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="form.term">Term</label>
-                        <div style="display: flex; gap: 0.5rem;">
-                            <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">
-                            <select class="form-select" id="termUnit" style="flex: 1;">
-                                <option value="months" selected data-i18n="unit.months">Months</option>
-                                <option value="years" data-i18n="unit.years">Years</option>
-                                <option value="days" data-i18n="unit.days">Days</option>
-                            </select>
-                        </div>
-                    </div>
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start;">
+            <!-- Left Column: Main Deposit Details -->
+            <div class="calculator-form card" style="height: fit-content;">
+                <h3 data-i18n="section.deposit">Deposit Details</h3>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.initial">Initial Amount</label>
+                    <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
                 </div>
                 
-                <!-- Card 2: Advanced Options -->
-                <div class="calculator-form">
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
+                    <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
+                    <select class="form-select" id="capitalization">
+                        <option value="none" data-i18n="capitalization.none">None</option>
+                        <option value="monthly" selected data-i18n="capitalization.monthly">Monthly</option>
+                        <option value="quarterly" data-i18n="capitalization.quarterly">Quarterly</option>
+                        <option value="annually" data-i18n="capitalization.annually">Annually</option>
+                        <option value="daily" data-i18n="capitalization.daily">Daily</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.deposit.start">Deposit Start Date</label>
+                    <input type="date" class="form-input" id="startDate" value="">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" data-i18n="form.term">Term</label>
+                    <div style="display: flex; gap: 0.5rem;">
+                        <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">
+                        <select class="form-select" id="termUnit" style="flex: 1;">
+                            <option value="months" selected data-i18n="unit.months">Months</option>
+                            <option value="years" data-i18n="unit.years">Years</option>
+                            <option value="days" data-i18n="unit.days">Days</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Right Column: Advanced Options and Results -->
+            <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                <!-- Advanced Options Card -->
+                <div class="calculator-form card">
                     <h4 data-i18n="section.advanced">Advanced Options</h4>
                     
                     <!-- Deposit Additions -->
@@ -376,24 +369,24 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <!-- Tax Settings -->
-                    <div class="subsection">
-                        <h5 data-i18n="section.tax">Tax Settings</h5>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
-                            <select class="form-select" id="taxResident">
-                                <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
-                                <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
-                            </select>
-                        </div>
-                        <div class="tax-warning" id="taxWarning" style="display: none;">
-                            <p data-i18n="tax.warning"></p>
-                        </div>
+                </div>
+                
+                <!-- Tax Settings Card -->
+                <div class="calculator-form card">
+                    <h5 data-i18n="section.tax">Tax Settings</h5>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
+                        <select class="form-select" id="taxResident">
+                            <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
+                            <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
+                        </select>
+                    </div>
+                    <div class="tax-warning" id="taxWarning" style="display: none;">
+                        <p data-i18n="tax.warning"></p>
                     </div>
                     
                     <!-- Early Closure -->
-                    <div class="subsection">
+                    <div style="margin-top: 1.5rem;">
                         <h5 data-i18n="section.early">Early Closure</h5>
                         <div class="form-group">
                             <label>
@@ -413,11 +406,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
-            
-            <!-- Right Column: Results -->
-            <div>
-                <div class="results-container">
+                
+                <!-- Results -->
+                <div class="results-container card">
                     <h3 data-i18n="section.results">Results</h3>
                     <div class="results-grid">
                         <div class="result-item">
@@ -439,7 +430,8 @@
                     </div>
                 </div>
 
-                <div class="info-box">
+                <!-- How It Works -->
+                <div class="info-box card">
                     <h4 data-i18n="section.info">How It Works</h4>
                     <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.deposit">
                         This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, 
