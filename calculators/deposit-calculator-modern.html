@@ -60,10 +60,10 @@
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
-        /* Right Column: Two Cards - This determines the reference height */
+        /* Right Column: Two Cards - Results takes more space */
         .calculator-right-column {
             display: grid;
-            grid-template-rows: 1fr 1fr; /* Results + Info - equal height */
+            grid-template-rows: 2fr 1fr; /* Results takes 2x space, Info takes 1x */
             gap: 1rem;
             height: 100%;
         }
@@ -84,11 +84,15 @@
             overflow-y: auto;
         }
         
-        /* Make side cards match Results card height, but deposit-details stretches to match two side cards */
+        /* Make side cards match Results card height */
         .additional-options-card,
-        .tax-settings-card,
-        .info-card {
+        .tax-settings-card {
             max-height: 287px; /* Match Results card height */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+        
+        /* Info card - reduced height, no max-height restriction */
+        .info-card {
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
@@ -207,8 +211,8 @@
         }
         
         .info-card p {
-            font-size: 0.875rem;
-            line-height: 1.5;
+            font-size: 1rem; /* Increased from 0.875rem */
+            line-height: 1.6;
             margin: 0;
         }
         
@@ -276,7 +280,7 @@
         }
         
         .result-value {
-            font-size: 1.75rem;
+            font-size: 2.25rem; /* Increased from 1.75rem */
             font-weight: 700;
             line-height: 1.2;
             flex-grow: 1;
@@ -363,6 +367,7 @@
         
         .deposit-details-card .btn {
             margin-top: auto; /* Push button to bottom */
+            margin-bottom: 0; /* Remove any bottom margin */
             padding: 0.75rem;
             font-size: 0.95rem;
         }
@@ -502,7 +507,7 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem; padding: 0.75rem;" onclick="calculate()" data-i18n="form.submit">Calculate</button>
+                <button class="btn btn-primary" style="width: 100%; margin-top: auto; padding: 0.75rem;" onclick="calculate()" data-i18n="form.submit">Calculate</button>
                 </div>
                 
                 <!-- Right Side Cards (Stacked vertically next to main card) -->
