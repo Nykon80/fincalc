@@ -150,7 +150,7 @@
             padding-right: 0;
         }
         
-        /* Custom scrollbar - thin and doesn't overlap border */
+        /* Custom scrollbar - thin, hidden by default, shown on hover */
         .deposit-details-card::-webkit-scrollbar,
         .additional-options-card::-webkit-scrollbar,
         .tax-settings-card::-webkit-scrollbar,
@@ -163,24 +163,32 @@
         .tax-settings-card::-webkit-scrollbar-track,
         .info-card::-webkit-scrollbar-track {
             background: transparent;
-            margin: 4px 0; /* Space from top/bottom */
+            margin: 2px 0; /* Space from top/bottom */
         }
         
         .deposit-details-card::-webkit-scrollbar-thumb,
         .additional-options-card::-webkit-scrollbar-thumb,
         .tax-settings-card::-webkit-scrollbar-thumb,
         .info-card::-webkit-scrollbar-thumb {
-            background: rgba(0, 0, 0, 0.15);
+            background: transparent; /* Hidden by default */
             border-radius: 3px;
-            border: 1px solid transparent;
-            background-clip: padding-box; /* Prevents border from showing */
+            transition: background 0.2s;
         }
         
-        .deposit-details-card::-webkit-scrollbar-thumb:hover,
-        .additional-options-card::-webkit-scrollbar-thumb:hover,
-        .tax-settings-card::-webkit-scrollbar-thumb:hover,
-        .info-card::-webkit-scrollbar-thumb:hover {
-            background: rgba(0, 0, 0, 0.25);
+        /* Show scrollbar on hover */
+        .deposit-details-card:hover::-webkit-scrollbar-thumb,
+        .additional-options-card:hover::-webkit-scrollbar-thumb,
+        .tax-settings-card:hover::-webkit-scrollbar-thumb,
+        .info-card:hover::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Show scrollbar when scrolling */
+        .deposit-details-card.scrolling::-webkit-scrollbar-thumb,
+        .additional-options-card.scrolling::-webkit-scrollbar-thumb,
+        .tax-settings-card.scrolling::-webkit-scrollbar-thumb,
+        .info-card.scrolling::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.3);
         }
         
         /* For Firefox - thin scrollbar */
