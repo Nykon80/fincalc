@@ -126,6 +126,33 @@
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
             margin-top: var(--space-lg);
+            display: none; /* Hidden by default */
+        }
+        
+        .advanced-section.show {
+            display: block;
+        }
+        
+        .advanced-toggle {
+            display: flex;
+            justify-content: center;
+            margin: var(--space-lg) 0;
+        }
+        
+        .advanced-toggle .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .advanced-toggle .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
         }
         
         .advanced-section h4 {
@@ -252,8 +279,13 @@
                     </div>
                 </div>
                 
+                <!-- Advanced Options Toggle Button -->
+                <div class="advanced-toggle">
+                    <button class="btn" id="toggleAdvanced" data-i18n="button.advanced.show">Show Advanced Options</button>
+                </div>
+                
                 <!-- Advanced Options Section -->
-                <div class="advanced-section">
+                <div class="advanced-section" id="advancedSection">
                     <h4 data-i18n="section.advanced">Advanced Options</h4>
                     
                     <!-- Deposit Additions -->
@@ -798,13 +830,38 @@
         // Export to Excel
         document.getElementById('exportExcel').addEventListener('click', exportToExcel);
         
-        // Override i18n setLanguage to refresh calculations
+        // Override i18n setLanguage to refresh calculations and update button text
         const originalSetLanguage = i18n.setLanguage.bind(i18n);
         i18n.setLanguage = function(lang) {
             originalSetLanguage(lang);
             // Recalculate to update currency formatting
             calculate();
+            
+            // Update advanced toggle button text
+            const toggleButton = document.getElementById('toggleAdvanced');
+            if (toggleButton) {
+                const isAdvancedVisible = document.getElementById('advancedSection').classList.contains('show');
+                const buttonKey = isAdvancedVisible ? 'button.advanced.hide' : 'button.advanced.show';
+                toggleButton.setAttribute('data-i18n', buttonKey);
+                toggleButton.textContent = i18n.t(buttonKey);
+            }
         };
+        
+        // Toggle advanced options
+        function toggleAdvancedOptions() {
+            const advancedSection = document.getElementById('advancedSection');
+            const toggleButton = document.getElementById('toggleAdvanced');
+            
+            if (advancedSection.classList.contains('show')) {
+                advancedSection.classList.remove('show');
+                toggleButton.setAttribute('data-i18n', 'button.advanced.show');
+                toggleButton.textContent = i18n.t('button.advanced.show');
+            } else {
+                advancedSection.classList.add('show');
+                toggleButton.setAttribute('data-i18n', 'button.advanced.hide');
+                toggleButton.textContent = i18n.t('button.advanced.hide');
+            }
+        }
         
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
@@ -825,6 +882,9 @@
                 input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
+            
+            // Add advanced toggle button listener
+            document.getElementById('toggleAdvanced').addEventListener('click', toggleAdvancedOptions);
         });
     </script>
 </body>
