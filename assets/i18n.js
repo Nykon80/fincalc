@@ -1099,6 +1099,7 @@ const translations = {
     'info.mortgage': 'Raty hipoteczne są zazwyczaj stałe przez cały okres kredytu. Uwzględnij dodatkowe koszty, takie jak podatki od nieruchomości i ubezpieczenie.',
     'info.credit': 'Płacenie więcej niż minimalna płatność może znacząco zmniejszyć całkowite odsetki i czas spłaty.',
     'info.roi': 'ROI mierzy efektywność inwestycji. Wyższy ROI wskazuje na lepszą wydajność inwestycji w stosunku do kosztu.',
+    'info.deposit': 'Ten zaawansowany kalkulator uwzględnia kapitalizację odsetek, okresowe wpłaty i wypłaty, potrącenie podatku oraz scenariusze przedterminowego zamknięcia. Zobacz szczegółową tabelę poniżej dla postępu miesięcznego.',
     
     // Footer
     'footer.privacy': 'Polityka prywatności',
@@ -1903,6 +1904,7 @@ const translations = {
     'info.savings': 'Калькулятор накоплений поможет определить, сколько нужно откладывать каждый месяц для достижения вашей финансовой цели с учетом процентного дохода.',
     'info.mortgage': 'Ипотечный калькулятор рассчитывает ежемесячные платежи по ипотеке, включая основной долг, проценты, налоги на имущество и страхование.',
     'info.creditcard': 'Калькулятор кредитной карты показывает, сколько времени потребуется для погашения долга и сколько процентов вы заплатите при минимальных платежах.',
+    'info.deposit': 'Этот расширенный калькулятор учитывает капитализируемые проценты, периодические пополнения и снятия, удержание налогов и сценарии досрочного закрытия. См. подробную таблицу ниже для помесячного прогресса.',
     
     // Payment types
     'payment.monthly': 'Ежемесячный',
