@@ -406,17 +406,17 @@
                 <div class="card deposit-details-card">
                     <h3 data-i18n="section.deposit">Deposit Details</h3>
                 
-                <div class="form-group" style="margin-bottom: 0.4rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.initial">Initial Amount</label>
                     <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.4rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.rate">Interest Rate (%)</label>
                     <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.4rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
                     <select class="form-select" id="capitalization">
                         <option value="none" data-i18n="capitalization.none">None</option>
@@ -427,12 +427,12 @@
                     </select>
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.4rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.deposit.start">Start Date</label>
                     <input type="date" class="form-input" id="startDate" value="">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.4rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.term">Term</label>
                     <div style="display: flex; gap: 0.5rem;">
                         <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">
@@ -450,11 +450,11 @@
                 <!-- Right Side Cards - Single unified card -->
                 <div class="calculator-right-side-cards">
                     <div class="card additional-options-card">
-                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.4rem; font-size: 0.95rem; margin-top: 0;">Additional Options</h5>
+                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.25rem; font-size: 0.95rem; margin-top: 0;">Additional Options</h5>
                         
                         <!-- Deposit Additions -->
-                        <div style="margin-bottom: 0.25rem;">
-                            <div class="form-group" style="margin-bottom: 0.15rem;">
+                        <div style="margin-bottom: 0.15rem;">
+                            <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableAdditions" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.additions">Enable Periodic Additions</span>
@@ -477,8 +477,8 @@
                         </div>
                         
                         <!-- Partial Withdrawals -->
-                        <div style="margin-bottom: 0.25rem;">
-                            <div class="form-group" style="margin-bottom: 0.15rem;">
+                        <div style="margin-bottom: 0.15rem;">
+                            <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableWithdrawals" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
@@ -501,16 +501,16 @@
                         </div>
                         
                         <!-- Tax Settings -->
-                        <div style="margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px solid var(--border); margin-bottom: 0.25rem;">
+                        <div style="margin-top: 0.2rem; padding-top: 0.2rem; border-top: 1px solid var(--border); margin-bottom: 0.15rem;">
                             <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end; gap: 0.5rem;">
-                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.75rem; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; padding-bottom: 0.35rem;">Tax Rate (%)</label>
-                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.35rem; flex: 1; box-sizing: border-box; height: 32px;">
+                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.75rem; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; padding-bottom: 0.1rem;">Tax Rate (%)</label>
+                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="width: 100%; height: 32px;">
                             </div>
                         </div>
                         
                         <!-- Early Closure -->
-                        <div style="margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px solid var(--border);">
-                            <div class="form-group" style="margin-bottom: 0.15rem;">
+                        <div style="margin-top: 0.2rem; padding-top: 0.2rem; border-top: 1px solid var(--border);">
+                            <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.8rem; display: flex; align-items: center;">
                                     <input type="checkbox" id="enableEarlyClosure" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.early">Enable Early Closure Scenario</span>
