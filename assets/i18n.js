@@ -54,8 +54,8 @@ const translations = {
     'form.withdrawal.frequency': 'Frequency',
     'form.tax.resident': 'Tax Resident Status',
     'form.tax.rate': 'Tax Rate (%)',
-    'form.early.date': 'Closure Date',
-    'form.early.rate': 'Early Rate (%)',
+    'form.early.date': 'CLOSURE\nDATE',
+    'form.early.rate': 'EARLY CLOSURE\nRATE (%)',
     
     // Capitalization options
     'capitalization.none': 'None',
@@ -1019,8 +1019,8 @@ const translations = {
     'form.withdrawal.frequency': 'Częstotliwość',
     'form.tax.resident': 'Status rezydenta podatkowego',
     'form.tax.rate': 'Stawka Podatkowa (%)',
-    'form.early.date': 'Data zamknięcia',
-    'form.early.rate': 'Stawka (%)',
+    'form.early.date': 'DATA\nZAMKNIĘCIA',
+    'form.early.rate': 'STOPA PRZY\nPRZEDTERMINOWYM ZAMKNIĘCIU (%)',
     
     // Capitalization options
     'capitalization.none': 'Brak',
@@ -1841,8 +1841,8 @@ const translations = {
     'form.withdrawal.frequency': 'Частота',
     'form.tax.resident': 'Налоговый статус',
     'form.tax.rate': 'Налоговая ставка (%)',
-    'form.early.date': 'Дата закрытия',
-    'form.early.rate': 'Ставка (%)',
+    'form.early.date': 'ДАТА\nЗАКРЫТИЯ',
+    'form.early.rate': 'СТАВКА ПРИ\nДОСРОЧНОМ ЗАКРЫТИИ (%)',
     
     // Capitalization options
     'capitalization.none': 'Без капитализации',
