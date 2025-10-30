@@ -31,15 +31,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr; /* Equal width columns */
             gap: 1rem;
-            align-items: stretch; /* Stretch cards to fill height */
-            height: 100%;
+            align-items: start; /* Start alignment to prevent stretching */
         }
         
         /* Main Deposit Details Card (Large, Left) */
         .deposit-details-card {
             display: flex;
             flex-direction: column;
-            height: 100%;
+            max-height: 490px; /* Match compact additional options height */
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
@@ -47,14 +46,13 @@
         .calculator-right-side-cards {
             display: flex;
             flex-direction: column;
-            height: 100%;
         }
         
         .additional-options-card {
             width: 100%;
             display: flex;
             flex-direction: column;
-            height: 100%;
+            max-height: 490px; /* Compact height based on content */
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
@@ -63,15 +61,15 @@
             display: grid;
             grid-template-rows: auto auto;
             gap: 1rem;
-            height: 100%;
+            align-items: start; /* Start alignment to prevent stretching */
         }
         
-        /* Results Card - Reference height for all cards */
+        /* Results Card - Match compact left column height */
         .results-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             display: flex;
             flex-direction: column;
-            min-height: 360px; /* Reduced to match shorter additional options */
+            max-height: 360px; /* Reduced to match shorter additional options */
         }
         
         /* Info Card - More compact */
@@ -459,14 +457,14 @@
                                     <span data-i18n="enable.additions">Enable Periodic Additions</span>
                                 </label>
                             </div>
-                            <div id="additionsConfig">
-                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Amount</label>
-                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                            <div id="additionsConfig" style="display: flex; gap: 0.4rem;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Amount</label>
+                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem;">
                                 </div>
-                                <div class="form-group" style="margin-bottom: 0; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Frequency</label>
-                                    <select class="form-select" id="additionFrequency" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Frequency</label>
+                                    <select class="form-select" id="additionFrequency" style="font-size: 0.78rem; padding: 0.25rem;">
                                         <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
                                         <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -484,14 +482,14 @@
                                     <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
                                 </label>
                             </div>
-                            <div id="withdrawalsConfig">
-                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Amount</label>
-                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                            <div id="withdrawalsConfig" style="display: flex; gap: 0.4rem;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Amount</label>
+                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem;">
                                 </div>
-                                <div class="form-group" style="margin-bottom: 0; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Frequency</label>
-                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Frequency</label>
+                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.78rem; padding: 0.25rem;">
                                         <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -503,9 +501,9 @@
                         <!-- Tax Settings -->
                         <div style="margin-top: 0.25rem; padding-top: 0.25rem; border-top: 1px solid var(--border); margin-bottom: 0.35rem;">
                             <h6 data-i18n="section.tax" style="margin-bottom: 0.1rem; font-size: 0.78rem; font-weight: 600;">Tax Settings</h6>
-                            <div class="form-group" style="margin-bottom: 0; display: flex; gap: 0.4rem; align-items: center;">
-                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 100px;">Tax Rate (%)</label>
-                                <input type="number" class="form-input" id="taxRate" value="11.2" min="0" max="100" step="0.1" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Tax Rate (%)</label>
+                                <input type="number" class="form-input" id="taxRate" value="11.2" min="0" max="100" step="0.1" style="font-size: 0.78rem; padding: 0.25rem;">
                             </div>
                         </div>
                         
@@ -518,14 +516,14 @@
                                     <span data-i18n="enable.early">Enable Early Closure Scenario</span>
                                 </label>
                             </div>
-                            <div id="earlyClosureConfig">
-                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 100px;">Closure Date</label>
-                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                            <div id="earlyClosureConfig" style="display: flex; gap: 0.4rem;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Closure Date</label>
+                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.78rem; padding: 0.25rem;">
                                 </div>
-                                <div class="form-group" style="margin-bottom: 0; display: flex; gap: 0.4rem; align-items: center;">
-                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 100px;">Early Rate (%)</label>
-                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
+                                <div class="form-group" style="margin-bottom: 0; flex: 1;">
+                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.7rem; margin-bottom: 0.05rem;">Early Closure Rate (%)</label>
+                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.78rem; padding: 0.25rem;">
                                 </div>
                             </div>
                         </div>
