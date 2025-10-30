@@ -71,7 +71,7 @@
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             display: flex;
             flex-direction: column;
-            min-height: 360px; /* Reduced to match shorter additional options */
+            min-height: 485px; /* Increased to match left column */
         }
         
         /* Info Card - More compact */
@@ -448,11 +448,11 @@
                 <!-- Right Side Cards - Single unified card -->
                 <div class="calculator-right-side-cards">
                     <div class="card additional-options-card">
-                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.35rem; font-size: 0.9rem; margin-top: 0;">Additional Options</h5>
+                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.4rem; font-size: 0.9rem; margin-top: 0;">Additional Options</h5>
                         
                         <!-- Deposit Additions -->
                         <div style="margin-bottom: 0.35rem;">
-                            <h6 data-i18n="section.additions" style="margin-bottom: 0.1rem; font-size: 0.75rem; font-weight: 600;">Deposit Additions</h6>
+                            <h6 data-i18n="section.additions" style="margin-bottom: 0.1rem; font-size: 0.78rem; font-weight: 600;">Deposit Additions</h6>
                             <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.75rem;">
                                     <input type="checkbox" id="enableAdditions" checked style="margin-right: 0.35rem; transform: scale(0.85);">
@@ -460,7 +460,7 @@
                                 </label>
                             </div>
                             <div id="additionsConfig">
-                                <div class="form-group" style="margin-bottom: 0.15rem; display: flex; gap: 0.4rem; align-items: center;">
+                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
                                     <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Amount</label>
                                     <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
                                 </div>
@@ -477,7 +477,7 @@
                         
                         <!-- Partial Withdrawals -->
                         <div style="margin-bottom: 0.35rem;">
-                            <h6 data-i18n="section.withdrawals" style="margin-bottom: 0.1rem; font-size: 0.75rem; font-weight: 600;">Partial Withdrawals</h6>
+                            <h6 data-i18n="section.withdrawals" style="margin-bottom: 0.1rem; font-size: 0.78rem; font-weight: 600;">Partial Withdrawals</h6>
                             <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.75rem;">
                                     <input type="checkbox" id="enableWithdrawals" checked style="margin-right: 0.35rem; transform: scale(0.85);">
@@ -485,7 +485,7 @@
                                 </label>
                             </div>
                             <div id="withdrawalsConfig">
-                                <div class="form-group" style="margin-bottom: 0.15rem; display: flex; gap: 0.4rem; align-items: center;">
+                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
                                     <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 80px;">Amount</label>
                                     <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
                                 </div>
@@ -501,8 +501,8 @@
                         </div>
                         
                         <!-- Tax Settings -->
-                        <div style="margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px solid var(--border); margin-bottom: 0.35rem;">
-                            <h6 data-i18n="section.tax" style="margin-bottom: 0.1rem; font-size: 0.75rem; font-weight: 600;">Tax Settings</h6>
+                        <div style="margin-top: 0.25rem; padding-top: 0.25rem; border-top: 1px solid var(--border); margin-bottom: 0.35rem;">
+                            <h6 data-i18n="section.tax" style="margin-bottom: 0.1rem; font-size: 0.78rem; font-weight: 600;">Tax Settings</h6>
                             <div class="form-group" style="margin-bottom: 0; display: flex; gap: 0.4rem; align-items: center;">
                                 <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 100px;">Tax Rate (%)</label>
                                 <input type="number" class="form-input" id="taxRate" value="11.2" min="0" max="100" step="0.1" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
@@ -510,8 +510,8 @@
                         </div>
                         
                         <!-- Early Closure -->
-                        <div style="margin-top: 0.3rem; padding-top: 0.3rem; border-top: 1px solid var(--border);">
-                            <h6 data-i18n="section.early" style="margin-bottom: 0.1rem; font-size: 0.75rem; font-weight: 600;">Early Closure</h6>
+                        <div style="margin-top: 0.25rem; padding-top: 0.25rem; border-top: 1px solid var(--border);">
+                            <h6 data-i18n="section.early" style="margin-bottom: 0.1rem; font-size: 0.78rem; font-weight: 600;">Early Closure</h6>
                             <div class="form-group" style="margin-bottom: 0.1rem;">
                                 <label style="font-size: 0.75rem;">
                                     <input type="checkbox" id="enableEarlyClosure" checked style="margin-right: 0.35rem; transform: scale(0.85);">
@@ -519,7 +519,7 @@
                                 </label>
                             </div>
                             <div id="earlyClosureConfig">
-                                <div class="form-group" style="margin-bottom: 0.15rem; display: flex; gap: 0.4rem; align-items: center;">
+                                <div class="form-group" style="margin-bottom: 0.12rem; display: flex; gap: 0.4rem; align-items: center;">
                                     <label class="form-label" data-i18n="form.early.date" style="font-size: 0.7rem; margin-bottom: 0; white-space: nowrap; min-width: 100px;">Closure Date</label>
                                     <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.78rem; padding: 0.25rem; flex: 1;">
                                 </div>
