@@ -93,10 +93,7 @@ const translations = {
     'button.yearly': 'Yearly View',
     'button.monthly': 'Monthly View',
     'button.export': 'Export to Excel',
-    'button.advanced.show': 'Show Advanced Options',
-    'button.advanced.hide': 'Hide Advanced Options',
-    'button.charts.show': 'Show Charts & Details',
-    'button.charts.hide': 'Hide Charts & Details',
+    'form.submit': 'Calculate',
     
     // Info
     'info.deposit': 'This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, tax withholding, and early closure scenarios. See the detailed breakdown table below for month-by-month progression.',
@@ -1095,10 +1092,7 @@ const translations = {
     'result.tax': 'Potrącony Podatek',
     'button.yearly': 'Widok Roczny',
     'button.export': 'Eksportuj do Excel',
-    'button.advanced.show': 'Pokaż Opcje Zaawansowane',
-    'button.advanced.hide': 'Ukryj Opcje Zaawansowane',
-    'button.charts.show': 'Pokaż Wykresy i Szczegóły',
-    'button.charts.hide': 'Ukryj Wykresy i Szczegóły',
+    'form.submit': 'Oblicz',
     
     // Information text
     'info.compound': 'Procent składany jest obliczany od kapitału początkowego i skumulowanych odsetek z poprzednich okresów. To tworzy wykładniczy wzrost w czasie.',
@@ -1794,10 +1788,7 @@ const translations = {
     'result.tax': 'Удержанный налог',
     'button.yearly': 'Годовой Вид',
     'button.export': 'Экспорт в Excel',
-    'button.advanced.show': 'Показать Дополнительные Опции',
-    'button.advanced.hide': 'Скрыть Дополнительные Опции',
-    'button.charts.show': 'Показать Графики и Детали',
-    'button.charts.hide': 'Скрыть Графики и Детали',
+    'form.submit': 'Рассчитать',
 
     // ROI Calculator labels - Russian
     'form.investment.costs': 'Дополнительные затраты',
