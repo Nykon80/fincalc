@@ -23,7 +23,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 1.5rem;
             margin-top: 2rem;
-            align-items: stretch; /* Make both columns equal height */
+            align-items: end; /* Align bottom edges of columns */
         }
         
         /* Left Column: Two Cards Layout - Equal Width */
@@ -31,14 +31,14 @@
             display: grid;
             grid-template-columns: 1fr 1fr; /* Equal width columns */
             gap: 1rem;
-            align-items: start; /* Start alignment to prevent stretching */
+            align-items: end; /* Align bottom edges */
         }
         
         /* Main Deposit Details Card (Large, Left) */
         .deposit-details-card {
             display: flex;
             flex-direction: column;
-            max-height: 490px; /* Match compact additional options height */
+            height: 100%;
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
@@ -46,22 +46,23 @@
         .calculator-right-side-cards {
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
         
         .additional-options-card {
             width: 100%;
             display: flex;
             flex-direction: column;
-            max-height: 490px; /* Compact height based on content */
+            height: 100%;
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
         /* Right Column: Two Cards - Results takes more space vertically */
         .calculator-right-column {
             display: grid;
-            grid-template-rows: auto auto;
+            grid-template-rows: 1fr auto; /* Results takes available space, info card auto */
             gap: 1rem;
-            align-items: start; /* Start alignment to prevent stretching */
+            align-items: end; /* Align bottom edges */
         }
         
         /* Results Card - Match compact left column height */
@@ -69,7 +70,8 @@
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             display: flex;
             flex-direction: column;
-            max-height: 360px; /* Reduced to match shorter additional options */
+            height: 100%;
+            overflow-y: auto;
         }
         
         /* Info Card - More compact */
@@ -77,14 +79,9 @@
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             display: flex;
             flex-direction: column;
-            max-height: 220px;
             overflow-y: auto;
         }
         
-        /* Deposit details card should stretch to match height of two side cards */
-        .results-card {
-            max-height: none; /* Results card sets the reference */
-        }
         
         /* Maintain default padding while keeping scrollbar overlay */
         .deposit-details-card,
