@@ -1084,6 +1084,13 @@ const translations = {
     'table.principal': 'Kapitał',
     'table.interest': 'Odsetki',
     'table.remaining': 'Pozostałe saldo',
+    'table.period': 'Okres',
+    'table.additions': 'Wpłaty',
+    'table.withdrawals': 'Wypłaty',
+    'table.tax': 'Podatek',
+    'result.tax': 'Potrącony Podatek',
+    'button.yearly': 'Widok Roczny',
+    'button.export': 'Eksportuj do Excel',
     
     // Information text
     'info.compound': 'Procent składany jest obliczany od kapitału początkowego i skumulowanych odsetek z poprzednich okresów. To tworzy wykładniczy wzrost w czasie.',
@@ -1769,6 +1776,15 @@ const translations = {
     'table.ending_balance': 'Конечный баланс',
     'table.month': 'Месяц',
     'table.payment': 'Платеж',
+    'table.period': 'Период',
+    'table.balance.start': 'Начальный баланс',
+    'table.balance.end': 'Конечный баланс',
+    'table.additions': 'Пополнения',
+    'table.withdrawals': 'Снятия',
+    'table.tax': 'Налог',
+    'result.tax': 'Удержанный налог',
+    'button.yearly': 'Годовой Вид',
+    'button.export': 'Экспорт в Excel',
 
     // ROI Calculator labels - Russian
     'form.investment.costs': 'Дополнительные затраты',
