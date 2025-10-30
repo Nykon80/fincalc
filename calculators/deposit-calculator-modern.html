@@ -50,6 +50,15 @@
         .additional-options-card,
         .tax-settings-card {
             width: 100%;
+            min-height: fit-content;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Ensure cards align properly */
+        .calculator-right-side-cards > .card {
+            display: flex;
+            flex-direction: column;
         }
         
         /* Right Column: Two Cards */
@@ -395,14 +404,8 @@
                     <div class="card tax-settings-card">
                         <h5 data-i18n="section.tax">Tax Settings</h5>
                         <div class="form-group">
-                            <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
-                            <select class="form-select" id="taxResident">
-                                <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
-                                <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
-                            </select>
-                        </div>
-                        <div class="tax-warning" id="taxWarning" style="display: none; margin-top: 0.75rem;">
-                            <p data-i18n="tax.warning" style="font-size: 0.85rem; margin: 0;"></p>
+                            <label class="form-label" data-i18n="form.tax.rate">Tax Rate (%)</label>
+                            <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1">
                         </div>
                         
                         <!-- Early Closure -->
@@ -556,6 +559,9 @@
             // Set default rate
             document.getElementById('rate').value = defaults.defaultRate;
             
+            // Set default tax rate (use resident rate as default)
+            document.getElementById('taxRate').value = defaults.taxRate.resident * 100;
+            
             // Set today's date as start date
             const today = new Date();
             const dateStr = today.toISOString().split('T')[0];
@@ -572,10 +578,9 @@
             const termValue = parseInt(document.getElementById('termValue').value) || 0;
             const termUnit = document.getElementById('termUnit').value;
             
-            // Get tax settings
-            const isTaxResident = document.getElementById('taxResident').value === 'yes';
-            const lang = i18n.currentLang || 'en';
-            const taxRate = regionalDefaults[lang].taxRate[isTaxResident ? 'resident' : 'nonResident'];
+            // Get tax settings - direct input
+            const taxRatePercent = parseFloat(document.getElementById('taxRate').value) || 0;
+            const taxRate = taxRatePercent / 100;
             
             // Advanced options
             const enableAdditions = document.getElementById('enableAdditions').checked;
@@ -711,10 +716,8 @@
             if (totalTax > 0) {
                 document.getElementById('taxResult').style.display = 'flex';
                 document.getElementById('tax').textContent = i18n.formatCurrency(totalTax);
-                document.getElementById('taxWarning').style.display = 'block';
             } else {
                 document.getElementById('taxResult').style.display = 'none';
-                document.getElementById('taxWarning').style.display = 'none';
             }
             
             // Update table

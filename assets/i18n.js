@@ -53,6 +53,7 @@ const translations = {
     'form.withdrawal.amount': 'Withdrawal Amount',
     'form.withdrawal.frequency': 'Frequency',
     'form.tax.resident': 'Tax Resident Status',
+    'form.tax.rate': 'Tax Rate (%)',
     'form.early.date': 'Closure Date',
     'form.early.rate': 'Early Closure Rate (%)',
     
@@ -1017,6 +1018,7 @@ const translations = {
     'form.withdrawal.amount': 'Kwota wypłaty',
     'form.withdrawal.frequency': 'Częstotliwość',
     'form.tax.resident': 'Status rezydenta podatkowego',
+    'form.tax.rate': 'Stawka Podatkowa (%)',
     'form.early.date': 'Data zamknięcia',
     'form.early.rate': 'Stopa przy przedterminowym zamknięciu (%)',
     
@@ -1838,6 +1840,7 @@ const translations = {
     'form.withdrawal.amount': 'Сумма снятия',
     'form.withdrawal.frequency': 'Частота',
     'form.tax.resident': 'Налоговый статус',
+    'form.tax.rate': 'Налоговая ставка (%)',
     'form.early.date': 'Дата закрытия',
     'form.early.rate': 'Ставка при досрочном закрытии (%)',
     
