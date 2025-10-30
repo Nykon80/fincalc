@@ -26,10 +26,10 @@
             align-items: stretch; /* Make both columns equal height */
         }
         
-        /* Left Column: Three Cards Layout */
+        /* Left Column: Two Cards Layout - Equal Width */
         .calculator-left-column {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 1fr 1fr; /* Equal width columns */
             gap: 1rem;
             align-items: stretch; /* Stretch cards to fill height */
             height: 100%;
@@ -246,7 +246,7 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: 1rem; /* Reduced padding for compactness */
+            padding: 0.75rem; /* More compact padding */
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin: 0; /* Remove any default margins */
             box-sizing: border-box;
@@ -254,31 +254,31 @@
         
         .card h3 {
             margin-top: 0;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
         }
         
         .card h5 {
             margin-top: 0;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             font-weight: 600;
         }
         
         .card h6 {
             margin-top: 0;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.35rem;
             color: var(--text-primary);
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             font-weight: 600;
         }
         
         /* Compact form styling */
         .card .form-group {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         
         .deposit-details-card {
@@ -286,25 +286,25 @@
         }
         
         .deposit-details-card .form-group:last-of-type {
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
         }
         
         .card .form-label {
-            font-size: 0.85rem;
-            margin-bottom: 0.25rem;
+            font-size: 0.8rem;
+            margin-bottom: 0.2rem;
         }
         
         .card .form-input,
         .card .form-select {
-            font-size: 0.9rem;
-            padding: 0.5rem;
+            font-size: 0.85rem;
+            padding: 0.4rem;
         }
         
         .deposit-details-card .btn {
             margin-top: auto; /* Push button to bottom */
             margin-bottom: 0;
-            padding: 0.75rem;
-            font-size: 0.95rem;
+            padding: 0.6rem;
+            font-size: 0.9rem;
         }
         
         /* Responsive Design */
@@ -404,17 +404,17 @@
                 <div class="card deposit-details-card">
                     <h3 data-i18n="section.deposit">Deposit Details</h3>
                 
-                <div class="form-group" style="margin-bottom: 0.75rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.initial">Initial Amount</label>
                     <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.75rem;">
-                    <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
+                <div class="form-group" style="margin-bottom: 0.5rem;">
+                    <label class="form-label" data-i18n="form.rate">Interest Rate (%)</label>
                     <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.75rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
                     <select class="form-select" id="capitalization">
                         <option value="none" data-i18n="capitalization.none">None</option>
@@ -425,12 +425,12 @@
                     </select>
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.75rem;">
-                    <label class="form-label" data-i18n="form.deposit.start">Deposit Start Date</label>
+                <div class="form-group" style="margin-bottom: 0.5rem;">
+                    <label class="form-label" data-i18n="form.deposit.start">Start Date</label>
                     <input type="date" class="form-input" id="startDate" value="">
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0.75rem;">
+                <div class="form-group" style="margin-bottom: 0.5rem;">
                     <label class="form-label" data-i18n="form.term">Term</label>
                     <div style="display: flex; gap: 0.5rem;">
                         <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">

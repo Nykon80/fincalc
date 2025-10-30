@@ -39,14 +39,14 @@ const translations = {
     // Form labels
     'form.initial': 'Initial Amount',
     'form.monthly': 'Monthly Contribution',
-    'form.rate': 'Annual Interest Rate (%)',
+    'form.rate': 'Interest Rate (%)',
     'form.years': 'Time Period (Years)',
     'form.calculate': 'Calculate',
     'form.reset': 'Reset',
     
     // Deposit calculator specific labels
     'form.capitalization': 'Capitalization',
-    'form.deposit.start': 'Deposit Start Date',
+    'form.deposit.start': 'Start Date',
     'form.term': 'Term',
     'form.addition.amount': 'Addition Amount',
     'form.addition.frequency': 'Frequency',
@@ -942,7 +942,7 @@ const translations = {
     // Form labels
     'form.initial': 'Kwota początkowa',
     'form.monthly': 'Miesięczna wpłata',
-    'form.rate': 'Roczna stopa procentowa (%)',
+    'form.rate': 'Stopa procentowa (%)',
     'form.years': 'Okres (lata)',
     'form.calculate': 'Oblicz',
     'form.reset': 'Wyczyść',
@@ -1011,7 +1011,7 @@ const translations = {
     
     // Deposit calculator specific labels
     'form.capitalization': 'Kapitalizacja',
-    'form.deposit.start': 'Data rozpoczęcia lokaty',
+    'form.deposit.start': 'Data rozpoczęcia',
     'form.term': 'Okres',
     'form.addition.amount': 'Kwota wpłaty',
     'form.addition.frequency': 'Częstotliwość',
