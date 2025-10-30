@@ -296,8 +296,10 @@
         
         .card .form-input,
         .card .form-select {
-            font-size: 0.85rem;
-            padding: 0.4rem;
+            font-size: 0.82rem;
+            padding: 0.35rem;
+            height: 32px; /* Fixed height for all inputs */
+            box-sizing: border-box;
         }
         
         .deposit-details-card .btn {
@@ -461,11 +463,11 @@
                             <div id="additionsConfig" style="display: flex; gap: 0.5rem; align-items: flex-end;">
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Amount</label>
-                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="width: 100%; height: 32px;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Frequency</label>
-                                    <select class="form-select" id="additionFrequency" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <select class="form-select" id="additionFrequency" style="width: 100%; height: 32px;">
                                         <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
                                         <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -485,11 +487,11 @@
                             <div id="withdrawalsConfig" style="display: flex; gap: 0.5rem; align-items: flex-end;">
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Amount</label>
-                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="width: 100%; height: 32px;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Frequency</label>
-                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <select class="form-select" id="withdrawalFrequency" style="width: 100%; height: 32px;">
                                         <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -501,8 +503,8 @@
                         <!-- Tax Settings -->
                         <div style="margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--border); margin-bottom: 0.4rem;">
                             <div class="form-group" style="margin-bottom: 0; display: flex; align-items: flex-end; gap: 0.5rem;">
-                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.75rem; margin-bottom: 0.15rem; white-space: nowrap; flex-shrink: 0;">Tax Rate (%)</label>
-                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.35rem; flex: 1; box-sizing: border-box;">
+                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.75rem; margin-bottom: 0; white-space: nowrap; flex-shrink: 0; padding-bottom: 0.35rem;">Tax Rate (%)</label>
+                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.35rem; flex: 1; box-sizing: border-box; height: 32px;">
                             </div>
                         </div>
                         
@@ -517,11 +519,11 @@
                             <div id="earlyClosureConfig" style="display: flex; gap: 0.5rem; align-items: flex-end;">
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.early.date" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Closure Date</label>
-                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="width: 100%; height: 32px;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0; flex: 1;">
                                     <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.75rem; margin-bottom: 0.15rem; display: block;">Early Closure Rate (%)</label>
-                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.35rem; width: 100%; box-sizing: border-box;">
+                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="width: 100%; height: 32px;">
                                 </div>
                             </div>
                         </div>
