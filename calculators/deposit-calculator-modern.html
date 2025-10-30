@@ -40,6 +40,7 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
         /* Right Side Cards Container */
@@ -62,8 +63,9 @@
         /* Right Column: Two Cards - This determines the reference height */
         .calculator-right-column {
             display: grid;
-            grid-template-rows: auto auto; /* Results + Info - natural height */
+            grid-template-rows: 1fr 1fr; /* Results + Info - equal height */
             gap: 1rem;
+            height: 100%;
         }
         
         /* Results Card - Reference height for all cards */
@@ -73,16 +75,16 @@
             flex-direction: column;
         }
         
-        /* Info Card - Compact to match Results height */
+        /* Info Card - Match Results height */
         .info-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             display: flex;
             flex-direction: column;
-            max-height: fit-content; /* Compact height */
+            height: 100%;
+            overflow-y: auto;
         }
         
-        /* Make all top cards match Results card height */
-        .deposit-details-card,
+        /* Make side cards match Results card height, but deposit-details stretches to match two side cards */
         .additional-options-card,
         .tax-settings-card,
         .info-card {
@@ -90,8 +92,104 @@
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
+        /* Deposit details card should stretch to match height of two side cards */
+        .deposit-details-card {
+            /* No max-height - will stretch to match two side cards combined */
+        }
+        
         .results-card {
             max-height: none; /* Results card sets the reference */
+        }
+        
+        /* Hide scrollbars or make them less visible - Custom scrollbar styling */
+        .deposit-details-card::-webkit-scrollbar,
+        .additional-options-card::-webkit-scrollbar,
+        .tax-settings-card::-webkit-scrollbar,
+        .info-card::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-track,
+        .additional-options-card::-webkit-scrollbar-track,
+        .tax-settings-card::-webkit-scrollbar-track,
+        .info-card::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 4px;
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-thumb,
+        .additional-options-card::-webkit-scrollbar-thumb,
+        .tax-settings-card::-webkit-scrollbar-thumb,
+        .info-card::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 4px;
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-thumb:hover,
+        .additional-options-card::-webkit-scrollbar-thumb:hover,
+        .tax-settings-card::-webkit-scrollbar-thumb:hover,
+        .info-card::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* For Firefox */
+        .deposit-details-card,
+        .additional-options-card,
+        .tax-settings-card,
+        .info-card {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+        }
+        
+        /* Hide scrollbar or make it overlay - doesn't take space */
+        .deposit-details-card,
+        .additional-options-card,
+        .tax-settings-card,
+        .info-card {
+            /* Use padding to account for scrollbar so it doesn't overlap border */
+            padding-right: 0;
+        }
+        
+        /* Custom scrollbar - thin and doesn't overlap border */
+        .deposit-details-card::-webkit-scrollbar,
+        .additional-options-card::-webkit-scrollbar,
+        .tax-settings-card::-webkit-scrollbar,
+        .info-card::-webkit-scrollbar {
+            width: 6px; /* Thin scrollbar */
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-track,
+        .additional-options-card::-webkit-scrollbar-track,
+        .tax-settings-card::-webkit-scrollbar-track,
+        .info-card::-webkit-scrollbar-track {
+            background: transparent;
+            margin: 4px 0; /* Space from top/bottom */
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-thumb,
+        .additional-options-card::-webkit-scrollbar-thumb,
+        .tax-settings-card::-webkit-scrollbar-thumb,
+        .info-card::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.15);
+            border-radius: 3px;
+            border: 1px solid transparent;
+            background-clip: padding-box; /* Prevents border from showing */
+        }
+        
+        .deposit-details-card::-webkit-scrollbar-thumb:hover,
+        .additional-options-card::-webkit-scrollbar-thumb:hover,
+        .tax-settings-card::-webkit-scrollbar-thumb:hover,
+        .info-card::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 0, 0, 0.25);
+        }
+        
+        /* For Firefox - thin scrollbar */
+        .deposit-details-card,
+        .additional-options-card,
+        .tax-settings-card,
+        .info-card {
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
         }
         
         .info-card h4 {
@@ -204,6 +302,7 @@
             padding: 1rem; /* Reduced padding for compactness */
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin: 0; /* Remove any default margins */
+            box-sizing: border-box;
         }
         
         .card h3 {
