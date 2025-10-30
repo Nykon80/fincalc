@@ -121,59 +121,16 @@
         }
         
         /* Advanced Options Section */
+        .calculator-form {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+        
         .advanced-section {
             background: var(--gray-50);
             border-radius: var(--radius-lg);
             padding: var(--space-lg);
-            margin-top: var(--space-lg);
-            display: none; /* Hidden by default */
-        }
-        
-        .advanced-section.show {
-            display: block;
-        }
-        
-        .toggle-buttons-section {
-            display: flex;
-            justify-content: center;
-            gap: var(--space-md);
-            margin: var(--space-xl) 0;
-            padding: var(--space-lg) 0;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-1px);
-        }
-        
-        .btn-secondary {
-            background: var(--gray-100);
-            color: var(--text-primary);
-            border: 1px solid var(--gray-300);
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-md);
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-        
-        .btn-secondary:hover {
-            background: var(--gray-200);
-            transform: translateY(-1px);
-        }
-        
-        .charts-section {
             margin-top: var(--space-lg);
         }
         
@@ -183,16 +140,37 @@
         }
         
         .subsection {
-            background: white;
+            background: var(--gray-50);
             border-radius: var(--radius-md);
             padding: var(--space-md);
-            margin-bottom: var(--space-md);
+            margin-bottom: 1rem;
+            border: 1px solid var(--border);
+        }
+        
+        .subsection:last-child {
+            margin-bottom: 0;
         }
         
         .subsection h5 {
             color: var(--text-primary);
-            margin-bottom: var(--space-sm);
+            margin-bottom: 0.75rem;
             font-size: 0.95rem;
+            font-weight: 600;
+        }
+        
+        /* Compact form groups in advanced options */
+        .calculator-form .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .calculator-form .form-group:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Ensure cards have equal height */
+        .grid > .calculator-form {
+            display: flex;
+            flex-direction: column;
         }
         
         /* Tax Warning Box */
@@ -258,8 +236,9 @@
         <h1 data-i18n="calc.deposit">Extended Deposit Calculator</h1>
         <p class="mb-3" data-i18n="calc.deposit.desc">Calculate deposit growth with capitalization, additions, withdrawals, and tax</p>
         
-        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-            <!-- Input Form -->
+        <!-- Input Cards Row -->
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <!-- Left Card: Deposit Details -->
             <div class="calculator-form">
                 <h3 data-i18n="section.deposit">Deposit Details</h3>
                 
@@ -302,172 +281,163 @@
                 </div>
             </div>
             
-            <!-- Results Section -->
-            <div class="results-section">
+            <!-- Right Card: Advanced Options -->
+            <div class="calculator-form">
+                <h3 data-i18n="section.advanced">Advanced Options</h3>
+                
+                <!-- Deposit Additions -->
+                <div class="subsection" style="margin-bottom: 1.5rem;">
+                    <h5 data-i18n="section.additions">Deposit Additions</h5>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableAdditions">
+                            <span data-i18n="enable.additions">Enable Periodic Additions</span>
+                        </label>
+                    </div>
+                    <div id="additionsConfig" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.addition.amount">Addition Amount</label>
+                            <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.addition.frequency">Frequency</label>
+                            <select class="form-select" id="additionFrequency">
+                                <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
+                                <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
+                                <option value="annually" data-i18n="frequency.annually">Annually</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Partial Withdrawals -->
+                <div class="subsection" style="margin-bottom: 1.5rem;">
+                    <h5 data-i18n="section.withdrawals">Partial Withdrawals</h5>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableWithdrawals">
+                            <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
+                        </label>
+                    </div>
+                    <div id="withdrawalsConfig" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.withdrawal.amount">Withdrawal Amount</label>
+                            <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.withdrawal.frequency">Frequency</label>
+                            <select class="form-select" id="withdrawalFrequency">
+                                <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
+                                <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
+                                <option value="annually" data-i18n="frequency.annually">Annually</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tax Settings -->
+                <div class="subsection" style="margin-bottom: 1.5rem;">
+                    <h5 data-i18n="section.tax">Tax Settings</h5>
+                    <div class="form-group">
+                        <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
+                        <select class="form-select" id="taxResident">
+                            <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
+                            <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
+                        </select>
+                    </div>
+                    <div class="tax-warning" id="taxWarning" style="display: none;">
+                        <p data-i18n="tax.warning"></p>
+                    </div>
+                </div>
+                
+                <!-- Early Closure -->
+                <div class="subsection">
+                    <h5 data-i18n="section.early">Early Closure</h5>
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="enableEarlyClosure">
+                            <span data-i18n="enable.early">Enable Early Closure Scenario</span>
+                        </label>
+                    </div>
+                    <div id="earlyClosureConfig" style="display: none;">
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.early.date">Closure Date</label>
+                            <input type="date" class="form-input" id="earlyClosureDate" value="">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" data-i18n="form.early.rate">Early Closure Rate (%)</label>
+                            <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Results Section -->
+        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <div class="results-container">
                 <h3 data-i18n="section.results">Results</h3>
                 <div class="results-grid">
-                    <div class="result-card">
-                        <div class="result-label" data-i18n="result.total">Total Amount</div>
-                        <div class="result-value" id="total">$104,543</div>
+                    <div class="result-item">
+                        <div class="result-label" data-i18n="result.total">Final Amount</div>
+                        <div class="result-value" id="total">$0</div>
                     </div>
-                    <div class="result-card">
-                        <div class="result-label" data-i18n="result.invested">Total Invested</div>
-                        <div class="result-value" id="invested">$100,000</div>
+                    <div class="result-item">
+                        <div class="result-label" data-i18n="result.invested">Total Deposited</div>
+                        <div class="result-value" id="invested">$0</div>
                     </div>
-                    <div class="result-card">
+                    <div class="result-item">
                         <div class="result-label" data-i18n="result.interest">Interest Earned</div>
-                        <div class="result-value" id="interest">$4,543</div>
+                        <div class="result-value" id="interest">$0</div>
                     </div>
-                    <div class="result-card" id="taxResult" style="display: none;">
+                    <div class="result-item" id="taxResult" style="display: none;">
                         <div class="result-label" data-i18n="result.tax">Tax Withheld</div>
                         <div class="result-value" id="tax">$0</div>
                     </div>
                 </div>
-                
-                <div class="info-section">
-                    <h4 data-i18n="section.info">How It Works</h4>
-                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.deposit">
-                        This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, 
-                        tax withholding, and early closure scenarios. See the detailed breakdown table below for month-by-month progression.
-                    </p>
-                </div>
+            </div>
+
+            <div class="info-box">
+                <h4 data-i18n="section.info">How It Works</h4>
+                <p style="margin: 0; color: var(--text-secondary);" data-i18n="info.deposit">
+                    This advanced calculator accounts for capitalizable interest, periodic additions and withdrawals, 
+                    tax withholding, and early closure scenarios. See the detailed breakdown table below for month-by-month progression.
+                </p>
             </div>
         </div>
         
-        <!-- Toggle Buttons Section -->
-        <div class="toggle-buttons-section">
-            <button class="btn btn-primary" id="toggleAdvanced" data-i18n="button.advanced.show">Show Advanced Options</button>
-            <button class="btn btn-secondary" id="toggleCharts" data-i18n="button.charts.show">Show Charts & Details</button>
+        <!-- Chart -->
+        <div class="chart-container">
+            <h3 data-i18n="section.chart">Growth Chart</h3>
+            <canvas id="growthChart"></canvas>
         </div>
         
-        <!-- Advanced Options Section -->
-        <div class="advanced-section" id="advancedSection">
-                    <h4 data-i18n="section.advanced">Advanced Options</h4>
-                    
-                    <!-- Deposit Additions -->
-                    <div class="subsection">
-                        <h5 data-i18n="section.additions">Deposit Additions</h5>
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="enableAdditions">
-                                <span data-i18n="enable.additions">Enable Periodic Additions</span>
-                            </label>
-                        </div>
-                        <div id="additionsConfig" style="display: none;">
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.addition.amount">Addition Amount</label>
-                                <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.addition.frequency">Frequency</label>
-                                <select class="form-select" id="additionFrequency">
-                                    <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
-                                    <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
-                                    <option value="annually" data-i18n="frequency.annually">Annually</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Partial Withdrawals -->
-                    <div class="subsection">
-                        <h5 data-i18n="section.withdrawals">Partial Withdrawals</h5>
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="enableWithdrawals">
-                                <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
-                            </label>
-                        </div>
-                        <div id="withdrawalsConfig" style="display: none;">
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.withdrawal.amount">Withdrawal Amount</label>
-                                <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.withdrawal.frequency">Frequency</label>
-                                <select class="form-select" id="withdrawalFrequency">
-                                    <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
-                                    <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
-                                    <option value="annually" data-i18n="frequency.annually">Annually</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Tax Settings -->
-                    <div class="subsection">
-                        <h5 data-i18n="section.tax">Tax Settings</h5>
-                        <div class="form-group">
-                            <label class="form-label" data-i18n="form.tax.resident">Tax Resident Status</label>
-                            <select class="form-select" id="taxResident">
-                                <option value="yes" selected data-i18n="tax.resident.yes">Yes (Resident)</option>
-                                <option value="no" data-i18n="tax.resident.no">No (Non-Resident)</option>
-                            </select>
-                        </div>
-                        <div class="tax-warning" id="taxWarning" style="display: none;">
-                            <p data-i18n="tax.warning"></p>
-                        </div>
-                    </div>
-                    
-                    <!-- Early Closure -->
-                    <div class="subsection">
-                        <h5 data-i18n="section.early">Early Closure</h5>
-                        <div class="form-group">
-                            <label>
-                                <input type="checkbox" id="enableEarlyClosure">
-                                <span data-i18n="enable.early">Enable Early Closure Scenario</span>
-                            </label>
-                        </div>
-                        <div id="earlyClosureConfig" style="display: none;">
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.early.date">Closure Date</label>
-                                <input type="date" class="form-input" id="earlyClosureDate" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" data-i18n="form.early.rate">Early Closure Rate (%)</label>
-                                <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1">
-                            </div>
-                        </div>
-                    </div>
+        <!-- Detailed Breakdown Table -->
+        <div style="margin-top: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-secondary" id="toggleView" data-i18n="button.yearly">Yearly View</button>
+                    <button class="btn btn-secondary" id="exportExcel" data-i18n="button.export">Export to Excel</button>
                 </div>
             </div>
-        </div>
-        
-        <!-- Charts and Details Section (Hidden by default) -->
-        <div class="charts-section" id="chartsSection" style="display: none;">
-            <!-- Chart -->
-            <div class="chart-container">
-                <h3 data-i18n="section.chart">Growth Chart</h3>
-                <canvas id="growthChart"></canvas>
-            </div>
-            
-            <!-- Detailed Breakdown Table -->
-            <div style="margin-top: 2rem;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                    <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
-                    <div style="display: flex; gap: 0.5rem;">
-                        <button class="btn btn-secondary" id="toggleView" data-i18n="button.yearly">Yearly View</button>
-                        <button class="btn btn-secondary" id="exportExcel" data-i18n="button.export">Export to Excel</button>
-                    </div>
-                </div>
-                <div style="overflow-x: auto;">
-                    <table class="breakdown-table" id="breakdownTable">
-                        <thead>
-                            <tr>
-                                <th data-i18n="table.period">Period</th>
-                                <th data-i18n="table.balance.start">Starting Balance</th>
-                                <th data-i18n="table.additions">Additions</th>
-                                <th data-i18n="table.withdrawals">Withdrawals</th>
-                                <th data-i18n="table.interest">Interest</th>
-                                <th data-i18n="table.tax">Tax</th>
-                                <th data-i18n="table.balance.end">Ending Balance</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tableBody">
-                            <!-- Populated by JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
+            <div style="overflow-x: auto;">
+                <table class="breakdown-table" id="breakdownTable">
+                    <thead>
+                        <tr>
+                            <th data-i18n="table.period">Period</th>
+                            <th data-i18n="table.balance.start">Starting Balance</th>
+                            <th data-i18n="table.additions">Additions</th>
+                            <th data-i18n="table.withdrawals">Withdrawals</th>
+                            <th data-i18n="table.interest">Interest</th>
+                            <th data-i18n="table.tax">Tax</th>
+                            <th data-i18n="table.balance.end">Ending Balance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                        <!-- Populated by JavaScript -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -856,63 +826,13 @@
         // Export to Excel
         document.getElementById('exportExcel').addEventListener('click', exportToExcel);
         
-        // Override i18n setLanguage to refresh calculations and update button text
+        // Override i18n setLanguage to refresh calculations
         const originalSetLanguage = i18n.setLanguage.bind(i18n);
         i18n.setLanguage = function(lang) {
             originalSetLanguage(lang);
             // Recalculate to update currency formatting
             calculate();
-            
-            // Update toggle button texts
-            const advancedButton = document.getElementById('toggleAdvanced');
-            const chartsButton = document.getElementById('toggleCharts');
-            
-            if (advancedButton) {
-                const isAdvancedVisible = document.getElementById('advancedSection').classList.contains('show');
-                const advancedKey = isAdvancedVisible ? 'button.advanced.hide' : 'button.advanced.show';
-                advancedButton.setAttribute('data-i18n', advancedKey);
-                advancedButton.textContent = i18n.t(advancedKey);
-            }
-            
-            if (chartsButton) {
-                const isChartsVisible = document.getElementById('chartsSection').style.display !== 'none';
-                const chartsKey = isChartsVisible ? 'button.charts.hide' : 'button.charts.show';
-                chartsButton.setAttribute('data-i18n', chartsKey);
-                chartsButton.textContent = i18n.t(chartsKey);
-            }
         };
-        
-        // Toggle advanced options
-        function toggleAdvancedOptions() {
-            const advancedSection = document.getElementById('advancedSection');
-            const toggleButton = document.getElementById('toggleAdvanced');
-            
-            if (advancedSection.classList.contains('show')) {
-                advancedSection.classList.remove('show');
-                toggleButton.setAttribute('data-i18n', 'button.advanced.show');
-                toggleButton.textContent = i18n.t('button.advanced.show');
-            } else {
-                advancedSection.classList.add('show');
-                toggleButton.setAttribute('data-i18n', 'button.advanced.hide');
-                toggleButton.textContent = i18n.t('button.advanced.hide');
-            }
-        }
-        
-        // Toggle charts and details
-        function toggleCharts() {
-            const chartsSection = document.getElementById('chartsSection');
-            const toggleButton = document.getElementById('toggleCharts');
-            
-            if (chartsSection.style.display === 'none') {
-                chartsSection.style.display = 'block';
-                toggleButton.setAttribute('data-i18n', 'button.charts.hide');
-                toggleButton.textContent = i18n.t('button.charts.hide');
-            } else {
-                chartsSection.style.display = 'none';
-                toggleButton.setAttribute('data-i18n', 'button.charts.show');
-                toggleButton.textContent = i18n.t('button.charts.show');
-            }
-        }
         
         // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
@@ -933,10 +853,6 @@
                 input.addEventListener('input', calculate);
                 input.addEventListener('change', calculate);
             });
-            
-            // Add toggle button listeners
-            document.getElementById('toggleAdvanced').addEventListener('click', toggleAdvancedOptions);
-            document.getElementById('toggleCharts').addEventListener('click', toggleCharts);
         });
     </script>
 </body>
