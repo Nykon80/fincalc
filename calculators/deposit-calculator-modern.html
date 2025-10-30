@@ -17,35 +17,37 @@
             padding: 2rem 0;
         }
         
-        /* Main Grid Layout */
+        /* Main Grid Layout - Two columns with equal height */
         .calculator-main-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
+            gap: 1.5rem;
             margin-top: 2rem;
+            align-items: stretch; /* Make both columns equal height */
         }
         
         /* Left Column: Three Cards Layout */
         .calculator-left-column {
             display: grid;
             grid-template-columns: 2fr 1fr;
-            grid-template-rows: auto auto;
             gap: 1rem;
-            align-items: stretch; /* Stretch to fill vertical space */
+            align-items: stretch; /* Stretch cards to fill height */
+            height: 100%;
         }
         
         /* Main Deposit Details Card (Large, Left) */
         .deposit-details-card {
-            grid-row: 1 / 3;
             display: flex;
             flex-direction: column;
+            height: 100%;
         }
         
         /* Right Side Cards Container */
         .calculator-right-side-cards {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: 1fr 1fr; /* Two equal rows */
             gap: 1rem;
+            height: 100%;
         }
         
         .additional-options-card,
@@ -53,35 +55,55 @@
             width: 100%;
             display: flex;
             flex-direction: column;
-            flex: 1; /* Equal height distribution */
+            height: 100%;
+            overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
-        /* Ensure cards align properly */
-        .calculator-right-side-cards > .card {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* Right Column: Two Cards */
+        /* Right Column: Two Cards - This determines the reference height */
         .calculator-right-column {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-rows: auto auto; /* Results + Info - natural height */
             gap: 1rem;
         }
         
-        /* Results Card */
+        /* Results Card - Reference height for all cards */
         .results-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            display: flex;
+            flex-direction: column;
         }
         
-        /* Info Card */
+        /* Info Card - Compact to match Results height */
         .info-card {
             background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            display: flex;
+            flex-direction: column;
+            max-height: fit-content; /* Compact height */
+        }
+        
+        /* Make all top cards match Results card height */
+        .deposit-details-card,
+        .additional-options-card,
+        .tax-settings-card,
+        .info-card {
+            max-height: 287px; /* Match Results card height */
+            overflow-y: auto; /* Allow scrolling if content overflows */
+        }
+        
+        .results-card {
+            max-height: none; /* Results card sets the reference */
         }
         
         .info-card h4 {
             color: var(--primary);
-            margin-bottom: var(--space-sm);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .info-card p {
+            font-size: 0.875rem;
+            line-height: 1.5;
+            margin: 0;
         }
         
         .chart-container {
@@ -127,33 +149,33 @@
         .result-item {
             background-color: white;
             border-radius: var(--radius-md);
-            padding: 1.5rem;
+            padding: 1rem;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             text-align: center;
-            min-height: 120px;
+            min-height: 100px;
         }
         
         .result-label {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
             font-weight: 500;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             text-transform: uppercase;
             letter-spacing: 0.5px;
             flex-shrink: 0;
         }
         
         .result-value {
-            font-size: 2rem;
+            font-size: 1.75rem;
             font-weight: 700;
-            line-height: 1;
+            line-height: 1.2;
             flex-grow: 1;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
         }
         
@@ -179,32 +201,63 @@
             background: white;
             border: 1px solid var(--border);
             border-radius: var(--radius-lg);
-            padding: var(--space-lg);
+            padding: 1rem; /* Reduced padding for compactness */
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
             margin: 0; /* Remove any default margins */
         }
         
         .card h3 {
             margin-top: 0;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             color: var(--text-primary);
-            font-size: 1.25rem;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
         
         .card h5 {
             margin-top: 0;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem;
             color: var(--text-primary);
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
         }
         
         .card h6 {
             margin-top: 0;
-            margin-bottom: 0.75rem;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-weight: 600;
+        }
+        
+        /* Compact form styling */
+        .card .form-group {
+            margin-bottom: 0.75rem;
+        }
+        
+        .deposit-details-card {
+            justify-content: flex-start;
+        }
+        
+        .deposit-details-card .form-group:last-of-type {
+            margin-bottom: 0.75rem;
+        }
+        
+        .card .form-label {
+            font-size: 0.85rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .card .form-input,
+        .card .form-select {
+            font-size: 0.9rem;
+            padding: 0.5rem;
+        }
+        
+        .deposit-details-card .btn {
+            margin-top: auto; /* Push button to bottom */
+            padding: 0.75rem;
+            font-size: 0.95rem;
         }
         
         /* Responsive Design */
@@ -304,17 +357,17 @@
                 <div class="card deposit-details-card">
                     <h3 data-i18n="section.deposit">Deposit Details</h3>
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
                     <label class="form-label" data-i18n="form.initial">Initial Amount</label>
                     <input type="number" class="form-input" id="initial" value="100000" min="0" step="1000">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
                     <label class="form-label" data-i18n="form.rate">Annual Interest Rate (%)</label>
                     <input type="number" class="form-input" id="rate" value="10" min="0" max="100" step="0.1">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
                     <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
                     <select class="form-select" id="capitalization">
                         <option value="none" data-i18n="capitalization.none">None</option>
@@ -325,12 +378,12 @@
                     </select>
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
                     <label class="form-label" data-i18n="form.deposit.start">Deposit Start Date</label>
                     <input type="date" class="form-input" id="startDate" value="">
                 </div>
                 
-                <div class="form-group">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
                     <label class="form-label" data-i18n="form.term">Term</label>
                     <div style="display: flex; gap: 0.5rem;">
                         <input type="number" class="form-input" id="termValue" value="12" min="1" max="1200" step="1" style="flex: 1;">
@@ -342,7 +395,7 @@
                     </div>
                 </div>
                 
-                <button class="btn btn-primary" style="width: 100%; margin-top: 1.5rem;" onclick="calculate()" data-i18n="form.submit">Calculate</button>
+                <button class="btn btn-primary" style="width: 100%; margin-top: 0.5rem; padding: 0.75rem;" onclick="calculate()" data-i18n="form.submit">Calculate</button>
                 </div>
                 
                 <!-- Right Side Cards (Stacked vertically next to main card) -->
@@ -352,22 +405,22 @@
                         <h5 data-i18n="section.advanced">Additional Options</h5>
                         
                         <!-- Deposit Additions -->
-                        <div style="margin-bottom: 1rem;">
+                        <div style="margin-bottom: 0.75rem;">
                             <h6 data-i18n="section.additions">Deposit Additions</h6>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="enableAdditions">
+                            <div class="form-group" style="margin-bottom: 0.5rem;">
+                                <label style="font-size: 0.85rem;">
+                                    <input type="checkbox" id="enableAdditions" style="margin-right: 0.5rem;">
                                     <span data-i18n="enable.additions">Enable Periodic Additions</span>
                                 </label>
                             </div>
                             <div id="additionsConfig" style="display: none;">
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.addition.amount">Addition Amount</label>
-                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100">
+                                <div class="form-group" style="margin-bottom: 0.5rem;">
+                                    <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.8rem;">Addition Amount</label>
+                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.85rem; padding: 0.4rem;">
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.addition.frequency">Frequency</label>
-                                    <select class="form-select" id="additionFrequency">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.8rem;">Frequency</label>
+                                    <select class="form-select" id="additionFrequency" style="font-size: 0.85rem; padding: 0.4rem;">
                                         <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
                                         <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -379,20 +432,20 @@
                         <!-- Partial Withdrawals -->
                         <div>
                             <h6 data-i18n="section.withdrawals">Partial Withdrawals</h6>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="enableWithdrawals">
+                            <div class="form-group" style="margin-bottom: 0.5rem;">
+                                <label style="font-size: 0.85rem;">
+                                    <input type="checkbox" id="enableWithdrawals" style="margin-right: 0.5rem;">
                                     <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
                                 </label>
                             </div>
                             <div id="withdrawalsConfig" style="display: none;">
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.withdrawal.amount">Withdrawal Amount</label>
-                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100">
+                                <div class="form-group" style="margin-bottom: 0.5rem;">
+                                    <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.8rem;">Withdrawal Amount</label>
+                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.85rem; padding: 0.4rem;">
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.withdrawal.frequency">Frequency</label>
-                                    <select class="form-select" id="withdrawalFrequency">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.8rem;">Frequency</label>
+                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.85rem; padding: 0.4rem;">
                                         <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -411,22 +464,22 @@
                         </div>
                         
                         <!-- Early Closure -->
-                        <div style="margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--border);">
+                        <div style="margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--border);">
                             <h6 data-i18n="section.early">Early Closure</h6>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" id="enableEarlyClosure">
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label style="font-size: 0.85rem;">
+                                    <input type="checkbox" id="enableEarlyClosure" style="margin-right: 0.5rem;">
                                     <span data-i18n="enable.early">Enable Early Closure Scenario</span>
                                 </label>
                             </div>
-                            <div id="earlyClosureConfig" style="display: none;">
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.early.date">Closure Date</label>
-                                    <input type="date" class="form-input" id="earlyClosureDate" value="">
+                            <div id="earlyClosureConfig" style="display: none; margin-top: 0.5rem;">
+                                <div class="form-group" style="margin-bottom: 0.5rem;">
+                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.8rem;">Closure Date</label>
+                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.85rem; padding: 0.4rem;">
                                 </div>
-                                <div class="form-group">
-                                    <label class="form-label" data-i18n="form.early.rate">Early Closure Rate (%)</label>
-                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1">
+                                <div class="form-group" style="margin-bottom: 0;">
+                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.8rem;">Early Closure Rate (%)</label>
+                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.85rem; padding: 0.4rem;">
                                 </div>
                             </div>
                         </div>
