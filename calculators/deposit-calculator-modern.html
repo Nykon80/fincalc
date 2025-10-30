@@ -43,16 +43,14 @@
             overflow-y: auto; /* Allow scrolling if content overflows */
         }
         
-        /* Right Side Cards Container */
+        /* Right Side Cards Container - Single card now */
         .calculator-right-side-cards {
-            display: grid;
-            grid-template-rows: 1fr 1fr; /* Two equal rows */
-            gap: 0.75rem; /* Reduced gap for compactness */
+            display: flex;
+            flex-direction: column;
             height: 100%;
         }
         
-        .additional-options-card,
-        .tax-settings-card {
+        .additional-options-card {
             width: 100%;
             display: flex;
             flex-direction: column;
@@ -106,7 +104,6 @@
         /* Maintain default padding while keeping scrollbar overlay */
         .deposit-details-card,
         .additional-options-card,
-        .tax-settings-card,
         .info-card {
             padding-right: 1rem;
         }
@@ -114,14 +111,12 @@
         /* Custom scrollbar - thin, hidden by default, shown on hover */
         .deposit-details-card::-webkit-scrollbar,
         .additional-options-card::-webkit-scrollbar,
-        .tax-settings-card::-webkit-scrollbar,
         .info-card::-webkit-scrollbar {
             width: 6px; /* Thin scrollbar */
         }
         
         .deposit-details-card::-webkit-scrollbar-track,
         .additional-options-card::-webkit-scrollbar-track,
-        .tax-settings-card::-webkit-scrollbar-track,
         .info-card::-webkit-scrollbar-track {
             background: transparent;
             margin: 2px 0; /* Space from top/bottom */
@@ -129,7 +124,6 @@
         
         .deposit-details-card::-webkit-scrollbar-thumb,
         .additional-options-card::-webkit-scrollbar-thumb,
-        .tax-settings-card::-webkit-scrollbar-thumb,
         .info-card::-webkit-scrollbar-thumb {
             background: transparent; /* Hidden by default */
             border-radius: 3px;
@@ -139,7 +133,6 @@
         /* Show scrollbar on hover */
         .deposit-details-card:hover::-webkit-scrollbar-thumb,
         .additional-options-card:hover::-webkit-scrollbar-thumb,
-        .tax-settings-card:hover::-webkit-scrollbar-thumb,
         .info-card:hover::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.2);
         }
@@ -147,7 +140,6 @@
         /* Show scrollbar when scrolling */
         .deposit-details-card.scrolling::-webkit-scrollbar-thumb,
         .additional-options-card.scrolling::-webkit-scrollbar-thumb,
-        .tax-settings-card.scrolling::-webkit-scrollbar-thumb,
         .info-card.scrolling::-webkit-scrollbar-thumb {
             background: rgba(0, 0, 0, 0.3);
         }
@@ -155,7 +147,6 @@
         /* For Firefox - thin scrollbar */
         .deposit-details-card,
         .additional-options-card,
-        .tax-settings-card,
         .info-card {
             scrollbar-width: thin;
             scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
@@ -467,29 +458,28 @@
                 <button class="btn btn-primary" style="width: 100%; margin-top: auto; padding: 0.75rem;" onclick="calculate()" data-i18n="form.submit">Calculate</button>
                 </div>
                 
-                <!-- Right Side Cards (Stacked vertically next to main card) -->
+                <!-- Right Side Cards - Single unified card -->
                 <div class="calculator-right-side-cards">
-                    <!-- Additional Options Card (Top Right) -->
                     <div class="card additional-options-card">
-                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Additional Options</h5>
+                        <h5 data-i18n="section.advanced" style="margin-bottom: 0.5rem; font-size: 0.95rem; margin-top: 0;">Additional Options</h5>
                         
                         <!-- Deposit Additions -->
                         <div style="margin-bottom: 0.5rem;">
-                            <h6 data-i18n="section.additions" style="margin-bottom: 0.25rem; font-size: 0.8rem;">Deposit Additions</h6>
-                            <div class="form-group" style="margin-bottom: 0.25rem;">
+                            <h6 data-i18n="section.additions" style="margin-bottom: 0.15rem; font-size: 0.82rem; font-weight: 600;">Deposit Additions</h6>
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem;">
-                                    <input type="checkbox" id="enableAdditions" style="margin-right: 0.4rem;">
+                                    <input type="checkbox" id="enableAdditions" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.additions">Enable Periodic Additions</span>
                                 </label>
                             </div>
-                            <div id="additionsConfig" style="display: none;">
-                                <div class="form-group" style="margin-bottom: 0.25rem;">
-                                    <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Addition Amount</label>
-                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.8rem; padding: 0.35rem;">
+                            <div id="additionsConfig">
+                                <div class="form-group" style="margin-bottom: 0.2rem;">
+                                    <label class="form-label" data-i18n="form.addition.amount" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Amount</label>
+                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100" style="font-size: 0.82rem; padding: 0.3rem;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Frequency</label>
-                                    <select class="form-select" id="additionFrequency" style="font-size: 0.8rem; padding: 0.35rem;">
+                                    <label class="form-label" data-i18n="form.addition.frequency" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Frequency</label>
+                                    <select class="form-select" id="additionFrequency" style="font-size: 0.82rem; padding: 0.3rem;">
                                         <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
                                         <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -499,22 +489,22 @@
                         </div>
                         
                         <!-- Partial Withdrawals -->
-                        <div>
-                            <h6 data-i18n="section.withdrawals" style="margin-bottom: 0.25rem; font-size: 0.8rem;">Partial Withdrawals</h6>
-                            <div class="form-group" style="margin-bottom: 0.25rem;">
+                        <div style="margin-bottom: 0.5rem;">
+                            <h6 data-i18n="section.withdrawals" style="margin-bottom: 0.15rem; font-size: 0.82rem; font-weight: 600;">Partial Withdrawals</h6>
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem;">
-                                    <input type="checkbox" id="enableWithdrawals" style="margin-right: 0.4rem;">
+                                    <input type="checkbox" id="enableWithdrawals" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.withdrawals">Enable Partial Withdrawals</span>
                                 </label>
                             </div>
-                            <div id="withdrawalsConfig" style="display: none;">
-                                <div class="form-group" style="margin-bottom: 0.25rem;">
-                                    <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Withdrawal Amount</label>
-                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.8rem; padding: 0.35rem;">
+                            <div id="withdrawalsConfig">
+                                <div class="form-group" style="margin-bottom: 0.2rem;">
+                                    <label class="form-label" data-i18n="form.withdrawal.amount" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Amount</label>
+                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100" style="font-size: 0.82rem; padding: 0.3rem;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Frequency</label>
-                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.8rem; padding: 0.35rem;">
+                                    <label class="form-label" data-i18n="form.withdrawal.frequency" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Frequency</label>
+                                    <select class="form-select" id="withdrawalFrequency" style="font-size: 0.82rem; padding: 0.3rem;">
                                         <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
                                         <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
                                         <option value="annually" data-i18n="frequency.annually">Annually</option>
@@ -522,33 +512,33 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Tax Settings Card (Bottom Right) -->
-                    <div class="card tax-settings-card">
-                        <h5 data-i18n="section.tax" style="margin-bottom: 0.5rem; font-size: 0.9rem;">Tax Settings</h5>
-                        <div class="form-group" style="margin-bottom: 0.5rem;">
-                            <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.8rem; margin-bottom: 0.15rem;">Tax Rate (%)</label>
-                            <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1" style="font-size: 0.85rem; padding: 0.4rem;">
+                        
+                        <!-- Tax Settings -->
+                        <div style="margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--border); margin-bottom: 0.5rem;">
+                            <h6 data-i18n="section.tax" style="margin-bottom: 0.15rem; font-size: 0.82rem; font-weight: 600;">Tax Settings</h6>
+                            <div class="form-group" style="margin-bottom: 0;">
+                                <label class="form-label" data-i18n="form.tax.rate" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Tax Rate (%)</label>
+                                <input type="number" class="form-input" id="taxRate" value="11.2" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.3rem;">
+                            </div>
                         </div>
                         
                         <!-- Early Closure -->
-                        <div style="margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--border);">
-                            <h6 data-i18n="section.early" style="margin-bottom: 0.25rem; font-size: 0.8rem;">Early Closure</h6>
-                            <div class="form-group" style="margin-bottom: 0;">
+                        <div style="margin-top: 0.4rem; padding-top: 0.4rem; border-top: 1px solid var(--border);">
+                            <h6 data-i18n="section.early" style="margin-bottom: 0.15rem; font-size: 0.82rem; font-weight: 600;">Early Closure</h6>
+                            <div class="form-group" style="margin-bottom: 0.15rem;">
                                 <label style="font-size: 0.8rem;">
-                                    <input type="checkbox" id="enableEarlyClosure" style="margin-right: 0.4rem;">
+                                    <input type="checkbox" id="enableEarlyClosure" checked style="margin-right: 0.4rem;">
                                     <span data-i18n="enable.early">Enable Early Closure Scenario</span>
                                 </label>
                             </div>
-                            <div id="earlyClosureConfig" style="display: none; margin-top: 0.4rem;">
-                                <div class="form-group" style="margin-bottom: 0.25rem;">
-                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Closure Date</label>
-                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.8rem; padding: 0.35rem;">
+                            <div id="earlyClosureConfig">
+                                <div class="form-group" style="margin-bottom: 0.2rem;">
+                                    <label class="form-label" data-i18n="form.early.date" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Closure Date</label>
+                                    <input type="date" class="form-input" id="earlyClosureDate" value="" style="font-size: 0.82rem; padding: 0.3rem;">
                                 </div>
                                 <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.75rem; margin-bottom: 0.15rem;">Early Closure Rate (%)</label>
-                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.8rem; padding: 0.35rem;">
+                                    <label class="form-label" data-i18n="form.early.rate" style="font-size: 0.76rem; margin-bottom: 0.1rem;">Early Closure Rate (%)</label>
+                                    <input type="number" class="form-input" id="earlyClosureRate" value="0.1" min="0" max="100" step="0.1" style="font-size: 0.82rem; padding: 0.3rem;">
                                 </div>
                             </div>
                         </div>
@@ -987,20 +977,10 @@
         }
         
         // Toggle advanced options display
-        document.getElementById('enableAdditions').addEventListener('change', function() {
-            document.getElementById('additionsConfig').style.display = this.checked ? 'block' : 'none';
-            calculate();
-        });
-        
-        document.getElementById('enableWithdrawals').addEventListener('change', function() {
-            document.getElementById('withdrawalsConfig').style.display = this.checked ? 'block' : 'none';
-            calculate();
-        });
-        
-        document.getElementById('enableEarlyClosure').addEventListener('change', function() {
-            document.getElementById('earlyClosureConfig').style.display = this.checked ? 'block' : 'none';
-            calculate();
-        });
+        // Config sections are now always visible - no toggle needed
+        document.getElementById('enableAdditions').addEventListener('change', calculate);
+        document.getElementById('enableWithdrawals').addEventListener('change', calculate);
+        document.getElementById('enableEarlyClosure').addEventListener('change', calculate);
         
         // Toggle view mode
         document.getElementById('toggleView').addEventListener('click', function() {
@@ -1035,7 +1015,7 @@
             initializeRegionalDefaults();
             
             // Add scroll event listeners to show scrollbar when scrolling
-            const scrollableCards = document.querySelectorAll('.deposit-details-card, .additional-options-card, .tax-settings-card, .info-card');
+            const scrollableCards = document.querySelectorAll('.deposit-details-card, .additional-options-card, .info-card');
             scrollableCards.forEach(card => {
                 let scrollTimeout;
                 card.addEventListener('scroll', function() {
