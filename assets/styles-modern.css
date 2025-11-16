@@ -405,12 +405,11 @@ section[id] {
 
 .card-description {
   font-size: 0.95rem;
-  line-height: 1.7;
-  color: var(--text-primary);
-  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-weight: 400;
   position: relative;
   z-index: 1;
-  letter-spacing: 0.3px;
 }
 
 .card-highlights {
@@ -428,11 +427,11 @@ section[id] {
   display: flex;
   align-items: flex-start;
   gap: 0.7rem;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   color: var(--text-primary);
   font-weight: 600;
   line-height: 1.5;
-  letter-spacing: 0.2px;
+  padding: 0.4rem 0;
 }
 
 .card-highlights li::before {
@@ -448,7 +447,7 @@ section[id] {
   justify-content: center;
   width: 20px;
   height: 20px;
-  background: rgba(0, 102, 255, 0.08);
+  background: rgba(0, 102, 255, 0.15);
   border-radius: 50%;
 }
 
