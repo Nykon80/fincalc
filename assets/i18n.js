@@ -54,8 +54,8 @@ const translations = {
     'form.withdrawal.frequency': 'Frequency',
     'form.tax.resident': 'Tax Resident Status',
     'form.tax.rate': 'Tax Rate (%)',
-    'form.early.date': 'CLOSURE\nDATE',
-    'form.early.rate': 'EARLY CLOSURE\nRATE (%)',
+    'form.early.date': 'Closure Date',
+    'form.early.rate': 'Early Closure Rate (%)',
     
     // Capitalization options
     'capitalization.none': 'None',
@@ -1019,8 +1019,8 @@ const translations = {
     'form.withdrawal.frequency': 'Częstotliwość',
     'form.tax.resident': 'Status rezydenta podatkowego',
     'form.tax.rate': 'Stawka Podatkowa (%)',
-    'form.early.date': 'DATA\nZAMKNIĘCIA',
-    'form.early.rate': 'STOPA PRZY\nPRZEDTERMINOWYM\nZAMKNIĘCIU',
+    'form.early.date': 'Data zamknięcia',
+    'form.early.rate': 'Stopa przy przedterminowym zamknięciu (%)',
     
     // Capitalization options
     'capitalization.none': 'Brak',
@@ -1841,8 +1841,8 @@ const translations = {
     'form.withdrawal.frequency': 'Частота',
     'form.tax.resident': 'Налоговый статус',
     'form.tax.rate': 'Налоговая ставка (%)',
-    'form.early.date': 'ДАТА\nЗАКРЫТИЯ',
-    'form.early.rate': 'СТАВКА ПРИ\nДОСРОЧНОМ\nЗАКРЫТИИ',
+    'form.early.date': 'Дата<br>закрытия',
+    'form.early.rate': '% при<br>досрочном закрытии',
     
     // Capitalization options
     'capitalization.none': 'Без капитализации',
@@ -2054,7 +2054,7 @@ const translations = {
     'article.savings.emergency.text': 'Прежде чем инвестировать или преследовать другие финансовые цели, создайте чрезвычайный фонд, покрывающий 3-6 месяцев расходов. Эта подушка безопасности предотвратит накопление долгов в неожиданных ситуациях.',
     'article.savings.emergency.tip': 'Начните с всего лишь 500-1000 долларов в качестве первоначальной цели чрезвычайного фонда. Как только вы достигнете этого, постепенно увеличивайте его до полных 3-6 месяцев расходов.',
     'article.savings.goals.title': 'Ставьте SMART Финансовые Цели',
-    'article.savings.goals.text': 'Конкретные, Измеримые, Достижимые, Актуальные и Ограниченные по времени цели дают вам четкие ориентиры. Вместо "экономить больше денег" стремитесь к "накопить 10 000 долларов на первоначальный взнос за дом к декабрю 2025 года".',
+    'article.savings.goals.text': 'Конкретные, Измеримые, Достижимые, Актуальные и Ограниченные по времени цели дают вам четкие ориентиры. Вместо "экономить больше денег" стремитесь к "накопить 10 000 долларов на первоначальный взнос за дом к декабрю 2025."',
     'article.savings.smart.title': 'Пример SMART Цели:',
     'article.savings.smart.specific': 'Конкретная:',
     'article.savings.smart.specific.text': 'Чрезвычайный фонд',
@@ -2179,13 +2179,9 @@ const translations = {
     'article.investment.risk.medium': 'Средний Риск',
     'article.investment.risk.medium.desc': 'ETF Фондового Рынка, REIT',
     'article.investment.risk.medium.return': 'Потенциал: 6-10% доходности',
-    'article.investment.chart.title': 'Рост Денег: Сбережения vs Инвестиции (10 Лет)',
-    'article.investment.chart.savings': 'Сберегательный Счет<br>11,051 $',
-    'article.investment.chart.stocks': 'Фондовый Рынок<br>19,672 $',
-    'article.investment.chart.note': 'На основе 10,000 $ начальной инвестиции, 1% ставка сбережений vs 7% доходность рынка',
     'article.investment.risk.low': 'Низкий Риск',
-    'article.investment.risk.low.desc': 'Облигации, Депозиты, Высокодоходные Сбережения',
-    'article.investment.risk.low.return': 'Потенциал: 1-5% доходности',
+    'article.investment.risk.low.desc': 'Obligacje, Lokaty, Wysokodochodowe Oszczędności',
+    'article.investment.risk.low.return': 'Potencjał: 1-5% zwrotu',
     'article.investment.diversification.title': 'Сила Диверсификации',
     'article.investment.diversification.text': 'Не кладите все яйца в одну корзину. Диверсификация по различным классам активов, секторам и географическим регионам может снизить общий риск портфеля.',
     'article.investment.diversification.example': '📊 Пример Диверсификации',
@@ -2297,8 +2293,8 @@ const translations = {
     'article.investment.portfolios.growth.title': 'Долгосрочный Рост (10+ лет)',
     'article.investment.portfolios.growth.text': 'Максимизируйте экспозицию на акции с дисциплинированной ребалансировкой.',
     'article.investment.portfolios.growth.line1': '70% глобальные акции (широкие ETF)',
-    'article.investment.portfolios.growth.line2': '20% развивающиеся рынки и тематические наклоны',
-    'article.investment.portfolios.growth.line3': '10% облигации для оппортунистической ребалансировки',
+    'article.investment.portfolios.growth.line2': '20% rynki wschodzące i nachylenia tematyczne',
+    'article.investment.portfolios.growth.line3': '10% obligacje do oportunistycznego równoważenia',
 
     'article.investment.cta.title': 'Протестируйте Свой План под Стрессом',
     'article.investment.cta.text': 'Симулируйте доходность и ежемесячные депозиты с нашим калькулятором сложного процента, чтобы подтвердить путь к целевому богатству.',
