@@ -485,8 +485,8 @@ const translations = {
 
     // English article hero section
     'article.investment.hero.tag': '2025 Outlook',
-    'article.investment.hero.title': 'Invest With Clarity in the US Market',
-    'article.investment.hero.subtitle': 'Track US trends, compare banking offers in America, and build a resilient portfolio that fits your goals.',
+    'article.investment.hero.title': 'Investment Basics: Your Path to Financial Growth',
+    'article.investment.hero.subtitle': 'Learn the fundamentals of investing, manage risk wisely, and build a diversified portfolio aligned with your goals.',
     'article.investment.hero.cta': 'Plan Growth Scenario',
     'article.investment.hero.updated': 'Data verified: September 2025',
     'article.investment.meta.reading': '8 min read',
@@ -555,8 +555,8 @@ const translations = {
 
     // Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': '2025 Outlook',
-    'article.investment.hero.title': 'Invest With Clarity in Any Market',
-    'article.investment.hero.subtitle': 'Track global trends, compare regional banking offers, and build a resilient portfolio that fits your goals.',
+    'article.investment.hero.title': 'Investment Basics: Your Path to Financial Growth',
+    'article.investment.hero.subtitle': 'Learn the fundamentals of investing, manage risk wisely, and build a diversified portfolio aligned with your goals.',
     'article.investment.meta.updated': 'Updated October 2025',
     'article.investment.hero.cta': 'Plan Growth Scenario',
     'article.investment.hero.updated': 'Data verified: September 2025',
@@ -1292,8 +1292,8 @@ const translations = {
 
     // Polish Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': 'Prognoza 2025',
-    'article.investment.hero.title': 'Inwestuj z Klarownością na Każdym Rynku',
-    'article.investment.hero.subtitle': 'Śledź globalne trendy, porównuj oferty bankowe w regionie i buduj odporne portfolio dostosowane do Twoich celów.',
+    'article.investment.hero.title': 'Podstawy Inwestowania: Twoja Ścieżka do Wzrostu Finansowego',
+    'article.investment.hero.subtitle': 'Poznaj fundamenty inwestowania, naucz się zarządzać ryzykiem i zbuduj zdywersyfikowane portfolio dopasowane do Twoich celów.',
     'article.investment.meta.updated': 'Aktualizacja: październik 2025',
     'article.investment.hero.cta': 'Zaplanuj Scenariusz Wzrostu',
     'article.investment.hero.updated': 'Dane zweryfikowane: wrzesień 2025',
@@ -2214,8 +2214,8 @@ const translations = {
 
     // Russian Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': 'Прогноз 2025',
-    'article.investment.hero.title': 'Инвестируйте с Ясностью на Любом Рынке',
-    'article.investment.hero.subtitle': 'Отслеживайте глобальные тенденции, сравнивайте банковские предложения в регионе и создавайте устойчивое портфолио, соответствующее вашим целям.',
+    'article.investment.hero.title': 'Основы Инвестирования: Ваш Путь к Финансовому Росту',
+    'article.investment.hero.subtitle': 'Изучите базовые принципы инвестирования, научитесь управлять риском и создайте диверсифицированное портфолио под ваши цели.',
     'article.investment.meta.updated': 'Обновлено: октябрь 2025',
     'article.investment.hero.cta': 'Запланировать Сценарий Роста',
     'article.investment.hero.updated': 'Данные проверены: сентябрь 2025',
