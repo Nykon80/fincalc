@@ -2632,6 +2632,17 @@ class I18n {
     
     // Update document language
     document.documentElement.lang = this.currentLang;
+    
+    // Update dropdown button text to current language
+    const dropdownBtnText = document.querySelector('.lang-btn-text');
+    if (dropdownBtnText) {
+      const langName = {
+        en: 'English',
+        pl: 'Polski',
+        ru: 'Русский'
+      };
+      dropdownBtnText.textContent = langName[this.currentLang];
+    }
   }
   
   updateURL() {
