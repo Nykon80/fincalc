@@ -3,27 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Calculators Poland | Compound Interest, Loans & Investment Tools</title>
-    <meta name="description" content="Free professional financial calculators for Poland & Europe. Calculate compound interest, loan payments, mortgage rates, and savings goals. Make smart financial decisions with our accurate tools.">
-    <meta name="keywords" content="financial calculator poland, compound interest calculator, loan calculator poland, mortgage calculator europe, investment calculator, savings calculator, credit card payoff calculator">
-    <meta name="author" content="Financial Calculators">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://nykon80.github.io/fincalc/">
+    <title>Financial Calculators - Smart Tools for Your Money</title>
+    <meta name="description" content="Professional financial calculators for compound interest, loans, mortgages, and savings goals. Make informed decisions with our free tools.">
     
     <!-- SEO Meta Tags -->
-    <meta property="og:title" content="Financial Calculators Poland | Free Investment & Loan Tools">
-    <meta property="og:description" content="Professional financial calculators for Poland & Europe. Calculate compound interest, loans, mortgages, and savings goals with our free tools.">
+    <meta property="og:title" content="Financial Calculators - Smart Tools">
+    <meta property="og:description" content="Free professional financial calculators for smart money decisions">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nykon80.github.io/fincalc/">
-    <meta property="og:image" content="https://nykon80.github.io/fincalc/assets/og-image.png">
-    <meta property="og:site_name" content="Financial Calculators">
-    <meta property="og:locale" content="en_US">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Financial Calculators Poland | Free Investment & Loan Tools">
-    <meta name="twitter:description" content="Professional financial calculators for Poland & Europe. Calculate compound interest, loans, mortgages, and savings goals.">
-    <meta name="twitter:image" content="https://nykon80.github.io/fincalc/assets/og-image.png">
+    <meta property="og:image" content="/assets/og-image.png">
     
     <!-- Styles -->
     <link rel="stylesheet" href="assets/styles-modern.css">
@@ -36,11 +23,25 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href="https://nykon80.github.io/fincalc/">
+    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/">
+    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/?lang=pl">
+    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/?lang=ru">
+    <link rel="alternate" hreflang="x-default" href="https://nykon80.github.io/fincalc/">
+    
+    <!-- Google Analytics 4 (GA4) with Consent Mode v2 -->
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
+      
+      // Set default consent state to 'denied' (GDPR/RODO compliant)
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied',
+        'ad_storage': 'denied',
+        'wait_for_update': 500
+      });
+      
       gtag('js', new Date());
       gtag('config', 'G-LW2KKBR4L2', {
         'page_title': document.title,
@@ -48,6 +49,7 @@
         'language': (navigator.language || navigator.userLanguage).split('-')[0]
       });
     </script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
 
     <!-- Яндекс Метрика -->
     <!-- ЗАМЕНИТЕ XXXXXX на ваш реальный номер счетчика из Яндекс Метрики -->
@@ -65,118 +67,22 @@
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
-    <!-- Schema.org Structured Data -->
+    <!-- Schema.org -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Financial Calculators Poland",
-        "alternateName": "Financial Calculators Europe",
-        "url": "https://nykon80.github.io/fincalc/",
-        "description": "Free professional financial calculators for Poland & Europe. Calculate compound interest, loan payments, mortgage rates, and savings goals.",
-        "inLanguage": ["en", "pl", "ru"],
-        "author": {
-            "@type": "Organization",
-            "name": "Financial Calculators"
-        },
+        "name": "Financial Calculators",
+        "url": "https://yoursite.com",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://nykon80.github.io/fincalc/?q={search_term_string}",
+            "target": "https://yoursite.com/search?q={search_term_string}",
             "query-input": "required name=search_term_string"
-        },
-        "sameAs": []
+        }
     }
     </script>
-    
-    <!-- Calculator Tools Schema -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        "name": "Financial Calculator Tools",
-        "description": "Collection of professional financial calculators for Poland and Europe",
-        "itemListElement": [
-            {
-                "@type": "SoftwareApplication",
-                "name": "Compound Interest Calculator",
-                "description": "Calculate how your investments grow with compound interest over time",
-                "url": "https://nykon80.github.io/fincalc/calculators/compound-interest-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            },
-            {
-                "@type": "SoftwareApplication",
-                "name": "Loan Payment Calculator",
-                "description": "Calculate monthly loan payments and total interest for personal loans",
-                "url": "https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            },
-            {
-                "@type": "SoftwareApplication",
-                "name": "Mortgage Calculator",
-                "description": "Calculate mortgage payments and compare different loan terms",
-                "url": "https://nykon80.github.io/fincalc/calculators/mortgage-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            },
-            {
-                "@type": "SoftwareApplication",
-                "name": "Savings Goal Calculator",
-                "description": "Calculate how much to save monthly to reach your financial goals",
-                "url": "https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            },
-            {
-                "@type": "SoftwareApplication",
-                "name": "Credit Card Payoff Calculator",
-                "description": "Calculate the best strategy to pay off credit card debt",
-                "url": "https://nykon80.github.io/fincalc/calculators/credit-card-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            },
-            {
-                "@type": "SoftwareApplication",
-                "name": "ROI Calculator",
-                "description": "Calculate return on investment and compare different investment options",
-                "url": "https://nykon80.github.io/fincalc/calculators/roi-modern.html",
-                "applicationCategory": "FinanceApplication",
-                "operatingSystem": "Web Browser",
-                "offers": {
-                    "@type": "Offer",
-                    "price": "0",
-                    "priceCurrency": "USD"
-                }
-            }
-        ]
-    }
-    </script>
+    <script src="assets/i18n.js" defer></script>
+    <script src="assets/main.js" defer></script>
 </head>
 <body>
     <!-- Header -->
@@ -231,21 +137,22 @@
     <!-- Calculators Grid -->
     <section id="calculators" class="container">
         <div class="grid">
-            <!-- Extended Deposit Calculator -->
+            <!-- Deposit Calculator -->
             <article class="card fade-in">
                 <div class="card-header">
                     <h3 data-i18n="calc.deposit">Extended Deposit Calculator</h3>
                     <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Банковский депозит -->
-                        <rect x="5" y="8" width="14" height="12" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M5 14h14" stroke-linecap="round"/>
-                        <circle cx="9" cy="11" r="1" fill="currentColor"/>
-                        <circle cx="15" cy="11" r="1" fill="currentColor"/>
-                        <path d="M5 10V6a2 2 0 012-2h10a2 2 0 012 2v2" stroke-linecap="round"/>
+                        <!-- График роста с процентами -->
+                        <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M7 14l3-3 3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="7" cy="14" r="1.5" fill="currentColor"/>
+                        <circle cx="10" cy="11" r="1.5" fill="currentColor"/>
+                        <circle cx="13" cy="14" r="1.5" fill="currentColor"/>
+                        <circle cx="18" cy="9" r="1.5" fill="currentColor"/>
                     </svg>
                 </div>
                 <p data-i18n="calc.deposit.desc">Calculate deposit growth with capitalization, additions, withdrawals, and tax</p>
-                <a href="calculators/deposit-calculator-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/deposit-calculator-modern.html')">
+                <a href="calculators/deposit-calculator-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -266,7 +173,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.loan.desc">Find your monthly payment and total interest</p>
-                <a href="calculators/loan-payment-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/loan-payment-modern.html')">
+                <a href="calculators/loan-payment-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -287,7 +194,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.savings.desc">Plan your savings to reach financial goals</p>
-                <a href="calculators/savings-goal-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/savings-goal-modern.html')">
+                <a href="calculators/savings-goal-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -305,7 +212,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.mortgage.desc">Calculate mortgage payments and affordability</p>
-                <a href="calculators/mortgage-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/mortgage-modern.html')">
+                <a href="calculators/mortgage-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -326,7 +233,7 @@
                     </svg>
                 </div>
                 <p data-i18n="calc.creditcard.desc">Create a payoff plan for credit card debt</p>
-                <a href="calculators/credit-card-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/credit-card-modern.html')">
+                <a href="calculators/credit-card-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -347,7 +254,7 @@
                     </svg>
                 </div>
                 <p data-i18n="card.roi.desc">Calculate return on investment and compare opportunities</p>
-                <a href="calculators/roi-modern.html" class="btn btn-primary" onclick="i18n.navigateTo(event, 'calculators/roi-modern.html')">
+                <a href="calculators/roi-modern.html" class="btn btn-primary">
                     <span data-i18n="form.calculate">Calculate</span>
                     <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
                         <path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
@@ -366,25 +273,25 @@
                 <p data-i18n="article.savings.desc">Discover proven strategies to build your savings, set achievable goals, and create a solid financial foundation.</p>
                 <a href="articles/savings-strategies-guide.html" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
             </article>
-            
+
             <article class="card">
                 <h3 data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</h3>
                 <p data-i18n="article.investment.desc">Learn the fundamentals of investing, from risk management to portfolio diversification. Start your investment journey with confidence.</p>
                 <a href="articles/investment-basics-guide.html" onclick="redirectToLocalizedArticle(event, 'investment-basics-guide')" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
             </article>
-            
+
             <article class="card">
                 <h3 data-i18n="article.debt.title">Debt Management: Take Control of Your Financial Future</h3>
                 <p data-i18n="article.debt.desc">Learn effective strategies to pay off debt faster, reduce interest costs, and regain financial freedom with proven debt management techniques.</p>
                 <a href="articles/debt-management-guide.html" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
             </article>
-            
+
             <article class="card">
                 <h3 data-i18n="article.budget.title">Budget Planning: Master Your Money Management</h3>
                 <p data-i18n="article.budget.desc">Create a realistic budget that works for your lifestyle. Learn proven budgeting methods and tools to take control of your finances.</p>
                 <a href="articles/budget-planning-guide.html" class="btn btn-secondary" data-i18n="article.read_more">Read More</a>
             </article>
-            
+
             <article class="card">
                 <h3 data-i18n="article.compound.title">Understanding Compound Interest</h3>
                 <p data-i18n="article.compound.desc">Learn how compound interest works and why Einstein called it the 8th wonder of the world.</p>
@@ -395,13 +302,13 @@
     
     <!-- Compare Section -->
     <section id="compare" class="container mt-3">
-        <h2 class="text-center" data-i18n="compare.title">Compare Financial Products</h2>
+        <h2 class="text-center">Compare Financial Products</h2>
         <div class="results-container">
-            <p class="text-center" data-i18n="compare.subtitle">Compare interest rates, fees, and features of financial products in your region.</p>
+            <p class="text-center">Compare interest rates, fees, and features of financial products in your region.</p>
             <div class="text-center mt-2">
-                <button class="btn btn-success" disabled data-i18n="compare.coming_soon">Coming Soon</button>
-                <button class="btn btn-success" disabled data-i18n="compare.coming_soon">Coming Soon</button>
-                <button class="btn btn-success" disabled data-i18n="compare.coming_soon">Coming Soon</button>
+                <button class="btn btn-success" disabled>Coming Soon</button>
+                <button class="btn btn-success" disabled>Coming Soon</button>
+                <button class="btn btn-success" disabled>Coming Soon</button>
             </div>
         </div>
     </section>
@@ -443,20 +350,26 @@
             // Update language on page load
             i18n.updatePage();
             
+            // Check if cookies were previously accepted
+            const cookiesAccepted = localStorage.getItem('cookiesAccepted');
+            if (cookiesAccepted === 'true' && typeof gtag !== 'undefined') {
+                // User previously accepted - grant consent immediately
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted'
+                });
+            }
+            
             // Show cookie banner if not accepted
-            if (!localStorage.getItem('cookiesAccepted')) {
+            if (!cookiesAccepted) {
                 document.getElementById('cookie-banner').style.display = 'block';
             }
             
             // Add smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
-                    const href = this.getAttribute('href');
-                    if (!href || href === '#') {
-                        return;
-                    }
                     e.preventDefault();
-                    const target = document.querySelector(href);
+                    const target = document.querySelector(this.getAttribute('href'));
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
@@ -484,12 +397,27 @@
         function acceptCookies() {
             localStorage.setItem('cookiesAccepted', 'true');
             document.getElementById('cookie-banner').style.display = 'none';
-            // Initialize analytics here
+            
+            // Update consent to 'granted' (Consent Mode v2)
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'granted',
+                    'ad_storage': 'granted'
+                });
+            }
         }
         
         function declineCookies() {
             localStorage.setItem('cookiesAccepted', 'false');
             document.getElementById('cookie-banner').style.display = 'none';
+            
+            // Keep consent as 'denied' (Consent Mode v2)
+            if (typeof gtag !== 'undefined') {
+                gtag('consent', 'update', {
+                    'analytics_storage': 'denied',
+                    'ad_storage': 'denied'
+                });
+            }
         }
 
         function redirectToLocalizedArticle(event, articleName) {
@@ -515,9 +443,14 @@
                 }
             }
 
-            // Always redirect to the main article file with language parameter
-            // The article will handle dynamic localization internally
-            const redirectUrl = `articles/${articleName}.html?lang=${lang}`;
+            // Redirect to appropriate localized version
+            let redirectUrl = `articles/${articleName}.html`;
+            if (lang === 'pl') {
+                redirectUrl = `articles/${articleName}-pl.html`;
+            } else if (lang === 'ru') {
+                redirectUrl = `articles/${articleName}-ru.html`;
+            }
+
             window.location.href = redirectUrl;
         }
     </script>
