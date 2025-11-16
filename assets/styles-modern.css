@@ -92,6 +92,8 @@ html {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
   scroll-behavior: smooth;
 }
 
@@ -108,7 +110,7 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.2;
   margin-bottom: var(--space-md);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 h1 { font-size: 2.5rem; }
@@ -248,16 +250,72 @@ section[id] {
 
 .card {
   background: var(--bg-card);
-  border: 1px solid var(--border);
+  border: 2px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   transition: all var(--transition-base);
   position: relative;
   overflow: hidden;
-  min-height: 220px;
+  min-height: 240px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  box-shadow: var(--shadow-md);
+}
+
+/* Colorful backgrounds for different card types */
+.card:nth-child(1) {
+  background: linear-gradient(135deg, rgba(0, 102, 255, 0.05) 0%, rgba(0, 102, 255, 0.02) 100%);
+  border-color: rgba(0, 102, 255, 0.2);
+}
+
+.card:nth-child(1) .card-icon {
+  color: #0066ff;
+}
+
+.card:nth-child(2) {
+  background: linear-gradient(135deg, rgba(0, 168, 107, 0.05) 0%, rgba(0, 168, 107, 0.02) 100%);
+  border-color: rgba(0, 168, 107, 0.2);
+}
+
+.card:nth-child(2) .card-icon {
+  color: #00a86b;
+}
+
+.card:nth-child(3) {
+  background: linear-gradient(135deg, rgba(255, 149, 0, 0.05) 0%, rgba(255, 149, 0, 0.02) 100%);
+  border-color: rgba(255, 149, 0, 0.2);
+}
+
+.card:nth-child(3) .card-icon {
+  color: #ff9500;
+}
+
+.card:nth-child(4) {
+  background: linear-gradient(135deg, rgba(255, 59, 48, 0.05) 0%, rgba(255, 59, 48, 0.02) 100%);
+  border-color: rgba(255, 59, 48, 0.2);
+}
+
+.card:nth-child(4) .card-icon {
+  color: #ff3b30;
+}
+
+.card:nth-child(5) {
+  background: linear-gradient(135deg, rgba(175, 82, 222, 0.05) 0%, rgba(175, 82, 222, 0.02) 100%);
+  border-color: rgba(175, 82, 222, 0.2);
+}
+
+.card:nth-child(5) .card-icon {
+  color: #af52de;
+}
+
+.card:nth-child(6) {
+  background: linear-gradient(135deg, rgba(52, 168, 219, 0.05) 0%, rgba(52, 168, 219, 0.02) 100%);
+  border-color: rgba(52, 168, 219, 0.2);
+}
+
+.card:nth-child(6) .card-icon {
+  color: #34a8db;
 }
 
 .card::before {
@@ -266,14 +324,15 @@ section[id] {
   top: 0;
   left: 0;
   right: 0;
-  height: 4px;
+  height: 5px;
   background: linear-gradient(90deg, var(--primary) 0%, var(--success) 100%);
   transform: translateY(-100%);
   transition: transform var(--transition-base);
+  border-radius: 0 0 8px 0;
 }
 
 .card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-6px);
   box-shadow: var(--shadow-xl);
   border-color: var(--primary);
 }
@@ -283,7 +342,7 @@ section[id] {
 }
 
 .card:hover .card-icon {
-  transform: scale(1.1);
+  transform: scale(1.15) rotate(5deg);
   opacity: 1;
 }
 
@@ -291,20 +350,31 @@ section[id] {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+  gap: var(--space-md);
 }
 
 .card-header h3 {
   margin: 0;
   flex: 1;
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-primary);
 }
 
 .card-icon {
   color: var(--primary);
-  opacity: 0.7;
+  opacity: 0.9;
   flex-shrink: 0;
-  margin-left: var(--space-md);
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: all var(--transition-base);
+  min-width: 52px;
+  stroke-width: 1.8 !important;
 }
 
 .card h3 {
@@ -328,8 +398,11 @@ section[id] {
 }
 
 .card-description {
-  font-size: 1rem;
-  line-height: 1.5;
+  font-size: 1.01rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  font-weight: 500;
+  margin-bottom: var(--space-lg);
 }
 
 .card-highlights {
@@ -338,15 +411,17 @@ section[id] {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.6rem;
 }
 
 .card-highlights li {
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.95rem;
+  align-items: flex-start;
+  gap: 0.75rem;
+  font-size: 0.98rem;
+  line-height: 1.5;
   color: var(--text-secondary);
+  font-weight: 500;
 }
 
 .card-highlights li::before {
