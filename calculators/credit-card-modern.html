@@ -40,6 +40,22 @@
             background: var(--gray-50);
         }
         
+        /* Результаты контейнер */
+        .results-container {
+            background: linear-gradient(135deg, rgba(224, 242, 255, 0.8) 0%, rgba(225, 250, 245, 0.8) 100%);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(0, 102, 255, 0.15);
+        }
+        
+        .results-container h3 {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: var(--text-primary);
+        }
+        
         /* Стили для блоков результатов */
         .results-grid {
             display: grid;
@@ -55,10 +71,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
+            justify-content: center;
             text-align: center;
             height: 100%;
-            min-height: 120px;
+            min-height: 140px;
         }
         
         .result-label {
@@ -165,10 +181,6 @@
                     <label class="form-label" data-i18n="form.credit.payment">Monthly Payment</label>
                     <input type="number" class="form-input" id="monthlyPayment" value="200" min="0" step="50">
                 </div>
-                
-                <button class="btn btn-primary" style="width: 100%;" onclick="calculate()">
-                    <span data-i18n="form.calculate">Calculate</span>
-                </button>
             </div>
             
             <!-- Results -->
