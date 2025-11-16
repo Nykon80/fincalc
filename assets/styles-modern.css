@@ -316,8 +316,45 @@ section[id] {
   flex-grow: 1;
 }
 
-.card .btn {
-  margin-top: auto;
+.card-link {
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.card-link:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 4px;
+}
+
+.card-description {
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.card-highlights {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.card-highlights li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+
+.card-highlights li::before {
+  content: '•';
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1;
 }
 
 /* Buttons */

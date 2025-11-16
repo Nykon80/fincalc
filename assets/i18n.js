@@ -25,16 +25,29 @@ const translations = {
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Investment ROI',
-    'card.roi.desc': 'Calculate return on investment and compare opportunities',
+    'card.roi.desc': 'Measure investment profitability with net profit and annualized return.',
 
     // Calculator descriptions
     'calc.compound.desc': 'Calculate how your investments grow with compound interest',
-    'calc.deposit.desc': 'Calculate deposit growth with capitalization, additions, withdrawals, and tax',
-    'calc.loan.desc': 'Find your monthly payment and total interest',
-    'calc.savings.desc': 'Plan your savings to reach financial goals',
-    'calc.mortgage.desc': 'Calculate mortgage payments and affordability',
-    'calc.creditcard.desc': 'Create a payoff plan for credit card debt',
-    'calc.roi.desc': 'Calculate return on investment and profitability',
+    'calc.deposit.desc': 'Simulate deposit growth with flexible compounding, planned top-ups or withdrawals, and instant tax projections to see real net profit.',
+    'calc.loan.desc': 'Compare loan offers before applying: preview payment size, interest share, and payoff date for any term or rate.',
+    'calc.savings.desc': 'Turn a dream purchase into a realistic savings plan using current balance, future contributions, and expected returns.',
+    'calc.mortgage.desc': 'Estimate mortgage affordability with down payment, insurance, taxes, and adjustable-rate scenarios.',
+    'calc.creditcard.desc': 'Build a payoff roadmap for credit cards: adjust payment size to see payoff time, interest cost, and best strategy.',
+    'calc.roi.desc': 'Measure investment profitability by comparing invested capital, net profit, and annualized return after extra costs.',
+
+    'calc.deposit.point1': 'Supports monthly, quarterly, annual, and daily compounding.',
+    'calc.deposit.point2': 'See balance timelines before and after partial withdrawals.',
+    'calc.loan.point1': 'Full amortization table with principal vs. interest.',
+    'calc.loan.point2': 'Test extra payments to see how much faster you finish.',
+    'calc.savings.point1': 'Shows required monthly amount and total invested.',
+    'calc.savings.point2': 'Compares projections with and without extra deposits.',
+    'calc.mortgage.point1': 'Provides monthly cost breakdown by component.',
+    'calc.mortgage.point2': 'Stress-test rate hikes before signing paperwork.',
+    'calc.creditcard.point1': 'Suggests optimal payment to stop balance growth.',
+    'calc.creditcard.point2': 'Visual timeline of balances shrinking each month.',
+    'calc.roi.point1': 'Calculates total and annualized ROI automatically.',
+    'calc.roi.point2': 'Add fees and taxes to see the true net result.',
     
     // Form labels
     'form.initial': 'Initial Amount',
@@ -349,7 +362,9 @@ const translations = {
     
     // Articles
     'article.compound.title': 'The Power of Compound Interest: Complete Guide',
-    'article.compound.desc': 'Learn how compound interest can transform your financial future. Complete guide with examples, strategies, and calculations.',
+    'article.compound.desc': 'See compound interest in action with charts, formulas, and comparisons between early vs. late investors.',
+    'article.compound.point1': 'Interactive examples with yearly projections.',
+    'article.compound.point2': 'Guides you to calculators that quantify your scenario.',
     'article.compound.intro': 'Albert Einstein allegedly called compound interest "the eighth wonder of the world." Whether he actually said it or not, the sentiment rings true: compound interest is one of the most powerful forces in finance, capable of turning modest savings into substantial wealth over time.',
     'article.meta.reading': '5 min read',
     'article.meta.updated': 'Updated December 2024',
@@ -393,7 +408,9 @@ const translations = {
     
     // Savings Strategy Article
     'article.savings.title': 'Smart Savings Strategies: Build Wealth Step by Step',
-    'article.savings.desc': 'Discover proven strategies to build your savings, set achievable goals, and create a solid financial foundation.',
+    'article.savings.desc': 'Build a resilient savings system: emergency fund checklist, automation tactics, and EU-friendly accounts explained in plain language.',
+    'article.savings.point1': 'Step-by-step targets for 1, 3, and 6 months of expenses.',
+    'article.savings.point2': 'Templates for automatic transfers and envelope budgeting.',
     'article.savings.intro': 'Building wealth doesn\'t happen overnight, but with the right savings strategies, you can steadily grow your financial security. Whether you\'re just starting or looking to optimize your approach, these proven methods will help you reach your goals faster.',
     'article.savings.emergency.title': 'Build Your Emergency Fund First',
     'article.savings.emergency.text': 'Before investing or pursuing other financial goals, establish an emergency fund covering 3-6 months of expenses. This safety net prevents you from going into debt during unexpected situations.',
@@ -433,7 +450,9 @@ const translations = {
     
     // Investment Guide Article  
     'article.investment.title': 'Investment Basics: Your Path to Financial Growth',
-    'article.investment.desc': 'Learn the fundamentals of investing, from risk management to portfolio diversification. Start your investment journey with confidence.',
+    'article.investment.desc': 'Learn diversification, risk management, and ETF/bond mixes tailored for EN/PL/RU investors with local data.',
+    'article.investment.point1': 'Explains risk levels with sample portfolios.',
+    'article.investment.point2': 'Links to trusted local regulators and brokers.',
     'article.investment.intro': 'Investing can seem intimidating, but it\'s one of the most powerful tools for building long-term wealth. This guide covers the essential concepts every investor should understand before getting started.',
     'article.investment.why.title': 'Why Invest?',
     'article.investment.why.text': 'Inflation erodes the purchasing power of money over time. While savings accounts preserve capital, investments help your money grow faster than inflation, building real wealth.',
@@ -483,7 +502,9 @@ const translations = {
     'article.investment.cta.text': 'See how your investments could grow over time with our compound interest calculator.',
     'article.investment.cta.button': 'Try Investment Calculator',
     'article.clarity.title': 'Invest With Clarity in Any Market',
-    'article.clarity.desc': 'Dive into US data, investor stories, and step-by-step actions to keep your plan resilient during volatility.',
+    'article.clarity.desc': 'Use dashboards, volatility scripts, and investor case studies to stay calm during US/EU swings and adjust your plan fast.',
+    'article.clarity.point1': 'Macro heatmaps covering inflation, yields, and sector flows.',
+    'article.clarity.point2': 'Printable action plan with weekly review checklist.',
 
     // English article hero section
     'article.investment.hero.tag': '2025 Outlook',
@@ -725,7 +746,9 @@ const translations = {
 
     // Debt Management Article
     'article.debt.title': 'Debt Management: Take Control of Your Financial Future',
-    'article.debt.desc': 'Learn effective strategies to pay off debt faster, reduce interest costs, and regain financial freedom with proven debt management techniques.',
+    'article.debt.desc': 'Get out of debt faster with avalanche vs. snowball playbooks, negotiation scripts, and motivation tricks.',
+    'article.debt.point1': 'Choose the best strategy based on rate and balance.',
+    'article.debt.point2': 'Templates for calling banks and lowering interest rates.',
     'article.debt.intro': 'Debt can feel overwhelming, but with the right strategy, you can take control and work toward financial freedom. This guide outlines proven methods to tackle debt systematically and efficiently.',
     'article.debt.assessment.title': 'Assess Your Debt Situation',
     'article.debt.assessment.text': 'List all your debts with balances, minimum payments, and interest rates. Understanding the full picture is the first step toward creating an effective payoff plan.',
@@ -799,7 +822,9 @@ const translations = {
     
     // Budget Planning Article
     'article.budget.title': 'Budget Planning: Master Your Money Management',
-    'article.budget.desc': 'Create a realistic budget that works for your lifestyle. Learn proven budgeting methods and tools to take control of your finances.',
+    'article.budget.desc': 'Blend zero-based and 50/30/20 budgeting so every paycheck has a job while keeping guilt-free spending money.',
+    'article.budget.point1': 'Downloadable monthly review and category tracker.',
+    'article.budget.point2': 'Tips for syncing budgets across the whole family.',
     'article.budget.intro': 'A well-planned budget is the foundation of financial success. It helps you understand where your money goes, prioritize your spending, and work toward your financial goals with confidence.',
     'article.budget.why.title': 'Why Budgeting Matters',
     'article.budget.why.text': 'Budgeting isn\'t about restricting yourself – it\'s about giving yourself permission to spend on what matters most while ensuring you\'re saving for the future.',
@@ -930,16 +955,29 @@ const translations = {
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Inwestycyjny ROI',
-    'card.roi.desc': 'Oblicz zwrot z inwestycji i porównaj możliwości',
+    'card.roi.desc': 'Zmierz opłacalność projektu z uwzględnieniem zysku netto i rocznej stopy.',
 
     // Calculator descriptions
     'calc.compound.desc': 'Oblicz, jak rosną Twoje inwestycje z procentem składanym',
-    'calc.deposit.desc': 'Oblicz wzrost lokaty z kapitalizacją, wpłatami, wypłatami i podatkiem',
-    'calc.loan.desc': 'Znajdź miesięczną ratę i całkowite odsetki',
-    'calc.savings.desc': 'Zaplanuj oszczędności, aby osiągnąć cele finansowe',
-    'calc.mortgage.desc': 'Oblicz raty hipoteczne i zdolność kredytową',
-    'calc.creditcard.desc': 'Stwórz plan spłaty zadłużenia karty kredytowej',
-    'calc.roi.desc': 'Oblicz zwrot z inwestycji i rentowność',
+    'calc.deposit.desc': 'Symuluj wzrost lokaty z elastyczną kapitalizacją, planowanymi dopłatami/wypłatami i projekcją podatku, aby znać realny zysk.',
+    'calc.loan.desc': 'Porównaj oferty kredytów: zobacz ratę, udział odsetek i datę spłaty dla dowolnego okresu i stopy.',
+    'calc.savings.desc': 'Przekuj wymarzony zakup w realistyczny plan oszczędzania na podstawie salda, wpłat i oczekiwanej stopy zwrotu.',
+    'calc.mortgage.desc': 'Oceń zdolność hipoteczną z wkładem własnym, ubezpieczeniem, podatkami i scenariuszami zmiennej stopy.',
+    'calc.creditcard.desc': 'Stwórz plan spłaty kart: zmieniaj wysokość płatności, by zobaczyć czas spłaty, koszt odsetek i najlepszą strategię.',
+    'calc.roi.desc': 'Zmierz rentowność inwestycji, porównując kapitał, zysk netto i roczną stopę po kosztach.',
+
+    'calc.deposit.point1': 'Obsługuje kapitalizację miesięczną, kwartalną, roczną i dzienną.',
+    'calc.deposit.point2': 'Zobacz linię salda przed i po częściowych wypłatach.',
+    'calc.loan.point1': 'Pełna tabela amortyzacji kapitał vs. odsetki.',
+    'calc.loan.point2': 'Przetestuj nadpłaty i zobacz, jak skracają okres.',
+    'calc.savings.point1': 'Pokazuje wymaganą miesięczną kwotę i łączną inwestycję.',
+    'calc.savings.point2': 'Porównuje prognozy z dodatkowymi wpłatami i bez nich.',
+    'calc.mortgage.point1': 'Rozbija miesięczny koszt na wszystkie składniki.',
+    'calc.mortgage.point2': 'Testuj podwyżki stóp przed podpisaniem umowy.',
+    'calc.creditcard.point1': 'Podpowiada płatność zatrzymującą wzrost zadłużenia.',
+    'calc.creditcard.point2': 'Wizualny harmonogram malejącego salda.',
+    'calc.roi.point1': 'Automatycznie liczy całkowity i roczny ROI.',
+    'calc.roi.point2': 'Dodaj opłaty i podatki, aby zobaczyć realny wynik.',
     
     // Form labels
     'form.initial': 'Kwota początkowa',
@@ -980,7 +1018,9 @@ const translations = {
     
     // Compound Interest Article
     'article.compound.title': 'Zrozumienie procentu składanego',
-    'article.compound.desc': 'Dowiedz się, jak działa procent składany i dlaczego Einstein nazwał go ósmym cudem świata.',
+    'article.compound.desc': 'Zobacz procent składany w praktyce dzięki wykresom, wzorom i porównaniom wczesnego oraz późnego startu.',
+    'article.compound.point1': 'Interaktywne przykłady z prognozą roczną.',
+    'article.compound.point2': 'Prowadzi do kalkulatorów dopasowanych do Twojego scenariusza.',
     
     // Additional form labels
     'form.loan.amount': 'Kwota kredytu',
@@ -1128,7 +1168,9 @@ const translations = {
     
     // Savings Strategy Article - Polish
     'article.savings.title': 'Inteligentne Strategie Oszczędzania: Buduj Majątek Krok po Kroku',
-    'article.savings.desc': 'Odkryj sprawdzone strategie budowania oszczędności, wyznaczania osiągalnych celów i tworzenia solidnej podstawy finansowej.',
+    'article.savings.desc': 'Zbuduj odporny system oszczędzania: fundusz awaryjny, automatyczne wpłaty i konta przyjazne UE opisane prostym językiem.',
+    'article.savings.point1': 'Cele krok po kroku na 1, 3 i 6 miesięcy wydatków.',
+    'article.savings.point2': 'Szablony automatycznych przelewów i budżetu kopertowego.',
     'article.savings.intro': 'Budowanie majątku nie dzieje się z dnia na dzień, ale dzięki odpowiednim strategiom oszczędzania możesz stale zwiększać swoje bezpieczeństwo finansowe. Niezależnie od tego, czy dopiero zaczynasz, czy chcesz zoptymalizować swoje podejście, te sprawdzone metody pomogą Ci szybciej osiągnąć cele.',
     'article.savings.emergency.title': 'Najpierw Zbuduj Fundusz Awaryjny',
     'article.savings.emergency.text': 'Przed inwestowaniem lub realizacją innych celów finansowych, ustanów fundusz awaryjny pokrywający 3-6 miesięcy wydatków. Ta siatka bezpieczeństwa zapobiega zadłużaniu się w nieprzewidzianych sytuacjach.',
@@ -1168,7 +1210,9 @@ const translations = {
 
     // Debt Management Article - Polish
     'article.debt.title': 'Zarządzanie Długiem: Przejmij Kontrolę nad Swoją Finansową Przyszłością',
-    'article.debt.desc': 'Naucz się skutecznych strategii szybszej spłaty długów, redukcji kosztów odsetkowych i odzyskania wolności finansowej.',
+    'article.debt.desc': 'Spłać długi szybciej dzięki metodzie lawiny/kuli śnieżnej, scenariuszom negocjacji i trikom motywacyjnym.',
+    'article.debt.point1': 'Dobierz strategię na podstawie stopy i salda.',
+    'article.debt.point2': 'Szablony rozmów z bankiem o obniżce oprocentowania.',
     'article.debt.intro': 'Dług może przytłaczać, ale z odpowiednią strategią możesz przejąć kontrolę i dążyć do wolności finansowej. Ten przewodnik przedstawia sprawdzone metody systematycznego i skutecznego radzenia sobie z długiem.',
     'article.debt.assessment.title': 'Oceń Swoją Sytuację Długową',
     'article.debt.assessment.text': 'Wypisz wszystkie swoje długi wraz z saldami, minimalnymi ratami i oprocentowaniem. Zrozumienie pełnego obrazu to pierwszy krok do stworzenia skutecznego planu spłaty.',
@@ -1242,9 +1286,13 @@ const translations = {
 
     // Investment Guide Article - Polish
     'article.investment.title': 'Podstawy Inwestowania: Twoja Ścieżka do Wzrostu Finansowego',
-    'article.investment.desc': 'Naucz się podstaw inwestowania, od zarządzania ryzykiem po dywersyfikację portfela. Rozpocznij swoją podróż inwestycyjną z pewnością siebie.',
+    'article.investment.desc': 'Poznaj dywersyfikację, zarządzanie ryzykiem i gotowe portfele ETF/obligacje dla inwestorów EN/PL/RU z lokalnymi danymi.',
+    'article.investment.point1': 'Wyjaśnia poziomy ryzyka na przykładach portfeli.',
+    'article.investment.point2': 'Linki do zaufanych regulatorów i brokerów.',
     'article.clarity.title': 'Inwestuj z klarownością na każdym rynku',
-    'article.clarity.desc': 'Poznaj dane z USA, historie inwestorów i wizualne kroki, dzięki którym utrzymasz plan nawet przy dużej zmienności.',
+    'article.clarity.desc': 'Wykorzystaj dashboardy, skrypty zmienności i case studies, by zachować spokój podczas wahań US/UE i szybko korygować plan.',
+    'article.clarity.point1': 'Makro heatmapy inflacji, rentowności i przepływów sektorowych.',
+    'article.clarity.point2': 'Drukowalny plan działania z cotygodniową checklistą.',
     'article.investment.intro': 'Inwestowanie może wydawać się onieśmielające, ale jest to jedno z najpotężniejszych narzędzi do budowania długoterminowego bogactwa. Ten przewodnik omawia podstawowe koncepcje, które każdy inwestor powinien zrozumieć przed rozpoczęciem.',
     'article.investment.why.title': 'Dlaczego Warto Inwestować?',
     'article.investment.why.text': 'Inflacja z czasem obniża siłę nabywczą pieniądza. Podczas gdy konta oszczędnościowe chronią kapitał, inwestycje pomagają pieniądzom rosnąć szybciej niż inflacja, budując prawdziwe bogactwo.',
@@ -1425,7 +1473,9 @@ const translations = {
 
     // Budget Planning Article - Polish
     'article.budget.title': 'Planowanie Budżetu: Opanuj Zarządzanie Pieniędzmi',
-    'article.budget.desc': 'Stwórz realistyczny budżet, który pasuje do Twojego stylu życia. Poznaj sprawdzone metody i narzędzia budżetowania, aby przejąć kontrolę nad swoimi finansami.',
+    'article.budget.desc': 'Połącz budżet zerowy z 50/30/20, by każda wypłata miała zadanie i wciąż zostawały środki na przyjemności.',
+    'article.budget.point1': 'Pobierz miesięczny arkusz kontroli kategorii.',
+    'article.budget.point2': 'Porady synchronizacji budżetu całej rodziny.',
     'article.budget.intro': 'Dobrze zaplanowany budżet to podstawa sukcesu finansowego. Pomaga zrozumieć, na co idą Twoje pieniądze, priorytetyzować wydatki i z pewnością dążyć do celów finansowych.',
     'article.budget.why.title': 'Dlaczego Budżetowanie Ma Znaczenie',
     'article.budget.why.text': 'Budżetowanie nie polega na ograniczaniu się – polega na dawaniu sobie pozwolenia na wydawanie na to, co najważniejsze, jednocześnie zapewniając oszczędności na przyszłość.',
@@ -1717,16 +1767,29 @@ const translations = {
 
     // Calculator card titles (for main page)
     'card.roi.title': 'Инвестиционный ROI',
-    'card.roi.desc': 'Рассчитайте рентабельность инвестиций и сравните возможности',
+    'card.roi.desc': 'Измерьте прибыль проекта с учетом чистой прибыли и годовой доходности.',
 
     // Calculator descriptions
     'calc.compound.desc': 'Рассчитайте, как ваши инвестиции растут со временем благодаря сложному проценту',
-    'calc.deposit.desc': 'Рассчитайте рост вклада с капитализацией, пополнениями, снятиями и налогом',
-    'calc.loan.desc': 'Определите свой ежемесячный платеж и общую сумму процентов',
-    'calc.savings.desc': 'Планируйте свои сбережения для достижения ваших финансовых целей',
-    'calc.mortgage.desc': 'Оцените свои ипотечные платежи и доступность жилья',
-    'calc.creditcard.desc': 'Разработайте стратегию погашения задолженности по кредитной карте',
-    'calc.roi.desc': 'Рассчитайте рентабельность и доходность ваших инвестиций',
+    'calc.deposit.desc': 'Смоделируйте рост вклада с гибкой капитализацией, плановыми пополнениями/снятиями и мгновённым расчетом налога.',
+    'calc.loan.desc': 'Сравните кредитные предложения: заранее узнайте платёж, долю процентов и дату погашения для любого срока и ставки.',
+    'calc.savings.desc': 'Превратите желаемую покупку в реальный план накоплений с учётом текущего баланса, взносов и ожидаемой доходности.',
+    'calc.mortgage.desc': 'Оцените ипотечную доступность с первоначальным взносом, страховкой, налогами и сценариями роста ставки.',
+    'calc.creditcard.desc': 'Составьте карту погашения кредитки: меняйте платёж, чтобы видеть срок, проценты и лучшую стратегию.',
+    'calc.roi.desc': 'Измерьте прибыльность инвестиций, сравнивая вложенный капитал, чистую прибыль и годовую доходность после расходов.',
+
+    'calc.deposit.point1': 'Поддерживает месячную, квартальную, годовую и дневную капитализацию.',
+    'calc.deposit.point2': 'Показывает динамику баланса до и после частичных снятий.',
+    'calc.loan.point1': 'Полная амортизационная таблица «тело vs. проценты».',
+    'calc.loan.point2': 'Тестируйте досрочные платежи и экономию по времени.',
+    'calc.savings.point1': 'Показывает нужный ежемесячный платёж и общий взнос.',
+    'calc.savings.point2': 'Сравнивает сценарии с дополнительными взносами и без них.',
+    'calc.mortgage.point1': 'Делит ежемесячный платёж на все составляющие.',
+    'calc.mortgage.point2': 'Стресс‑тест повышения ставок до подписания договора.',
+    'calc.creditcard.point1': 'Советует платёж, который останавливает рост долга.',
+    'calc.creditcard.point2': 'Визуальный таймлайн уменьшения баланса по месяцам.',
+    'calc.roi.point1': 'Автоматически считает общий и годовой ROI.',
+    'calc.roi.point2': 'Добавьте комиссии и налоги, чтобы увидеть реальный результат.',
     
     // Form labels
     'form.initial': 'Начальная сумма',
@@ -2011,7 +2074,9 @@ const translations = {
     
     // Compound Interest Article
     'article.compound.title': 'Сила Сложного Процента: Полное Руководство',
-    'article.compound.desc': 'Узнайте, как сложный процент может экспоненциально увеличить ваши сбережения, и изучите стратегии для максимизации вашего богатства.',
+    'article.compound.desc': 'Увидьте сложный процент в действии: графики, формулы и сравнение раннего и позднего старта.',
+    'article.compound.point1': 'Интерактивные примеры с годовой динамикой.',
+    'article.compound.point2': 'Подсказывает калькуляторы для вашего сценария.',
     'article.compound.intro': 'Альберт Эйнштейн якобы назвал сложный процент "восьмым чудом света". Говорил он это или нет, но суть верна: сложный процент - одна из мощнейших сил в финансах, способная превратить скромные сбережения в значительное богатство.',
     'article.compound.what.title': 'Что такое Сложный Процент?',
     'article.compound.what.text': 'Сложный процент — это процент, который начисляется на первоначальную сумму вклада, а также на накопленные проценты за предыдущие периоды. Проще говоря, это "проценты на проценты" — и именно это заставляет ваши деньги расти экспоненциально, а не линейно.',
@@ -2052,7 +2117,9 @@ const translations = {
     
     // Savings Strategies Article
     'article.savings.title': '5 Эффективных Стратегий Сбережений для Достижения Ваших Целей',
-    'article.savings.desc': 'От автоматизации сбережений до постановки четких целей — узнайте практические стратегии для увеличения ваших сбережений и обеспечения финансового будущего.',
+    'article.savings.desc': 'Постройте устойчивую систему сбережений: резерв, авто‑переводы и подходящие для ЕС счета объяснены простым языком.',
+    'article.savings.point1': 'План целей на 1, 3 и 6 месяцев расходов.',
+    'article.savings.point2': 'Шаблоны авто‑переводов и конвертного бюджета.',
     'article.savings.intro': 'Экономить деньги — это больше, чем просто откладывать то, что осталось в конце месяца. Это требует целенаправленной стратегии. Вот пять проверенных методов, которые помогут вам эффективно увеличить ваши сбережения.',
     'article.savings.emergency.title': 'Сначала Создайте Чрезвычайный Фонд',
     'article.savings.emergency.text': 'Прежде чем инвестировать или преследовать другие финансовые цели, создайте чрезвычайный фонд, покрывающий 3-6 месяцев расходов. Эта подушка безопасности предотвратит накопление долгов в неожиданных ситуациях.',
@@ -2092,7 +2159,9 @@ const translations = {
     
     // Debt Management Article
     'article.debt.title': 'Управление Долгом: Возьмите под Контроль Свое Финансовое Будущее',
-    'article.debt.desc': 'Изучите эффективные стратегии для более быстрого погашения долгов, снижения процентных расходов и обретения финансовой свободы.',
+    'article.debt.desc': 'Выйдите из долгов быстрее с методами лавины/снежка, сценариями переговоров и приёмами мотивации.',
+    'article.debt.point1': 'Выберите стратегию исходя из ставки и остатка.',
+    'article.debt.point2': 'Шаблоны звонков в банк для снижения процента.',
     'article.debt.intro': 'Долг может быть ошеломляющим, но с правильной стратегией вы можете взять контроль и работать над достижением финансовой свободы. В этом руководстве рассматриваются проверенные методы систематического и эффективного решения проблемы долга.',
     'article.debt.assessment.title': 'Оцените Свою Долговую Ситуацию',
     'article.debt.assessment.text': 'Перечислите все свои долги с указанием остатков, минимальных платежей и процентных ставок. Понимание полной картины — это первый шаг к созданию эффективного плана погашения.',
@@ -2166,9 +2235,13 @@ const translations = {
     
     // Investment Basics Article
     'article.investment.title': 'Основы Инвестирования: Ваш Путь к Финансовому Росту',
-    'article.investment.desc': 'Изучите основные концепции инвестирования, стратегии управления рисками и как начать строить долгосрочное богатство через разумные инвестиции.',
+    'article.investment.desc': 'Разберитесь с диверсификацией, управлением риском и готовыми ETF/облигационными портфелями для EN/PL/RU инвесторов с локальными данными.',
+    'article.investment.point1': 'Объясняет уровни риска на примерах портфелей.',
+    'article.investment.point2': 'Ссылки на надёжных регуляторов и брокеров.',
     'article.clarity.title': 'Инвестируйте с ясностью на любом рынке',
-    'article.clarity.desc': 'Изучите данные США, истории инвесторов и пошаговые действия, чтобы сохранить стратегию даже при высокой волатильности.',
+    'article.clarity.desc': 'Используйте дашборды, скрипты волатильности и истории инвесторов, чтобы сохранять спокойствие при колебаниях US/EU и быстро корректировать план.',
+    'article.clarity.point1': 'Макро heatmap по инфляции, доходностям и секторам.',
+    'article.clarity.point2': 'Печатный план действий с еженедельным чек-листом.',
     'article.investment.intro': 'Инвестирование может показаться пугающим, но это один из самых мощных инструментов для создания долгосрочного богатства. В этом руководстве рассматриваются основные концепции, которые должен понимать каждый инвестор перед началом.',
     'article.investment.why.title': 'Почему Стоит Инвестировать?',
     'article.investment.why.text': 'Инфляция со временем снижает покупательную способность денег. Хотя сберегательные счета сохраняют капитал, инвестиции помогают вашим деньгам расти быстрее инфляции, создавая реальное богатство.',
@@ -2349,7 +2422,9 @@ const translations = {
 
     // Budget Planning Article
     'article.budget.title': 'Планирование Бюджета: Овладейте Управлением Деньгами',
-    'article.budget.desc': 'Создайте реалистичный бюджет, который соответствует вашему образу жизни. Изучите проверенные методы и инструменты составления бюджета, чтобы взять под контроль свои финансы.',
+    'article.budget.desc': 'Совместите zero-based и 50/30/20, чтобы каждый рубль имел задачу и оставались средства на удовольствие.',
+    'article.budget.point1': 'Загружаемый лист ежемесячного контроля категорий.',
+    'article.budget.point2': 'Советы по синхронизации бюджета всей семьи.',
     'article.budget.intro': 'Хорошо спланированный бюджет — это основа финансового успеха. Он помогает понять, куда уходят ваши деньги, расставить приоритеты в расходах и уверенно работать над достижением финансовых целей.',
     'article.budget.why.title': 'Почему Составление Бюджета Важно',
     'article.budget.why.text': 'Составление бюджета — это не ограничение себя, а разрешение тратить на самое важное, одновременно обеспечивая сбережения на будущее.',
