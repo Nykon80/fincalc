@@ -84,6 +84,8 @@ const translations = {
     
     // Sections
     'section.deposit': 'Deposit Details',
+    'section.loan_details': 'Loan Details',
+    'section.results': 'Results',
     'section.advanced': 'Advanced Options',
     'section.additions': 'Deposit Additions',
     'section.withdrawals': 'Partial Withdrawals',
@@ -263,6 +265,7 @@ const translations = {
     'section.chart': 'Growth Chart',
     'section.breakdown': 'Yearly Breakdown',
     'section.info': 'How It Works',
+    'section.calculators.title': 'Financial Calculators',
     'section.articles.title': 'Financial Guides & Articles',
     
     // Article navigation
@@ -1000,6 +1003,7 @@ const translations = {
     // Section headers
     'section.investment': 'Szczegóły inwestycji',
     'section.loan': 'Szczegóły kredytu',
+    'section.loan_details': 'Szczegóły kredytu',
     'section.savings': 'Szczegóły oszczędności',
     'section.mortgage': 'Szczegóły hipoteki',
     'section.credit': 'Szczegóły karty kredytowej',
@@ -1008,6 +1012,7 @@ const translations = {
     'section.chart': 'Wykres wzrostu',
     'section.breakdown': 'Podział roczny',
     'section.info': 'Jak to działa',
+    'section.calculators.title': 'Kalkulatory Finansowe',
     'section.articles.title': 'Przewodniki i Artykuły Finansowe',
     
     // Article navigation

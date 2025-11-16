@@ -71,6 +71,9 @@
             border-radius: var(--radius-lg);
             padding: var(--space-xl);
             margin-top: var(--space-xl);
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 900px;
             height: 400px;
         }
         
@@ -589,14 +592,8 @@
         </div>
         
         <!-- Detailed Breakdown Table -->
-        <div style="margin-top: 2rem;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-                <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
-                <div style="display: flex; gap: 0.5rem;">
-                    <button class="btn btn-secondary" id="toggleView" data-i18n="button.yearly">Yearly View</button>
-                    <button class="btn btn-secondary" id="exportExcel" data-i18n="button.export">Export to Excel</button>
-                </div>
-            </div>
+        <div style="margin-top: 2rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+            <h3 data-i18n="section.breakdown">Detailed Breakdown</h3>
             <div style="overflow-x: auto;">
                 <table class="breakdown-table" id="breakdownTable">
                     <thead>
@@ -614,6 +611,10 @@
                         <!-- Populated by JavaScript -->
                     </tbody>
                 </table>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 1rem;">
+                <button class="btn btn-secondary" id="toggleView" data-i18n="button.yearly">Yearly View</button>
+                <button class="btn btn-secondary" id="exportExcel" data-i18n="button.export">Export to Excel</button>
             </div>
         </div>
     </div>
