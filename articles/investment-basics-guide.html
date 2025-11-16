@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Investment Basics: Your Path to Financial Growth</title>
-    <meta name="description" content="Current 2025 playbook with US market data, step-by-step strategy and modern visualizations.">
+    <meta name="description" content="2025 guide to building a resilient portfolio: metrics to watch, practical steps, and ready-to-use allocations for every goal.">
 
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
@@ -105,106 +105,143 @@
         }
 
         .metric-label {
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-size: 0.8rem;
             font-weight: 600;
-            color: var(--text-primary);
-            font-size: 0.95rem;
+            color: var(--text-muted);
         }
 
         .metric-value {
             font-size: 1.75rem;
             font-weight: 700;
-            color: var(--primary);
-            line-height: 1.2;
+            color: var(--text-primary);
         }
 
         .metric-note {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-top: auto;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
         }
 
-        .region-grid {
+        .principles-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: var(--space-lg);
         }
 
-        .region-card {
+        .principle-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
             padding: var(--space-xl);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(0, 168, 107, 0.18);
             border-radius: var(--radius-lg);
             background: var(--white);
             box-shadow: var(--shadow-sm);
         }
 
-        .region-card h3 {
-            color: var(--primary);
-            margin-bottom: var(--space-md);
-            font-size: 1.1rem;
-        }
-
-        .rate-item {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: var(--space-sm);
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .rate-item:last-child {
-            border-bottom: none;
-        }
-
-        .rate-value {
-            font-weight: 600;
+        .principle-card h3 {
             color: var(--success);
         }
 
-        .region-note {
-            background: var(--primary-light);
-            border-left: 4px solid var(--primary);
-            padding: var(--space-lg);
-            border-radius: var(--radius-md);
-            margin: var(--space-xl) 0;
+        .principle-card ul {
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
         }
 
-        .region-note h4 {
-            color: var(--primary);
-            margin-bottom: var(--space-sm);
+        .principle-card ul li {
+            margin-bottom: var(--space-xs);
         }
 
-        .portfolio-grid {
+        .region-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: var(--space-lg);
         }
 
-        .portfolio-card {
+        .region-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
             padding: var(--space-xl);
-            border: 1px solid var(--border);
+            border: 1px solid rgba(0, 168, 107, 0.18);
             border-radius: var(--radius-lg);
             background: var(--white);
             box-shadow: var(--shadow-sm);
         }
 
-        .portfolio-card h3 {
-            color: var(--primary);
-            margin-bottom: var(--space-md);
+        .region-card__header {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-sm);
+            align-items: flex-start;
+        }
+
+        .region-yield {
+            font-weight: 600;
+            color: var(--success);
+            font-size: 0.95rem;
+            background: var(--success-light);
+            padding: var(--space-xs) var(--space-sm);
+            border-radius: var(--radius-md);
+        }
+
+        .region-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            color: var(--text-secondary);
+        }
+
+        .region-list li {
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .region-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .region-note {
+            margin-top: var(--space-xl);
+            padding: var(--space-lg);
+            background: var(--gray-100);
+            border-radius: var(--radius-lg);
+            border-left: 4px solid var(--primary);
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-lg);
+        }
+
+        .portfolio-card {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            padding: var(--space-xl);
+            border: 1px solid rgba(17, 24, 39, 0.08);
+            border-radius: var(--radius-lg);
+            background: var(--white);
+            box-shadow: var(--shadow-sm);
         }
 
         .allocation-list {
-            list-style: none;
-            padding: 0;
-            margin-top: var(--space-md);
+            margin-top: var(--space-sm);
+            padding-left: 1.2rem;
+            color: var(--text-secondary);
         }
 
         .allocation-list li {
-            padding: var(--space-sm) 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .allocation-list li:last-child {
-            border-bottom: none;
+            margin-bottom: var(--space-xs);
         }
 
         .cta-card {
@@ -214,7 +251,6 @@
             color: var(--white);
             text-align: center;
             box-shadow: var(--shadow-lg);
-            margin: var(--space-3xl) 0;
         }
 
         .cta-card h3,
@@ -222,54 +258,68 @@
             color: var(--white);
         }
 
-        .btn-cta {
+        .cta-card .btn-cta {
             background: var(--white);
             color: var(--primary);
-            padding: var(--space-md) var(--space-xl);
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition-base);
-        }
-
-        .btn-cta:hover {
-            background: var(--gray-100);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
         }
 
         .cta-card small {
             display: block;
             margin-top: var(--space-lg);
-            color: rgba(255, 255, 255, 0.85);
+            color: rgba(255, 255, 255, 0.8);
             font-size: 0.85rem;
         }
 
         .article-nav {
             display: flex;
             justify-content: space-between;
-            margin: var(--space-3xl) 0;
-            padding: var(--space-xl) 0;
+            gap: var(--space-md);
+            margin-top: var(--space-3xl);
+            padding-top: var(--space-xl);
             border-top: 1px solid var(--border);
         }
 
         .nav-btn {
-            background: var(--gray-100);
-            color: var(--text-primary);
-            padding: var(--space-md) var(--space-lg);
+            padding: var(--space-sm) var(--space-lg);
+            border: 1px solid var(--border);
             border-radius: var(--radius-md);
             text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition-base);
+            color: var(--text-secondary);
+            transition: all var(--transition-fast);
+            text-align: center;
+            flex: 1;
         }
 
         .nav-btn:hover {
-            background: var(--primary);
-            color: white;
+            border-color: var(--primary);
+            color: var(--primary);
+            background: var(--primary-light);
+        }
+
+        @media (max-width: 768px) {
+            .article-hero {
+                padding: var(--space-2xl) 0 var(--space-xl);
+            }
+
+            .article-hero__subtitle {
+                font-size: 1.05rem;
+            }
+
+            .article-meta {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .article-nav {
+                flex-direction: column;
+            }
+
+            .metric-grid,
+            .principles-grid,
+            .region-grid,
+            .portfolio-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -292,24 +342,24 @@
                     </svg>
                     <span>FinCalc</span>
                 </a>
-                
+
                 <nav class="nav-menu">
-                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Home</a>
-                    <a href="../index.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
-                    <a href="../index.html#articles" class="nav-link active" data-i18n="nav.articles">Articles</a>
-                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
-                    
+                    <a href="../index.html" class="nav-link">Home</a>
+                    <a href="../index.html#calculators" class="nav-link">Calculators</a>
+                    <a href="../index.html#articles" class="nav-link active">Articles</a>
+                    <a href="../index.html#compare" class="nav-link">Compare</a>
+
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="investment-basics-guide.html" data-lang="en" class="active">English</a>
+                            <a href="investment-basics-guide-pl.html" data-lang="pl">Polski</a>
+                            <a href="investment-basics-guide-ru.html" data-lang="ru">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
@@ -318,261 +368,189 @@
     <main class="article-page">
         <section class="article-hero">
             <div class="container">
-                <span class="article-hero__tag" data-i18n="article.investment.hero.tag">2025 Outlook</span>
-                <h1 class="article-title" data-i18n="article.investment.hero.title">Invest With Clarity in the US Market</h1>
-                <p class="article-hero__subtitle" data-i18n="article.investment.hero.subtitle">Track US trends, compare banking offers in America, and build a resilient portfolio that fits your goals.</p>
+                <span class="article-hero__tag">2025 Playbook</span>
+                <h1 class="article-title">Investment Basics: Build Confidence in Any Market</h1>
+                <p class="article-hero__subtitle">Learn how to read the macro picture, protect cash flow, and turn consistent contributions into long-term wealth.</p>
 
                 <div class="article-meta">
-                    <span data-i18n="article.investment.meta.reading">8 min read</span> •
-                    <span data-i18n="article.investment.meta.updated">Updated October 2025</span>
+                    <span>8 min read</span>
+                    <span>•</span>
+                    <span>Updated: October 2025</span>
                 </div>
 
                 <div class="article-hero__actions">
                     <a href="../calculators/compound-interest-modern.html" class="btn btn-primary">
-                        <span data-i18n="article.investment.hero.cta">Plan Growth Scenario</span>
+                        <span>Model your growth</span>
                     </a>
-                    <span class="data-badge" data-i18n="article.investment.hero.updated">Data verified: September 2025</span>
+                    <span class="data-badge">Data verified: September 2025</span>
                 </div>
             </div>
         </section>
 
         <section class="container" style="margin-top: var(--space-3xl);">
             <div class="section-header">
-                <h2 data-i18n="article.investment.metrics.title">US Capital Markets</h2>
-                <p data-i18n="article.investment.metrics.subtitle">Key US market indicators every investor should track.</p>
+                <h2>Market Check: Signals to Watch in 2025</h2>
+                <p>Use these benchmark numbers to gauge whether you should stay defensive or lean into risk assets.</p>
             </div>
 
             <div class="metric-grid">
                 <article class="metric-card">
-                    <span class="metric-label" data-i18n="article.investment.metrics.stocks.label">S&P 500 5-Year Return</span>
-                    <span class="metric-value" data-i18n="article.investment.metrics.stocks.value">11.8% (S&P 500, 2019-2024)</span>
-                    <small class="metric-note" data-i18n="article.investment.metrics.stocks.note">Source: S&P Global, Q3 2024</small>
+                    <span class="metric-label">Global equities (MSCI World)</span>
+                    <span class="metric-value">+10.2% 5Y CAGR</span>
+                    <small class="metric-note">Source: MSCI, data through Q3 2025</small>
                 </article>
                 <article class="metric-card">
-                    <span class="metric-label" data-i18n="article.investment.metrics.bonds.label">10-Year Treasury Yield</span>
-                    <span class="metric-value" data-i18n="article.investment.metrics.bonds.value">4.2% (US Treasury)</span>
-                    <small class="metric-note" data-i18n="article.investment.metrics.bonds.note">Current yield on 10-year government bonds</small>
+                    <span class="metric-label">Sovereign bonds (10Y)</span>
+                    <span class="metric-value">3.8–5.2% yield</span>
+                    <small class="metric-note">US Treasuries vs. EU core bonds, Sept 2025</small>
                 </article>
                 <article class="metric-card">
-                    <span class="metric-label" data-i18n="article.investment.metrics.inflation.label">Core Inflation Rate</span>
-                    <span class="metric-value" data-i18n="article.investment.metrics.inflation.value">3.1% (CPI, YoY)</span>
-                    <small class="metric-note" data-i18n="article.investment.metrics.inflation.note">Federal Reserve target: 2%</small>
+                    <span class="metric-label">Inflation (US/EU median)</span>
+                    <span class="metric-value">3.1% YoY</span>
+                    <small class="metric-note">IMF October 2025 outlook</small>
                 </article>
             </div>
         </section>
 
         <section class="container" style="margin-top: var(--space-3xl);">
             <div class="section-header">
-                <h2 data-i18n="article.investment.stories.title">Real Stories: From Zero to Investor Hero</h2>
-                <p data-i18n="article.investment.stories.subtitle">See how ordinary people turned small investments into life-changing wealth – and how you can too.</p>
+                <h2>Build a Simple Investment Framework</h2>
+                <p>Great portfolios are boring. Follow these three pillars and let automation do the heavy lifting.</p>
             </div>
 
-            <div class="story-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg);">
-                <div class="story-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm);">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop" alt="Successful young investor" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md);">
-                    <small>Image by Unsplash User - Free to use</small>
-                    <h3 data-i18n="article.investment.stories.john.title">John's Journey: $10K to $50K in 5 Years</h3>
-                    <p data-i18n="article.investment.stories.john.text">John, a teacher from California, started with a simple S&P 500 ETF. With consistent monthly investments of $200 and 8% average returns, he built a nest egg. Tip for beginners: Start small, stay consistent.</p>
-                </div>
-
-                <div class="story-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm);">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&h=300&fit=crop" alt="Woman managing investments" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md);">
-                    <small>Image by Unsplash User - Free to use</small>
-                    <h3 data-i18n="article.investment.stories.maria.title">Maria's Smart Move: Beating Inflation</h3>
-                    <p data-i18n="article.investment.stories.maria.text">Maria from New York switched from savings (2% rate) to bonds and stocks. In 3 years, her portfolio grew 25%. Pro tip for experienced: Diversify to hedge against 3% inflation.</p>
-                </div>
+            <div class="principles-grid">
+                <article class="principle-card">
+                    <h3>1. Map your goals by horizon</h3>
+                    <p>Write down targets for short (≤2 years), medium (3–7 years), and long-term (10+ years) goals. Assign a base currency and inflation assumption to each.</p>
+                    <ul>
+                        <li>Document the minimum required return to stay on track.</li>
+                        <li>Pair each goal with the correct account (brokerage, retirement, cash).</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>2. Ring-fence your safety buffer</h3>
+                    <p>Keep 3–6 months of expenses in insured cash products before increasing market exposure.</p>
+                    <ul>
+                        <li>Separate emergency savings from brokerage accounts to avoid impulse selling.</li>
+                        <li>Use high-yield savings, CDs, or money-market funds for extra yield.</li>
+                    </ul>
+                </article>
+                <article class="principle-card">
+                    <h3>3. Automate and rebalance</h3>
+                    <p>Schedule contributions for payday and rebalance quarterly back to target weights.</p>
+                    <ul>
+                        <li>Enable fractional ETF purchases if your broker supports them.</li>
+                        <li>Increase contributions whenever your income rises.</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
         <section class="container" style="margin-top: var(--space-3xl);">
             <div class="section-header">
-                <h2 data-i18n="article.investment.regions.title">US Banking and Investment Landscape</h2>
-                <p data-i18n="article.investment.regions.subtitle">Current rates, brokers, and investment opportunities available for US investors.</p>
+                <h2>Regional Playbook</h2>
+                <p>Mix local advantages (currency-matched cash and tax shelters) with global diversification.</p>
             </div>
 
             <div class="region-grid">
-                <div class="region-card">
-                    <h3 data-i18n="article.investment.regions.banks.title">Major US Banks</h3>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.banks.savings">High-Yield Savings:</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.banks.savings.value">4.50-5.25% APY</span>
-                        <a href="#" data-i18n-href="article.investment.regions.banks.savings.link" target="_blank" rel="noopener" class="rate-link">Source</a>
+                <article class="region-card">
+                    <div class="region-card__header">
+                        <h3>United States — USD</h3>
+                        <span class="region-yield">HYSA 5.0–5.2% • 401(k) match up to 6%</span>
                     </div>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.banks.cd">CD Rates (12-month):</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.banks.cd.value">4.75-5.50% APY</span>
-                        <a href="#" data-i18n-href="article.investment.regions.banks.cd.link" target="_blank" rel="noopener" class="rate-link">Source</a>
+                    <ul class="region-list">
+                        <li>Open a Roth IRA for tax-free growth after maxing employer match.</li>
+                        <li>Low-cost brokers: Fidelity, Vanguard, Charles Schwab (no commissions on ETFs).</li>
+                        <li>Cash ladder: split between Treasury bills and insured savings accounts.</li>
+                    </ul>
+                </article>
+
+                <article class="region-card">
+                    <div class="region-card__header">
+                        <h3>European Union — EUR/PLN</h3>
+                        <span class="region-yield">Term deposits 3.8–4.6% • IKE limit 24 689 PLN</span>
                     </div>
-                </div>
-                <div class="region-card">
-                    <h3 data-i18n="article.investment.regions.brokers.title">Top US Brokers</h3>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.brokers.commission">Commission:</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.brokers.commission.value">$0 (stocks/ETFs)</span>
-                        <a href="#" data-i18n-href="article.investment.regions.brokers.commission.link" target="_blank" rel="noopener" class="rate-link">Source</a>
+                    <ul class="region-list">
+                        <li>Use IKE/IKZE or PEPP wrappers for tax deductions and compounding.</li>
+                        <li>Banks such as PKO BP, Santander, Bunq offer insured savings above 4%.</li>
+                        <li>Commission-free brokers: Trade Republic, XTB, Degiro (EU ETFs and US stocks).</li>
+                    </ul>
+                </article>
+
+                <article class="region-card">
+                    <div class="region-card__header">
+                        <h3>Emerging markets — multi-currency</h3>
+                        <span class="region-yield">Inflation-linked bonds 5.5–6.5%</span>
                     </div>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.brokers.minimum">Minimum Deposit:</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.brokers.minimum.value">$0-$2,500</span>
-                        <a href="#" data-i18n-href="article.investment.regions.brokers.minimum.link" target="_blank" rel="noopener" class="rate-link">Source</a>
-                    </div>
-                </div>
-                <div class="region-card">
-                    <h3 data-i18n="article.investment.regions.investments.title">Investment Options</h3>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.investments.etf">ETF Expense Ratios:</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.investments.etf.value">0.03-0.15%</span>
-                        <a href="#" data-i18n-href="article.investment.regions.investments.etf.link" target="_blank" rel="noopener" class="rate-link">Source</a>
-                    </div>
-                    <div class="rate-item">
-                        <span data-i18n="article.investment.regions.investments.401k">401(k) Match:</span>
-                        <span class="rate-value" data-i18n="article.investment.regions.investments.401k.value">Up to 6%</span>
-                        <a href="#" data-i18n-href="article.investment.regions.investments.401k.link" target="_blank" rel="noopener" class="rate-link">Source</a>
-                    </div>
-                </div>
+                    <ul class="region-list">
+                        <li>Blend local inflation-linked instruments with USD or EUR ETFs.</li>
+                        <li>Watch FX spread when converting between local currency and USD.</li>
+                        <li>Document withholding tax rules for dividends (treaties differ by country).</li>
+                    </ul>
+                </article>
             </div>
 
             <div class="region-note">
-                <h4 data-i18n="article.investment.regions.note.title">How to use US investment opportunities</h4>
-                <p data-i18n="article.investment.regions.note.text">Check broker registration with SEC and FINRA before opening accounts. Confirm FDIC insurance for deposit products and SIPC protection for securities.</p>
+                <h4>Due diligence tips</h4>
+                <p>Always confirm regulator registration (SEC, FCA, KNF, etc.) and investor compensation schemes (SIPC, FSCS, BFG). Screenshot fee tables before signing to avoid hidden spreads.</p>
             </div>
         </section>
 
         <section class="container" style="margin-top: var(--space-3xl);">
             <div class="section-header">
-                <h2 data-i18n="article.investment.portfolios.title">Model Portfolios for US Investors</h2>
-                <p data-i18n="article.investment.portfolios.subtitle">US asset allocation strategies for different risk profiles and time horizons.</p>
+                <h2>Model Portfolios You Can Copy</h2>
+                <p>Use these allocations as a starting point. Rebalance annually and adjust currency exposure to your base currency.</p>
             </div>
 
             <div class="portfolio-grid">
                 <article class="portfolio-card">
-                    <h3 data-i18n="article.investment.portfolios.conservative.title">Conservative Portfolio (0-3 years)</h3>
-                    <p data-i18n="article.investment.portfolios.conservative.desc">Focus on capital preservation and liquidity for short-term goals.</p>
+                    <h3>Conservative (0–3 years)</h3>
+                    <p>Preserve capital while earning a real yield on cash you need soon.</p>
                     <ul class="allocation-list">
-                        <li data-i18n="article.investment.portfolios.conservative.line1">50% high-yield savings (4.5-5.2%)</li>
-                        <li data-i18n="article.investment.portfolios.conservative.line2">30% short-term Treasury bonds</li>
-                        <li data-i18n="article.investment.portfolios.conservative.line3">20% money market funds</li>
+                        <li>50% insured deposits or money-market funds</li>
+                        <li>30% short-duration government bonds</li>
+                        <li>20% ultra-short bond ETFs / T-bills ladder</li>
                     </ul>
                 </article>
 
                 <article class="portfolio-card">
-                    <h3 data-i18n="article.investment.portfolios.balanced.title">Balanced Portfolio (3-7 years)</h3>
-                    <p data-i18n="article.investment.portfolios.balanced.desc">Mix of US stocks and bonds for moderate growth.</p>
+                    <h3>Balanced (3–7 years)</h3>
+                    <p>Blend growth and stability for medium-term goals such as property down payments.</p>
                     <ul class="allocation-list">
-                        <li data-i18n="article.investment.portfolios.balanced.line1">15% cash and savings</li>
-                        <li data-i18n="article.investment.portfolios.balanced.line2">45% US large-cap stocks (S&P 500)</li>
-                        <li data-i18n="article.investment.portfolios.balanced.line3">25% US bonds (Treasury/Corporate)</li>
-                        <li data-i18n="article.investment.portfolios.balanced.line4">15% international stocks</li>
+                        <li>15% cash buffer</li>
+                        <li>45% global equity ETFs (S&P 500 + MSCI World)</li>
+                        <li>25% investment-grade bonds</li>
+                        <li>15% international/small-cap exposure</li>
                     </ul>
                 </article>
 
                 <article class="portfolio-card">
-                    <h3 data-i18n="article.investment.portfolios.growth.title">Growth Portfolio (7+ years)</h3>
-                    <p data-i18n="article.investment.portfolios.growth.desc">Higher allocation to stocks for long-term wealth building.</p>
+                    <h3>Growth (10+ years)</h3>
+                    <p>Maximize equity exposure and use bonds only for opportunistic rebalancing.</p>
                     <ul class="allocation-list">
-                        <li data-i18n="article.investment.portfolios.growth.line1">75% US stocks (broad market)</li>
-                        <li data-i18n="article.investment.portfolios.growth.line2">15% small-cap growth stocks</li>
-                        <li data-i18n="article.investment.portfolios.growth.line3">10% Treasury bonds for rebalancing</li>
+                        <li>70% global equities (broad market)</li>
+                        <li>20% thematic or small-cap tilt (tech, climate, EM)</li>
+                        <li>10% bonds or alternatives for dry powder</li>
                     </ul>
                 </article>
             </div>
         </section>
 
+        <section class="container" style="margin-top: var(--space-3xl);">
+            <div class="cta-card">
+                <h3>Pressure-test your plan</h3>
+                <p>Use the compound interest or savings goal calculators to validate that your contribution rate survives inflation and market swings.</p>
+                <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-cta">Open calculator</a>
+                <small>Educational content only. Double-check rates and regulations with your financial institution.</small>
+            </div>
+        </section>
 
         <!-- Article Navigation -->
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2 data-i18n="article.investment.visuals.title">Visual Guide: Your Money's Growth Potential</h2>
-                <p data-i18n="article.investment.visuals.subtitle">See the power of compounding in action.</p>
-            </div>
-
-            <div class="visual-guide-card" style="max-width: 800px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3" alt="Investment growth chart infographic" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md);">
-                    <small style="color: var(--text-muted);">Infographic by Unsplash - Free to use</small>
-                </div>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2 data-i18n="article.investment.quiz.title">Quick Quiz: Are You Investment-Ready?</h2>
-                <p data-i18n="article.investment.quiz.subtitle">Answer these 3 questions to gauge your strategy (for beginners and pros).</p>
-            </div>
-
-            <div class="quiz-card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card">
-                    <ol style="padding-left: var(--space-lg); margin-bottom: var(--space-lg);">
-                        <li style="margin-bottom: var(--space-md);" data-i18n="article.investment.quiz.q1">What's your risk tolerance? (Low: Bonds; High: Stocks)</li>
-                        <li style="margin-bottom: var(--space-md);" data-i18n="article.investment.quiz.q2">How long until you need the money? (Short: Savings; Long: Growth portfolio)</li>
-                        <li data-i18n="article.investment.quiz.q3">Diversified? (Mix assets to reduce risk)</li>
-                    </ol>
-                    <p data-i18n="article.investment.quiz.cta">Score yourself: 3/3? You're ready! Share your results in comments.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2 data-i18n="article.investment.action.title">Your Next Steps: Turn Knowledge Into Action</h2>
-                <p data-i18n="article.investment.action.subtitle">Don't let this information sit idle. Here's how to start your investment journey today.</p>
-            </div>
-
-            <div class="action-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-lg); margin-bottom: var(--space-2xl);">
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
-                    <h3 data-i18n="article.investment.action.step1.title">Step 1: Calculate Your Starting Point</h3>
-                    <p data-i18n="article.investment.action.step1.text" style="flex-grow: 1;">Use our compound interest calculator to see how even $100/month can grow over 10 years.</p>
-                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step1.button" style="margin-top: auto; align-self: flex-start;">Try Calculator</a>
-                </div>
-
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
-                    <h3 data-i18n="article.investment.action.step2.title">Step 2: Set Your Savings Goal</h3>
-                    <p data-i18n="article.investment.action.step2.text" style="flex-grow: 1;">Define how much you want to save and by when. Our savings goal calculator will show you the monthly amount needed.</p>
-                    <a href="../calculators/savings-goal-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step2.button" style="margin-top: auto; align-self: flex-start;">Set Goal</a>
-                </div>
-
-                <div class="action-card" style="padding: var(--space-xl); border: 1px solid var(--border); border-radius: var(--radius-lg); background: var(--white); box-shadow: var(--shadow-sm); display: flex; flex-direction: column; height: 100%;">
-                    <h3 data-i18n="article.investment.action.step3.title">Step 3: Research Investment Options</h3>
-                    <p data-i18n="article.investment.action.step3.text" style="flex-grow: 1;">Check official sources: <a href="https://www.sec.gov" target="_blank" rel="noopener">SEC.gov</a> (US), <a href="https://www.knf.gov.pl" target="_blank" rel="noopener">KNF.gov.pl</a> (Poland), <a href="https://www.cbr.ru" target="_blank" rel="noopener">CBR.ru</a> (Russia).</p>
-                    <a href="../calculators/roi-modern.html" class="btn btn-primary" data-i18n="article.investment.action.step3.button" style="margin-top: auto; align-self: flex-start;">Calculate ROI</a>
-                </div>
-            </div>
-
-            <div class="motivation-section" style="background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 168, 107, 0.08) 100%); padding: var(--space-2xl); border-radius: var(--radius-xl); text-align: center; margin: var(--space-2xl) 0;">
-                <h3 data-i18n="article.investment.motivation.title">Remember: Every Expert Was Once a Beginner</h3>
-                <p data-i18n="article.investment.motivation.text">John and Maria didn't start with thousands. They started with knowledge, consistency, and small amounts. You can too.</p>
-                <div style="margin-top: var(--space-xl);">
-                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-lg" data-i18n="article.investment.motivation.button">Start Your Investment Journey Today</a>
-                </div>
-                <small style="display: block; margin-top: var(--space-lg); color: var(--text-muted);" data-i18n="footer.disclaimer">Financial calculators for informational purposes only</small>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2 data-i18n="article.investment.share.title">Loved this? Share with Friends!</h2>
-                <p data-i18n="article.investment.share.subtitle">Help others discover the power of smart investing.</p>
-            </div>
-
-            <div class="share-card" style="max-width: 600px; margin: 0 auto;">
-                <div class="card" style="text-align: center;">
-                    <div style="display: flex; justify-content: center; gap: var(--space-md); margin-bottom: var(--space-xl);">
-                        <a href="https://twitter.com/intent/tweet?text=Check out this guide on Investment Basics!&url=https://your-site.com/articles/investment-basics-guide.html" class="btn btn-primary" target="_blank" data-i18n="article.investment.share.twitter">Share on Twitter</a>
-                        <a href="https://www.facebook.com/sharer/sharer.php?u=https://your-site.com/articles/investment-basics-guide.html" class="btn btn-primary" target="_blank" data-i18n="article.investment.share.facebook">Share on Facebook</a>
-                    </div>
-                    <img src="https://images.unsplash.com/photo-1523961131990-5ea7c61b2107" alt="People sharing investment tips" style="width: 100%; border-radius: var(--radius-md); margin-bottom: var(--space-md);">
-                    <small style="color: var(--text-muted);">Image by Unsplash - Free to use</small>
-                </div>
-            </div>
-        </section>
-
-        <!-- Article Navigation - moved to bottom -->
-        <div class="container" style="margin-top: var(--space-3xl); padding-top: var(--space-2xl); border-top: 1px solid var(--border);">
-            <div class="article-nav" style="display: flex; justify-content: center; gap: var(--space-lg); flex-wrap: wrap;">
-                <a href="debt-management-guide.html" onclick="i18n.navigateTo(event, 'debt-management-guide.html')" class="nav-btn" data-i18n="article.previous">Previous Article</a>
-                <a href="roi-investment-guide.html" onclick="i18n.navigateTo(event, 'roi-investment-guide.html')" class="nav-btn" data-i18n="article.next">Next Article</a>
-                <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
+        <div class="container">
+            <div class="article-nav">
+                <a href="debt-management-guide.html" class="nav-btn">Previous article</a>
+                <a href="roi-investment-guide.html" class="nav-btn">Next article</a>
+                <a href="../index.html#articles" class="nav-btn">Back to articles</a>
             </div>
         </div>
     </main>
@@ -581,12 +559,12 @@
     <footer class="site-footer">
         <div class="container">
             <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+                <p>&copy; 2024 FinCalc. <span>Financial calculators for informational purposes only</span></p>
             </div>
         </div>
     </footer>
 
-    <!-- Google Analytics 4 (GA4) -->
+    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -595,21 +573,5 @@
       gtag('config', 'G-LW2KKBR4L2');
     </script>
 
-    <!-- Scripts -->
-    <script src="../assets/i18n.js?v=202501220200"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Detect language from URL parameter or localStorage
-            const urlParams = new URLSearchParams(window.location.search);
-            const urlLang = urlParams.get('lang');
-            const savedLang = localStorage.getItem('preferredLanguage');
-            
-            let lang = urlLang || savedLang || 'en';
-            
-            // Set the detected language
-            i18n.setLanguage(lang);
-            i18n.updatePage();
-        });
-    </script>
 </body>
 </html>

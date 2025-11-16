@@ -482,11 +482,13 @@ const translations = {
     'article.investment.cta.title': 'Calculate Your Investment Growth',
     'article.investment.cta.text': 'See how your investments could grow over time with our compound interest calculator.',
     'article.investment.cta.button': 'Try Investment Calculator',
+    'article.clarity.title': 'Invest With Clarity in Any Market',
+    'article.clarity.desc': 'Dive into US data, investor stories, and step-by-step actions to keep your plan resilient during volatility.',
 
     // English article hero section
     'article.investment.hero.tag': '2025 Outlook',
-    'article.investment.hero.title': 'Investment Basics: Your Path to Financial Growth',
-    'article.investment.hero.subtitle': 'Learn the fundamentals of investing, manage risk wisely, and build a diversified portfolio aligned with your goals.',
+    'article.investment.hero.title': 'Invest With Clarity in the US Market',
+    'article.investment.hero.subtitle': 'Track US trends, compare banking offers in America, and build a resilient portfolio that fits your goals.',
     'article.investment.hero.cta': 'Plan Growth Scenario',
     'article.investment.hero.updated': 'Data verified: September 2025',
     'article.investment.meta.reading': '8 min read',
@@ -555,8 +557,8 @@ const translations = {
 
     // Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': '2025 Outlook',
-    'article.investment.hero.title': 'Investment Basics: Your Path to Financial Growth',
-    'article.investment.hero.subtitle': 'Learn the fundamentals of investing, manage risk wisely, and build a diversified portfolio aligned with your goals.',
+    'article.investment.hero.title': 'Invest With Clarity in Any Market',
+    'article.investment.hero.subtitle': 'Track global trends, compare regional banking offers, and build a resilient portfolio that fits your goals.',
     'article.investment.meta.updated': 'Updated October 2025',
     'article.investment.hero.cta': 'Plan Growth Scenario',
     'article.investment.hero.updated': 'Data verified: September 2025',
@@ -1241,6 +1243,8 @@ const translations = {
     // Investment Guide Article - Polish
     'article.investment.title': 'Podstawy Inwestowania: Twoja Ścieżka do Wzrostu Finansowego',
     'article.investment.desc': 'Naucz się podstaw inwestowania, od zarządzania ryzykiem po dywersyfikację portfela. Rozpocznij swoją podróż inwestycyjną z pewnością siebie.',
+    'article.clarity.title': 'Inwestuj z klarownością na każdym rynku',
+    'article.clarity.desc': 'Poznaj dane z USA, historie inwestorów i wizualne kroki, dzięki którym utrzymasz plan nawet przy dużej zmienności.',
     'article.investment.intro': 'Inwestowanie może wydawać się onieśmielające, ale jest to jedno z najpotężniejszych narzędzi do budowania długoterminowego bogactwa. Ten przewodnik omawia podstawowe koncepcje, które każdy inwestor powinien zrozumieć przed rozpoczęciem.',
     'article.investment.why.title': 'Dlaczego Warto Inwestować?',
     'article.investment.why.text': 'Inflacja z czasem obniża siłę nabywczą pieniądza. Podczas gdy konta oszczędnościowe chronią kapitał, inwestycje pomagają pieniądzom rosnąć szybciej niż inflacja, budując prawdziwe bogactwo.',
@@ -1292,8 +1296,8 @@ const translations = {
 
     // Polish Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': 'Prognoza 2025',
-    'article.investment.hero.title': 'Podstawy Inwestowania: Twoja Ścieżka do Wzrostu Finansowego',
-    'article.investment.hero.subtitle': 'Poznaj fundamenty inwestowania, naucz się zarządzać ryzykiem i zbuduj zdywersyfikowane portfolio dopasowane do Twoich celów.',
+    'article.investment.hero.title': 'Inwestuj z Klarownością na Każdym Rynku',
+    'article.investment.hero.subtitle': 'Śledź globalne trendy, porównuj oferty bankowe w regionie i buduj odporne portfolio dostosowane do Twoich celów.',
     'article.investment.meta.updated': 'Aktualizacja: październik 2025',
     'article.investment.hero.cta': 'Zaplanuj Scenariusz Wzrostu',
     'article.investment.hero.updated': 'Dane zweryfikowane: wrzesień 2025',
@@ -2163,6 +2167,8 @@ const translations = {
     // Investment Basics Article
     'article.investment.title': 'Основы Инвестирования: Ваш Путь к Финансовому Росту',
     'article.investment.desc': 'Изучите основные концепции инвестирования, стратегии управления рисками и как начать строить долгосрочное богатство через разумные инвестиции.',
+    'article.clarity.title': 'Инвестируйте с ясностью на любом рынке',
+    'article.clarity.desc': 'Изучите данные США, истории инвесторов и пошаговые действия, чтобы сохранить стратегию даже при высокой волатильности.',
     'article.investment.intro': 'Инвестирование может показаться пугающим, но это один из самых мощных инструментов для создания долгосрочного богатства. В этом руководстве рассматриваются основные концепции, которые должен понимать каждый инвестор перед началом.',
     'article.investment.why.title': 'Почему Стоит Инвестировать?',
     'article.investment.why.text': 'Инфляция со временем снижает покупательную способность денег. Хотя сберегательные счета сохраняют капитал, инвестиции помогают вашим деньгам расти быстрее инфляции, создавая реальное богатство.',
@@ -2214,8 +2220,8 @@ const translations = {
 
     // Russian Regional Banking & Investment Data (October 2025)
     'article.investment.hero.tag': 'Прогноз 2025',
-    'article.investment.hero.title': 'Основы Инвестирования: Ваш Путь к Финансовому Росту',
-    'article.investment.hero.subtitle': 'Изучите базовые принципы инвестирования, научитесь управлять риском и создайте диверсифицированное портфолио под ваши цели.',
+    'article.investment.hero.title': 'Инвестируйте с Ясностью на Любом Рынке',
+    'article.investment.hero.subtitle': 'Отслеживайте глобальные тенденции, сравнивайте банковские предложения в регионе и создавайте устойчивое портфолио, соответствующее вашим целям.',
     'article.investment.meta.updated': 'Обновлено: октябрь 2025',
     'article.investment.hero.cta': 'Запланировать Сценарий Роста',
     'article.investment.hero.updated': 'Данные проверены: сентябрь 2025',
