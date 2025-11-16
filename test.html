@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inteligentne Strategie Oszczędzania | Buduj Majątek</title>
+    
+    <!-- Подключение Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Подключение Chart.js для инфографики -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- Подключение иконок (Heroicons) -->
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+    <style>
+        /* Использование современного шрифта Inter */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc; /* Светло-серый фон */
+        }
+        h1, h2, h3 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700; /* Полужирный для заголовков */
+        }
+        .chart-container {
+            position: relative;
+            height: 300px; /* Фиксированная высота для контейнеров диаграмм */
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="text-gray-800">
+
+    <!-- Контейнер статьи -->
+    <div class="max-w-4xl mx-auto bg-white shadow-xl rounded-lg overflow-hidden my-8 md:my-16">
+        
+        <!-- Заголовок статьи -->
+        <header class="p-8 md:p-12 bg-blue-800 text-white">
+            <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-3">Inteligentne Strategie Oszczędzania</h1>
+            <p class="text-xl md:text-2xl font-light text-blue-200">Buduj Majątek Krok po Kroku w Erze Cyfrowej</p>
+        </header>
+
+        <!-- Основное содержание -->
+        <main class="p-8 md:p-12 space-y-10">
+
+            <!-- Вступление -->
+            <section>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    W dzisiejszych czasach oszczędzanie to nie tylko odkładanie pieniędzy do skarpety. To fundament budowania finansowej niezależności i bezpieczeństwa. W erze, gdzie inflacja potrafi zjadać wartość naszych pieniędzy, a możliwości inwestycyjne są na wyciągnięcie ręki, "inteligentne" oszczędzanie staje się kluczową umiejętnością. Ten artykuł przeprowadzi Cię przez nowoczesne strategie, które pomogą Ci budować majątek systematycznie i skutecznie.
+                </p>
+            </section>
+
+            <!-- Раздел 1: Сила сложного процента -->
+            <section class="space-y-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-900 border-b-2 border-blue-200 pb-2">Moc Procentu Składanego: Ósmy Cud Świata</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Albert Einstein nazwał procent składany "ósmym cudem świata". To potężne narzędzie, które sprawia, że Twoje pieniądze pracują na Ciebie. Różnica między oszczędzaniem bez inwestowania a pozwoleniem pieniądzom rosnąć wykładniczo jest ogromna. Zobaczmy to na przykładzie.
+                </p>
+                
+                <!-- Инфографика 1: Сложный процент (Диаграмма) -->
+                <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                    <h3 class="text-xl font-semibold text-center mb-4 text-gray-800">Infografika: Wzrost 10 000 zł przez 20 lat</h3>
+                    <div class="chart-container">
+                        <canvas id="compoundInterestChart"></canvas>
+                    </div>
+                    <p class="text-sm text-center text-gray-500 mt-4">
+                        Założenia: Linia niebieska (procent składany) to 7% rocznie. Linia szara (oszczędzanie proste) to brak oprocentowania.
+                    </p>
+                </div>
+            </section>
+
+            <!-- Раздел 2: Стратегии шаг за шагом -->
+            <section class="space-y-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-900 border-b-2 border-blue-200 pb-2">Krok po Kroku: Twoja Mapa do Majątku</h2>
+                <p class="text-gray-700 leading-relaxed">Budowanie bogactwa to maraton, nie sprint. Wymaga planu i konsekwencji. Oto cztery filary inteligentnej strategii oszczędzania.</p>
+
+                <!-- Шаг 1: Бюджетирование 50/30/20 -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Krok 1: Budżetowanie 50/30/20 – Przejmij Kontrolę</h3>
+                    <div class="md:flex md:space-x-6 items-center">
+                        <div class="md:w-1/2 text-gray-700 space-y-3">
+                            <p>Zanim zaczniesz oszczędzać, musisz wiedzieć, dokąd idą Twoje pieniądze. Reguła 50/30/20 to prosty i skuteczny sposób na zarządzanie budżetem:</p>
+                            <ul class="list-disc list-inside space-y-1">
+                                <li><strong class="text-blue-700">50% na Potrzeby:</strong> Czynsz, rachunki, jedzenie, transport.</li>
+                                <li><strong class="text-green-700">30% na Zachcianki:</strong> Rozrywka, jedzenie na mieście, hobby.</li>
+                                <li><strong class="text-yellow-700">20% na Oszczędności i Inwestycje:</strong> To Twój priorytet!</li>
+                            </ul>
+                        </div>
+                        <!-- Инфографика 2: 50/30/20 (Круговая диаграмма) -->
+                        <div class="md:w-1/2 mt-6 md:mt-0">
+                            <div class="chart-container" style="height: 250px;">
+                                <canvas id="budgetDonutChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 2: Автоматизация -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Krok 2: "Płać Najpierw Sobie" – Magia Automatyzacji</h3>
+                    <p class="text-gray-700 mb-6">Najskuteczniejsi oszczędzający nie polegają na sile woli. Oni automatyzują proces. Ustaw stałe zlecenie przelewu na konto oszczędnościowe lub inwestycyjne na dzień po otrzymaniu wynagrodzenia. Traktuj oszczędności jak każdy inny rachunek, który *musisz* zapłacić.</p>
+                    
+                    <!-- Инфографика 3: Поток автоматизации (CSS) -->
+                    <div class="flex flex-col md:flex-row justify-around items-center space-y-4 md:space-y-0 md:space-x-4 text-center">
+                        <div class="flex items-center flex-col md:flex-row">
+                            <div class="p-4 bg-green-100 border-2 border-green-300 rounded-full w-24 h-24 flex items-center justify-center shadow-md">
+                                <span class="text-3xl">💰</span>
+                            </div>
+                            <div class="mt-2 md:mt-0 md:ml-4">
+                                <div class="font-semibold text-green-800">1. Wpływ Pensji</div>
+                                <div class="text-sm text-gray-600">Pieniądze trafiają na konto</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-4xl text-blue-400 transform rotate-90 md:rotate-0">→</div>
+
+                        <div class="flex items-center flex-col md:flex-row">
+                            <div class="p-4 bg-blue-100 border-2 border-blue-300 rounded-full w-24 h-24 flex items-center justify-center shadow-md">
+                                <span class="text-3xl">🤖</span>
+                            </div>
+                             <div class="mt-2 md:mt-0 md:ml-4">
+                                <div class="font-semibold text-blue-800">2. Automatyczny Przelew</div>
+                                <div class="text-sm text-gray-600">Stałe zlecenie (np. 20%)</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-4xl text-blue-400 transform rotate-90 md:rotate-0">→</div>
+
+                        <div class="flex items-center flex-col md:flex-row">
+                            <div class="p-4 bg-yellow-100 border-2 border-yellow-300 rounded-full w-24 h-24 flex items-center justify-center shadow-md">
+                                <span class="text-3xl">📈</span>
+                            </div>
+                             <div class="mt-2 md:mt-0 md:ml-4">
+                                <div class="font-semibold text-yellow-800">3. Konto Inwestycyjne</div>
+                                <div class="text-sm text-gray-600">Pieniądze zaczynają rosnąć</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 3: Цели -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-xl md:text-2xl font-semibold text-blue-800 mb-6">Krok 3: Wyznacz Konkretne Cele Finansowe</h3>
+                    <p class="text-gray-700 mb-6">Oszczędzanie bez celu jest demotywujące. Podziel swoje cele na trzy kategorie, aby wiedzieć, jakimi narzędziami się posługiwać.</p>
+                    
+                    <!-- Инфографика 4: Карточки целей (CSS + Иконки) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Краткосрочная цель -->
+                        <div class="bg-blue-50 p-6 rounded-lg text-center shadow-sm border border-blue-200">
+                            <ion-icon name="car-sport-outline" class="text-5xl text-blue-600 mx-auto"></ion-icon>
+                            <h4 class="text-lg font-semibold my-2 text-blue-900">Cele Krótkoterminowe (do 2 lat)</h4>
+                            <p class="text-sm text-gray-700">Np. Fundusz awaryjny, wakacje, nowy laptop. Najlepsze narzędzie: <strong>Konto oszczędnościowe, lokata.</strong></p>
+                        </div>
+                        <!-- Среднесрочная цель -->
+                        <div class="bg-green-50 p-6 rounded-lg text-center shadow-sm border border-green-200">
+                            <ion-icon name="home-outline" class="text-5xl text-green-600 mx-auto"></ion-icon>
+                            <h4 class="text-lg font-semibold my-2 text-green-900">Cele Średnioterminowe (2-7 lat)</h4>
+                            <p class="text-sm text-gray-700">Np. Wkład własny na mieszkanie, zakup samochodu. Najlepsze narzędzie: <strong>Obligacje skarbowe, fundusze dłużne.</strong></p>
+                        </div>
+                        <!-- Долгосрочная цель -->
+                        <div class="bg-yellow-50 p-6 rounded-lg text-center shadow-sm border border-yellow-200">
+                            <ion-icon name="trending-up-outline" class="text-5xl text-yellow-600 mx-auto"></ion-icon>
+                            <h4 class="text-lg font-semibold my-2 text-yellow-900">Cele Długoterminowe (7+ lat)</h4>
+                            <p class="text-sm text-gray-700">Np. Emerytura, edukacja dzieci. Najlepsze narzędzie: <strong>Fundusze ETF, akcje, IKE/IKZE.</strong></p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Шаг 4: Диверсификация -->
+                <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+                    <h3 class="text-xl md:text-2xl font-semibold text-blue-800 mb-4">Krok 4: Walcz z Inflacją – Mądra Dywersyfikacja</h3>
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Trzymanie wszystkich oszczędności na nieoprocentowanym koncie to strata. Inflacja systematycznie zmniejsza ich siłę nabywczą. Samo oszczędzanie nie wystarczy – trzeba inwestować. Kluczem jest dywersyfikacja, czyli "nie wkładanie wszystkich jajek do jednego koszyka".
+                    </p>
+                    
+                    <!-- Инфографика 5: Риск vs Доходность (Гистограмма) -->
+                    <div class="bg-gray-50 p-6 rounded-xl shadow-inner">
+                        <h3 class="text-xl font-semibold text-center mb-4 text-gray-800">Infografika: Zależność Ryzyka i Potencjalnego Zysku</h3>
+                        <div class="chart-container" style="height: 350px;">
+                            <canvas id="riskRewardChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Раздел 3: Современные инструменты -->
+            <section class="space-y-4">
+                <h2 class="text-2xl md:text-3xl font-bold text-blue-900 border-b-2 border-blue-200 pb-2">Narzędziownia Nowoczesnego Oszczędzającego</h2>
+                <p class="text-gray-700 leading-relaxed">
+                    Technologia sprawia, że inteligentne oszczędzanie jest łatwiejsze niż kiedykolwiek. Skorzystaj z dostępnych narzędzi, aby zoptymalizować swoje finanse:
+                </p>
+                <ul class="list-disc list-inside text-gray-700 space-y-2">
+                    <li><strong>Aplikacje Budżetowe (np. YNAB, Kontomierz):</strong> Automatycznie śledzą Twoje wydatki i pomagają trzymać się planu.</li>
+                    <li><strong>Robo-doradcy (np. Finax, Portu):</strong> Automatycznie inwestują Twoje pieniądze w zdywersyfikowany portfel ETF-ów, dopasowany do Twojego profilu ryzyka. Idealne na start.</li>
+                    <li><strong>Konta IKE/IKZE:</strong> Polskie programy wspierające oszczędzanie na emeryturę, oferujące korzyści podatkowe.</li>
+                    <li><strong>Fintech i "Buy Now, Pay Later" (BNPL) – UWAGA!:</strong> Narzędzia te mogą być pomocne, ale też stanowią pułapkę. Traktuj BNPL jak kredyt – używaj odpowiedzialnie i tylko wtedy, gdy masz pewność spłaty.</li>
+                </ul>
+            </section>
+
+            <!-- Заключение -->
+            <section class="bg-blue-800 text-white p-8 rounded-lg shadow-xl">
+                <h2 class="text-3xl font-bold mb-4">Podsumowanie: Zacznij Dziś</h2>
+                <p class="text-blue-100 text-lg leading-relaxed">
+                    Budowanie majątku to maraton, nie sprint. Kluczem jest konsekwencja, automatyzacja i mądre wykorzystanie procentu składanego. Nie musisz być ekspertem finansowym, aby zacząć. Wybierz jedną strategię z tego artykułu – ustaw automatyczny przelew, przeanalizuj budżet metodą 50/30/20 lub otwórz konto IKE – i zacznij już dziś. Twoja przyszła, finansowo niezależna wersja będzie Ci za to wdzięczna.
+                </p>
+            </section>
+        </main>
+
+        <!-- Футер -->
+        <footer class="text-center p-6 bg-gray-100 text-gray-500 text-sm border-t border-gray-200">
+            <p>&copy; 2025 TwójPortalFinansowy.pl. Wszelkie prawa zastrzeżone.</p>
+            <p class="mt-1">Treści mają charakter informacyjny i nie stanowią porady inwestycyjnej.</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript для инициализации диаграмм -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // --- Инфографика 1: Сложный процент (Линейная диаграмма) ---
+            const ctx1 = document.getElementById('compoundInterestChart')?.getContext('2d');
+            if (ctx1) {
+                const labels = Array.from({length: 21}, (_, i) => `Rok ${i}`);
+                const compoundData = [];
+                const simpleData = [];
+                let compoundValue = 10000;
+                let simpleValue = 10000;
+
+                for (let i = 0; i <= 20; i++) {
+                    compoundData.push(compoundValue);
+                    simpleData.push(simpleValue);
+                    compoundValue *= 1.07; // 7% годовых
+                    // simpleValue pozostaje bez zmian (lub rośnie liniowo, jeśli dodajemy) - tu pokazujemy stagnację
+                }
+
+                new Chart(ctx1, {
+                    type: 'line',
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: 'Procent Składany (7% rocznie)',
+                                data: compoundData,
+                                borderColor: 'rgb(37, 99, 235)',
+                                backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                                fill: true,
+                                tension: 0.3,
+                            },
+                            {
+                                label: 'Oszczędzanie Proste (bez wzrostu)',
+                                data: simpleData,
+                                borderColor: 'rgb(156, 163, 175)',
+                                backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                                fill: true,
+                                borderDash: [5, 5],
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('pl-PL', { style: 'currency', currency: 'PLN' });
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y.toLocaleString('pl-PL', { style: 'currency', currency: 'PLN' });
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Инфографика 2: 50/30/20 (Круговая диаграмма) ---
+            const ctx2 = document.getElementById('budgetDonutChart')?.getContext('2d');
+            if (ctx2) {
+                new Chart(ctx2, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [
+                            'Potrzeby (50%)',
+                            'Zachcianki (30%)',
+                            'Oszczędności (20%)'
+                        ],
+                        datasets: [{
+                            data: [50, 30, 20],
+                            backgroundColor: [
+                                'rgb(59, 130, 246)', // Синий
+                                'rgb(16, 185, 129)', // Зеленый
+                                'rgb(245, 158, 11)'  // Желтый/Оранжевый
+                            ],
+                            hoverOffset: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                            },
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        return `${context.label}: ${context.raw}%`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // --- Инфографика 5: Риск vs Доходность (Гистограмма) ---
+            const ctx3 = document.getElementById('riskRewardChart')?.getContext('2d');
+            if (ctx3) {
+                new Chart(ctx3, {
+                    type: 'bar',
+                    data: {
+                        labels: ['Lokaty Bankowe', 'Obligacje Skarbowe', 'Akcje / Fundusze ETF'],
+                        datasets: [
+                            {
+                                label: 'Poziom Ryzyka',
+                                data: [1, 3, 8], // Условная шкала 1-10
+                                backgroundColor: 'rgb(239, 68, 68)', // Красный для риска
+                                order: 2
+                            },
+                            {
+                                label: 'Potencjalny Zysk',
+                                data: [2, 4, 9], // Условная шкала 1-10
+                                backgroundColor: 'rgb(34, 197, 94)', // Зеленый для доходности
+                                order: 1
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                max: 10,
+                                ticks: {
+                                    stepSize: 1,
+                                    callback: function(value) {
+                                        if (value === 0) return 'Brak';
+                                        if (value === 10) return 'Bardzo Wysoki';
+                                        if (value === 5) return 'Średni';
+                                        return '';
+                                    }
+                                }
+                            }
+                        },
+                        plugins: {
+                            tooltip: {
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) {
+                                            label += ': ';
+                                        }
+                                        let level;
+                                        switch (context.parsed.y) {
+                                            case 1: level = 'Bardzo Niski'; break;
+                                            case 2: level = 'Niski'; break;
+                                            case 3: level = 'Nisko-Średni'; break;
+                                            case 4: level = 'Średni'; break;
+                                            case 8: level = 'Wysoki'; break;
+                                            case 9: level = 'Bardzo Wysoki'; break;
+                                            default: level = context.parsed.y;
+                                        }
+                                        label += level;
+                                        return label;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+        });
+    </script>
+
+</body>
+</html>

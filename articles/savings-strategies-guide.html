@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -10,16 +10,21 @@
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
     <style>
         .article-container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
-            padding: 2rem 0;
+            padding: 2rem 1rem;
         }
         
         .article-header {
             text-align: center;
             margin-bottom: 3rem;
+            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.05) 100%);
+            padding: 3rem 2rem;
+            border-radius: var(--radius-lg);
         }
         
         .article-title {
@@ -32,23 +37,25 @@
         .article-meta {
             color: var(--text-secondary);
             font-size: 0.9rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0;
         }
         
         .article-content {
-            line-height: 1.7;
-            font-size: 1.1rem;
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
         
         .article-content h2 {
             font-size: 1.8rem;
             font-weight: 700;
-            margin: 2.5rem 0 1rem 0;
+            margin: 3rem 0 1rem 0;
             color: var(--primary);
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 0.5rem;
         }
         
         .article-content h3 {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             font-weight: 600;
             margin: 2rem 0 1rem 0;
             color: var(--text-primary);
@@ -56,7 +63,7 @@
         
         .example-box {
             background: var(--primary-light);
-            border: 1px solid var(--primary);
+            border: 2px solid var(--primary);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             margin: 2rem 0;
@@ -65,12 +72,12 @@
         .example-title {
             font-weight: 600;
             color: var(--primary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
         
         .info-box {
             background: var(--success-light);
-            border: 1px solid var(--success);
+            border: 2px solid var(--success);
             border-radius: var(--radius-lg);
             padding: 1.5rem;
             margin: 2rem 0;
@@ -81,6 +88,112 @@
             color: var(--success);
             margin-bottom: 0.5rem;
         }
+        
+        .chart-container {
+            position: relative;
+            height: 300px;
+            width: 100%;
+            background: var(--gray-50);
+            border-radius: var(--radius-lg);
+            padding: 1rem;
+            margin: 2rem 0;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .chart-title {
+            font-weight: 600;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+        
+        .automation-flow {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .automation-flow {
+                flex-direction: row;
+                justify-content: space-around;
+                align-items: center;
+            }
+        }
+        
+        .automation-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            text-align: center;
+        }
+        
+        .step-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .step-blue { background: var(--primary-light); border: 2px solid var(--primary); }
+        .step-green { background: var(--success-light); border: 2px solid var(--success); }
+        .step-yellow { background: rgba(255, 193, 7, 0.1); border: 2px solid #ffc107; }
+        
+        .step-label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .step-desc {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        
+        .goals-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        @media (min-width: 768px) {
+            .goals-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .goal-card {
+            padding: 1.5rem;
+            border-radius: var(--radius-lg);
+            text-align: center;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .goal-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .goal-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .goal-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        
+        .blue-card { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%); }
+        .green-card { background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(0, 168, 107, 0.05) 100%); }
+        .yellow-card { background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); }
         
         .comparison-table {
             width: 100%;
@@ -101,20 +214,23 @@
         .comparison-table th {
             background: var(--gray-100);
             font-weight: 600;
+            color: var(--text-primary);
         }
         
         .cta-section {
             background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
             color: white;
-            padding: 2rem;
+            padding: 2.5rem;
             border-radius: var(--radius-lg);
             text-align: center;
             margin: 3rem 0;
+            box-shadow: var(--shadow-lg);
         }
         
         .cta-section h3 {
             color: white;
             margin-bottom: 1rem;
+            font-size: 1.5rem;
         }
         
         .btn-cta {
@@ -216,80 +332,114 @@
                 Whether you're just starting or looking to optimize your approach, these proven methods will help you reach your goals faster.
             </p>
 
-            <h2 data-i18n="article.savings.emergency.title">Build Your Emergency Fund First</h2>
-            <p data-i18n="article.savings.emergency.text">
-                Before investing or pursuing other financial goals, establish an emergency fund covering 3-6 months of expenses. 
-                This safety net prevents you from going into debt during unexpected situations.
+            <!-- Chart: Compound Interest -->
+            <h2 data-i18n="article.savings.emergency.title">🏦 The Power of Compound Interest: See Your Money Grow</h2>
+            <div class="chart-container">
+                <div class="chart-title">Growth of $10,000 Over 20 Years</div>
+                <canvas id="compoundChart"></canvas>
+            </div>
+            <p>This shows the dramatic difference between saving without interest (left) and letting your money work through compound interest (right). Start early, and time becomes your greatest asset.</p>
+
+            <h2 data-i18n="article.savings.goals.title">📊 Set SMART Financial Goals by Time Horizon</h2>
+            <p data-i18n="article.savings.goals.text">
+                Specific, Measurable, Achievable, Relevant, and Time-bound goals give you clear targets. 
+                Different time horizons need different tools.
             </p>
+
+            <div class="goals-grid">
+                <div class="goal-card blue-card">
+                    <div class="goal-icon">🚗</div>
+                    <div class="goal-title">Short-term (0-2 years)</div>
+                    <div class="goal-desc">Emergency fund, vacation, new gadget. Use: <strong>High-yield savings, money market.</strong></div>
+                </div>
+                <div class="goal-card green-card">
+                    <div class="goal-icon">🏠</div>
+                    <div class="goal-title">Medium-term (2-7 years)</div>
+                    <div class="goal-desc">Home down payment, car purchase. Use: <strong>Bond funds, CDs, conservative ETFs.</strong></div>
+                </div>
+                <div class="goal-card yellow-card">
+                    <div class="goal-icon">📈</div>
+                    <div class="goal-title">Long-term (7+ years)</div>
+                    <div class="goal-desc">Retirement, education fund. Use: <strong>Stock ETFs, index funds, Roth IRA.</strong></div>
+                </div>
+            </div>
+
+            <h2 data-i18n="article.savings.automation.title">🤖 "Pay Yourself First" – The Magic of Automation</h2>
+            <p data-i18n="article.savings.automation.text">
+                The most successful savers don't rely on willpower. They automate the process. Set up a standing transfer 
+                on payday and watch your wealth build effortlessly.
+            </p>
+
+            <div class="automation-flow">
+                <div class="automation-step">
+                    <div class="step-icon step-blue">💰</div>
+                    <div class="step-label">1. Salary Arrives</div>
+                    <div class="step-desc">Money hits checking account</div>
+                </div>
+                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
+                <div class="automation-step">
+                    <div class="step-icon step-green">🤖</div>
+                    <div class="step-label">2. Auto-transfer (20%)</div>
+                    <div class="step-desc">Standing order executes</div>
+                </div>
+                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
+                <div class="automation-step">
+                    <div class="step-icon step-yellow">📈</div>
+                    <div class="step-label">3. Money Grows</div>
+                    <div class="step-desc">Earning interest/returns</div>
+                </div>
+            </div>
+
+            <h3 data-i18n="article.savings.automation.strategies">Automation Strategies:</h3>
+            <ul>
+                <li data-i18n="article.savings.automation.direct"><strong>Direct deposit split:</strong> Send 20% straight to savings before you see it</li>
+                <li data-i18n="article.savings.automation.transfer"><strong>Scheduled transfers:</strong> Every payday to your savings account</li>
+                <li data-i18n="article.savings.automation.roundup"><strong>Round-up apps:</strong> Acorns, Chime auto-save spare change</li>
+                <li data-i18n="article.savings.automation.investment"><strong>Invest automatically:</strong> Set up recurring ETF purchases</li>
+            </ul>
 
             <div class="info-box">
                 <div class="info-title">💡 Pro Tip</div>
                 <p data-i18n="article.savings.emergency.tip">
-                    Start with just $500-$1,000 as your initial emergency fund goal. Once you reach that, 
-                    gradually build it up to the full 3-6 months of expenses.
+                    Start with just $500–$1,000 as your initial emergency fund goal. Once you reach that, 
+                    gradually build it up to the full 3-6 months of expenses (typically $15,000–$30,000 for US households).
                 </p>
             </div>
 
-            <h2 data-i18n="article.savings.goals.title">Set SMART Financial Goals</h2>
-            <p data-i18n="article.savings.goals.text">
-                Specific, Measurable, Achievable, Relevant, and Time-bound goals give you clear targets. 
-                Instead of "save more money," aim for "save $10,000 for a house down payment by December 2025."
-            </p>
-
-            <div class="example-box">
-                <div class="example-title" data-i18n="article.savings.smart.title">SMART Goal Example:</div>
-                <ul>
-                    <li><strong data-i18n="article.savings.smart.specific">Specific:</strong> <span data-i18n="article.savings.smart.specific.text">Emergency fund</span></li>
-                    <li><strong data-i18n="article.savings.smart.measurable">Measurable:</strong> <span data-i18n="article.savings.smart.measurable.text">$15,000</span></li>
-                    <li><strong data-i18n="article.savings.smart.achievable">Achievable:</strong> <span data-i18n="article.savings.smart.achievable.text">Based on your income</span></li>
-                    <li><strong data-i18n="article.savings.smart.relevant">Relevant:</strong> <span data-i18n="article.savings.smart.relevant.text">Financial security</span></li>
-                    <li><strong data-i18n="article.savings.smart.timebound">Time-bound:</strong> <span data-i18n="article.savings.smart.timebound.text">Within 18 months</span></li>
-                </ul>
-            </div>
-
-            <h2 data-i18n="article.savings.automation.title">Automate Your Success</h2>
-            <p data-i18n="article.savings.automation.text">
-                Set up automatic transfers to your savings account immediately after payday. 
-                Treat savings like a non-negotiable bill – pay yourself first.
-            </p>
-
-            <h3 data-i18n="article.savings.automation.strategies">Automation Strategies:</h3>
-            <ul>
-                <li data-i18n="article.savings.automation.direct">Direct deposit split between checking and savings</li>
-                <li data-i18n="article.savings.automation.transfer">Automatic transfer on payday</li>
-                <li data-i18n="article.savings.automation.roundup">Round-up savings apps</li>
-                <li data-i18n="article.savings.automation.investment">Automatic investment contributions</li>
-            </ul>
-
-            <h2 data-i18n="article.savings.high_yield.title">Choose High-Yield Accounts</h2>
+            <h2 data-i18n="article.savings.high_yield.title">💵 High-Yield Savings vs. Traditional Banks</h2>
             <p data-i18n="article.savings.high_yield.text">
                 Don't let your money sit in low-interest accounts. High-yield savings accounts can earn 
-                10-20 times more interest than traditional savings accounts.
+                50–100 times more interest than traditional savings accounts.
             </p>
 
             <table class="comparison-table">
                 <thead>
                     <tr>
                         <th data-i18n="article.savings.table.account">Account Type</th>
-                        <th data-i18n="article.savings.table.apy">Typical APY</th>
+                        <th data-i18n="article.savings.table.apy">APY Rate (Dec 2025)</th>
                         <th data-i18n="article.savings.table.interest">Annual Interest on $10,000</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td data-i18n="article.savings.table.traditional">Traditional Savings</td>
+                        <td data-i18n="article.savings.table.traditional">Traditional Bank</td>
                         <td>0.01%</td>
                         <td>$1</td>
                     </tr>
+                    <tr style="background: rgba(0, 168, 107, 0.05);">
+                        <td data-i18n="article.savings.table.high_yield"><strong>High-Yield Savings (Ally, SoFi, Marcus)</strong></td>
+                        <td><strong>4.0–4.5%</strong></td>
+                        <td><strong>$400–$450</strong></td>
+                    </tr>
                     <tr>
-                        <td data-i18n="article.savings.table.high_yield">High-Yield Savings</td>
-                        <td>4.50%</td>
-                        <td>$450</td>
+                        <td><strong>6-month CD</strong></td>
+                        <td><strong>4.7–5.0%</strong></td>
+                        <td><strong>$470–$500</strong></td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2 data-i18n="article.savings.conclusion.title">Start Today, Thank Yourself Tomorrow</h2>
+            <h2 data-i18n="article.savings.conclusion.title">🎯 Start Today, Thank Yourself Tomorrow</h2>
             <p data-i18n="article.savings.conclusion.text">
                 The best savings strategy is the one you actually follow. Start with small, consistent amounts 
                 and gradually increase as your income grows. Your future self will thank you.
@@ -332,7 +482,78 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
+            initCompoundChart();
         });
+
+        function initCompoundChart() {
+            const ctx = document.getElementById('compoundChart');
+            if (!ctx) return;
+
+            const labels = Array.from({length: 21}, (_, i) => `Year ${i}`);
+            const compoundData = [];
+            const simpleData = [];
+            let compoundValue = 10000;
+
+            for (let i = 0; i <= 20; i++) {
+                compoundData.push(Math.round(compoundValue));
+                simpleData.push(10000);
+                compoundValue *= 1.07; // 7% compound interest
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'With 7% Compound Interest',
+                            data: compoundData,
+                            borderColor: 'rgb(0, 168, 107)',
+                            backgroundColor: 'rgba(0, 168, 107, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                        },
+                        {
+                            label: 'No Interest (Flat)',
+                            data: simpleData,
+                            borderColor: 'rgb(156, 163, 175)',
+                            backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                            fill: true,
+                            borderDash: [5, 5],
+                            tension: 0,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': $' + context.parsed.y.toLocaleString();
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>

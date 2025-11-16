@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="article.savings.title">Inteligentne Strategie Oszczędzania</title>
+    <meta name="description" data-i18n="article.savings.desc" content="Zbuduj odporny system oszczędzania: fundusz awaryjny, automatyczne wpłaty i konta przyjazne UE opisane prostym językiem.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/styles-modern.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        .article-container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        .article-header { text-align: center; margin-bottom: 3rem; background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.05) 100%); padding: 3rem 2rem; border-radius: var(--radius-lg); }
+        .article-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; color: var(--text-primary); }
+        .article-meta { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 0; }
+        .article-content { line-height: 1.8; font-size: 1.05rem; }
+        .article-content h2 { font-size: 1.8rem; font-weight: 700; margin: 3rem 0 1rem 0; color: var(--primary); border-bottom: 2px solid var(--primary-light); padding-bottom: 0.5rem; }
+        .article-content h3 { font-size: 1.3rem; font-weight: 600; margin: 2rem 0 1rem 0; color: var(--text-primary); }
+        .info-box { background: var(--success-light); border: 2px solid var(--success); border-radius: var(--radius-lg); padding: 1.5rem; margin: 2rem 0; }
+        .info-title { font-weight: 600; color: var(--success); margin-bottom: 0.5rem; }
+        .chart-container { position: relative; height: 300px; width: 100%; background: var(--gray-50); border-radius: var(--radius-lg); padding: 1rem; margin: 2rem 0; box-shadow: var(--shadow-sm); }
+        .chart-title { font-weight: 600; text-align: center; margin-bottom: 1rem; color: var(--text-primary); }
+        .automation-flow { display: flex; flex-direction: column; gap: 1.5rem; margin: 2rem 0; }
+        @media (min-width: 768px) { .automation-flow { flex-direction: row; justify-content: space-around; align-items: center; } }
+        .automation-step { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; text-align: center; }
+        .step-icon { width: 80px; height: 80px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; box-shadow: var(--shadow-md); }
+        .step-blue { background: var(--primary-light); border: 2px solid var(--primary); }
+        .step-green { background: var(--success-light); border: 2px solid var(--success); }
+        .step-yellow { background: rgba(255, 193, 7, 0.1); border: 2px solid #ffc107; }
+        .step-label { font-weight: 600; color: var(--text-primary); }
+        .step-desc { font-size: 0.9rem; color: var(--text-secondary); }
+        .goals-grid { display: grid; grid-template-columns: 1fr; gap: 1.5rem; margin: 2rem 0; }
+        @media (min-width: 768px) { .goals-grid { grid-template-columns: repeat(3, 1fr); } }
+        .goal-card { padding: 1.5rem; border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md); }
+        .goal-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .goal-title { font-weight: 600; margin-bottom: 0.5rem; color: var(--text-primary); }
+        .goal-desc { font-size: 0.95rem; color: var(--text-secondary); }
+        .blue-card { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%); }
+        .green-card { background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(0, 168, 107, 0.05) 100%); }
+        .yellow-card { background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); }
+        .comparison-table { width: 100%; border-collapse: collapse; margin: 2rem 0; box-shadow: var(--shadow-md); border-radius: var(--radius-lg); overflow: hidden; }
+        .comparison-table th, .comparison-table td { padding: 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+        .comparison-table th { background: var(--gray-100); font-weight: 600; color: var(--text-primary); }
+        .cta-section { background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%); color: white; padding: 2.5rem; border-radius: var(--radius-lg); text-align: center; margin: 3rem 0; box-shadow: var(--shadow-lg); }
+        .cta-section h3 { color: white; margin-bottom: 1rem; font-size: 1.5rem; }
+        .btn-cta { background: white; color: var(--primary); padding: 0.75rem 2rem; border-radius: var(--radius-md); text-decoration: none; font-weight: 600; display: inline-block; margin-top: 1rem; transition: var(--transition-base); }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+        .article-nav { display: flex; justify-content: space-between; margin: 3rem 0; padding: 2rem 0; border-top: 1px solid var(--border); }
+        .nav-btn { background: var(--gray-100); color: var(--text-primary); padding: 0.75rem 1.5rem; border-radius: var(--radius-md); text-decoration: none; font-weight: 500; transition: var(--transition-base); }
+        .nav-btn:hover { background: var(--primary); color: white; }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="site-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="../index.html" class="logo">
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs>
+                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
+                                <stop stop-color="#0066ff"/>
+                                <stop offset="1" stop-color="#00a86b"/>
+                            </linearGradient>
+                        </defs>
+                    </svg>
+                    <span>FinCalc</span>
+                </a>
+                
+                <nav class="nav-menu">
+                    <a href="../index.html" class="nav-link" data-i18n="nav.home">Strona główna</a>
+                    <a href="../index.html#calculators" class="nav-link" data-i18n="nav.calculators">Kalkulatory</a>
+                    <a href="../index.html#articles" class="nav-link active" data-i18n="nav.articles">Artykuły</a>
+                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare">Porównaj</a>
+                    
+                    <div class="lang-dropdown">
+                    <button class="lang-dropdown-btn">
+                        <img src="../assets/globe-icon.svg" alt="globe" class="feather feather-globe" width="16" height="16">
+                        <span class="lang-btn-text">Polski</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="savings-strategies-guide.html">English</a>
+                        <a href="savings-strategies-guide-pl.html" class="active">Polski</a>
+                        <a href="savings-strategies-guide-ru.html">Русский</a>
+                    </div>
+                </div>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article -->
+    <div class="container article-container">
+        <div class="article-header">
+            <h1 class="article-title">Inteligentne Strategie Oszczędzania: Buduj Majątek Krok po Kroku</h1>
+            <div class="article-meta">
+                <span>Czytanie: 5 min</span> • 
+                <span>Zaktualizowano: Grudzień 2024</span>
+            </div>
+        </div>
+
+        <div class="article-content">
+            <p>
+                Budowanie majątku nie dzieje się z dnia na dzień, ale dzięki właściwym strategiom oszczędzania możesz systematycznie rozwijać swoją bezpieczeństwo finansowe. Niezależnie od tego, czy dopiero zaczynasz, czy optymalizujesz swoje podejście, te sprawdzone metody pomogą Ci szybciej osiągnąć cele.
+            </p>
+
+            <!-- Chart: Compound Interest -->
+            <h2>🏦 Moc Procentu Składanego: Obserwuj Wzrost Swoich Pieniędzy</h2>
+            <div class="chart-container">
+                <div class="chart-title">Wzrost 10 000 PLN Przez 20 Lat</div>
+                <canvas id="compoundChart"></canvas>
+            </div>
+            <p>To pokazuje dramatyczną różnicę między oszczędzaniem bez odsetek (linia szara) a pozwoleniem pieniądzom pracować dzięki procentowi składanemu (linia zielona). Zacznij wcześnie, a czas stanie się Twoim największym atutem.</p>
+
+            <h2>📊 Wyznaczaj SMART Cele Finansowe Według Horyzontu Czasowego</h2>
+            <p>
+                Konkretne, mierzalne, osiągalne, istotne i ograniczone czasem cele dają jasne kierunki. 
+                Różne horyzonty czasowe wymagają różnych narzędzi.
+            </p>
+
+            <div class="goals-grid">
+                <div class="goal-card blue-card">
+                    <div class="goal-icon">🚗</div>
+                    <div class="goal-title">Krótkoterminowe (0-2 lata)</div>
+                    <div class="goal-desc">Fundusz awaryjny, wakacje, nowy gadżet. Użyj: <strong>Lokaty bieżące 5.0-5.5%, konta oszczędnościowe.</strong></div>
+                </div>
+                <div class="goal-card green-card">
+                    <div class="goal-icon">🏠</div>
+                    <div class="goal-title">Średnioterminowe (2-7 lat)</div>
+                    <div class="goal-desc">Wkład własny na mieszkanie, zakup samochodu. Użyj: <strong>Obligacje, CDs, konserwatywne ETFy.</strong></div>
+                </div>
+                <div class="goal-card yellow-card">
+                    <div class="goal-icon">📈</div>
+                    <div class="goal-title">Długoterminowe (7+ lat)</div>
+                    <div class="goal-desc">Emerytura, fundusz edukacji. Użyj: <strong>ETFy akcyjne, fundusze indeksowe, IKE/IKZE.</strong></div>
+                </div>
+            </div>
+
+            <h2>🤖 "Płać Sobie Najpierw" – Magia Automatyzacji</h2>
+            <p>
+                Najskuteczniejszy oszczędzający nie polegają na sile woli. Automatyzują proces. Ustaw stałe zlecenie przelewu 
+                w dniu wypłaty i obserwuj, jak Twoje bogactwo rośnie bez wysiłku.
+            </p>
+
+            <div class="automation-flow">
+                <div class="automation-step">
+                    <div class="step-icon step-blue">💰</div>
+                    <div class="step-label">1. Wypłata Trafia</div>
+                    <div class="step-desc">Pieniądze na koncie czekającym</div>
+                </div>
+                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
+                <div class="automation-step">
+                    <div class="step-icon step-green">🤖</div>
+                    <div class="step-label">2. Auto-przelew (20%)</div>
+                    <div class="step-desc">Stałe zlecenie wykonane</div>
+                </div>
+                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
+                <div class="automation-step">
+                    <div class="step-icon step-yellow">📈</div>
+                    <div class="step-label">3. Pieniądze Rosną</div>
+                    <div class="step-desc">Zarobiły odsetki/zwroty</div>
+                </div>
+            </div>
+
+            <h3>Strategie Automatyzacji:</h3>
+            <ul>
+                <li><strong>Podział wpłaty:</strong> Wyślij 20% bezpośrednio do oszczędności, zanim go zobaczysz</li>
+                <li><strong>Zaplanowane transfery:</strong> Każdy dzień wypłaty do Twojego konta oszczędnościowego</li>
+                <li><strong>Aplikacje zaokrąglające:</strong> Finax, Portu auto-oszczędzanie drobnych kwot</li>
+                <li><strong>Inwestycje automatyczne:</strong> Ustaw powtarzające się zakupy ETFów</li>
+            </ul>
+
+            <div class="info-box">
+                <div class="info-title">💡 Porady Pro</div>
+                <p>
+                    Zacznij z zaledwie 1 000–2 000 PLN jako początkowy cel funduszu awaryjnego. Gdy to osiągniesz, 
+                    stopniowo buduj go do pełnych 3–6 miesięcy wydatków (zazwyczaj 15 000–30 000 PLN dla polskich gospodarstw domowych).
+                </p>
+            </div>
+
+            <h2>💵 Lokaty Wysokodochodowe vs. Tradycyjne Banki</h2>
+            <p>
+                Nie trzymaj swoich pieniędzy na niewypłacalnych kontach. Lokaty wysokodochodowe mogą zarabiać 
+                50–100 razy więcej niż tradycyjne rachunki oszczędnościowe.
+            </p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Typ Konta</th>
+                        <th>Oprocentowanie (Grudzień 2024)</th>
+                        <th>Odsetki Roczne z 10 000 PLN</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bank Tradycyjny</td>
+                        <td>0.01%</td>
+                        <td>1 PLN</td>
+                    </tr>
+                    <tr style="background: rgba(0, 168, 107, 0.05);">
+                        <td><strong>Lokata Bieżąca (PKO, Santander, Millennium)</strong></td>
+                        <td><strong>5.0–5.5%</strong></td>
+                        <td><strong>500–550 PLN</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Lokata 6-miesięczna</strong></td>
+                        <td><strong>5.5–6.0%</strong></td>
+                        <td><strong>550–600 PLN</strong></td>
+                    </tr>
+                    <tr>
+                        <td><strong>ETF Akcyjny (SP500)</strong></td>
+                        <td><strong>7–8% (średnia historyczna)</strong></td>
+                        <td><strong>700–800 PLN (długoterminowo)</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>🎯 Zacznij Dziś, Podziękuj Sobie Jutro</h2>
+            <p>
+                Najlepsza strategia oszczędzania to ta, którą faktycznie stosujesz. Zacznij od małych, konsekwentnych kwot 
+                i stopniowo zwiększaj w miarę wzrostu dochodów. Twoje przyszłe ja będzie Ci wdzięczne.
+            </p>
+
+            <div class="cta-section">
+                <h3>Gotów Zaplanować Swoje Oszczędności?</h3>
+                <p>Użyj naszego kalkulatora celu oszczędnościowego, aby dokładnie zobaczyć, ile musisz oszczędzać miesięcznie, aby osiągnąć swój cel.</p>
+                <a href="../calculators/savings-goal-modern.html" class="btn-cta">Spróbuj Kalkulatora Oszczędności</a>
+            </div>
+        </div>
+
+        <!-- Article Navigation -->
+        <div class="article-nav">
+            <a href="compound-interest-guide-pl.html" class="nav-btn">Następny Artykuł</a>
+            <a href="../index.html#articles" class="nav-btn">Powrót do Artykułów</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2024 FinCalc. Kalkulatory finansowe wyłącznie w celach informacyjnych</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Google Analytics 4 (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-LW2KKBR4L2');
+    </script>
+
+    <!-- Scripts -->
+    <script src="../assets/i18n.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            i18n.setLanguage('pl');
+            i18n.updatePage();
+            initCompoundChart();
+        });
+
+        function initCompoundChart() {
+            const ctx = document.getElementById('compoundChart');
+            if (!ctx) return;
+
+            const labels = Array.from({length: 21}, (_, i) => `Rok ${i}`);
+            const compoundData = [];
+            const simpleData = [];
+            let compoundValue = 10000;
+
+            for (let i = 0; i <= 20; i++) {
+                compoundData.push(Math.round(compoundValue));
+                simpleData.push(10000);
+                compoundValue *= 1.07; // 7% compound interest
+            }
+
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Z 7% Procentem Składanym',
+                            data: compoundData,
+                            borderColor: 'rgb(0, 168, 107)',
+                            backgroundColor: 'rgba(0, 168, 107, 0.1)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 4,
+                            pointHoverRadius: 6,
+                        },
+                        {
+                            label: 'Bez Odsetek (Stały)',
+                            data: simpleData,
+                            borderColor: 'rgb(156, 163, 175)',
+                            backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                            fill: true,
+                            borderDash: [5, 5],
+                            tension: 0,
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return value.toLocaleString('pl-PL') + ' PLN';
+                                }
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'top' },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toLocaleString('pl-PL') + ' PLN';
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
+
