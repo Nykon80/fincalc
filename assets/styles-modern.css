@@ -1437,3 +1437,103 @@ section[id] {
     align-self: flex-end;
   }
 }
+
+/* Tabs Navigation */
+.tabs-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0;
+  background: var(--bg-secondary);
+  border-bottom: 2px solid var(--border);
+  position: sticky;
+  top: 70px;
+  z-index: 100;
+}
+
+.tab-btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.tab-btn:hover {
+  color: var(--primary);
+  background: rgba(0, 102, 255, 0.08);
+}
+
+.tab-btn.active {
+  color: var(--primary);
+  background: var(--bg-card);
+  box-shadow: 0 2px 8px rgba(0, 102, 255, 0.15);
+}
+
+.tab-btn.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--primary);
+}
+
+/* Tab Content */
+.tab-content {
+  display: none;
+  padding: var(--space-2xl) 0;
+  animation: fadeIn 0.3s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* News Section */
+.news-placeholder {
+  text-align: center;
+  padding: var(--space-3xl) 0;
+}
+
+.news-placeholder h3 {
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.news-placeholder p {
+  color: var(--text-secondary);
+  font-size: 1.1rem;
+}
+
+/* Mobile tabs */
+@media (max-width: 768px) {
+  .tabs-navigation {
+    gap: 0.25rem;
+    padding: 0.5rem 0;
+    flex-wrap: wrap;
+  }
+  
+  .tab-btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}

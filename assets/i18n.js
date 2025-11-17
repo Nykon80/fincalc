@@ -7,16 +7,17 @@ const translations = {
     'nav.calculators': 'Calculators',
     'nav.articles': 'Articles',
     'nav.compare': 'Compare',
+    'nav.news': 'News',
     'nav.about': 'About',
     'nav.language': 'Language',
     
     // Hero
-    'hero.title': 'Smart Financial Calculators',
+    'hero.title': 'Financial Calculators',
     'hero.subtitle': 'Make informed decisions with our professional tools',
     
     // Calculator names
     'calc.compound': 'Compound Interest',
-    'calc.deposit': 'Extended Deposit Calculator',
+    'calc.deposit': 'Deposit Calculator',
     'calc.loan': 'Loan Payment',
     'calc.savings': 'Savings Goal',
     'calc.mortgage': 'Mortgage Calculator',
@@ -267,6 +268,9 @@ const translations = {
     'section.info': 'How It Works',
     'section.calculators.title': 'Financial Calculators',
     'section.articles.title': 'Financial Guides & Articles',
+    'section.news.title': 'Financial News & Updates',
+    'section.news.subtitle': 'Stay informed with the latest financial trends and insights',
+    'section.news.coming_soon': 'News feed coming soon...',
     
     // Article navigation
     'article.read_more': 'Read More',
@@ -940,16 +944,17 @@ const translations = {
     'nav.calculators': 'Kalkulatory',
     'nav.articles': 'Artykuły',
     'nav.compare': 'Porównaj',
+    'nav.news': 'Aktualności',
     'nav.about': 'O nas',
     'nav.language': 'Język',
     
     // Hero
-    'hero.title': 'Inteligentne Kalkulatory Finansowe',
+    'hero.title': 'Kalkulatory Finansowe',
     'hero.subtitle': 'Podejmuj świadome decyzje dzięki naszym profesjonalnym narzędziom',
     
     // Calculator names
     'calc.compound': 'Procent składany',
-    'calc.deposit': 'Rozszerzony Kalkulator Lokat',
+    'calc.deposit': 'Kalkulator Lokat',
     'calc.loan': 'Rata kredytu',
     'calc.savings': 'Cel oszczędnościowy',
     'calc.mortgage': 'Kalkulator hipoteczny',
@@ -1014,6 +1019,9 @@ const translations = {
     'section.info': 'Jak to działa',
     'section.calculators.title': 'Kalkulatory Finansowe',
     'section.articles.title': 'Przewodniki i Artykuły Finansowe',
+    'section.news.title': 'Wiadomości Finansowe',
+    'section.news.subtitle': 'Bądź na bieżąco z najnowszymi trendami i informacjami finansowymi',
+    'section.news.coming_soon': 'Wkrótce kanał informacyjny...',
     
     // Article navigation
     'article.read_more': 'Czytaj więcej',
@@ -1754,16 +1762,17 @@ const translations = {
     'nav.calculators': 'Калькуляторы',
     'nav.articles': 'Статьи',
     'nav.compare': 'Сравнить',
+    'nav.news': 'Новости',
     'nav.about': 'О нас',
     'nav.language': 'Язык',
     
     // Hero
-    'hero.title': 'Умные Финансовые Калькуляторы',
+    'hero.title': 'Финансовые Калькуляторы',
     'hero.subtitle': 'Принимайте обоснованные решения с нашими профессиональными инструментами',
     
     // Calculator names
     'calc.compound': 'Сложный процент',
-    'calc.deposit': 'Расширенный Калькулятор Вкладов',
+    'calc.deposit': 'Калькулятор Вкладов',
     'calc.loan': 'Платеж по кредиту',
     'calc.savings': 'Сберегательная цель',
     'calc.mortgage': 'Ипотечный калькулятор',
@@ -2066,8 +2075,11 @@ const translations = {
     'tip.compound_consistency': 'Последовательность — это ключ. Регулярные взносы, даже небольшие, могут со временем значительно вырасти.',
 
     // Sections
-    'section.calculators.title': 'Наши Калькуляторы',
+    'section.calculators.title': 'Калькуляторы',
     'section.articles.title': 'Избранные Статьи',
+    'section.news.title': 'Финансовые Новости',
+    'section.news.subtitle': 'Будьте в курсе последних финансовых трендов и аналитики',
+    'section.news.coming_soon': 'Лента новостей скоро появится...',
     'article.read_more': 'Читать далее',
     'article.previous': 'Предыдущая статья',
     'article.next': 'Следующая статья',

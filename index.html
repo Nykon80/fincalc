@@ -108,11 +108,6 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="index.html" class="nav-link active" data-i18n="nav.home">Home</a>
-                    <a href="index.html#calculators" class="nav-link" data-i18n="nav.calculators">Calculators</a>
-                    <a href="index.html#articles" class="nav-link" data-i18n="nav.articles">Articles</a>
-                    <a href="index.html#compare" class="nav-link" data-i18n="nav.compare">Compare</a>
-                    
                     <div class="lang-dropdown">
                     <button class="lang-dropdown-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -137,8 +132,28 @@
         </div>
     </section>
     
-    <!-- Calculators Grid -->
-    <section id="calculators" class="container">
+    <!-- Tabs Navigation -->
+    <div class="tabs-navigation">
+        <button class="tab-btn active" data-tab="news" data-i18n="nav.news">News</button>
+        <button class="tab-btn" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
+        <button class="tab-btn" data-tab="articles" data-i18n="nav.articles">Articles</button>
+        <button class="tab-btn" data-tab="compare" data-i18n="nav.compare">Compare</button>
+    </div>
+    
+    <!-- News Tab -->
+    <div id="news" class="tab-content active">
+        <section class="container">
+            <div class="news-placeholder">
+                <h3 data-i18n="section.news.title">Financial News & Updates</h3>
+                <p data-i18n="section.news.subtitle">Stay informed with the latest financial trends and insights</p>
+                <p data-i18n="section.news.coming_soon" style="margin-top: 2rem; font-style: italic;">News feed coming soon...</p>
+            </div>
+        </section>
+    </div>
+    
+    <!-- Calculators Tab -->
+    <div id="calculators" class="tab-content">
+        <section class="container">
         <h2 data-i18n="section.calculators.title">Financial Calculators</h2>
         <div class="grid">
             <!-- Deposit Calculator -->
@@ -254,10 +269,12 @@
                 </ul>
             </article>
         </div>
-    </section>
+        </section>
+    </div>
     
-    <!-- Featured Articles -->
-    <section id="articles" class="container mt-3">
+    <!-- Articles Tab -->
+    <div id="articles" class="tab-content">
+        <section class="container">
         <h2 class="text-center" data-i18n="section.articles.title">Financial Guides & Articles</h2>
         <div class="grid">
             <article class="card card-link" role="link" tabindex="0" data-article="savings-strategies-guide">
@@ -314,10 +331,12 @@
                 </ul>
             </article>
         </div>
-    </section>
+        </section>
+    </div>
     
-    <!-- Compare Section -->
-    <section id="compare" class="container mt-3">
+    <!-- Compare Tab -->
+    <div id="compare" class="tab-content">
+        <section class="container">
         <h2 class="text-center">Compare Financial Products</h2>
         <div class="results-container">
             <p class="text-center">Compare interest rates, fees, and features of financial products in your region.</p>
@@ -327,7 +346,8 @@
                 <button class="btn btn-success" disabled>Coming Soon</button>
             </div>
         </div>
-    </section>
+        </section>
+    </div>
     
     <!-- Ad Slot -->
     <div class="container mt-3">

@@ -57,6 +57,51 @@ window.financeUtils = {
   on,
 };
 
-
+// Tabs functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+  
+  // Function to switch tabs
+  function switchTab(tabName) {
+    // Remove active class from all buttons and contents
+    tabBtns.forEach(btn => btn.classList.remove('active'));
+    tabContents.forEach(content => content.classList.remove('active'));
+    
+    // Add active class to selected button and content
+    const selectedBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    const selectedContent = document.getElementById(tabName);
+    
+    if (selectedBtn) selectedBtn.classList.add('active');
+    if (selectedContent) selectedContent.classList.add('active');
+    
+    // Update URL hash without scrolling
+    history.pushState(null, null, `#${tabName}`);
+  }
+  
+  // Add click event to all tab buttons
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const tabName = this.getAttribute('data-tab');
+      switchTab(tabName);
+    });
+  });
+  
+  // Check URL hash on load and switch to that tab
+  const hash = window.location.hash.substring(1); // Remove # from hash
+  if (hash && ['news', 'calculators', 'articles', 'compare'].includes(hash)) {
+    switchTab(hash);
+  }
+  
+  // Handle browser back/forward buttons
+  window.addEventListener('popstate', function() {
+    const hash = window.location.hash.substring(1);
+    if (hash && ['news', 'calculators', 'articles', 'compare'].includes(hash)) {
+      switchTab(hash);
+    } else {
+      switchTab('news'); // Default to news if no hash
+    }
+  });
+});
 
 
