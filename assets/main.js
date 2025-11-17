@@ -119,6 +119,34 @@ document.addEventListener('DOMContentLoaded', function() {
       switchTab('calculators'); // Default to calculators if no hash
     }
   });
+  
+  // Language dropdown toggle for mobile
+  const langDropdown = document.querySelector('.lang-dropdown');
+  const langDropdownBtn = document.querySelector('.lang-dropdown-btn');
+  const langDropdownContent = document.querySelector('.lang-dropdown-content');
+  
+  if (langDropdownBtn && langDropdownContent) {
+    // Toggle dropdown on button click (for mobile)
+    langDropdownBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const isOpen = langDropdownContent.style.display === 'block';
+      langDropdownContent.style.display = isOpen ? 'none' : 'block';
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!langDropdown.contains(e.target)) {
+        langDropdownContent.style.display = 'none';
+      }
+    });
+    
+    // Close dropdown when language is selected
+    langDropdownContent.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function() {
+        langDropdownContent.style.display = 'none';
+      });
+    });
+  }
 });
 
 

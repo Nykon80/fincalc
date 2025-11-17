@@ -1020,6 +1020,7 @@ section[id] {
     justify-content: space-between;
     align-items: center;
     gap: var(--space-sm);
+    position: relative;
   }
 
   .logo {
@@ -1032,14 +1033,7 @@ section[id] {
 
   /* Navigation mobile - compact horizontal */
   .nav-menu {
-    display: flex;
-    flex-direction: row;
-    gap: var(--space-xs);
-    align-items: center;
-    overflow-x: auto;
-    flex: 1;
-    justify-content: center;
-    padding: 0 var(--space-sm);
+    display: none; /* Hide nav-menu on mobile, it's empty now */
   }
 
   .nav-menu a {
@@ -1060,9 +1054,10 @@ section[id] {
 
   /* Language dropdown mobile */
   .lang-dropdown {
-    margin-left: 0;
+    margin-left: auto;
     flex-shrink: 0;
-    z-index: 1001;
+    z-index: 2001;
+    position: relative;
   }
 
   .lang-dropdown-btn {
@@ -1083,9 +1078,21 @@ section[id] {
     right: 0;
     top: 100%;
     margin-top: 0.5rem;
-    z-index: 1000;
-    min-width: 120px;
+    z-index: 2000;
+    min-width: 140px;
     overflow: visible;
+    position: absolute;
+    display: none;
+  }
+  
+  .lang-dropdown:hover .lang-dropdown-content,
+  .lang-dropdown:focus-within .lang-dropdown-content {
+    display: block;
+  }
+  
+  /* Show dropdown on mobile when active class is added */
+  .lang-dropdown.active .lang-dropdown-content {
+    display: block !important;
   }
   
   .lang-dropdown-content::before {
@@ -1101,6 +1108,7 @@ section[id] {
   .lang-dropdown-content a {
     padding: 14px 16px; /* Larger touch targets */
     font-size: 0.95rem;
+    white-space: nowrap;
   }
 
   /* Hero section mobile */
