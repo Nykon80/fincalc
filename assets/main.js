@@ -77,6 +77,23 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Update URL hash without scrolling
     history.pushState(null, null, `#${tabName}`);
+    
+    // Scroll to top of page smoothly
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+    
+    // Load news if news tab is activated
+    if (tabName === 'news' && window.newsManager) {
+      const currentLang = window.i18n ? window.i18n.currentLang : (localStorage.getItem('preferredLanguage') || 'en');
+      window.newsManager.loadNews(currentLang);
+    }
+    
+    // Dispatch custom event for tab activation
+    window.dispatchEvent(new CustomEvent('tabActivated', {
+      detail: { tabName: tabName }
+    }));
   }
   
   // Add click event to all tab buttons
@@ -99,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (hash && ['news', 'calculators', 'articles', 'compare'].includes(hash)) {
       switchTab(hash);
     } else {
-      switchTab('news'); // Default to news if no hash
+      switchTab('calculators'); // Default to calculators if no hash
     }
   });
 });

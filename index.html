@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Financial Calculators - Smart Tools for Your Money</title>
-    <meta name="description" content="Professional financial calculators for compound interest, loans, mortgages, and savings goals. Make informed decisions with our free tools.">
+    <title>FinCalc - Financial Calculators, Tools & News | Free Online</title>
+    <meta name="description" content="Professional financial calculators for deposits, loans, mortgages, savings, ROI & credit cards. Real-time financial news from CNBC, Yahoo Finance, RBC. Free tools in EN/PL/RU.">
+    <meta name="keywords" content="financial calculator, deposit calculator, loan calculator, mortgage calculator, savings calculator, ROI calculator, credit card payoff, financial news, investment tools, compound interest, financial planning">
+    <meta name="author" content="FinCalc">
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
     
     <!-- SEO Meta Tags -->
-    <meta property="og:title" content="Financial Calculators - Smart Tools for Your Money">
-    <meta property="og:description" content="Professional financial calculators for compound interest, loans, mortgages, and savings goals. Make informed decisions with our free tools.">
+    <meta property="og:title" content="FinCalc - Financial Calculators, Tools & News">
+    <meta property="og:description" content="Professional financial calculators for deposits, loans, mortgages, savings, ROI & credit cards. Real-time financial news from CNBC, Yahoo Finance, RBC.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="https://nykon80.github.io/fincalc/assets/og-image.png">
     <meta property="og:url" content="https://nykon80.github.io/fincalc/">
+    <meta property="og:site_name" content="FinCalc">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="pl_PL">
+    <meta property="og:locale:alternate" content="ru_RU">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Financial Calculators - Smart Tools for Your Money">
-    <meta name="twitter:description" content="Professional financial calculators for compound interest, loans, mortgages, and savings goals.">
+    <meta name="twitter:title" content="FinCalc - Financial Calculators, Tools & News">
+    <meta name="twitter:description" content="Professional financial calculators & real-time financial news. Free tools for deposits, loans, mortgages, savings, ROI & credit cards.">
     <meta name="twitter:image" content="https://nykon80.github.io/fincalc/assets/og-image.png">
+    <meta name="twitter:site" content="@FinCalc">
+    <meta name="twitter:creator" content="@FinCalc">
     
     <!-- Styles -->
     <link rel="stylesheet" href="assets/styles-modern.css">
@@ -58,6 +67,7 @@
 
     <!-- Яндекс Метрика -->
     <!-- ЗАМЕНИТЕ XXXXXX на ваш реальный номер счетчика из Яндекс Метрики -->
+    <!--
     <script>
        (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
        m[i].l=1*new Date();k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
@@ -71,17 +81,68 @@
        });
     </script>
     <noscript><div><img src="https://mc.yandex.ru/watch/XXXXXX" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+    -->
 
-    <!-- Schema.org -->
+    <!-- Schema.org - Website -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Financial Calculators - FinCalc",
-        "description": "Professional financial calculators for compound interest, loans, mortgages, and savings goals",
+        "name": "FinCalc - Financial Calculators",
+        "alternateName": "Financial Calculators",
+        "description": "Professional financial calculators for compound interest, loans, mortgages, savings goals, and investment planning. Free tools with real-time financial news.",
         "url": "https://nykon80.github.io/fincalc/",
         "inLanguage": ["en", "pl", "ru"],
-        "image": "https://nykon80.github.io/fincalc/assets/og-image.png"
+        "image": "https://nykon80.github.io/fincalc/assets/og-image.png",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://nykon80.github.io/fincalc/#search={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Schema.org - Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FinCalc",
+        "url": "https://nykon80.github.io/fincalc/",
+        "logo": "https://nykon80.github.io/fincalc/favicon.svg",
+        "description": "Provider of free professional financial calculators and tools",
+        "sameAs": [
+            "https://github.com/Nykon80/fincalc"
+        ]
+    }
+    </script>
+    
+    <!-- Schema.org - BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [{
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://nykon80.github.io/fincalc/"
+        },{
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Calculators",
+            "item": "https://nykon80.github.io/fincalc/#calculators"
+        },{
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Articles",
+            "item": "https://nykon80.github.io/fincalc/#articles"
+        },{
+            "@type": "ListItem",
+            "position": 4,
+            "name": "News",
+            "item": "https://nykon80.github.io/fincalc/#news"
+        }]
     }
     </script>
     <script src="assets/i18n.js" defer></script>
@@ -135,14 +196,14 @@
     
     <!-- Tabs Navigation -->
     <div class="tabs-navigation">
-        <button class="tab-btn active" data-tab="news" data-i18n="nav.news">News</button>
-        <button class="tab-btn" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
+        <button class="tab-btn active" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
+        <button class="tab-btn" data-tab="news" data-i18n="nav.news">News</button>
         <button class="tab-btn" data-tab="articles" data-i18n="nav.articles">Articles</button>
         <button class="tab-btn" data-tab="compare" data-i18n="nav.compare">Compare</button>
     </div>
     
     <!-- News Tab -->
-    <div id="news" class="tab-content active">
+    <div id="news" class="tab-content">
         <section class="container">
             <h2 data-i18n="section.news.title">Financial News & Updates</h2>
             <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="section.news.subtitle">Stay informed with the latest financial trends and insights</p>
@@ -163,7 +224,7 @@
     </div>
     
     <!-- Calculators Tab -->
-    <div id="calculators" class="tab-content">
+    <div id="calculators" class="tab-content active">
         <section class="container">
         <h2 data-i18n="section.calculators.title">Financial Calculators</h2>
         <div class="grid">
@@ -171,7 +232,8 @@
             <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/deposit-calculator-modern.html">
                 <div class="card-header">
                     <h3 data-i18n="calc.deposit">Extended Deposit Calculator</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" role="img" aria-label="Deposit Calculator Icon">
+                        <title>Deposit Calculator</title>
                         <!-- График роста с процентами -->
                         <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
                         <path d="M7 14l3-3 3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -389,13 +451,13 @@
     </div>
     
     <!-- Scripts -->
-    <script src="assets/i18n.js"></script>
-    <script src="assets/main.js"></script>
     <script>
         // Initialize page
         document.addEventListener('DOMContentLoaded', function() {
             // Update language on page load
-            i18n.updatePage();
+            if (window.i18n) {
+                i18n.updatePage();
+            }
             
             // Check if cookies were previously accepted
             const cookiesAccepted = localStorage.getItem('cookiesAccepted');
