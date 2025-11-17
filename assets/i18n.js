@@ -271,6 +271,10 @@ const translations = {
     'section.news.title': 'Financial News & Updates',
     'section.news.subtitle': 'Stay informed with the latest financial trends and insights',
     'section.news.coming_soon': 'News feed coming soon...',
+    'news.loading': 'Loading news...',
+    'news.error': 'Unable to load news. Please try again later.',
+    'news.source': 'Source',
+    'news.read_more': 'Read More',
     
     // Article navigation
     'article.read_more': 'Read More',
@@ -1022,6 +1026,10 @@ const translations = {
     'section.news.title': 'Wiadomości Finansowe',
     'section.news.subtitle': 'Bądź na bieżąco z najnowszymi trendami i informacjami finansowymi',
     'section.news.coming_soon': 'Wkrótce kanał informacyjny...',
+    'news.loading': 'Ładowanie wiadomości...',
+    'news.error': 'Nie udało się załadować wiadomości. Spróbuj ponownie później.',
+    'news.source': 'Źródło',
+    'news.read_more': 'Czytaj więcej',
     
     // Article navigation
     'article.read_more': 'Czytaj więcej',
@@ -2080,6 +2088,10 @@ const translations = {
     'section.news.title': 'Финансовые Новости',
     'section.news.subtitle': 'Будьте в курсе последних финансовых трендов и аналитики',
     'section.news.coming_soon': 'Лента новостей скоро появится...',
+    'news.loading': 'Загрузка новостей...',
+    'news.error': 'Не удалось загрузить новости. Попробуйте позже.',
+    'news.source': 'Источник',
+    'news.read_more': 'Читать далее',
     'article.read_more': 'Читать далее',
     'article.previous': 'Предыдущая статья',
     'article.next': 'Следующая статья',
@@ -2701,6 +2713,11 @@ class I18n {
       localStorage.setItem('preferredLanguage', lang);
       this.updatePage();
       this.updateURL();
+      
+      // Dispatch event for news feed to reload
+      window.dispatchEvent(new CustomEvent('languageChanged', { 
+        detail: { language: lang } 
+      }));
     }
   }
   
