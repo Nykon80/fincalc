@@ -7,7 +7,11 @@ const NEWS_FEEDS = {
     'https://www.cnbc.com/id/100003114/device/rss/rss.html',
     'https://feeds.reuters.com/reuters/businessNews',
     'https://feeds.marketwatch.com/marketwatch/markets',
-    'https://www.bloomberg.com/feeds/bloomberg-business.rss'
+    'https://www.bloomberg.com/feeds/bloomberg-business.rss',
+    'https://www.theguardian.com/business/rss',
+    'https://www.forbes.com/markets/feed/',
+    'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
+    'https://www.investopedia.com/feedbuilder/feed/getfeed/?feedName=investing'
   ],
   pl: [
     'https://www.bankier.pl/rss/wiadomosci.xml',
@@ -19,15 +23,26 @@ const NEWS_FEEDS = {
     'https://rss.money.pl/rss/rss_money_finanse.xml',
     'https://www.bankier.pl/rss/akcje.xml',
     'https://www.bankier.pl/rss/obligacje.xml',
-    'https://www.bankier.pl/rss/fundusze.xml'
+    'https://www.bankier.pl/rss/fundusze.xml',
+    'https://www.parkiet.com/rss/6515',
+    'https://strefainwestorow.pl/rss.xml',
+    'https://www.pb.pl/rss',
+    'https://businessinsider.com.pl/finanse/rss'
   ],
   ru: [
     'https://rssexport.rbc.ru/rbcnews/news/30/full.rss',
     'https://www.vedomosti.ru/rss/news',
     'https://www.kommersant.ru/RSS/news.xml',
-    'https://www.finam.ru/analysis/news/rss/'
+    'https://www.finam.ru/analysis/news/rss/',
+    'https://www.banki.ru/xml/news.rss',
+    'https://lenta.ru/rss/economics',
+    'https://www.interfax.ru/rss.asp',
+    'https://1prime.ru/export/rss.xml'
   ]
 };
+
+const MAX_NEWS_AGE_DAYS = 5;
+const MAX_NEWS_AGE_MS = MAX_NEWS_AGE_DAYS * 24 * 60 * 60 * 1000;
 
 const FALLBACK_NEWS = {
   en: [
@@ -399,17 +414,37 @@ class NewsFeedManager {
     this.loadingElement = document.getElementById('news-loading');
     this.errorElement = document.getElementById('news-error');
     this.gridElement = document.getElementById('news-grid');
+    // Compact news elements
+    this.compactLoadingElement = document.getElementById('news-compact-loading');
+    this.compactErrorElement = document.getElementById('news-compact-error');
+    this.compactGridElement = document.getElementById('news-compact-grid');
   }
 
   async loadNews(lang = 'en') {
+    // Determine which view to use
+    const newsTab = document.getElementById('news');
+    const calculatorsTab = document.getElementById('calculators');
+    const isNewsTabActive = newsTab && newsTab.classList.contains('active');
+    const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
+    
     // Check if already cached
     if (this.newsCache[lang]) {
-      this.displayNews(this.newsCache[lang]);
+      // Display news based on active tab
+      if (isNewsTabActive && this.gridElement) {
+        this.displayNews(this.newsCache[lang]);
+      } else if (isCalculatorsTabActive && this.compactGridElement) {
+        this.displayCompactNews(this.newsCache[lang], 6);
+      }
       return;
     }
 
     try {
-      this.showLoading();
+      // Show loading for appropriate element
+      if (isNewsTabActive && this.loadingElement) {
+        this.showLoading();
+      } else if (isCalculatorsTabActive && this.compactLoadingElement) {
+        this.showCompactLoading();
+      }
       
       const feeds = NEWS_FEEDS[lang] || NEWS_FEEDS['en'];
       const allNews = [];
@@ -479,8 +514,11 @@ class NewsFeedManager {
                 : (filteredItems.length > 0 ? filteredItems : data.items));
             
             // Take more items from each feed to ensure enough news (minimum 12 per language)
-            const itemsPerFeed = 15; // Increased for all languages to ensure minimum 12 news items
-            itemsToUse.slice(0, itemsPerFeed).forEach(item => {
+            const itemsPerFeed = 18;
+            const recentItems = itemsToUse.filter(item => this.isRecent(item.pubDate));
+            const feedItems = recentItems.length >= 5 ? recentItems : itemsToUse;
+            
+            feedItems.slice(0, itemsPerFeed).forEach(item => {
               try {
                 // Clean description first
                 const description = this.cleanDescription(item.description || item.content || '');
@@ -569,7 +607,17 @@ class NewsFeedManager {
       // Cache results
       this.newsCache[lang] = topNews;
 
-      this.displayNews(topNews);
+      // Display news based on active tab
+      const newsTab = document.getElementById('news');
+      const calculatorsTab = document.getElementById('calculators');
+      const isNewsTabActive = newsTab && newsTab.classList.contains('active');
+      const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
+      
+      if (isNewsTabActive && this.gridElement) {
+        this.displayNews(topNews);
+      } else if (isCalculatorsTabActive && this.compactGridElement) {
+        this.displayCompactNews(topNews, 6);
+      }
     } catch (error) {
       console.error('Error loading news:', error);
       
@@ -582,7 +630,18 @@ class NewsFeedManager {
       
       // Cache and display fallback
       this.newsCache[lang] = fallbackNews;
-      this.displayNews(fallbackNews);
+      
+      // Display news based on active tab
+      const newsTab = document.getElementById('news');
+      const calculatorsTab = document.getElementById('calculators');
+      const isNewsTabActive = newsTab && newsTab.classList.contains('active');
+      const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
+      
+      if (isNewsTabActive && this.gridElement) {
+        this.displayNews(fallbackNews);
+      } else if (isCalculatorsTabActive && this.compactGridElement) {
+        this.displayCompactNews(fallbackNews, 6);
+      }
     }
   }
 
@@ -650,6 +709,15 @@ class NewsFeedManager {
     return text.length > 200 ? text.substring(0, 200) + '...' : text;
   }
 
+  escapeHtml(text) {
+    if (!text || typeof text !== 'string') {
+      return '';
+    }
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   extractSource(url) {
     try {
       const hostname = new URL(url).hostname;
@@ -675,6 +743,19 @@ class NewsFeedManager {
     } else {
       return date.toLocaleDateString();
     }
+  }
+
+  isRecent(pubDate) {
+    if (!pubDate) {
+      return true;
+    }
+    
+    const published = new Date(pubDate);
+    if (isNaN(published.getTime())) {
+      return true;
+    }
+    
+    return (Date.now() - published.getTime()) <= MAX_NEWS_AGE_MS;
   }
 
   displayNews(newsItems) {
@@ -704,15 +785,15 @@ class NewsFeedManager {
       card.rel = 'noopener noreferrer';
       
       const imageHtml = hasImage ? `
-        <img src="${news.thumbnail}" alt="${news.title}" class="news-card-image" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">
+        <img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">
       ` : '';
       
       card.innerHTML = `
         ${imageHtml}
-        <h3 class="news-card-title">${news.title}</h3>
-        <p class="news-card-description">${news.description}</p>
+        <h3 class="news-card-title">${this.escapeHtml(news.title)}</h3>
+        <p class="news-card-description">${this.escapeHtml(news.description)}</p>
         <div class="news-card-meta">
-          <span class="news-card-source">${news.source}</span>
+          <span class="news-card-source">${this.escapeHtml(news.source)}</span>
           <span class="news-card-date">${this.formatDate(news.pubDate)}</span>
         </div>
       `;
@@ -726,24 +807,95 @@ class NewsFeedManager {
     }
   }
 
+  displayCompactNews(newsItems, limit = 6) {
+    if (!this.compactGridElement) return;
+    
+    this.hideCompactLoading();
+    this.hideCompactError();
+    this.compactGridElement.style.display = 'grid';
+    this.compactGridElement.innerHTML = '';
+
+    // Filter out news without description
+    const validNews = newsItems.filter(news => {
+      const description = (news.description || '').trim();
+      return description && description.length >= 20;
+    }).slice(0, limit); // Take only first N news items
+
+    if (validNews.length === 0) {
+      this.showCompactError();
+      return;
+    }
+
+    validNews.forEach(news => {
+      const card = document.createElement('a');
+      const hasImage = news.thumbnail && !news.thumbnail.includes('placeholder');
+      
+      card.className = `news-card ${hasImage ? '' : 'no-image'}`;
+      card.href = news.link;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      
+      const imageHtml = hasImage ? `
+        <img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">
+      ` : '';
+      
+      card.innerHTML = `
+        ${imageHtml}
+        <h3 class="news-card-title">${this.escapeHtml(news.title)}</h3>
+        <p class="news-card-description">${this.escapeHtml(news.description)}</p>
+        <div class="news-card-meta">
+          <span class="news-card-source">${this.escapeHtml(news.source)}</span>
+          <span class="news-card-date">${this.formatDate(news.pubDate)}</span>
+        </div>
+      `;
+      
+      this.compactGridElement.appendChild(card);
+    });
+
+    // Update i18n for dynamically added content
+    if (window.i18n && window.i18n.updatePage) {
+      window.i18n.updatePage();
+    }
+  }
+
   showLoading() {
-    this.loadingElement.style.display = 'block';
-    this.errorElement.style.display = 'none';
-    this.gridElement.style.display = 'none';
+    if (this.loadingElement) this.loadingElement.style.display = 'block';
+    if (this.errorElement) this.errorElement.style.display = 'none';
+    if (this.gridElement) this.gridElement.style.display = 'none';
   }
 
   hideLoading() {
-    this.loadingElement.style.display = 'none';
+    if (this.loadingElement) this.loadingElement.style.display = 'none';
   }
 
   showError() {
-    this.loadingElement.style.display = 'none';
-    this.errorElement.style.display = 'block';
-    this.gridElement.style.display = 'none';
+    if (this.loadingElement) this.loadingElement.style.display = 'none';
+    if (this.errorElement) this.errorElement.style.display = 'block';
+    if (this.gridElement) this.gridElement.style.display = 'none';
   }
 
   hideError() {
-    this.errorElement.style.display = 'none';
+    if (this.errorElement) this.errorElement.style.display = 'none';
+  }
+
+  showCompactLoading() {
+    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'block';
+    if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
+    if (this.compactGridElement) this.compactGridElement.style.display = 'none';
+  }
+
+  hideCompactLoading() {
+    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'none';
+  }
+
+  showCompactError() {
+    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'none';
+    if (this.compactErrorElement) this.compactErrorElement.style.display = 'block';
+    if (this.compactGridElement) this.compactGridElement.style.display = 'none';
+  }
+
+  hideCompactError() {
+    if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
   }
 }
 
@@ -754,6 +906,13 @@ document.addEventListener('DOMContentLoaded', function() {
   // Make newsManager globally available
   window.newsManager = newsManager;
   
+  // Check if calculators tab is active by default (load compact news)
+  const calculatorsTab = document.getElementById('calculators');
+  if (calculatorsTab && calculatorsTab.classList.contains('active')) {
+    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
+    newsManager.loadNews(currentLang);
+  }
+  
   // Check if news tab is active by default
   const newsTab = document.getElementById('news');
   if (newsTab && newsTab.classList.contains('active')) {
@@ -761,18 +920,24 @@ document.addEventListener('DOMContentLoaded', function() {
     newsManager.loadNews(currentLang);
   }
   
-  // Load news when news tab is activated
+  // Load news when tab is activated
   window.addEventListener('tabActivated', function(e) {
+    const currentLang = window.i18n ? window.i18n.currentLang : (localStorage.getItem('preferredLanguage') || 'en');
     if (e.detail.tabName === 'news') {
-      const currentLang = window.i18n ? window.i18n.currentLang : (localStorage.getItem('preferredLanguage') || 'en');
+      newsManager.loadNews(currentLang);
+    } else if (e.detail.tabName === 'calculators') {
+      // Load compact news for calculators tab
       newsManager.loadNews(currentLang);
     }
   });
   
-  // Reload news when language changes (only if news tab is active)
+  // Reload news when language changes
   window.addEventListener('languageChanged', function(e) {
+    const calculatorsTab = document.getElementById('calculators');
     const newsTab = document.getElementById('news');
-    if (newsTab && newsTab.classList.contains('active')) {
+    if (calculatorsTab && calculatorsTab.classList.contains('active')) {
+      newsManager.loadNews(e.detail.language);
+    } else if (newsTab && newsTab.classList.contains('active')) {
       newsManager.loadNews(e.detail.language);
     }
   });

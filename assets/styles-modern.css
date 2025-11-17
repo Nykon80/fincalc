@@ -1496,6 +1496,21 @@ a.tab-btn {
   padding-bottom: calc(0.75rem - 1px);
 }
 
+.view-all-btn {
+  border: 1px solid var(--primary) !important;
+  background: var(--primary) !important;
+  color: var(--white) !important;
+  border-bottom: 1px solid var(--primary) !important;
+  margin-bottom: 0 !important;
+  padding-bottom: 0.75rem !important;
+}
+
+.view-all-btn:hover {
+  background: var(--primary-dark) !important;
+  border-color: var(--primary-dark) !important;
+  color: var(--white) !important;
+}
+
 /* Tab Content */
 .tab-content {
   display: none !important;
@@ -1608,6 +1623,19 @@ a.tab-btn {
 .news-card-link svg {
   width: 16px;
   height: 16px;
+}
+
+/* Compact news section styling */
+#news-compact-grid .news-card {
+  min-height: auto;
+}
+
+#news-compact-grid .news-card-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Mobile tabs */

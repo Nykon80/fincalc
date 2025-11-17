@@ -432,11 +432,6 @@
                 </a>
                 
                 <nav class="nav-menu">
-                    <a href="../index.html" class="nav-link" data-i18n="nav.home" onclick="i18n.navigateTo(event, '../index.html')">Home</a>
-                    <a href="../index.html#calculators" class="nav-link active" data-i18n="nav.calculators" onclick="i18n.navigateTo(event, '../index.html#calculators')">Calculators</a>
-                    <a href="../index.html#articles" class="nav-link" data-i18n="nav.articles" onclick="i18n.navigateTo(event, '../index.html#articles')">Articles</a>
-                    <a href="../index.html#compare" class="nav-link" data-i18n="nav.compare" onclick="i18n.navigateTo(event, '../index.html#compare')">Compare</a>
-                    
                     <div class="lang-dropdown">
                         <button class="lang-dropdown-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -452,6 +447,14 @@
             </div>
         </div>
     </header>
+    
+    <!-- Tabs Navigation -->
+    <div class="tabs-navigation">
+        <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
+        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
+        <a href="../index.html#articles" class="tab-btn" data-i18n="nav.articles">Articles</a>
+        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
+    </div>
     
     <!-- Calculator -->
     <div class="container calculator-container">
@@ -1024,6 +1027,11 @@
         const originalSetLanguage = i18n.setLanguage.bind(i18n);
         i18n.setLanguage = function(lang) {
             originalSetLanguage(lang);
+            // Update toggle button text when language changes
+            const toggleButton = document.getElementById('toggleView');
+            if (toggleButton) {
+                toggleButton.textContent = viewMode === 'yearly' ? i18n.t('button.monthly') : i18n.t('button.yearly');
+            }
             // Recalculate to update currency formatting
             calculate();
         };
@@ -1041,6 +1049,13 @@
             
             // Initialize regional defaults
             initializeRegionalDefaults();
+            
+            // Initialize toggle button text (show opposite of current viewMode)
+            // Since viewMode defaults to 'yearly', button should show 'monthly'
+            const toggleButton = document.getElementById('toggleView');
+            if (toggleButton) {
+                toggleButton.textContent = viewMode === 'yearly' ? i18n.t('button.monthly') : i18n.t('button.yearly');
+            }
 
             // Add input listeners for real-time calculation
             document.querySelectorAll('input, select').forEach(input => {

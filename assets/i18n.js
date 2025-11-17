@@ -124,6 +124,7 @@ const translations = {
     'table.tax': 'Tax',
     
     // Chart
+    'chart.year': 'Year',
     'chart.month': 'Month',
     
     // Additional form labels
@@ -254,6 +255,9 @@ const translations = {
     'form.payment.monthly': 'Monthly',
     'form.payment.biweekly': 'Bi-weekly',
     'form.payment.weekly': 'Weekly',
+    'payment.monthly': 'Monthly',
+    'payment.biweekly': 'Bi-weekly',
+    'payment.weekly': 'Weekly',
     
     // Section headers
     'section.investment': 'Investment Details',
@@ -267,10 +271,12 @@ const translations = {
     'section.breakdown': 'Yearly Breakdown',
     'section.info': 'How It Works',
     'section.calculators.title': 'Financial Calculators',
-    'section.articles.title': 'Financial Guides & Articles',
+    'section.articles.title': 'Financial Literacy Articles',
     'section.news.title': 'Financial News & Updates',
     'section.news.subtitle': 'Stay informed with the latest financial trends and insights',
     'section.news.coming_soon': 'News feed coming soon...',
+    'section.news.compact_title': 'Latest Financial News',
+    'section.news.view_all': 'View All News',
     'news.loading': 'Loading news...',
     'news.error': 'Unable to load news. Please try again later.',
     'news.source': 'Source',
@@ -1022,10 +1028,12 @@ const translations = {
     'section.breakdown': 'Podział roczny',
     'section.info': 'Jak to działa',
     'section.calculators.title': 'Kalkulatory Finansowe',
-    'section.articles.title': 'Przewodniki i Artykuły Finansowe',
+    'section.articles.title': 'Artykuły o Finansowej Edukacji',
     'section.news.title': 'Wiadomości Finansowe',
     'section.news.subtitle': 'Bądź na bieżąco z najnowszymi trendami i informacjami finansowymi',
     'section.news.coming_soon': 'Wkrótce kanał informacyjny...',
+    'section.news.compact_title': 'Najnowsze Wiadomości Finansowe',
+    'section.news.view_all': 'Zobacz Wszystkie',
     'news.loading': 'Ładowanie wiadomości...',
     'news.error': 'Nie udało się załadować wiadomości. Spróbuj ponownie później.',
     'news.source': 'Źródło',
@@ -1071,6 +1079,9 @@ const translations = {
     'form.payment.monthly': 'Miesięcznie',
     'form.payment.biweekly': 'Co dwa tygodnie',
     'form.payment.weekly': 'Tygodniowo',
+    'payment.monthly': 'Miesięcznie',
+    'payment.biweekly': 'Co dwa tygodnie',
+    'payment.weekly': 'Tygodniowo',
     
     // Deposit calculator specific labels
     'form.capitalization': 'Kapitalizacja',
@@ -1140,6 +1151,10 @@ const translations = {
     'result.roi.amount': 'Kwota ROI',
     'result.roi.annual': 'Roczny ROI',
     
+    // Chart
+    'chart.year': 'Rok',
+    'chart.month': 'Miesiąc',
+    
     // Table headers
     'table.year': 'Rok',
     'table.month': 'Miesiąc',
@@ -1156,6 +1171,7 @@ const translations = {
     'table.tax': 'Podatek',
     'result.tax': 'Potrącony Podatek',
     'button.yearly': 'Widok Roczny',
+    'button.monthly': 'Widok Miesięczny',
     'button.export': 'Eksportuj do Excel',
     'form.submit': 'Oblicz',
     
@@ -1878,6 +1894,7 @@ const translations = {
     'table.tax': 'Налог',
     'result.tax': 'Удержанный налог',
     'button.yearly': 'Годовой Вид',
+    'button.monthly': 'Месячный Вид',
     'button.export': 'Экспорт в Excel',
     'form.submit': 'Рассчитать',
 
@@ -2003,6 +2020,9 @@ const translations = {
     'info.deposit': 'Этот расширенный калькулятор учитывает капитализируемые проценты, периодические пополнения и снятия, удержание налогов и сценарии досрочного закрытия. См. подробную таблицу ниже для помесячного прогресса.',
     
     // Payment types
+    'form.payment.monthly': 'Ежемесячный',
+    'form.payment.biweekly': 'Раз в две недели',
+    'form.payment.weekly': 'Еженедельный',
     'payment.monthly': 'Ежемесячный',
     'payment.biweekly': 'Раз в две недели',
     'payment.weekly': 'Еженедельный',
@@ -2084,10 +2104,12 @@ const translations = {
 
     // Sections
     'section.calculators.title': 'Калькуляторы',
-    'section.articles.title': 'Избранные Статьи',
+    'section.articles.title': 'Статьи по Финансовой Грамотности',
     'section.news.title': 'Финансовые Новости',
     'section.news.subtitle': 'Будьте в курсе последних финансовых трендов и аналитики',
     'section.news.coming_soon': 'Лента новостей скоро появится...',
+    'section.news.compact_title': 'Последние Финансовые Новости',
+    'section.news.view_all': 'Все Новости',
     'news.loading': 'Загрузка новостей...',
     'news.error': 'Не удалось загрузить новости. Попробуйте позже.',
     'news.source': 'Источник',

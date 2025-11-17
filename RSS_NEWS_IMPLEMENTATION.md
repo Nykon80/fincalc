@@ -21,13 +21,38 @@
 ### 🇬🇧 English Sources:
 - **CNBC** - `https://www.cnbc.com/id/100003114/device/rss/rss.html`
 - **Yahoo Finance** - `https://feeds.finance.yahoo.com/rss/2.0/headline`
+- **The Guardian Business** - `https://www.theguardian.com/business/rss`
+- **Forbes Markets** - `https://www.forbes.com/markets/feed/`
+- **Dow Jones / WSJ Markets** - `https://feeds.a.dj.com/rss/RSSMarketsMain.xml`
+- **Investopedia Investing** - `https://www.investopedia.com/feedbuilder/feed/getfeed/?feedName=investing`
 
 ### 🇵🇱 Polish Sources:
 - **Bankier.pl** - `https://www.bankier.pl/rss/wiadomosci.xml`
 - **Money.pl** - `https://rss.money.pl/rss/rss_money_biznes.xml`
+- **Parkiet (Giełда)** - `https://www.parkiet.com/rss/6515`
+- **Strefa Inwestorów** - `https://strefainwestorow.pl/rss.xml`
+- **Puls Biznesu** - `https://www.pb.pl/rss`
+- **Business Insider Polska (Finanse)** - `https://businessinsider.com.pl/finanse/rss`
 
 ### 🇷🇺 Russian Sources:
 - **RBC** - `https://rssexport.rbc.ru/rbcnews/news/30/full.rss`
+- **Ведомости** - `https://www.vedomosti.ru/rss/news`
+- **Коммерсантъ** - `https://www.kommersant.ru/RSS/news.xml`
+- **Finam** - `https://www.finam.ru/analysis/news/rss/`
+- **Banki.ru** - `https://www.banki.ru/xml/news.rss`
+- **Lenta.ru (Economics)** - `https://lenta.ru/rss/economics`
+- **Interfax** - `https://www.interfax.ru/rss.asp`
+- **Prime** - `https://1prime.ru/export/rss.xml`
+
+---
+
+### ♻️ Обновление 17.11.2025 (вечер)
+
+- ✅ Добавлены новые **бесплатные** RSS-источники для EN/PL/RU, чтобы выдавать больше профильных заметок без подписок и GitHub Actions.
+- ✅ **Качество**: теперь фильтруем записи старше **5 дней** (если фид не даёт дату, оставляем как есть, чтобы не терять важные материалы).
+- ✅ **Количество**: поднимаем выборку до **18 материалов с каждого фида**, а после агрегации оставляем минимум 12 лучших новостей.
+- ✅ **Производительность**: всё по‑прежнему работает через RSS2JSON, никаких платных API не нужно.
+- ✅ **UX**: кэш и fallback остаются — разделы «Новости» и компактный блок под калькуляторами используют одну общую логику.
 
 ---
 

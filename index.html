@@ -343,12 +343,35 @@
             </article>
         </div>
         </section>
+        
+        <!-- News Section (Compact) -->
+        <section class="container" style="margin-top: var(--space-3xl); padding-top: var(--space-3xl); border-top: 2px solid var(--border);">
+            <h2 style="margin-bottom: var(--space-xl);" data-i18n="section.news.compact_title">Latest Financial News</h2>
+            
+            <!-- News Loading State -->
+            <div id="news-compact-loading" style="text-align: center; padding: 2rem 0;">
+                <p data-i18n="news.loading">Loading news...</p>
+            </div>
+            
+            <!-- News Error State -->
+            <div id="news-compact-error" style="display: none; text-align: center; padding: 2rem 0; color: var(--danger);">
+                <p data-i18n="news.error">Unable to load news. Please try again later.</p>
+            </div>
+            
+            <!-- News Grid (Compact) -->
+            <div id="news-compact-grid" class="grid" style="display: none;"></div>
+            
+            <!-- View All Button -->
+            <div style="text-align: center; margin-top: var(--space-xl);">
+                <button class="tab-btn view-all-btn" data-tab="news" data-i18n="section.news.view_all">View All News</button>
+            </div>
+        </section>
     </div>
     
     <!-- Articles Tab -->
     <div id="articles" class="tab-content">
         <section class="container">
-        <h2 class="text-center" data-i18n="section.articles.title">Financial Guides & Articles</h2>
+        <h2 class="text-center" data-i18n="section.articles.title">Financial Literacy Articles</h2>
         <div class="grid">
             <article class="card card-link" role="link" tabindex="0" data-article="savings-strategies-guide">
                 <h3 data-i18n="article.savings.title">Smart Savings Strategies: Build Wealth Step by Step</h3>
