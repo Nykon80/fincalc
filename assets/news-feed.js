@@ -1,730 +1,467 @@
-// RSS News Feed Parser
-// Automatically loads financial news from RSS feeds
+// RSS News Feed Parser v2.1
+// Только финансовые новости с приоритетом изображений
 
+const NEWS_CONFIG = {
+  cacheLifetimeMs: 30 * 60 * 1000,
+  autoRefreshMs: 30 * 60 * 1000,
+  maxNewsAge: 7,
+  newsLimit: 15,
+  minNewsCount: 12,
+  compactLimit: 6,
+  minKeywordMatches: 2, // Минимум совпадений ключевых слов
+  prioritizeWithImages: true // Приоритет новостям с фото
+};
+
+// RSS источники - ТОЛЬКО финансовые
 const NEWS_FEEDS = {
   en: [
-    'https://feeds.finance.yahoo.com/rss/2.0/headline?region=US&lang=en-US',
-    'https://www.cnbc.com/id/100003114/device/rss/rss.html',
-    'https://feeds.reuters.com/reuters/businessNews',
-    'https://feeds.marketwatch.com/marketwatch/markets',
-    'https://www.bloomberg.com/feeds/bloomberg-business.rss',
-    'https://www.theguardian.com/business/rss',
-    'https://www.forbes.com/markets/feed/',
-    'https://feeds.a.dj.com/rss/RSSMarketsMain.xml',
-    'https://www.investopedia.com/feedbuilder/feed/getfeed/?feedName=investing'
+    { url: 'https://feeds.finance.yahoo.com/rss/2.0/headline?region=US&lang=en-US', name: 'Yahoo Finance', isFinance: true },
+    { url: 'https://www.cnbc.com/id/100003114/device/rss/rss.html', name: 'CNBC Markets', isFinance: true },
+    { url: 'https://feeds.marketwatch.com/marketwatch/marketpulse/', name: 'MarketWatch', isFinance: true },
+    { url: 'https://feeds.bbci.co.uk/news/business/rss.xml', name: 'BBC Business', isFinance: true },
+    { url: 'https://rss.nytimes.com/services/xml/rss/nyt/Business.xml', name: 'NY Times Business', isFinance: true },
+    { url: 'https://www.investing.com/rss/news.rss', name: 'Investing.com', isFinance: true }
   ],
   pl: [
-    'https://www.bankier.pl/rss/wiadomosci.xml',
-    'https://rss.money.pl/rss/rss_money_biznes.xml',
-    'https://www.bankier.pl/rss/Forex.xml',
-    'https://www.bankier.pl/rss/rynki.xml',
-    'https://www.bankier.pl/rss/gospodarka.xml',
-    'https://rss.money.pl/rss/rss_money_gospodarka.xml',
-    'https://rss.money.pl/rss/rss_money_finanse.xml',
-    'https://www.bankier.pl/rss/akcje.xml',
-    'https://www.bankier.pl/rss/obligacje.xml',
-    'https://www.bankier.pl/rss/fundusze.xml',
-    'https://www.parkiet.com/rss/6515',
-    'https://strefainwestorow.pl/rss.xml',
-    'https://www.pb.pl/rss',
-    'https://businessinsider.com.pl/finanse/rss'
+    { url: 'https://www.bankier.pl/rss/wiadomosci.xml', name: 'Bankier', isFinance: true },
+    { url: 'https://www.bankier.pl/rss/rynki.xml', name: 'Bankier Rynki', isFinance: true },
+    { url: 'https://www.bankier.pl/rss/gospodarka.xml', name: 'Bankier Gospodarka', isFinance: true },
+    { url: 'https://www.money.pl/rss/rss.xml', name: 'Money.pl', isFinance: true },
+    { url: 'https://www.parkiet.com/rss.xml', name: 'Parkiet', isFinance: true },
+    { url: 'https://stooq.pl/rss/?q=news', name: 'Stooq', isFinance: true }
   ],
   ru: [
-    'https://rssexport.rbc.ru/rbcnews/news/30/full.rss',
-    'https://www.vedomosti.ru/rss/news',
-    'https://www.kommersant.ru/RSS/news.xml',
-    'https://www.finam.ru/analysis/news/rss/',
-    'https://www.banki.ru/xml/news.rss',
-    'https://lenta.ru/rss/economics',
-    'https://www.interfax.ru/rss.asp',
-    'https://1prime.ru/export/rss.xml'
+    { url: 'https://rssexport.rbc.ru/rbcnews/news/30/full.rss', name: 'РБК Финансы', isFinance: true },
+    { url: 'https://www.vedomosti.ru/rss/news', name: 'Ведомости', isFinance: true },
+    { url: 'https://www.kommersant.ru/RSS/news.xml', name: 'Коммерсантъ', isFinance: true },
+    { url: 'https://www.finam.ru/analysis/news/rss/', name: 'Финам', isFinance: true },
+    { url: 'https://1prime.ru/rss.xml', name: 'Прайм', isFinance: true }
   ]
 };
 
-const MAX_NEWS_AGE_DAYS = 5;
-const MAX_NEWS_AGE_MS = MAX_NEWS_AGE_DAYS * 24 * 60 * 60 * 1000;
+const RSS_APIS = [
+  { url: 'https://api.rss2json.com/v1/api.json?rss_url=', name: 'rss2json' },
+  { url: 'https://api.allorigins.win/raw?url=', name: 'allorigins', isProxy: true }
+];
 
+// Расширенные ключевые слова для финансов
+const FINANCE_KEYWORDS = {
+  en: [
+    'stock', 'market', 'share', 'trading', 'investor', 'investment', 'portfolio',
+    'dow', 'nasdaq', 's&p', 'nyse', 'ftse', 'dax', 'index', 'indices',
+    'bank', 'banking', 'loan', 'mortgage', 'credit', 'debt', 'interest rate',
+    'fed', 'federal reserve', 'central bank', 'ecb', 'monetary policy',
+    'inflation', 'deflation', 'gdp', 'economy', 'economic', 'recession',
+    'bond', 'treasury', 'yield', 'fixed income',
+    'crypto', 'bitcoin', 'ethereum', 'cryptocurrency', 'blockchain',
+    'oil', 'gold', 'silver', 'commodity', 'crude', 'brent',
+    'forex', 'currency', 'dollar', 'euro', 'yen', 'pound', 'exchange rate',
+    'earnings', 'revenue', 'profit', 'dividend', 'ipo', 'merger', 'acquisition',
+    'etf', 'mutual fund', 'hedge fund', 'asset', 'wealth',
+    'fintech', 'payment', 'financi', 'wall street'
+  ],
+  pl: [
+    'akcje', 'giełda', 'gpw', 'wig', 'wig20', 'inwestor', 'inwestycja', 'portfel',
+    'bank', 'kredyt', 'hipoteka', 'pożyczka', 'oprocentowanie', 'stopa procentowa',
+    'nbp', 'rpp', 'polityka pieniężna',
+    'inflacja', 'pkb', 'gospodarka', 'recesja', 'wzrost',
+    'obligacje', 'skarbowe', 'rentowność',
+    'kryptowaluta', 'bitcoin', 'ethereum',
+    'ropa', 'złoto', 'srebro', 'surowce',
+    'waluta', 'kurs', 'złoty', 'euro', 'dolar', 'forex',
+    'zysk', 'przychód', 'dywidenda', 'fuzja', 'przejęcie',
+    'fundusz', 'etf', 'tfi', 'aktywa',
+    'finanse', 'finansow', 'rynki', 'notowania'
+  ],
+  ru: [
+    'акции', 'биржа', 'мосбиржа', 'ртс', 'индекс', 'инвестор', 'инвестици', 'портфель',
+    'банк', 'кредит', 'ипотека', 'займ', 'процентн', 'ставка', 'вклад', 'депозит',
+    'цб', 'центробанк', 'центральный банк', 'ключевая ставка', 'денежно-кредитн',
+    'инфляци', 'ввп', 'экономик', 'рецессия', 'рост',
+    'облигаци', 'офз', 'доходност', 'купон',
+    'криптовалют', 'биткоин', 'эфириум', 'блокчейн',
+    'нефть', 'золото', 'серебро', 'сырье', 'брент',
+    'валют', 'курс', 'рубль', 'доллар', 'евро', 'форекс',
+    'прибыль', 'выручка', 'дивиденд', 'слияни', 'поглощени',
+    'фонд', 'etf', 'пиф', 'актив',
+    'финанс', 'рынок', 'торг', 'котировк', 'сбер', 'газпром', 'лукойл'
+  ]
+};
+
+// Слова-исключения (политика, война и т.д.)
+const EXCLUDE_KEYWORDS = {
+  en: ['war', 'military', 'troops', 'invasion', 'missile', 'bomb', 'soldier', 'ukraine conflict', 'taiwan strait', 'political', 'election', 'vote', 'campaign', 'democrat', 'republican', 'celebrity', 'entertainment', 'sport', 'football', 'movie', 'music'],
+  pl: ['wojna', 'wojsk', 'żołnierz', 'atak', 'rakiet', 'polityk', 'wybor', 'głosow', 'partia', 'celebryta', 'rozrywka', 'sport', 'piłka', 'film', 'muzyka'],
+  ru: ['война', 'военн', 'солдат', 'ракет', 'атак', 'удар', 'политик', 'выбор', 'голосов', 'партия', 'депутат', 'дума', 'украин', 'крым', 'донбасс', 'нато', 'санкци', 'знаменит', 'шоу-бизнес', 'спорт', 'футбол', 'кино', 'музык']
+};
+
+// Fallback новости - финансовые с фото
 const FALLBACK_NEWS = {
   en: [
-    {
-      title: 'Global Markets Rally as Inflation Data Improves',
-      description: 'US and EU benchmark indices closed higher after softer inflation readings pointed to fewer rate hikes in 2026.',
-      link: 'https://www.cnbc.com/',
-      pubDate: new Date(Date.now() - 2 * 3600000),
-      source: 'Global Markets',
-      thumbnail: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Fed Officials Signal Gradual Rate Cuts for 2026',
-      description: 'Minutes from the November meeting show the Federal Reserve preparing a roadmap for rate cuts next year if inflation keeps moderating.',
-      link: 'https://www.reuters.com/',
-      pubDate: new Date(Date.now() - 4 * 3600000),
-      source: 'Fed News',
-      thumbnail: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Oil Prices Slip as Supply Stabilizes',
-      description: 'Brent crude moved lower as OPEC+ confirmed voluntary cuts will stay in place only through Q1 2026.',
-      link: 'https://www.marketwatch.com/',
-      pubDate: new Date(Date.now() - 6 * 3600000),
-      source: 'Commodities',
-      thumbnail: 'https://images.unsplash.com/photo-1488820098099-8dbd460c81b0?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Tech Giants Report Strong Q3 Earnings',
-      description: 'Major technology companies surpassed expectations with AI-driven growth and increased cloud revenue margins.',
-      link: 'https://www.bloomberg.com/',
-      pubDate: new Date(Date.now() - 8 * 3600000),
-      source: 'Tech Markets',
-      thumbnail: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Banking Sector Eyes Merger Wave in 2026',
-      description: 'Regulatory changes and margin pressures spark speculation about consolidation across regional banks.',
-      link: 'https://www.yahoo.com/finance',
-      pubDate: new Date(Date.now() - 10 * 3600000),
-      source: 'Finance News',
-      thumbnail: 'https://images.unsplash.com/photo-1552821206-b6e36b1f1b0f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Cryptocurrency Markets See Volatility Spike',
-      description: 'Bitcoin and major altcoins experienced significant price swings as regulatory clarity remains uncertain in key markets.',
-      link: 'https://www.coindesk.com/',
-      pubDate: new Date(Date.now() - 12 * 3600000),
-      source: 'Crypto Markets',
-      thumbnail: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'European Central Bank Maintains Current Policy',
-      description: 'ECB officials signal no immediate changes to interest rates as inflation data comes in line with expectations.',
-      link: 'https://www.reuters.com/',
-      pubDate: new Date(Date.now() - 14 * 3600000),
-      source: 'ECB News',
-      thumbnail: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Real Estate Investment Trusts Show Strong Performance',
-      description: 'REITs across commercial and residential sectors report higher occupancy rates and rental income growth.',
-      link: 'https://www.marketwatch.com/',
-      pubDate: new Date(Date.now() - 16 * 3600000),
-      source: 'Real Estate',
-      thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Emerging Markets Currency Rally Continues',
-      description: 'Currencies in developing economies strengthen as commodity prices stabilize and global trade flows improve.',
-      link: 'https://www.bloomberg.com/',
-      pubDate: new Date(Date.now() - 18 * 3600000),
-      source: 'Forex Markets',
-      thumbnail: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Corporate Bond Yields Narrow on Economic Optimism',
-      description: 'Investment-grade corporate bonds see spread compression as credit markets anticipate stable economic growth.',
-      link: 'https://www.cnbc.com/',
-      pubDate: new Date(Date.now() - 20 * 3600000),
-      source: 'Bond Markets',
-      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Sustainable Finance Gains Momentum',
-      description: 'ESG-focused investment products attract record inflows as institutional investors prioritize climate and social impact.',
-      link: 'https://www.yahoo.com/finance',
-      pubDate: new Date(Date.now() - 22 * 3600000),
-      source: 'ESG Investing',
-      thumbnail: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Gold Prices Reach New Highs Amid Economic Uncertainty',
-      description: 'Precious metals surge as investors seek safe-haven assets while central banks signal potential policy shifts.',
-      link: 'https://www.marketwatch.com/',
-      pubDate: new Date(Date.now() - 24 * 3600000),
-      source: 'Commodities',
-      thumbnail: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Housing Market Shows Signs of Stabilization',
-      description: 'Home prices moderate as mortgage rates level off and inventory levels increase across major metropolitan areas.',
-      link: 'https://www.bloomberg.com/',
-      pubDate: new Date(Date.now() - 26 * 3600000),
-      source: 'Real Estate',
-      thumbnail: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Retail Banking Digital Transformation Accelerates',
-      description: 'Traditional banks invest heavily in mobile banking platforms and AI-powered customer service to compete with fintech challengers.',
-      link: 'https://www.cnbc.com/',
-      pubDate: new Date(Date.now() - 28 * 3600000),
-      source: 'Banking',
-      thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Insurance Sector Adapts to Climate Risk',
-      description: 'Property and casualty insurers revise pricing models and coverage terms as extreme weather events become more frequent.',
-      link: 'https://www.reuters.com/',
-      pubDate: new Date(Date.now() - 30 * 3600000),
-      source: 'Insurance',
-      thumbnail: 'https://images.unsplash.com/photo-1444653389962-8149286c578a?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Pension Funds Increase Alternative Investments',
-      description: 'Institutional investors allocate more capital to private equity, real estate, and infrastructure to boost long-term returns.',
-      link: 'https://www.yahoo.com/finance',
-      pubDate: new Date(Date.now() - 32 * 3600000),
-      source: 'Pensions',
-      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'
-    }
+    { title: 'Stock Markets Rally on Fed Rate Decision', description: 'Major indices closed higher as investors welcomed the Federal Reserve\'s decision on interest rates. The S&P 500 gained 1.2% while Nasdaq led with 1.8% growth.', link: 'https://finance.yahoo.com/', source: 'Markets', pubDate: new Date(Date.now() - 2*3600000), thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Banking Sector Reports Strong Quarterly Earnings', description: 'Major banks exceeded expectations with robust loan growth and improved net interest margins. JPMorgan, Bank of America, and Wells Fargo all beat analyst estimates.', link: 'https://www.cnbc.com/', source: 'Banking', pubDate: new Date(Date.now() - 4*3600000), thumbnail: 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Oil Prices Surge on OPEC+ Production Cuts', description: 'Crude oil jumped 3% after OPEC+ announced deeper production cuts to support prices amid global demand concerns. Brent crude topped $85 per barrel.', link: 'https://www.marketwatch.com/', source: 'Commodities', pubDate: new Date(Date.now() - 6*3600000), thumbnail: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Bitcoin Rebounds Above $45,000 Mark', description: 'Cryptocurrency markets recovered as Bitcoin gained 5% in 24 hours. Institutional buying and ETF inflows drove the rally across digital assets.', link: 'https://www.coindesk.com/', source: 'Crypto', pubDate: new Date(Date.now() - 8*3600000), thumbnail: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Treasury Yields Rise on Inflation Data', description: '10-year Treasury yield climbed to 4.5% after inflation figures came in above expectations. Bond investors reassess rate cut timing expectations.', link: 'https://www.wsj.com/', source: 'Bonds', pubDate: new Date(Date.now() - 10*3600000), thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Gold Hits New Record High Amid Dollar Weakness', description: 'Gold prices surged to all-time high of $2,150 per ounce as the dollar weakened and safe-haven demand increased amid economic uncertainty.', link: 'https://www.kitco.com/', source: 'Gold', pubDate: new Date(Date.now() - 12*3600000), thumbnail: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Tech Giants Lead Market with AI Investments', description: 'Apple, Microsoft, and Google shares rose as companies announced increased AI spending. Tech sector outperformed broader market indices.', link: 'https://www.bloomberg.com/', source: 'Tech Stocks', pubDate: new Date(Date.now() - 14*3600000), thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80' },
+    { title: 'European Markets Close Higher on ECB Signals', description: 'European equities gained as ECB signaled potential rate cuts. DAX rose 0.8%, CAC 40 added 1.1%, and FTSE 100 climbed 0.6%.', link: 'https://www.reuters.com/', source: 'Europe', pubDate: new Date(Date.now() - 16*3600000), thumbnail: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Mortgage Rates Drop to 6-Month Low', description: '30-year fixed mortgage rate fell to 6.8%, spurring refinancing activity. Home buyers see improved affordability as rates trend lower.', link: 'https://www.forbes.com/', source: 'Real Estate', pubDate: new Date(Date.now() - 18*3600000), thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Dollar Index Weakens Against Major Currencies', description: 'The DXY fell 0.5% as traders price in Fed rate cuts. Euro strengthened to 1.10 while yen gained ground against the greenback.', link: 'https://www.dailyfx.com/', source: 'Forex', pubDate: new Date(Date.now() - 20*3600000), thumbnail: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Retail Investors Drive ETF Inflows to Record', description: 'Exchange-traded funds attracted $50 billion in monthly inflows. Index funds and dividend ETFs led the surge in retail investor interest.', link: 'https://www.morningstar.com/', source: 'ETFs', pubDate: new Date(Date.now() - 22*3600000), thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Corporate Bond Spreads Tighten on Risk Appetite', description: 'Investment-grade corporate bonds rallied as credit spreads narrowed. Companies with strong balance sheets see improved borrowing costs.', link: 'https://www.ft.com/', source: 'Credit', pubDate: new Date(Date.now() - 24*3600000), thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Hedge Funds Increase Equity Exposure', description: 'Major hedge funds raised stock holdings to highest level in 18 months. Tech and healthcare sectors attract most institutional capital.', link: 'https://www.bloomberg.com/', source: 'Hedge Funds', pubDate: new Date(Date.now() - 26*3600000), thumbnail: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Emerging Markets Currencies Rally', description: 'EM currencies strengthened as risk sentiment improved. Brazilian real and Mexican peso led gains against the dollar.', link: 'https://www.investing.com/', source: 'EM Markets', pubDate: new Date(Date.now() - 28*3600000), thumbnail: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'IPO Market Rebounds with Tech Listings', description: 'Initial public offerings surge as market conditions improve. Several fintech and AI companies prepare for listings in coming weeks.', link: 'https://www.cnbc.com/', source: 'IPOs', pubDate: new Date(Date.now() - 30*3600000), thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80' }
   ],
   pl: [
-    {
-      title: 'NBP zapowiada ostrożne cięcia stóp w 2026 roku',
-      description: 'Rada Polityki Pieniężnej sygnalizuje możliwość obniżek stóp przy stabilnej inflacji bazowej.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 2 * 3600000),
-      source: 'NBP',
-      thumbnail: 'https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Polskie spółki technologiczne biją rekordy wyceny',
-      description: 'Na GPW rośnie zainteresowanie spółkami AI i cyberbezpieczeństwa, których wycena wzrosła średnio o 18% w ostatnim miesiącu.',
-      link: 'https://www.money.pl/',
-      pubDate: new Date(Date.now() - 4 * 3600000),
-      source: 'GPW',
-      thumbnail: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Kurs złotego stabilny mimo wahań na świecie',
-      description: 'PLN pozostaje w przedziale 4,25–4,30 za euro dzięki napływowi środków z UE i dodatniemu bilansowi handlowemu.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 6 * 3600000),
-      source: 'Forex',
-      thumbnail: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Nowe obligacje oszczędnościowe biją rekord sprzedaży',
-      description: 'Indeksowane inflacją obligacje detaliczne przyciągnęły ponad 7 mld zł nowych środków w ostatnich tygodniach.',
-      link: 'https://www.money.pl/',
-      pubDate: new Date(Date.now() - 8 * 3600000),
-      source: 'Obligacje',
-      thumbnail: 'https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Sektor bankowy zmienia strategie pod presją AI',
-      description: 'Polskie banki inwestują w transformację cyfrową, automatyzując obsługę klientów i procesy wewnętrzne.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 10 * 3600000),
-      source: 'Banki',
-      thumbnail: 'https://images.unsplash.com/photo-1552821206-b6e36b1f1b0f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'GPW notuje wzrosty dzięki dobrym wynikom spółek',
-      description: 'Warszawska giełda zanotowała wzrost głównego indeksu WIG20 o 2,3% po publikacji lepszych niż oczekiwano wyników kwartalnych.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 12 * 3600000),
-      source: 'GPW',
-      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Inflacja w Polsce spada poniżej oczekiwań',
-      description: 'GUS podał dane o inflacji za listopad - wskaźnik CPI wyniósł 3,8% r/r, co jest niższe niż prognozowane 4,1%.',
-      link: 'https://www.money.pl/',
-      pubDate: new Date(Date.now() - 14 * 3600000),
-      source: 'Inflacja',
-      thumbnail: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Fundusze inwestycyjne notują rekordowe wpływy',
-      description: 'Polskie fundusze inwestycyjne odnotowały w tym miesiącu najwyższe wpływy od początku roku, głównie dzięki funduszom akcyjnym.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 16 * 3600000),
-      source: 'Fundusze',
-      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Kredyty hipoteczne drożeją po decyzji NBP',
-      description: 'Banki podnoszą oprocentowanie kredytów mieszkaniowych po ostatniej decyzji Rady Polityki Pieniężnej o utrzymaniu stóp na obecnym poziomie.',
-      link: 'https://www.money.pl/',
-      pubDate: new Date(Date.now() - 18 * 3600000),
-      source: 'Kredyty',
-      thumbnail: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Złoty zyskuje na rynku walutowym',
-      description: 'Kurs złotego umacnia się wobec głównych walut dzięki napływowi środków z funduszy unijnych i stabilnej sytuacji gospodarczej.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 20 * 3600000),
-      source: 'Forex',
-      thumbnail: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Spółki energetyczne zwiększają inwestycje w OZE',
-      description: 'Polskie firmy energetyczne planują rekordowe inwestycje w odnawialne źródła energii, co wpływa pozytywnie na ich wycenę na giełdzie.',
-      link: 'https://www.money.pl/',
-      pubDate: new Date(Date.now() - 22 * 3600000),
-      source: 'Energetyka',
-      thumbnail: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Budżet państwa z rekordowym przychodem',
-      description: 'Ministerstwo Finansów podało dane o wykonaniu budżetu - przychody przekroczyły plan o 5,2 mld zł dzięki wyższym wpływom z podatków.',
-      link: 'https://www.bankier.pl/',
-      pubDate: new Date(Date.now() - 24 * 3600000),
-      source: 'Budżet',
-      thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80'
-    }
+    { title: 'WIG20 Zamknął Sesję na Plusie', description: 'Główny indeks warszawskiej giełdy zyskał 1,5% dzięki wzrostom spółek bankowych i energetycznych. Obroty przekroczyły 1,2 mld złotych.', link: 'https://www.bankier.pl/', source: 'GPW', pubDate: new Date(Date.now() - 2*3600000), thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80' },
+    { title: 'NBP Utrzymał Stopy Procentowe', description: 'Rada Polityki Pieniężnej zdecydowała o utrzymaniu stóp na niezmienionym poziomie. Główna stopa referencyjna wynosi 5,75%.', link: 'https://www.money.pl/', source: 'NBP', pubDate: new Date(Date.now() - 4*3600000), thumbnail: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Złoty Umocnił Się Wobec Euro', description: 'Polska waluta zyskała 0,3% do euro, osiągając poziom 4,32 PLN/EUR. Analitycy wskazują na poprawę nastrojów na rynkach wschodzących.', link: 'https://www.bankier.pl/', source: 'Forex', pubDate: new Date(Date.now() - 6*3600000), thumbnail: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Inflacja w Polsce Spadła do 4,5%', description: 'GUS podał dane o inflacji - wskaźnik CPI wyniósł 4,5% r/r, poniżej oczekiwań rynkowych. Ceny żywności pozostają głównym czynnikiem.', link: 'https://businessinsider.com.pl/', source: 'Inflacja', pubDate: new Date(Date.now() - 8*3600000), thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'PKO BP Ogłosił Rekordowy Zysk', description: 'Największy polski bank zaraportował zysk netto 8,2 mld zł za trzy kwartały. Wzrost napędzany wysoką marżą odsetkową i niższymi rezerwami.', link: 'https://www.parkiet.com/', source: 'Banki', pubDate: new Date(Date.now() - 10*3600000), thumbnail: 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Ceny Mieszkań Stabilizują Się', description: 'Raport NBP wskazuje na wyhamowanie wzrostu cen nieruchomości w dużych miastach. Średnia cena metra kwadratowego wynosi 12 500 zł.', link: 'https://www.money.pl/', source: 'Nieruchomości', pubDate: new Date(Date.now() - 12*3600000), thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Obligacje Skarbowe Biją Rekordy Sprzedaży', description: 'Ministerstwo Finansów sprzedało obligacje za 5 mld zł w listopadzie. Inwestorzy wybierają papiery indeksowane inflacją.', link: 'https://www.pb.pl/', source: 'Obligacje', pubDate: new Date(Date.now() - 14*3600000), thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Fundusze Akcyjne z Napływami', description: 'TFI zanotowały 1,5 mld zł napływów do funduszy akcyjnych. Rosnące indeksy przyciągają kapitał do polskich akcji.', link: 'https://www.bankier.pl/', source: 'Fundusze', pubDate: new Date(Date.now() - 16*3600000), thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Oprocentowanie Kredytów Hipotecznych Spada', description: 'Banki obniżają marże kredytów mieszkaniowych. Średnie oprocentowanie spadło do 7,8% przy malejącej stawce WIBOR.', link: 'https://www.money.pl/', source: 'Kredyty', pubDate: new Date(Date.now() - 18*3600000), thumbnail: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'KGHM i Orlen Liderami Wzrostów', description: 'Spółki surowcowe zyskały po wzroście cen miedzi i ropy. KGHM wzrósł o 3,2%, Orlen o 2,8% na zamknięciu sesji.', link: 'https://stooq.pl/', source: 'Spółki', pubDate: new Date(Date.now() - 20*3600000), thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80' },
+    { title: 'PKB Polski Wzrósł o 3,1%', description: 'Wstępne dane GUS pokazują wzrost PKB o 3,1% r/r w trzecim kwartale. Konsumpcja prywatna głównym motorem wzrostu.', link: 'https://businessinsider.com.pl/', source: 'PKB', pubDate: new Date(Date.now() - 22*3600000), thumbnail: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Dywidendy Spółek Giełdowych Rosną', description: 'Analitycy prognozują rekordowe dywidendy za 2024 rok. Banki i spółki energetyczne zapowiadają wysokie wypłaty dla akcjonariuszy.', link: 'https://www.parkiet.com/', source: 'Dywidendy', pubDate: new Date(Date.now() - 24*3600000), thumbnail: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'PPK z Rekordowymi Wpływami', description: 'Pracownicze Plany Kapitałowe przyciągnęły 2 mld zł nowych składek. Liczba uczestników przekroczyła 3,5 miliona osób.', link: 'https://www.pb.pl/', source: 'PPK', pubDate: new Date(Date.now() - 26*3600000), thumbnail: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Ceny Energii dla Firm Stabilne', description: 'Rynek energii elektrycznej stabilizuje się po okresie wzrostów. Firmy negocjują kontrakty na 2025 rok po niższych cenach.', link: 'https://www.bankier.pl/', source: 'Energia', pubDate: new Date(Date.now() - 28*3600000), thumbnail: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Rynek IPO Ożywia Się', description: 'Giełda w Warszawie przygotowuje się na nowe debiuty. Kilka spółek technologicznych planuje oferty publiczne w I kwartale.', link: 'https://www.money.pl/', source: 'IPO', pubDate: new Date(Date.now() - 30*3600000), thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80' }
   ],
   ru: [
-    {
-      title: 'Рубль укрепился на фоне роста цен на нефть',
-      description: 'Курс рубля поднялся до 86 за доллар после повышения котировок Brent и рекордного профицита торгового баланса.',
-      link: 'https://www.rbc.ru/',
-      pubDate: new Date(Date.now() - 2 * 3600000),
-      source: 'RBC',
-      thumbnail: 'https://images.unsplash.com/photo-1504196606672-aef5c9cefc92?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'ЦБ РФ сохранил ключевую ставку и усилил риторику',
-      description: 'Регулятор подтвердил готовность удерживать ставку 15% до устойчивого снижения инфляционных ожиданий.',
-      link: 'https://www.vedomosti.ru/',
-      pubDate: new Date(Date.now() - 4 * 3600000),
-      source: 'ЦБ РФ',
-      thumbnail: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Российские экспортеры наращивают дивидендные выплаты',
-      description: 'Газовые и металлургические компании утвердили рекордные дивиденды за 2025 год благодаря высоким ценам на сырье.',
-      link: 'https://www.kommersant.ru/',
-      pubDate: new Date(Date.now() - 6 * 3600000),
-      source: 'Компании',
-      thumbnail: 'https://images.unsplash.com/photo-1444653389962-8149286c578a?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Спрос на ипотеку растет несмотря на высокие ставки',
-      description: 'Банки фиксируют 9% рост выдач благодаря субсидированным программам и возвращению семейных льгот.',
-      link: 'https://www.finam.ru/',
-      pubDate: new Date(Date.now() - 8 * 3600000),
-      source: 'Ипотека',
-      thumbnail: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Технологический сектор привлекает венчурные инвестиции',
-      description: 'Несмотря на санкции, российские стартапы в области AI и облачных технологий получают значительное финансирование.',
-      link: 'https://www.rbc.ru/',
-      pubDate: new Date(Date.now() - 10 * 3600000),
-      source: 'IT Технологии',
-      thumbnail: 'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Банки увеличивают резервы на возможные потери',
-      description: 'Крупнейшие российские банки нарастили резервы на 15% в третьем квартале, готовясь к возможному росту просроченной задолженности.',
-      link: 'https://www.vedomosti.ru/',
-      pubDate: new Date(Date.now() - 12 * 3600000),
-      source: 'Банки',
-      thumbnail: 'https://images.unsplash.com/photo-1552821206-b6e36b1f1b0f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Фондовый рынок демонстрирует устойчивость',
-      description: 'Индекс МосБиржи сохраняет положительную динамику на фоне стабильных цен на нефть и укрепления рубля.',
-      link: 'https://www.kommersant.ru/',
-      pubDate: new Date(Date.now() - 14 * 3600000),
-      source: 'Фондовый рынок',
-      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Облигации федерального займа пользуются спросом',
-      description: 'Инвесторы активно приобретают ОФЗ с длинными сроками погашения, привлеченные высокой доходностью и надежностью.',
-      link: 'https://www.finam.ru/',
-      pubDate: new Date(Date.now() - 16 * 3600000),
-      source: 'Облигации',
-      thumbnail: 'https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Страховой рынок показывает рост премий',
-      description: 'Объем собранных страховых премий вырос на 12% по сравнению с аналогичным периодом прошлого года.',
-      link: 'https://www.rbc.ru/',
-      pubDate: new Date(Date.now() - 18 * 3600000),
-      source: 'Страхование',
-      thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Микрофинансовые организации расширяют присутствие',
-      description: 'МФО увеличивают объемы выдачи займов, особенно в регионах, где традиционные банки ограничивают кредитование.',
-      link: 'https://www.vedomosti.ru/',
-      pubDate: new Date(Date.now() - 20 * 3600000),
-      source: 'МФО',
-      thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Валютные резервы ЦБ остаются на высоком уровне',
-      description: 'Золотовалютные резервы России сохраняются выше 600 миллиардов долларов благодаря высоким ценам на энергоносители.',
-      link: 'https://www.kommersant.ru/',
-      pubDate: new Date(Date.now() - 22 * 3600000),
-      source: 'ЦБ РФ',
-      thumbnail: 'https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Депозитные ставки продолжают расти',
-      description: 'Банки повышают процентные ставки по вкладам, привлекая средства населения в условиях высокой ключевой ставки ЦБ.',
-      link: 'https://www.finam.ru/',
-      pubDate: new Date(Date.now() - 24 * 3600000),
-      source: 'Депозиты',
-      thumbnail: 'https://images.unsplash.com/photo-1444653389962-8149286c578a?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Рынок недвижимости стабилизируется',
-      description: 'Цены на жилье в крупных городах перестали падать, что указывает на стабилизацию рынка недвижимости.',
-      link: 'https://www.rbc.ru/',
-      pubDate: new Date(Date.now() - 26 * 3600000),
-      source: 'Недвижимость',
-      thumbnail: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Инфляция замедляется быстрее прогнозов',
-      description: 'Рост потребительских цен в ноябре составил 4,2% в годовом выражении, что ниже ожиданий аналитиков.',
-      link: 'https://www.vedomosti.ru/',
-      pubDate: new Date(Date.now() - 28 * 3600000),
-      source: 'Инфляция',
-      thumbnail: 'https://images.unsplash.com/photo-1454165205744-3b78555e5572?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Криптовалютный рынок демонстрирует волатильность',
-      description: 'Курс биткоина колеблется в широком диапазоне на фоне неопределенности регуляторной политики в различных юрисдикциях.',
-      link: 'https://www.kommersant.ru/',
-      pubDate: new Date(Date.now() - 30 * 3600000),
-      source: 'Криптовалюты',
-      thumbnail: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=1200&q=80'
-    },
-    {
-      title: 'Фондовые индексы показывают положительную динамику',
-      description: 'Индекс МосБиржи и индекс РТС демонстрируют рост благодаря укреплению рубля и стабильным ценам на сырьевые товары.',
-      link: 'https://www.finam.ru/',
-      pubDate: new Date(Date.now() - 32 * 3600000),
-      source: 'Фондовый рынок',
-      thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80'
-    }
+    { title: 'Индекс МосБиржи Вырос на 1,8%', description: 'Российский фондовый рынок закрылся в плюсе благодаря росту нефтегазового сектора. Объем торгов составил 85 млрд рублей.', link: 'https://www.rbc.ru/', source: 'МосБиржа', pubDate: new Date(Date.now() - 2*3600000), thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80' },
+    { title: 'ЦБ Сохранил Ключевую Ставку 16%', description: 'Банк России оставил ставку без изменений, ссылаясь на сохраняющееся инфляционное давление. Следующее заседание в декабре.', link: 'https://www.vedomosti.ru/', source: 'ЦБ РФ', pubDate: new Date(Date.now() - 4*3600000), thumbnail: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Курс Доллара Опустился до 88 Рублей', description: 'Российская валюта укрепилась на фоне высоких нефтяных цен и продаж валютной выручки экспортерами перед налоговым периодом.', link: 'https://www.kommersant.ru/', source: 'Валюта', pubDate: new Date(Date.now() - 6*3600000), thumbnail: 'https://images.unsplash.com/photo-1580519542036-c47de6196ba5?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Инфляция Замедлилась до 7,5%', description: 'Росстат зафиксировал снижение годовой инфляции. Продовольственные товары показали наименьший рост цен за полгода.', link: 'https://www.finam.ru/', source: 'Инфляция', pubDate: new Date(Date.now() - 8*3600000), thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Сбербанк Увеличил Чистую Прибыль', description: 'Крупнейший банк страны заработал 1,5 трлн рублей за 9 месяцев. Рост обеспечен высокой процентной маржой и комиссионными доходами.', link: 'https://www.rbc.ru/', source: 'Банки', pubDate: new Date(Date.now() - 10*3600000), thumbnail: 'https://images.unsplash.com/photo-1501167786227-4cba60f6d58f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Цены на Жилье в Москве Стабильны', description: 'Средняя стоимость квадратного метра в столице составляет 320 тыс. рублей. Рынок новостроек показывает умеренный спрос.', link: 'https://www.vedomosti.ru/', source: 'Недвижимость', pubDate: new Date(Date.now() - 12*3600000), thumbnail: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Нефть Brent Превысила $85 за Баррель', description: 'Котировки нефти выросли после решения ОПЕК+ продлить ограничения добычи. Российская Urals торгуется с дисконтом $8.', link: 'https://www.kommersant.ru/', source: 'Нефть', pubDate: new Date(Date.now() - 14*3600000), thumbnail: 'https://images.unsplash.com/photo-1516937941344-00b4e0337589?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Доходность ОФЗ Достигла 14,5%', description: 'Государственные облигации показывают высокую доходность на фоне жесткой политики ЦБ. Инвесторы наращивают позиции.', link: 'https://www.finam.ru/', source: 'Облигации', pubDate: new Date(Date.now() - 16*3600000), thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Ипотечные Ставки Достигли 18%', description: 'Средняя ставка по рыночной ипотеке выросла до 18% годовых. Льготные программы остаются основным драйвером спроса.', link: 'https://www.rbc.ru/', source: 'Ипотека', pubDate: new Date(Date.now() - 18*3600000), thumbnail: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Газпром Анонсировал Дивиденды', description: 'Совет директоров рекомендовал дивиденды в размере 52 рубля на акцию. Закрытие реестра назначено на декабрь.', link: 'https://www.vedomosti.ru/', source: 'Дивиденды', pubDate: new Date(Date.now() - 20*3600000), thumbnail: 'https://images.unsplash.com/photo-1579621970563-ebec7560ff3e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Ставки по Вкладам Выросли до 20%', description: 'Банки предлагают рекордные проценты по депозитам. Максимальные ставки доступны по вкладам сроком от года.', link: 'https://www.finam.ru/', source: 'Депозиты', pubDate: new Date(Date.now() - 22*3600000), thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80' },
+    { title: 'ВВП России Вырос на 4,1%', description: 'Экономика показала устойчивый рост в третьем квартале. Промышленное производство и потребительский спрос остаются сильными.', link: 'https://www.kommersant.ru/', source: 'ВВП', pubDate: new Date(Date.now() - 24*3600000), thumbnail: 'https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Лукойл Увеличил Добычу Нефти', description: 'Компания нарастила добычу на 2,5% год к году. Акции выросли на 1,8% после публикации операционных результатов.', link: 'https://www.rbc.ru/', source: 'Нефтегаз', pubDate: new Date(Date.now() - 26*3600000), thumbnail: 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=800&q=80' },
+    { title: 'ПИФы Показали Рост Стоимости', description: 'Паевые инвестиционные фонды акций прибавили в среднем 15% с начала года. Облигационные фонды отстают из-за роста ставок.', link: 'https://www.vedomosti.ru/', source: 'ПИФы', pubDate: new Date(Date.now() - 28*3600000), thumbnail: 'https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=800&q=80' },
+    { title: 'Золото Подорожало до $2,100', description: 'Цена на золото обновила исторический максимум. Российские инвесторы увеличивают вложения в драгметаллы.', link: 'https://www.finam.ru/', source: 'Золото', pubDate: new Date(Date.now() - 30*3600000), thumbnail: 'https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&w=800&q=80' }
   ]
 };
-
-// RSS to JSON converter API (free service)
-const RSS_TO_JSON_API = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
 class NewsFeedManager {
   constructor() {
     this.newsCache = {};
+    this.cacheTimestamps = {};
+    this.isLoading = false;
+    this.autoRefreshInterval = null;
+    
     this.loadingElement = document.getElementById('news-loading');
     this.errorElement = document.getElementById('news-error');
     this.gridElement = document.getElementById('news-grid');
-    // Compact news elements
     this.compactLoadingElement = document.getElementById('news-compact-loading');
     this.compactErrorElement = document.getElementById('news-compact-error');
     this.compactGridElement = document.getElementById('news-compact-grid');
+    
+    this.startAutoRefresh();
   }
 
-  async loadNews(lang = 'en') {
-    // Determine which view to use
-    const newsTab = document.getElementById('news');
-    const calculatorsTab = document.getElementById('calculators');
-    const isNewsTabActive = newsTab && newsTab.classList.contains('active');
-    const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
+  startAutoRefresh() {
+    if (this.autoRefreshInterval) clearInterval(this.autoRefreshInterval);
     
-    // Check if already cached
-    if (this.newsCache[lang]) {
-      // Display news based on active tab
-      if (isNewsTabActive && this.gridElement) {
-        this.displayNews(this.newsCache[lang]);
-      } else if (isCalculatorsTabActive && this.compactGridElement) {
-        this.displayCompactNews(this.newsCache[lang], 6);
+    this.autoRefreshInterval = setInterval(() => {
+      const lang = window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+      this.invalidateCache(lang);
+      
+      const newsTab = document.getElementById('news');
+      const calculatorsTab = document.getElementById('calculators');
+      
+      if (newsTab?.classList.contains('active') || calculatorsTab?.classList.contains('active')) {
+        this.loadNews(lang, true);
       }
+    }, NEWS_CONFIG.autoRefreshMs);
+  }
+
+  isCacheValid(lang) {
+    return this.newsCache[lang] && this.cacheTimestamps[lang] && 
+           (Date.now() - this.cacheTimestamps[lang]) < NEWS_CONFIG.cacheLifetimeMs;
+  }
+
+  invalidateCache(lang) {
+    delete this.newsCache[lang];
+    delete this.cacheTimestamps[lang];
+  }
+
+  async loadNews(lang = 'en', forceRefresh = false) {
+    if (this.isLoading) return;
+    
+    if (!forceRefresh && this.isCacheValid(lang)) {
+      this.displayFromCache(lang);
       return;
     }
-
+    
+    this.isLoading = true;
+    
     try {
-      // Show loading for appropriate element
-      if (isNewsTabActive && this.loadingElement) {
-        this.showLoading();
-      } else if (isCalculatorsTabActive && this.compactLoadingElement) {
-        this.showCompactLoading();
-      }
+      this.showLoadingState();
       
-      const feeds = NEWS_FEEDS[lang] || NEWS_FEEDS['en'];
+      const feeds = NEWS_FEEDS[lang] || NEWS_FEEDS.en;
       const allNews = [];
-
-      // Fetch from multiple RSS feeds
-      for (const feedUrl of feeds) {
-        try {
-          const response = await fetch(RSS_TO_JSON_API + encodeURIComponent(feedUrl), {
-            method: 'GET',
-            headers: {
-              'Accept': 'application/json'
-            }
-          });
-          
-          if (!response.ok) {
-            console.warn(`Feed ${feedUrl} returned status ${response.status}`);
-            continue;
-          }
-          
-          const data = await response.json();
-          
-          if (!data || data.status !== 'ok') {
-            console.warn(`Feed ${feedUrl} returned invalid data:`, data);
-            continue;
-          }
-          
-          if (data.status === 'ok' && data.items) {
-            // Financial keywords for filtering (expanded list)
-            const financialKeywords = {
-              en: ['finance', 'financial', 'economy', 'economic', 'market', 'stock', 'investment', 'bank', 'currency', 'trading', 'business', 'money', 'dollar', 'euro', 'inflation', 'interest', 'rate', 'loan', 'mortgage', 'savings', 'deposit', 'credit', 'debt', 'budget', 'revenue', 'profit', 'loss', 'earnings', 'GDP', 'unemployment', 'employment', 'wage', 'salary', 'tax', 'fiscal', 'monetary', 'policy', 'central bank', 'fed', 'ecb', 'nbp', 'cbr', 'bitcoin', 'crypto', 'forex', 'bond', 'equity', 'dividend', 'IPO', 'merger', 'acquisition'],
-              pl: ['finanse', 'finansowy', 'gospodarka', 'gospodarczy', 'rynek', 'akcje', 'inwestycja', 'bank', 'waluta', 'handel', 'biznes', 'pieniądze', 'dolar', 'euro', 'inflacja', 'odsetki', 'stopa', 'kredyt', 'hipoteka', 'oszczędności', 'depozyt', 'dług', 'budżet', 'zysk', 'strata', 'zarobki', 'PKB', 'bezrobocie', 'zatrudnienie', 'pensja', 'podatek', 'fiskalny', 'monetarny', 'polityka', 'bank centralny', 'NBP'],
-              ru: ['финансы', 'финансовый', 'экономика', 'экономический', 'рынок', 'акции', 'инвестиции', 'банк', 'валюта', 'торговля', 'бизнес', 'деньги', 'доллар', 'евро', 'рубль', 'инфляция', 'процент', 'ставка', 'кредит', 'ипотека', 'сбережения', 'вклад', 'долг', 'бюджет', 'прибыль', 'убыток', 'заработок', 'ВВП', 'безработица', 'занятость', 'зарплата', 'налог', 'фискальный', 'монетарный', 'центральный банк', 'ЦБ', 'ЦБРФ', 'биткоин', 'крипто', 'форекс', 'облигации', 'дивиденды', 'IPO', 'котировки', 'курс', 'бирж', 'индекс', 'дивиденд', 'облигаци', 'депозит', 'кредит', 'ипотек', 'ставк', 'процентн', 'инфляци', 'валютн', 'рыночн', 'финансов', 'экономическ', 'инвестиционн', 'банковск', 'торгов', 'бизнес', 'прибыл', 'убытк', 'бюджетн', 'налогов', 'фискальн', 'монетарн']
-            };
-            
-            const keywords = financialKeywords[lang] || financialKeywords.en;
-            
-            // Filter financial news - stricter for Russian, more lenient for others
-            const filteredItems = data.items.filter(item => {
-              const titleLower = (item.title || '').toLowerCase();
-              const descLower = (item.description || item.content || '').toLowerCase();
-              const combined = titleLower + ' ' + descLower;
-              
-              // For Russian, require at least 2 keyword matches for better filtering
-              if (lang === 'ru') {
-                const matches = keywords.filter(keyword => combined.includes(keyword.toLowerCase())).length;
-                return matches >= 2; // Require at least 2 keyword matches
-              }
-              
-              // For other languages, one match is enough
-              return keywords.some(keyword => combined.includes(keyword.toLowerCase()));
-            });
-            
-            // Use filtered items if we have enough (at least 3), otherwise use all items from financial feeds
-            // For non-financial feeds, always filter strictly
-            const isFinancialFeed = feedUrl.includes('finance') || feedUrl.includes('business') || 
-                                   feedUrl.includes('market') || feedUrl.includes('bankier') || 
-                                   feedUrl.includes('money') || feedUrl.includes('rbc') || 
-                                   feedUrl.includes('vedomosti') || feedUrl.includes('kommersant') ||
-                                   feedUrl.includes('finam') || feedUrl.includes('cnbc') ||
-                                   feedUrl.includes('reuters') || feedUrl.includes('bloomberg');
-            
-            // For Russian, always use strict filtering
-            const itemsToUse = (lang === 'ru') 
-              ? filteredItems // Always filter strictly for Russian
-              : ((isFinancialFeed && filteredItems.length < 3) 
-                ? data.items.slice(0, 10) // Take more items from financial feeds for other languages
-                : (filteredItems.length > 0 ? filteredItems : data.items));
-            
-            // Take more items from each feed to ensure enough news (minimum 12 per language)
-            const itemsPerFeed = 18;
-            const recentItems = itemsToUse.filter(item => this.isRecent(item.pubDate));
-            const feedItems = recentItems.length >= 5 ? recentItems : itemsToUse;
-            
-            feedItems.slice(0, itemsPerFeed).forEach(item => {
-              try {
-                // Clean description first
-                const description = this.cleanDescription(item.description || item.content || '');
-                
-                // Skip items without description or with very short description (less than 20 chars)
-                if (!description || description.trim().length < 20) {
-                  return; // Skip this item
-                }
-                
-                allNews.push({
-                  title: item.title || 'Untitled',
-                  description: description,
-                  link: item.link || '#',
-                  pubDate: item.pubDate ? new Date(item.pubDate) : new Date(),
-                  source: this.extractSource(item.link || ''),
-                  thumbnail: this.extractThumbnail(item, lang)
-                });
-              } catch (err) {
-                console.warn('Error processing news item:', err, item);
-              }
-            });
-          }
-        } catch (err) {
-          console.warn('Failed to load feed:', feedUrl, err);
-        }
-      }
-
-      // Sort by date (newest first)
-      allNews.sort((a, b) => b.pubDate - a.pubDate);
-
-      // Filter out duplicates by title
-      const uniqueNews = [];
-      const seenTitles = new Set();
-      for (const news of allNews) {
-        const titleKey = news.title.toLowerCase().substring(0, 50);
-        if (!seenTitles.has(titleKey)) {
-          seenTitles.add(titleKey);
-          uniqueNews.push(news);
-        }
-      }
-
-      // Take top news items - minimum 12 for all languages
-      const newsLimit = 15; // Increased to ensure we always have at least 12 news items
-      let topNews = uniqueNews.slice(0, newsLimit);
-
-      // If no news found or less than 12 items, use fallback to ensure minimum 12
-      if (topNews.length < 12) {
-        console.warn('Not enough news items found for language:', lang, 'Using fallback news');
-        const fallback = FALLBACK_NEWS[lang] || FALLBACK_NEWS.en;
-        
-        // Combine any found news with fallback
-        topNews = [...topNews, ...fallback];
-        
-        // Deduplicate again
-        const dedupedNews = [];
-        const seenTitles = new Set();
-        for (const news of topNews) {
-          const titleKey = news.title.toLowerCase().substring(0, 50);
-          if (!seenTitles.has(titleKey)) {
-            seenTitles.add(titleKey);
-            dedupedNews.push(news);
-          }
-        }
-        
-        // Ensure we have at least 12 news items
-        topNews = dedupedNews.slice(0, Math.max(12, newsLimit));
-      }
-
-      // Final check: ensure we have at least 12 news items
-      if (topNews.length < 12) {
-        const fallback = FALLBACK_NEWS[lang] || FALLBACK_NEWS.en;
-        // Add fallback news to reach minimum 12
-        const needed = 12 - topNews.length;
-        const additionalFallback = fallback.slice(0, needed);
-        
-        // Deduplicate before adding
-        const existingTitles = new Set(topNews.map(n => n.title.toLowerCase().substring(0, 50)));
-        const uniqueFallback = additionalFallback.filter(n => {
-          const titleKey = n.title.toLowerCase().substring(0, 50);
-          return !existingTitles.has(titleKey);
-        });
-        
-        topNews = [...topNews, ...uniqueFallback].slice(0, 12);
-      }
-
-      // Cache results
-      this.newsCache[lang] = topNews;
-
-      // Display news based on active tab
-      const newsTab = document.getElementById('news');
-      const calculatorsTab = document.getElementById('calculators');
-      const isNewsTabActive = newsTab && newsTab.classList.contains('active');
-      const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
       
-      if (isNewsTabActive && this.gridElement) {
-        this.displayNews(topNews);
-      } else if (isCalculatorsTabActive && this.compactGridElement) {
-        this.displayCompactNews(topNews, 6);
+      const feedPromises = feeds.map(feed => this.fetchFeed(feed, lang));
+      const results = await Promise.allSettled(feedPromises);
+      
+      results.forEach((result, index) => {
+        if (result.status === 'fulfilled' && result.value) {
+          allNews.push(...result.value);
+        }
+      });
+      
+      let processedNews = this.processNews(allNews, lang);
+      
+      if (processedNews.length < NEWS_CONFIG.minNewsCount) {
+        processedNews = this.mergeFallback(processedNews, lang);
       }
+      
+      processedNews = processedNews.slice(0, NEWS_CONFIG.newsLimit);
+      
+      this.newsCache[lang] = processedNews;
+      this.cacheTimestamps[lang] = Date.now();
+      
+      this.displayFromCache(lang);
+      
     } catch (error) {
       console.error('Error loading news:', error);
-      
-      // Use fallback news if there's a network error
-      console.warn('Using fallback news due to error');
-      const fallback = FALLBACK_NEWS[lang] || FALLBACK_NEWS.en;
-      
-      // Ensure we have at least 12 news items from fallback
-      const fallbackNews = fallback.slice(0, Math.max(12, fallback.length));
-      
-      // Cache and display fallback
-      this.newsCache[lang] = fallbackNews;
-      
-      // Display news based on active tab
-      const newsTab = document.getElementById('news');
-      const calculatorsTab = document.getElementById('calculators');
-      const isNewsTabActive = newsTab && newsTab.classList.contains('active');
-      const isCalculatorsTabActive = calculatorsTab && calculatorsTab.classList.contains('active');
-      
-      if (isNewsTabActive && this.gridElement) {
-        this.displayNews(fallbackNews);
-      } else if (isCalculatorsTabActive && this.compactGridElement) {
-        this.displayCompactNews(fallbackNews, 6);
-      }
+      this.useFallback(lang);
+    } finally {
+      this.isLoading = false;
     }
   }
 
-  extractThumbnail(item, lang = 'en') {
-    // Try multiple sources for thumbnail
-    if (item.thumbnail && !item.thumbnail.includes('placeholder')) return item.thumbnail;
-    if (item.enclosure?.link && item.enclosure?.type?.startsWith('image/')) return item.enclosure.link;
-    if (item.enclosure?.link && !item.enclosure.link.includes('placeholder')) return item.enclosure.link;
+  async fetchFeed(feed, lang) {
+    for (const api of RSS_APIS) {
+      try {
+        const newsItems = await this.fetchWithApi(feed, api, lang);
+        if (newsItems?.length > 0) return newsItems;
+      } catch (error) {
+        console.warn(`API ${api.name} failed for ${feed.name}:`, error.message);
+      }
+    }
+    return [];
+  }
+
+  async fetchWithApi(feed, api, lang) {
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000);
     
-    // Try to extract image from description HTML (multiple patterns)
-    if (item.description || item.content) {
-      const html = item.description || item.content;
+    try {
+      const url = api.url + encodeURIComponent(feed.url);
+      const response = await fetch(url, { signal: controller.signal, headers: { 'Accept': 'application/json' } });
       
-      // Try different image patterns
-      const patterns = [
-        /<img[^>]+src=["']([^"']+)["']/i,
-        /<img[^>]+src=([^\s>]+)/i,
-        /src=["']([^"']*\.(jpg|jpeg|png|gif|webp)[^"']*)["']/i,
-        /https?:\/\/[^\s<>"']+\.(jpg|jpeg|png|gif|webp)/i
-      ];
+      clearTimeout(timeout);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
       
-      for (const pattern of patterns) {
-        const match = html.match(pattern);
-        if (match && match[1] && !match[1].includes('icon') && !match[1].includes('logo') && !match[1].includes('placeholder')) {
-          let imgUrl = match[1];
-          // Clean up URL
-          imgUrl = imgUrl.replace(/^["']|["']$/g, '');
-          if (imgUrl.startsWith('//')) imgUrl = 'https:' + imgUrl;
-          if (imgUrl.startsWith('/')) {
-            try {
-              const url = new URL(item.link);
-              imgUrl = url.origin + imgUrl;
-            } catch {}
+      if (api.isProxy) {
+        const text = await response.text();
+        return this.parseRssXml(text, feed, lang);
+      } else {
+        const data = await response.json();
+        if (data.status === 'ok' && data.items) {
+          return this.processRssItems(data.items, feed, lang);
+        }
+      }
+      return [];
+    } catch (error) {
+      clearTimeout(timeout);
+      throw error;
+    }
+  }
+
+  parseRssXml(xmlText, feed, lang) {
+    try {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(xmlText, 'text/xml');
+      const items = doc.querySelectorAll('item');
+      
+      const newsItems = [];
+      items.forEach(item => {
+        const title = item.querySelector('title')?.textContent;
+        const description = item.querySelector('description')?.textContent;
+        const link = item.querySelector('link')?.textContent;
+        const pubDate = item.querySelector('pubDate')?.textContent;
+        
+        let thumbnail = null;
+        const enclosure = item.querySelector('enclosure[type^="image"]');
+        if (enclosure) thumbnail = enclosure.getAttribute('url');
+        
+        const mediaContent = item.querySelector('media\\:content, content');
+        if (!thumbnail && mediaContent) thumbnail = mediaContent.getAttribute('url');
+        
+        // Извлечь изображение из description
+        if (!thumbnail && description) {
+          const imgMatch = description.match(/<img[^>]+src=["']([^"']+)["']/i);
+          if (imgMatch && !imgMatch[1].includes('icon') && !imgMatch[1].includes('logo')) {
+            thumbnail = imgMatch[1];
           }
-          if (imgUrl.startsWith('http')) return imgUrl;
+        }
+        
+        if (title && description) {
+          newsItems.push({
+            title: this.cleanText(title),
+            description: this.cleanDescription(description),
+            link: link || feed.url,
+            pubDate: pubDate ? new Date(pubDate) : new Date(),
+            source: feed.name,
+            thumbnail: thumbnail
+          });
+        }
+      });
+      
+      return this.filterFinancialNews(newsItems, lang);
+    } catch (error) {
+      return [];
+    }
+  }
+
+  processRssItems(items, feed, lang) {
+    const newsItems = items.map(item => ({
+      title: this.cleanText(item.title || ''),
+      description: this.cleanDescription(item.description || item.content || ''),
+      link: item.link || feed.url,
+      pubDate: item.pubDate ? new Date(item.pubDate) : new Date(),
+      source: feed.name,
+      thumbnail: this.extractThumbnail(item)
+    })).filter(item => item.title && item.description.length >= 30);
+    
+    return this.filterFinancialNews(newsItems, lang);
+  }
+
+  // Строгая фильтрация финансовых новостей
+  filterFinancialNews(items, lang) {
+    const keywords = FINANCE_KEYWORDS[lang] || FINANCE_KEYWORDS.en;
+    const excludeWords = EXCLUDE_KEYWORDS[lang] || EXCLUDE_KEYWORDS.en;
+    
+    return items.filter(item => {
+      const text = (item.title + ' ' + item.description).toLowerCase();
+      
+      // Проверить исключения - пропустить если есть запрещенные слова
+      const hasExcluded = excludeWords.some(word => text.includes(word.toLowerCase()));
+      if (hasExcluded) return false;
+      
+      // Подсчитать финансовые ключевые слова
+      const matches = keywords.filter(kw => text.includes(kw.toLowerCase()));
+      return matches.length >= NEWS_CONFIG.minKeywordMatches;
+    });
+  }
+
+  // Обработка новостей с приоритетом фото
+  processNews(allNews, lang) {
+    // Удаление дубликатов
+    const unique = [];
+    const seen = new Set();
+    
+    for (const news of allNews) {
+      const key = news.title.toLowerCase().substring(0, 50);
+      if (!seen.has(key)) {
+        seen.add(key);
+        
+        const ageMs = Date.now() - news.pubDate.getTime();
+        const ageDays = ageMs / (24 * 60 * 60 * 1000);
+        
+        if (ageDays <= NEWS_CONFIG.maxNewsAge) {
+          unique.push(news);
         }
       }
     }
     
-    // Try to get image from media:content (RSS 2.0)
-    if (item['media:content'] && item['media:content']['@']) {
-      const media = Array.isArray(item['media:content']) ? item['media:content'][0] : item['media:content'];
-      if (media && media.url && !media.url.includes('placeholder')) return media.url;
+    // Сортировка: сначала с фото, потом по дате
+    if (NEWS_CONFIG.prioritizeWithImages) {
+      unique.sort((a, b) => {
+        const aHasImage = a.thumbnail ? 1 : 0;
+        const bHasImage = b.thumbnail ? 1 : 0;
+        
+        // Сначала по наличию изображения
+        if (bHasImage !== aHasImage) return bHasImage - aHasImage;
+        
+        // Потом по дате
+        return b.pubDate - a.pubDate;
+      });
+    } else {
+      unique.sort((a, b) => b.pubDate - a.pubDate);
     }
     
-    // Return null to indicate no real image found (not placeholder)
-    return null;
+    return unique;
+  }
+
+  mergeFallback(news, lang) {
+    const fallback = FALLBACK_NEWS[lang] || FALLBACK_NEWS.en;
+    const combined = [...news];
+    const existingTitles = new Set(news.map(n => n.title.toLowerCase().substring(0, 30)));
+    
+    for (const fb of fallback) {
+      if (!existingTitles.has(fb.title.toLowerCase().substring(0, 30))) {
+        combined.push(fb);
+      }
+      if (combined.length >= NEWS_CONFIG.newsLimit) break;
+    }
+    
+    return combined;
+  }
+
+  useFallback(lang) {
+    const fallback = FALLBACK_NEWS[lang] || FALLBACK_NEWS.en;
+    this.newsCache[lang] = fallback.slice(0, NEWS_CONFIG.newsLimit);
+    this.cacheTimestamps[lang] = Date.now();
+    this.displayFromCache(lang);
+  }
+
+  displayFromCache(lang) {
+    const news = this.newsCache[lang];
+    if (!news) return;
+    
+    const newsTab = document.getElementById('news');
+    const calculatorsTab = document.getElementById('calculators');
+    
+    if (newsTab?.classList.contains('active')) {
+      this.displayNews(news);
+    } else if (calculatorsTab?.classList.contains('active')) {
+      this.displayCompactNews(news, NEWS_CONFIG.compactLimit);
+    }
+  }
+
+  cleanText(text) {
+    return text ? text.replace(/<[^>]*>/g, '').trim() : '';
   }
 
   cleanDescription(html) {
-    if (!html || typeof html !== 'string') {
-      return '';
-    }
-    
-    // Remove HTML tags and limit length
+    if (!html) return '';
     const temp = document.createElement('div');
     temp.innerHTML = html;
-    const text = (temp.textContent || temp.innerText || '').trim();
-    
-    // Return empty string if description is too short or empty
-    if (text.length < 10) {
-      return '';
-    }
-    
+    const text = (temp.textContent || '').trim();
     return text.length > 200 ? text.substring(0, 200) + '...' : text;
   }
 
-  escapeHtml(text) {
-    if (!text || typeof text !== 'string') {
-      return '';
+  extractThumbnail(item) {
+    if (item.thumbnail) return item.thumbnail;
+    if (item.enclosure?.link && (item.enclosure.link.includes('.jpg') || item.enclosure.link.includes('.png') || item.enclosure.link.includes('.webp'))) {
+      return item.enclosure.link;
     }
+    
+    const html = item.description || item.content || '';
+    const match = html.match(/<img[^>]+src=["']([^"']+)["']/i);
+    if (match && !match[1].includes('icon') && !match[1].includes('logo') && !match[1].includes('avatar')) {
+      return match[1];
+    }
+    
+    return null;
+  }
+
+  escapeHtml(text) {
+    if (!text) return '';
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
-  }
-
-  extractSource(url) {
-    try {
-      const hostname = new URL(url).hostname;
-      return hostname.replace('www.', '').split('.')[0];
-    } catch {
-      return 'Unknown';
-    }
   }
 
   formatDate(date) {
@@ -734,44 +471,39 @@ class NewsFeedManager {
     const diffHours = Math.floor(diffMs / 3600000);
     const diffDays = Math.floor(diffMs / 86400000);
 
-    if (diffMins < 60) {
-      return `${diffMins}m ago`;
-    } else if (diffHours < 24) {
-      return `${diffHours}h ago`;
-    } else if (diffDays < 7) {
-      return `${diffDays}d ago`;
-    } else {
-      return date.toLocaleDateString();
-    }
+    if (diffMins < 60) return `${diffMins}m ago`;
+    if (diffHours < 24) return `${diffHours}h ago`;
+    if (diffDays < 7) return `${diffDays}d ago`;
+    return date.toLocaleDateString();
   }
 
-  isRecent(pubDate) {
-    if (!pubDate) {
-      return true;
-    }
+  showLoadingState() {
+    const newsTab = document.getElementById('news');
+    const calculatorsTab = document.getElementById('calculators');
     
-    const published = new Date(pubDate);
-    if (isNaN(published.getTime())) {
-      return true;
+    if (newsTab?.classList.contains('active')) {
+      if (this.loadingElement) this.loadingElement.style.display = 'block';
+      if (this.gridElement) this.gridElement.style.display = 'none';
+      if (this.errorElement) this.errorElement.style.display = 'none';
+    } else if (calculatorsTab?.classList.contains('active')) {
+      if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'block';
+      if (this.compactGridElement) this.compactGridElement.style.display = 'none';
+      if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
     }
-    
-    return (Date.now() - published.getTime()) <= MAX_NEWS_AGE_MS;
   }
 
   displayNews(newsItems) {
-    this.hideLoading();
-    this.hideError();
+    if (this.loadingElement) this.loadingElement.style.display = 'none';
+    if (this.errorElement) this.errorElement.style.display = 'none';
+    if (!this.gridElement) return;
+    
     this.gridElement.style.display = 'grid';
     this.gridElement.innerHTML = '';
 
-    // Filter out news without description
-    const validNews = newsItems.filter(news => {
-      const description = (news.description || '').trim();
-      return description && description.length >= 20;
-    });
+    const validNews = newsItems.filter(n => n.description?.length >= 30);
 
     if (validNews.length === 0) {
-      this.showError();
+      if (this.errorElement) this.errorElement.style.display = 'block';
       return;
     }
 
@@ -784,12 +516,8 @@ class NewsFeedManager {
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       
-      const imageHtml = hasImage ? `
-        <img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">
-      ` : '';
-      
       card.innerHTML = `
-        ${imageHtml}
+        ${hasImage ? `<img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">` : ''}
         <h3 class="news-card-title">${this.escapeHtml(news.title)}</h3>
         <p class="news-card-description">${this.escapeHtml(news.description)}</p>
         <div class="news-card-meta">
@@ -800,29 +528,20 @@ class NewsFeedManager {
       
       this.gridElement.appendChild(card);
     });
-
-    // Update i18n for dynamically added content
-    if (window.i18n && window.i18n.updatePage) {
-      window.i18n.updatePage();
-    }
   }
 
   displayCompactNews(newsItems, limit = 6) {
+    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'none';
+    if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
     if (!this.compactGridElement) return;
     
-    this.hideCompactLoading();
-    this.hideCompactError();
     this.compactGridElement.style.display = 'grid';
     this.compactGridElement.innerHTML = '';
 
-    // Filter out news without description
-    const validNews = newsItems.filter(news => {
-      const description = (news.description || '').trim();
-      return description && description.length >= 20;
-    }).slice(0, limit); // Take only first N news items
+    const validNews = newsItems.filter(n => n.description?.length >= 30).slice(0, limit);
 
     if (validNews.length === 0) {
-      this.showCompactError();
+      if (this.compactErrorElement) this.compactErrorElement.style.display = 'block';
       return;
     }
 
@@ -835,12 +554,8 @@ class NewsFeedManager {
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       
-      const imageHtml = hasImage ? `
-        <img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">
-      ` : '';
-      
       card.innerHTML = `
-        ${imageHtml}
+        ${hasImage ? `<img src="${news.thumbnail}" alt="${this.escapeHtml(news.title)}" class="news-card-image" loading="lazy" onerror="this.parentElement.classList.add('no-image'); this.style.display='none';">` : ''}
         <h3 class="news-card-title">${this.escapeHtml(news.title)}</h3>
         <p class="news-card-description">${this.escapeHtml(news.description)}</p>
         <div class="news-card-meta">
@@ -851,95 +566,53 @@ class NewsFeedManager {
       
       this.compactGridElement.appendChild(card);
     });
-
-    // Update i18n for dynamically added content
-    if (window.i18n && window.i18n.updatePage) {
-      window.i18n.updatePage();
-    }
   }
 
-  showLoading() {
-    if (this.loadingElement) this.loadingElement.style.display = 'block';
-    if (this.errorElement) this.errorElement.style.display = 'none';
-    if (this.gridElement) this.gridElement.style.display = 'none';
-  }
-
-  hideLoading() {
-    if (this.loadingElement) this.loadingElement.style.display = 'none';
-  }
-
-  showError() {
-    if (this.loadingElement) this.loadingElement.style.display = 'none';
-    if (this.errorElement) this.errorElement.style.display = 'block';
-    if (this.gridElement) this.gridElement.style.display = 'none';
-  }
-
-  hideError() {
-    if (this.errorElement) this.errorElement.style.display = 'none';
-  }
-
-  showCompactLoading() {
-    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'block';
-    if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
-    if (this.compactGridElement) this.compactGridElement.style.display = 'none';
-  }
-
-  hideCompactLoading() {
-    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'none';
-  }
-
-  showCompactError() {
-    if (this.compactLoadingElement) this.compactLoadingElement.style.display = 'none';
-    if (this.compactErrorElement) this.compactErrorElement.style.display = 'block';
-    if (this.compactGridElement) this.compactGridElement.style.display = 'none';
-  }
-
-  hideCompactError() {
-    if (this.compactErrorElement) this.compactErrorElement.style.display = 'none';
+  refresh() {
+    const lang = window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+    this.invalidateCache(lang);
+    this.loadNews(lang, true);
   }
 }
 
-// Initialize news feed on page load
+// Инициализация
 document.addEventListener('DOMContentLoaded', function() {
   const newsManager = new NewsFeedManager();
-  
-  // Make newsManager globally available
   window.newsManager = newsManager;
   
-  // Check if calculators tab is active by default (load compact news)
   const calculatorsTab = document.getElementById('calculators');
-  if (calculatorsTab && calculatorsTab.classList.contains('active')) {
-    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-    newsManager.loadNews(currentLang);
-  }
-  
-  // Check if news tab is active by default
   const newsTab = document.getElementById('news');
-  if (newsTab && newsTab.classList.contains('active')) {
-    const currentLang = localStorage.getItem('preferredLanguage') || 'en';
-    newsManager.loadNews(currentLang);
+  
+  if (calculatorsTab?.classList.contains('active') || newsTab?.classList.contains('active')) {
+    const lang = localStorage.getItem('preferredLanguage') || 'en';
+    newsManager.loadNews(lang);
   }
   
-  // Load news when tab is activated
-  window.addEventListener('tabActivated', function(e) {
-    const currentLang = window.i18n ? window.i18n.currentLang : (localStorage.getItem('preferredLanguage') || 'en');
-    if (e.detail.tabName === 'news') {
-      newsManager.loadNews(currentLang);
-    } else if (e.detail.tabName === 'calculators') {
-      // Load compact news for calculators tab
-      newsManager.loadNews(currentLang);
+  window.addEventListener('tabActivated', e => {
+    const lang = window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+    if (e.detail.tabName === 'news' || e.detail.tabName === 'calculators') {
+      newsManager.loadNews(lang);
     }
   });
   
-  // Reload news when language changes
-  window.addEventListener('languageChanged', function(e) {
-    const calculatorsTab = document.getElementById('calculators');
+  window.addEventListener('languageChanged', e => {
+    newsManager.invalidateCache(e.detail.language);
     const newsTab = document.getElementById('news');
-    if (calculatorsTab && calculatorsTab.classList.contains('active')) {
-      newsManager.loadNews(e.detail.language);
-    } else if (newsTab && newsTab.classList.contains('active')) {
-      newsManager.loadNews(e.detail.language);
+    const calculatorsTab = document.getElementById('calculators');
+    if (newsTab?.classList.contains('active') || calculatorsTab?.classList.contains('active')) {
+      newsManager.loadNews(e.detail.language, true);
+    }
+  });
+  
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'visible') {
+      const lang = window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+      const newsTab = document.getElementById('news');
+      const calculatorsTab = document.getElementById('calculators');
+      
+      if ((newsTab?.classList.contains('active') || calculatorsTab?.classList.contains('active')) && !newsManager.isCacheValid(lang)) {
+        newsManager.loadNews(lang, true);
+      }
     }
   });
 });
-

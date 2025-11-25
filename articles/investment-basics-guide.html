@@ -8,9 +8,7 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/article-styles.css">
 
     <!-- Canonical & hreflang -->
     <link rel="canonical" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide.html">
@@ -18,313 +16,12 @@
     <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide-pl.html">
     <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide-ru.html">
     <link rel="alternate" hreflang="x-default" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide.html">
-
-    <style>
-        .article-page {
-            padding-bottom: var(--space-3xl);
-        }
-
-        .article-hero {
-            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.06) 50%, rgba(0, 168, 107, 0.08) 100%);
-            border-bottom: 1px solid var(--border);
-            padding: var(--space-3xl) 0 var(--space-2xl);
-        }
-
-        .article-hero__tag {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-full);
-            background: rgba(0, 102, 255, 0.12);
-            color: var(--primary);
-            font-weight: 600;
-            text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.1em;
-        }
-
-        .article-hero__subtitle {
-            max-width: 720px;
-            margin-top: var(--space-md);
-            color: var(--text-secondary);
-            font-size: 1.175rem;
-        }
-
-        .article-meta {
-            margin-top: var(--space-lg);
-            display: flex;
-            gap: var(--space-sm);
-            flex-wrap: wrap;
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            align-items: center;
-        }
-
-        .article-hero__actions {
-            margin-top: var(--space-xl);
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-md);
-            align-items: center;
-        }
-
-        .data-badge {
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-md);
-            background: var(--gray-100);
-            color: var(--text-secondary);
-            font-size: 0.85rem;
-        }
-
-        .section-header {
-            max-width: 760px;
-            margin-bottom: var(--space-xl);
-        }
-
-        .section-header p {
-            margin-top: var(--space-sm);
-            font-size: 1.05rem;
-        }
-
-        .metric-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .metric-card {
-            padding: var(--space-xl);
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            border: 1px solid rgba(0, 102, 255, 0.12);
-            border-radius: var(--radius-lg);
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .metric-label {
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-muted);
-        }
-
-        .metric-value {
-            font-size: 1.75rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
-
-        .metric-note {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .principle-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            padding: var(--space-xl);
-            border: 1px solid rgba(0, 168, 107, 0.18);
-            border-radius: var(--radius-lg);
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .principle-card h3 {
-            color: var(--success);
-        }
-
-        .principle-card ul {
-            margin-top: var(--space-sm);
-            padding-left: 1.2rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .principle-card ul li {
-            margin-bottom: var(--space-xs);
-        }
-
-        .region-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .region-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-md);
-            padding: var(--space-xl);
-            border: 1px solid rgba(0, 168, 107, 0.18);
-            border-radius: var(--radius-lg);
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .region-card__header {
-            display: flex;
-            justify-content: space-between;
-            gap: var(--space-sm);
-            align-items: flex-start;
-        }
-
-        .region-yield {
-            font-weight: 600;
-            color: var(--success);
-            font-size: 0.95rem;
-            background: var(--success-light);
-            padding: var(--space-xs) var(--space-sm);
-            border-radius: var(--radius-md);
-        }
-
-        .region-list {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            color: var(--text-secondary);
-        }
-
-        .region-list li {
-            padding-left: 1.2rem;
-            position: relative;
-        }
-
-        .region-list li::before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-
-        .region-note {
-            margin-top: var(--space-xl);
-            padding: var(--space-lg);
-            background: var(--gray-100);
-            border-radius: var(--radius-lg);
-            border-left: 4px solid var(--primary);
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-lg);
-        }
-
-        .portfolio-card {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-sm);
-            padding: var(--space-xl);
-            border: 1px solid rgba(17, 24, 39, 0.08);
-            border-radius: var(--radius-lg);
-            background: var(--white);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .allocation-list {
-            margin-top: var(--space-sm);
-            padding-left: 1.2rem;
-            color: var(--text-secondary);
-        }
-
-        .allocation-list li {
-            margin-bottom: var(--space-xs);
-        }
-
-        .cta-card {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
-            border-radius: var(--radius-xl);
-            padding: var(--space-2xl);
-            color: var(--white);
-            text-align: center;
-            box-shadow: var(--shadow-lg);
-        }
-
-        .cta-card h3,
-        .cta-card p {
-            color: var(--white);
-        }
-
-        .cta-card .btn-cta {
-            background: var(--white);
-            color: var(--primary);
-        }
-
-        .cta-card small {
-            display: block;
-            margin-top: var(--space-lg);
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 0.85rem;
-        }
-
-        .article-nav {
-            display: flex;
-            justify-content: space-between;
-            gap: var(--space-md);
-            margin-top: var(--space-3xl);
-            padding-top: var(--space-xl);
-            border-top: 1px solid var(--border);
-        }
-
-        .nav-btn {
-            padding: var(--space-sm) var(--space-lg);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            color: var(--text-secondary);
-            transition: all var(--transition-fast);
-            text-align: center;
-            flex: 1;
-        }
-
-        .nav-btn:hover {
-            border-color: var(--primary);
-            color: var(--primary);
-            background: var(--primary-light);
-        }
-
-        @media (max-width: 768px) {
-            .article-hero {
-                padding: var(--space-2xl) 0 var(--space-xl);
-            }
-
-            .article-hero__subtitle {
-                font-size: 1.05rem;
-            }
-
-            .article-meta {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .article-nav {
-                flex-direction: column;
-            }
-
-            .metric-grid,
-            .principles-grid,
-            .region-grid,
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
 </head>
-<body>
-    <!-- Header -->
+<body class="article-page">
+    <div class="reading-progress">
+        <div class="reading-progress__bar" id="reading-progress"></div>
+    </div>
+
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -345,229 +42,241 @@
                 
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                            <img src="../assets/globe-icon.svg" alt="globe" class="feather feather-globe" width="16" height="16">
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                             <span class="lang-btn-text">English</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                            <a href="investment-basics-guide.html" data-lang="en" class="active">English</a>
-                            <a href="investment-basics-guide-pl.html" data-lang="pl">Polski</a>
-                            <a href="investment-basics-guide-ru.html" data-lang="ru">Русский</a>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="investment-basics-guide.html" class="active">English</a>
+                            <a href="investment-basics-guide-pl.html">Polski</a>
+                            <a href="investment-basics-guide-ru.html">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn active" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
 
-    <main class="article-page">
-        <section class="article-hero">
-            <div class="container">
-                <span class="article-hero__tag">2025 Playbook</span>
-                <h1 class="article-title">Investment Basics: Build Confidence in Any Market</h1>
-                <p class="article-hero__subtitle">Learn how to read the macro picture, protect cash flow, and turn consistent contributions into long-term wealth.</p>
-
-                <div class="article-meta">
-                    <span>8 min read</span>
-                    <span>•</span>
-                    <span>Updated: October 2025</span>
-                </div>
-
-                <div class="article-hero__actions">
-                    <a href="../calculators/compound-interest-modern.html" class="btn btn-primary">
-                        <span>Model your growth</span>
-                    </a>
-                    <span class="data-badge">Data verified: September 2025</span>
-                </div>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2>Market Check: Signals to Watch in 2025</h2>
-                <p>Use these benchmark numbers to gauge whether you should stay defensive or lean into risk assets.</p>
-            </div>
-
-            <div class="metric-grid">
-                <article class="metric-card">
-                    <span class="metric-label">Global equities (MSCI World)</span>
-                    <span class="metric-value">+10.2% 5Y CAGR</span>
-                    <small class="metric-note">Source: MSCI, data through Q3 2025</small>
-                </article>
-                <article class="metric-card">
-                    <span class="metric-label">Sovereign bonds (10Y)</span>
-                    <span class="metric-value">3.8–5.2% yield</span>
-                    <small class="metric-note">US Treasuries vs. EU core bonds, Sept 2025</small>
-                </article>
-                <article class="metric-card">
-                    <span class="metric-label">Inflation (US/EU median)</span>
-                    <span class="metric-value">3.1% YoY</span>
-                    <small class="metric-note">IMF October 2025 outlook</small>
-                </article>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2>Build a Simple Investment Framework</h2>
-                <p>Great portfolios are boring. Follow these three pillars and let automation do the heavy lifting.</p>
-            </div>
-
-            <div class="principles-grid">
-                <article class="principle-card">
-                    <h3>1. Map your goals by horizon</h3>
-                    <p>Write down targets for short (≤2 years), medium (3–7 years), and long-term (10+ years) goals. Assign a base currency and inflation assumption to each.</p>
-                    <ul>
-                        <li>Document the minimum required return to stay on track.</li>
-                        <li>Pair each goal with the correct account (brokerage, retirement, cash).</li>
-                    </ul>
-                </article>
-                <article class="principle-card">
-                    <h3>2. Ring-fence your safety buffer</h3>
-                    <p>Keep 3–6 months of expenses in insured cash products before increasing market exposure.</p>
-                    <ul>
-                        <li>Separate emergency savings from brokerage accounts to avoid impulse selling.</li>
-                        <li>Use high-yield savings, CDs, or money-market funds for extra yield.</li>
-                    </ul>
-                </article>
-                <article class="principle-card">
-                    <h3>3. Automate and rebalance</h3>
-                    <p>Schedule contributions for payday and rebalance quarterly back to target weights.</p>
-                    <ul>
-                        <li>Enable fractional ETF purchases if your broker supports them.</li>
-                        <li>Increase contributions whenever your income rises.</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2>Regional Playbook</h2>
-                <p>Mix local advantages (currency-matched cash and tax shelters) with global diversification.</p>
-            </div>
-
-            <div class="region-grid">
-                <article class="region-card">
-                    <div class="region-card__header">
-                        <h3>United States — USD</h3>
-                        <span class="region-yield">HYSA 5.0–5.2% • 401(k) match up to 6%</span>
-                    </div>
-                    <ul class="region-list">
-                        <li>Open a Roth IRA for tax-free growth after maxing employer match.</li>
-                        <li>Low-cost brokers: Fidelity, Vanguard, Charles Schwab (no commissions on ETFs).</li>
-                        <li>Cash ladder: split between Treasury bills and insured savings accounts.</li>
-                    </ul>
-                </article>
-
-                <article class="region-card">
-                    <div class="region-card__header">
-                        <h3>European Union — EUR/PLN</h3>
-                        <span class="region-yield">Term deposits 3.8–4.6% • IKE limit 24 689 PLN</span>
-                    </div>
-                    <ul class="region-list">
-                        <li>Use IKE/IKZE or PEPP wrappers for tax deductions and compounding.</li>
-                        <li>Banks such as PKO BP, Santander, Bunq offer insured savings above 4%.</li>
-                        <li>Commission-free brokers: Trade Republic, XTB, Degiro (EU ETFs and US stocks).</li>
-                    </ul>
-                </article>
-
-                <article class="region-card">
-                    <div class="region-card__header">
-                        <h3>Emerging markets — multi-currency</h3>
-                        <span class="region-yield">Inflation-linked bonds 5.5–6.5%</span>
-                    </div>
-                    <ul class="region-list">
-                        <li>Blend local inflation-linked instruments with USD or EUR ETFs.</li>
-                        <li>Watch FX spread when converting between local currency and USD.</li>
-                        <li>Document withholding tax rules for dividends (treaties differ by country).</li>
-                    </ul>
-                </article>
-            </div>
-
-            <div class="region-note">
-                <h4>Due diligence tips</h4>
-                <p>Always confirm regulator registration (SEC, FCA, KNF, etc.) and investor compensation schemes (SIPC, FSCS, BFG). Screenshot fee tables before signing to avoid hidden spreads.</p>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="section-header">
-                <h2>Model Portfolios You Can Copy</h2>
-                <p>Use these allocations as a starting point. Rebalance annually and adjust currency exposure to your base currency.</p>
-            </div>
-
-            <div class="portfolio-grid">
-                <article class="portfolio-card">
-                    <h3>Conservative (0–3 years)</h3>
-                    <p>Preserve capital while earning a real yield on cash you need soon.</p>
-                    <ul class="allocation-list">
-                        <li>50% insured deposits or money-market funds</li>
-                        <li>30% short-duration government bonds</li>
-                        <li>20% ultra-short bond ETFs / T-bills ladder</li>
-                    </ul>
-                </article>
-
-                <article class="portfolio-card">
-                    <h3>Balanced (3–7 years)</h3>
-                    <p>Blend growth and stability for medium-term goals such as property down payments.</p>
-                    <ul class="allocation-list">
-                        <li>15% cash buffer</li>
-                        <li>45% global equity ETFs (S&P 500 + MSCI World)</li>
-                        <li>25% investment-grade bonds</li>
-                        <li>15% international/small-cap exposure</li>
-                    </ul>
-                </article>
-
-                <article class="portfolio-card">
-                    <h3>Growth (10+ years)</h3>
-                    <p>Maximize equity exposure and use bonds only for opportunistic rebalancing.</p>
-                    <ul class="allocation-list">
-                        <li>70% global equities (broad market)</li>
-                        <li>20% thematic or small-cap tilt (tech, climate, EM)</li>
-                        <li>10% bonds or alternatives for dry powder</li>
-                    </ul>
-                </article>
-            </div>
-        </section>
-
-        <section class="container" style="margin-top: var(--space-3xl);">
-            <div class="cta-card">
-                <h3>Pressure-test your plan</h3>
-                <p>Use the compound interest or savings goal calculators to validate that your contribution rate survives inflation and market swings.</p>
-                <a href="../calculators/compound-interest-modern.html" class="btn btn-primary btn-cta">Open calculator</a>
-                <small>Educational content only. Double-check rates and regulations with your financial institution.</small>
-            </div>
-        </section>
-
-        <!-- Article Navigation -->
+    <nav class="article-breadcrumbs">
         <div class="container">
-            <div class="article-nav">
-                <a href="debt-management-guide.html" class="nav-btn">Previous article</a>
-                <a href="roi-investment-guide.html" class="nav-btn">Next article</a>
-                <a href="../index.html#articles" class="nav-btn">Back to articles</a>
+            <ol class="breadcrumb-list">
+                <li><a href="../index.html">Home</a></li>
+                <li><span class="separator">/</span></li>
+                <li><a href="../index.html#articles">Articles</a></li>
+                <li><span class="separator">/</span></li>
+                <li><span class="current">Investment Basics</span></li>
+            </ol>
+        </div>
+    </nav>
+
+    <section class="article-hero-compact">
+        <div class="container">
+            <span class="article-hero__category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                2025 Playbook
+            </span>
+            <h1>Investment Basics: Build Confidence in Any Market</h1>
+            <p class="article-hero__lead">Learn how to read the macro picture, protect cash flow, and turn consistent contributions into long-term wealth.</p>
+            <div class="article-hero__meta">
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>8 min read</span>
+                </span>
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>Updated: October 2025</span>
+                </span>
             </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="article-layout">
+            <aside class="article-toc">
+                <div class="toc-header">Contents</div>
+                <ol class="toc-list">
+                    <li><a href="#market" class="toc-link">Market Signals 2025</a></li>
+                    <li><a href="#framework" class="toc-link">Investment Framework</a></li>
+                    <li><a href="#regional" class="toc-link">Regional Playbook</a></li>
+                    <li><a href="#portfolios" class="toc-link">Model Portfolios</a></li>
+                </ol>
+                <div class="toc-stats">
+                    <div class="toc-stat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>8 min read</span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="article-main">
+                <div class="article-body">
+                    <p>Building wealth through investing doesn't require a finance degree or a fortune teller's crystal ball. What it does require is understanding a few key principles and sticking to them through market ups and downs.</p>
+
+                    <h2 id="market">Market Check: Signals to Watch in 2025</h2>
+                    <p>Use these benchmark numbers to gauge whether you should stay defensive or lean into risk assets.</p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4>Global Equities (MSCI World)</h4>
+                            <p><strong style="font-size: 1.25rem; color: var(--article-heading);">+10.2% 5Y CAGR</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--article-text-muted);">Source: MSCI, Q3 2025</p>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <h4>Sovereign Bonds (10Y)</h4>
+                            <p><strong style="font-size: 1.25rem; color: var(--article-heading);">3.8–5.2% yield</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--article-text-muted);">US Treasuries vs EU, Sept 2025</p>
+                        </div>
+                        <div class="article-card article-card--warning">
+                            <h4>Inflation (US/EU median)</h4>
+                            <p><strong style="font-size: 1.25rem; color: var(--article-heading);">3.1% YoY</strong></p>
+                            <p style="font-size: 0.85rem; color: var(--article-text-muted);">IMF October 2025 outlook</p>
+                        </div>
+                    </div>
+
+                    <h2 id="framework">Build a Simple Investment Framework</h2>
+                    <p>Great portfolios are boring. Follow these three pillars and let automation do the heavy lifting.</p>
+
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4>Map your goals by horizon</h4>
+                                <p>Write down targets for short (≤2 years), medium (3–7 years), and long-term (10+ years) goals. Assign a base currency and inflation assumption to each.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4>Ring-fence your safety buffer</h4>
+                                <p>Keep 3–6 months of expenses in insured cash products before increasing market exposure. Separate emergency savings from brokerage accounts.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4>Automate and rebalance</h4>
+                                <p>Schedule contributions for payday and rebalance quarterly back to target weights. Increase contributions whenever your income rises.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 id="regional">Regional Playbook</h2>
+                    <p>Mix local advantages (currency-matched cash and tax shelters) with global diversification.</p>
+
+                    <div class="article-table-wrapper">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th>Region</th>
+                                    <th>Key Rates</th>
+                                    <th>Top Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>United States</strong></td>
+                                    <td>HYSA 5.0–5.2%</td>
+                                    <td>Max 401(k) match, open Roth IRA</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td><strong>EU / Poland</strong></td>
+                                    <td>Term deposits 3.8–4.6%</td>
+                                    <td>Use IKE/IKZE wrappers for tax benefits</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Emerging Markets</strong></td>
+                                    <td>Inflation bonds 5.5–6.5%</td>
+                                    <td>Blend local + USD/EUR ETFs</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 14v-2"/><path d="M16.17 16.17a7 7 0 1 0-8.34 0"/></svg>
+                            Due Diligence
+                        </div>
+                        <p>Always confirm regulator registration (SEC, FCA, KNF, etc.) and investor compensation schemes (SIPC, FSCS, BFG). Screenshot fee tables before signing to avoid hidden spreads.</p>
+                    </div>
+
+                    <h2 id="portfolios">Model Portfolios You Can Copy</h2>
+                    <p>Use these allocations as a starting point. Rebalance annually and adjust currency exposure to your base currency.</p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4>Conservative (0–3 years)</h4>
+                            <p>Preserve capital while earning real yield on cash you need soon.</p>
+                            <ul>
+                                <li>50% insured deposits / money-market</li>
+                                <li>30% short-duration government bonds</li>
+                                <li>20% ultra-short bond ETFs / T-bills</li>
+                            </ul>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <h4>Balanced (3–7 years)</h4>
+                            <p>Blend growth and stability for medium-term goals.</p>
+                            <ul>
+                                <li>15% cash buffer</li>
+                                <li>45% global equity ETFs</li>
+                                <li>25% investment-grade bonds</li>
+                                <li>15% international/small-cap</li>
+                            </ul>
+                        </div>
+                        <div class="article-card article-card--warning">
+                            <h4>Growth (10+ years)</h4>
+                            <p>Maximize equity exposure for long-term wealth.</p>
+                            <ul>
+                                <li>70% global equities (broad market)</li>
+                                <li>20% thematic/small-cap tilt</li>
+                                <li>10% bonds for dry powder</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </div>
+                        <div class="key-takeaway__title">Key Takeaway</div>
+                        <p>Consistency beats timing. Set up automatic contributions, stay diversified, and let compound returns do the heavy lifting over time.</p>
+                    </div>
+
+                    <div class="article-cta">
+                        <h3>Pressure-test your plan</h3>
+                        <p>Use the compound interest calculator to validate that your contribution rate survives inflation and market swings.</p>
+                        <a href="../calculators/deposit-calculator-modern.html" class="btn-cta">
+                            Open Calculator
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <nav class="article-nav-bottom">
+                        <a href="debt-management-guide.html" class="article-nav-link">
+                            <span class="article-nav-link__label">Previous Article</span>
+                            <span class="article-nav-link__title">Debt Management</span>
+                        </a>
+                        <a href="roi-investment-guide.html" class="article-nav-link article-nav-link--next">
+                            <span class="article-nav-link__label">Next Article</span>
+                            <span class="article-nav-link__title">ROI Guide</span>
+                        </a>
+                    </nav>
+
+                    <a href="../index.html#articles" class="article-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to All Articles
+                    </a>
+                </div>
+            </article>
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="article-footer">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span>Financial calculators for informational purposes only</span></p>
-            </div>
+            <p>&copy; 2024 FinCalc. <span>Financial calculators for informational purposes only</span></p>
         </div>
     </footer>
 
-    <!-- Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -576,14 +285,20 @@
       gtag('config', 'G-LW2KKBR4L2');
     </script>
 
-    <!-- i18n -->
     <script src="../assets/i18n.js?v=202501220200"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.setLanguage('en');
             i18n.updatePage();
+            const progressBar = document.getElementById('reading-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (window.scrollY / docHeight) * 100;
+                    progressBar.style.width = progress + '%';
+                });
+            }
         });
     </script>
-
 </body>
 </html>

@@ -1,21 +1,46 @@
+# FinCalc - Financial Calculators
+# https://nykon80.github.io/fincalc/
+
 User-agent: *
 Allow: /
 
-# Sitemap
+# Sitemap location
 Sitemap: https://nykon80.github.io/fincalc/sitemap.xml
 
 # Crawl-delay for respectful crawling
 Crawl-delay: 1
 
-# Disallow admin or private areas (if any)
-# Disallow: /admin/
-# Disallow: /private/
-
-# Allow all calculators and articles
+# Allow all main content
 Allow: /calculators/
 Allow: /articles/
 Allow: /pages/
-
-# Allow assets
 Allow: /assets/
 Allow: /favicon.svg
+
+# Disallow temporary and development files
+Disallow: /*.log
+Disallow: /*.md
+Disallow: /*.txt$
+Disallow: /combined.log
+Disallow: /error.log
+Disallow: /.playwright-mcp/
+
+# Allow sitemap and robots
+Allow: /sitemap.xml
+Allow: /robots.txt
+
+# Google-specific
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing-specific
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Yandex-specific (for Russian market)
+User-agent: YandexBot
+Allow: /
+Crawl-delay: 2
+Host: https://nykon80.github.io/fincalc/

@@ -7,9 +7,13 @@
     <meta name="description" content="Learn what Return on Investment (ROI) means, how to calculate it, and how to use it to compare investment opportunities.">
     
     <link rel="stylesheet" href="../assets/styles-modern.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/article-styles.css">
 </head>
-<body>
+<body class="article-page">
+    <div class="reading-progress">
+        <div class="reading-progress__bar" id="reading-progress"></div>
+    </div>
+
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -30,74 +34,198 @@
                 
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn active" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
 
-    <div class="container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
-        <article class="article-content">
-            <h1 data-i18n="article.roi.title">What Is ROI and How To Use It</h1>
-            
-            <div class="article-meta">
-                <span class="date">January 15, 2024</span>
-                <span class="read-time">5 min read</span>
-            </div>
-            
-            <p data-i18n="article.roi.p1">ROI measures the efficiency of an investment by comparing the gain or loss relative to the cost.</p>
-            
-            <h2>ROI Formula</h2>
-            <p><strong>ROI = ((Final Value - Initial Investment) / Initial Investment) × 100</strong></p>
-            
-            <h2>Example Calculation</h2>
-            <p>If you invest $1,000 and it grows to $1,200:</p>
-            <p>ROI = (($1,200 - $1,000) / $1,000) × 100 = 20%</p>
-            
-            <h2>Annualized ROI</h2>
-            <p data-i18n="article.roi.p2">Annualized ROI helps compare investments of different durations.</p>
-            
-            <h2>Beyond the Numbers</h2>
-            <p data-i18n="article.roi.p3">Consider risk and costs, not just headline return.</p>
-            
-            <div class="cta-box">
-                <h3>Calculate Your Investment ROI</h3>
-                <a href="../calculators/roi-modern.html" class="btn btn-primary">Use Our Calculator</a>
-            </div>
-        </article>
-        <div class="article-navigation">
-            <a href="investment-basics-guide.html" class="nav-link" data-i18n="article.previous">Previous Article</a>
-            <a href="budget-planning-guide.html" class="nav-link" data-i18n="article.next">Next Article</a>
-            <a href="../index.html#articles" class="nav-link" data-i18n="article.back_to_list">Back to Articles</a>
-        </div>
-    </div>
-
-    <footer class="site-footer">
+    <nav class="article-breadcrumbs">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            <ol class="breadcrumb-list">
+                <li><a href="../index.html">Home</a></li>
+                <li><span class="separator">/</span></li>
+                <li><a href="../index.html#articles">Articles</a></li>
+                <li><span class="separator">/</span></li>
+                <li><span class="current">ROI Guide</span></li>
+            </ol>
+        </div>
+    </nav>
+
+    <section class="article-hero-compact">
+        <div class="container">
+            <span class="article-hero__category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Investment Basics
+            </span>
+            <h1 data-i18n="article.roi.title">What Is ROI and How To Use It</h1>
+            <p class="article-hero__lead">Learn what Return on Investment (ROI) means, how to calculate it, and how to use it to compare investment opportunities.</p>
+            <div class="article-hero__meta">
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>5 min read</span>
+                </span>
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>January 2024</span>
+                </span>
             </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="article-layout">
+            <aside class="article-toc">
+                <div class="toc-header">Contents</div>
+                <ol class="toc-list">
+                    <li><a href="#what" class="toc-link">What is ROI?</a></li>
+                    <li><a href="#formula" class="toc-link">ROI Formula</a></li>
+                    <li><a href="#example" class="toc-link">Example Calculation</a></li>
+                    <li><a href="#annualized" class="toc-link">Annualized ROI</a></li>
+                    <li><a href="#beyond" class="toc-link">Beyond the Numbers</a></li>
+                </ol>
+                <div class="toc-stats">
+                    <div class="toc-stat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>5 min read</span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="article-main">
+                <div class="article-body">
+                    <h2 id="what">What is ROI?</h2>
+                    <p data-i18n="article.roi.p1">ROI (Return on Investment) measures the efficiency of an investment by comparing the gain or loss relative to the cost. It's expressed as a percentage and helps you compare different investment opportunities on equal footing.</p>
+
+                    <h2 id="formula">ROI Formula</h2>
+                    
+                    <div class="example-box">
+                        <div class="example-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            Formula
+                        </div>
+                        <code>ROI = ((Final Value - Initial Investment) / Initial Investment) × 100</code>
+                    </div>
+
+                    <p>This simple formula works for any investment where you know the starting value and ending value.</p>
+
+                    <h2 id="example">Example Calculation</h2>
+                    
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4>Initial Investment</h4>
+                                <p>You invest $1,000 in a stock.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4>Final Value</h4>
+                                <p>After one year, the stock is worth $1,200.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4>Calculate ROI</h4>
+                                <p>ROI = (($1,200 - $1,000) / $1,000) × 100 = <strong>20%</strong></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+                            What This Means
+                        </div>
+                        <p>A 20% ROI means you earned $20 for every $100 invested. Positive ROI = profit; negative ROI = loss.</p>
+                    </div>
+
+                    <h2 id="annualized">Annualized ROI</h2>
+                    <p data-i18n="article.roi.p2">When comparing investments of different durations, use annualized ROI to put them on equal footing.</p>
+
+                    <div class="example-box">
+                        <div class="example-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                            Annualized Formula
+                        </div>
+                        <code>Annualized ROI = ((1 + ROI)^(1/years) - 1) × 100</code>
+                    </div>
+
+                    <p>For example, a 50% return over 3 years = approximately 14.5% annualized return.</p>
+
+                    <h2 id="beyond">Beyond the Numbers</h2>
+                    <p data-i18n="article.roi.p3">ROI is a useful starting point, but smart investors also consider:</p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4>Risk</h4>
+                            <p>Higher potential returns usually come with higher risk. A 20% ROI from bonds differs vastly from 20% from crypto.</p>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <h4>Time Horizon</h4>
+                            <p>A 20% return in 1 year is very different from 20% over 10 years. Always annualize for comparison.</p>
+                        </div>
+                        <div class="article-card article-card--warning">
+                            <h4>Costs & Fees</h4>
+                            <p>Management fees, transaction costs, and taxes reduce your actual return. Calculate net ROI after costs.</p>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                        </div>
+                        <div class="key-takeaway__title">Key Takeaway</div>
+                        <p>ROI is a powerful tool for comparing investments, but always consider risk, time horizon, and fees alongside the headline number.</p>
+                    </div>
+
+                    <div class="article-cta">
+                        <h3>Calculate Your Investment ROI</h3>
+                        <p>Model different scenarios and see how your investments could grow over time.</p>
+                        <a href="../calculators/roi-modern.html" class="btn-cta">
+                            Use Our Calculator
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <nav class="article-nav-bottom">
+                        <a href="investment-basics-guide.html" class="article-nav-link">
+                            <span class="article-nav-link__label">Previous Article</span>
+                            <span class="article-nav-link__title">Investment Basics</span>
+                        </a>
+                        <a href="budget-planning-guide.html" class="article-nav-link article-nav-link--next">
+                            <span class="article-nav-link__label">Next Article</span>
+                            <span class="article-nav-link__title">Budget Planning</span>
+                        </a>
+                    </nav>
+
+                    <a href="../index.html#articles" class="article-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to All Articles
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="article-footer">
+        <div class="container">
+            <p>&copy; 2024 FinCalc. Financial calculators for informational purposes only</p>
         </div>
     </footer>
 
-    <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -110,6 +238,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
+            const progressBar = document.getElementById('reading-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (window.scrollY / docHeight) * 100;
+                    progressBar.style.width = progress + '%';
+                });
+            }
         });
     </script>
 </body>

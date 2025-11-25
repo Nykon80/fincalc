@@ -15,273 +15,16 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/article-styles.css">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    
-    <style>
-        .article-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        .article-header {
-            text-align: center;
-            margin-bottom: 3rem;
-            background: linear-gradient(135deg, var(--primary-light) 0%, rgba(0, 102, 255, 0.05) 100%);
-            padding: 3rem 2rem;
-            border-radius: var(--radius-lg);
-        }
-        
-        .article-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .article-meta {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 0;
-        }
-        
-        .article-content {
-            line-height: 1.8;
-            font-size: 1.05rem;
-        }
-        
-        .article-content h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 3rem 0 1rem 0;
-            color: var(--primary);
-            border-bottom: 2px solid var(--primary-light);
-            padding-bottom: 0.5rem;
-        }
-        
-        .article-content h3 {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin: 2rem 0 1rem 0;
-            color: var(--text-primary);
-        }
-        
-        .example-box {
-            background: var(--primary-light);
-            border: 2px solid var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .example-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .info-box {
-            background: var(--success-light);
-            border: 2px solid var(--success);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .info-title {
-            font-weight: 600;
-            color: var(--success);
-            margin-bottom: 0.5rem;
-        }
-        
-        .chart-container {
-            position: relative;
-            height: 300px;
-            width: 100%;
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            padding: 1rem;
-            margin: 2rem 0;
-            box-shadow: var(--shadow-sm);
-        }
-        
-        .chart-title {
-            font-weight: 600;
-            text-align: center;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .automation-flow {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        @media (min-width: 768px) {
-            .automation-flow {
-                flex-direction: row;
-                justify-content: space-around;
-                align-items: center;
-            }
-        }
-        
-        .automation-step {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.5rem;
-            text-align: center;
-        }
-        
-        .step-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .step-blue { background: var(--primary-light); border: 2px solid var(--primary); }
-        .step-green { background: var(--success-light); border: 2px solid var(--success); }
-        .step-yellow { background: rgba(255, 193, 7, 0.1); border: 2px solid #ffc107; }
-        
-        .step-label {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .step-desc {
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-        
-        .goals-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        @media (min-width: 768px) {
-            .goals-grid {
-                grid-template-columns: repeat(3, 1fr);
-            }
-        }
-        
-        .goal-card {
-            padding: 1.5rem;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            box-shadow: var(--shadow-md);
-        }
-        
-        .goal-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .goal-title {
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        
-        .goal-desc {
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-        
-        .blue-card { background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%); }
-        .green-card { background: linear-gradient(135deg, rgba(0, 168, 107, 0.1) 0%, rgba(0, 168, 107, 0.05) 100%); }
-        .yellow-card { background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 193, 7, 0.05) 100%); }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            box-shadow: var(--shadow-md);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-        
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .comparison-table th {
-            background: var(--gray-100);
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
-            color: white;
-            padding: 2.5rem;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            margin: 3rem 0;
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .cta-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
-        }
-        
-        .btn-cta {
-            background: white;
-            color: var(--primary);
-            padding: 0.75rem 2rem;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: var(--transition-base);
-        }
-        
-        .btn-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .article-nav {
-            display: flex;
-            justify-content: space-between;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-        }
-        
-        .nav-btn {
-            background: var(--gray-100);
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition-base);
-        }
-        
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-    </style>
 </head>
-<body>
+<body class="article-page">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="reading-progress__bar" id="reading-progress"></div>
+    </div>
+
     <!-- Header -->
     <header class="site-header">
         <div class="container">
@@ -303,183 +46,268 @@
                 
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn active" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
 
-    <!-- Article -->
-    <div class="container article-container">
-            <div class="article-header">
-            <h1 class="article-title" data-i18n="article.savings.title">Smart Savings Strategies: Build Wealth Step by Step</h1>
-            <div class="article-meta">
-                <span data-i18n="article.meta.reading">5 min read</span> • 
-                <span data-i18n="article.meta.updated">Updated November 2025</span>
+    <!-- Breadcrumbs -->
+    <nav class="article-breadcrumbs">
+        <div class="container">
+            <ol class="breadcrumb-list">
+                <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                <li><span class="separator">/</span></li>
+                <li><a href="../index.html#articles" data-i18n="nav.articles">Articles</a></li>
+                <li><span class="separator">/</span></li>
+                <li><span class="current" data-i18n="article.savings.title">Savings Strategies</span></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Compact Hero -->
+    <section class="article-hero-compact">
+        <div class="container">
+            <span class="article-hero__category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/></svg>
+                Savings Playbook 2025
+            </span>
+            <h1 data-i18n="article.savings.title">Smart Savings Strategies: Build Wealth Step by Step</h1>
+            <p class="article-hero__lead" data-i18n="article.savings.desc">
+                Build a resilient savings system: emergency fund checklist, automation tactics, and EU-friendly accounts explained in plain language.
+            </p>
+            <div class="article-hero__meta">
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span data-i18n="article.meta.reading">5 min read</span>
+                </span>
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span data-i18n="article.meta.updated">Updated November 2025</span>
+                </span>
             </div>
         </div>
+    </section>
 
-        <div class="article-content">
-            <p data-i18n="article.savings.intro">
-                Building wealth doesn't happen overnight, but with the right savings strategies, you can steadily grow your financial security. 
-                Whether you're just starting or looking to optimize your approach, these proven methods will help you reach your goals faster.
-            </p>
-
-            <!-- Chart: Compound Interest -->
-            <h2 data-i18n="article.savings.emergency.title">🏦 The Power of Compound Interest: See Your Money Grow</h2>
-            <div class="chart-container">
-                <div class="chart-title">Growth of $10,000 Over 20 Years</div>
-                <canvas id="compoundChart"></canvas>
-            </div>
-            <p>This shows the dramatic difference between saving without interest (left) and letting your money work through compound interest (right). Start early, and time becomes your greatest asset.</p>
-
-            <h2 data-i18n="article.savings.goals.title">📊 Set SMART Financial Goals by Time Horizon</h2>
-            <p data-i18n="article.savings.goals.text">
-                Specific, Measurable, Achievable, Relevant, and Time-bound goals give you clear targets. 
-                Different time horizons need different tools.
-            </p>
-
-            <div class="goals-grid">
-                <div class="goal-card blue-card">
-                    <div class="goal-icon">🚗</div>
-                    <div class="goal-title">Short-term (0-2 years)</div>
-                    <div class="goal-desc">Emergency fund, vacation, new gadget. Use: <strong>High-yield savings, money market.</strong></div>
+    <main>
+        <!-- Article Layout with TOC -->
+        <div class="article-layout">
+            <!-- Table of Contents (Sidebar) -->
+            <aside class="article-toc">
+                <div class="toc-header" data-i18n="toc.title">Contents</div>
+                <ol class="toc-list">
+                    <li><a href="#compound" class="toc-link">Compound Interest Power</a></li>
+                    <li><a href="#goals" class="toc-link">Set SMART Goals</a></li>
+                    <li><a href="#automation" class="toc-link">Pay Yourself First</a></li>
+                    <li><a href="#high-yield" class="toc-link">High-Yield vs Traditional</a></li>
+                    <li><a href="#conclusion" class="toc-link">Start Today</a></li>
+                </ol>
+                <div class="toc-stats">
+                    <div class="toc-stat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span data-i18n="article.meta.reading">5 min read</span>
+                    </div>
                 </div>
-                <div class="goal-card green-card">
-                    <div class="goal-icon">🏠</div>
-                    <div class="goal-title">Medium-term (2-7 years)</div>
-                    <div class="goal-desc">Home down payment, car purchase. Use: <strong>Bond funds, CDs, conservative ETFs.</strong></div>
+            </aside>
+
+            <!-- Article Content -->
+            <article class="article-main">
+                <div class="article-body">
+                    <p data-i18n="article.savings.intro">
+                        Building wealth doesn't happen overnight, but with the right savings strategies, you can steadily grow your financial security. 
+                        Whether you're just starting or looking to optimize your approach, these proven methods will help you reach your goals faster.
+                    </p>
+
+                    <h2 id="compound" data-i18n="article.savings.emergency.title">The Power of Compound Interest: See Your Money Grow</h2>
+                    
+                    <div style="background: var(--article-surface); border: 1px solid var(--article-border); border-radius: 8px; padding: 1rem; margin: 1.5rem 0;">
+                        <div style="font-weight: 600; text-align: center; margin-bottom: 1rem; font-family: var(--font-ui);">Growth of $10,000 Over 20 Years</div>
+                        <div style="position: relative; height: 280px; width: 100%;">
+                            <canvas id="compoundChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <p>This shows the dramatic difference between saving without interest (gray) and letting your money work through compound interest (green). Start early, and time becomes your greatest asset.</p>
+
+                    <h2 id="goals" data-i18n="article.savings.goals.title">Set SMART Financial Goals by Time Horizon</h2>
+                    <p data-i18n="article.savings.goals.text">
+                        Specific, Measurable, Achievable, Relevant, and Time-bound goals give you clear targets. 
+                        Different time horizons need different tools.
+                    </p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <div class="article-card__icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 17h2c.6 0 1-.4 1-1v-3c0-.9-.7-1.7-1.5-1.9C18.7 10.6 16 10 16 10s-1.3-1.4-2.2-2.3c-.5-.4-1.1-.7-1.8-.7H5c-.6 0-1.1.4-1.4.9l-1.4 2.9A3.7 3.7 0 0 0 2 12v4c0 .6.4 1 1 1h2"/><circle cx="7" cy="17" r="2"/><path d="M9 17h6"/><circle cx="17" cy="17" r="2"/></svg>
+                            </div>
+                            <h4>Short-term (0-2 years)</h4>
+                            <p>Emergency fund, vacation, new gadget. Use: <strong>High-yield savings, money market.</strong></p>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <div class="article-card__icon" style="background: var(--article-success-light);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--article-success)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                            </div>
+                            <h4>Medium-term (2-7 years)</h4>
+                            <p>Home down payment, car purchase. Use: <strong>Bond funds, CDs, conservative ETFs.</strong></p>
+                        </div>
+                        <div class="article-card article-card--warning">
+                            <div class="article-card__icon" style="background: var(--article-warning-light);">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--article-warning)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                            </div>
+                            <h4>Long-term (7+ years)</h4>
+                            <p>Retirement, education fund. Use: <strong>Stock ETFs, index funds, Roth IRA.</strong></p>
+                        </div>
+                    </div>
+
+                    <h2 id="automation" data-i18n="article.savings.automation.title">"Pay Yourself First" – The Magic of Automation</h2>
+                    <p data-i18n="article.savings.automation.text">
+                        The most successful savers don't rely on willpower. They automate the process. Set up a standing transfer 
+                        on payday and watch your wealth build effortlessly.
+                    </p>
+
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4>Salary Arrives</h4>
+                                <p>Money hits your checking account on payday.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4>Auto-transfer (20%)</h4>
+                                <p>Standing order automatically moves 20% to savings before you can spend it.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4>Money Grows</h4>
+                                <p>Your savings earn interest/returns without any effort from you.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 data-i18n="article.savings.automation.strategies">Automation Strategies:</h3>
+                    <ul>
+                        <li data-i18n="article.savings.automation.direct"><strong>Direct deposit split:</strong> Send 20% straight to savings before you see it</li>
+                        <li data-i18n="article.savings.automation.transfer"><strong>Scheduled transfers:</strong> Every payday to your savings account</li>
+                        <li data-i18n="article.savings.automation.roundup"><strong>Round-up apps:</strong> Acorns, Chime auto-save spare change</li>
+                        <li data-i18n="article.savings.automation.investment"><strong>Invest automatically:</strong> Set up recurring ETF purchases</li>
+                    </ul>
+
+                    <div class="tip-box">
+                        <div class="tip-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 14v-2"/><path d="M16.17 16.17a7 7 0 1 0-8.34 0"/></svg>
+                            Pro Tip
+                        </div>
+                        <p data-i18n="article.savings.emergency.tip">
+                            Start with just $500–$1,000 as your initial emergency fund goal. Once you reach that, 
+                            gradually build it up to the full 3-6 months of expenses (typically $15,000–$30,000 for US households).
+                        </p>
+                    </div>
+
+                    <h2 id="high-yield" data-i18n="article.savings.high_yield.title">High-Yield Savings vs. Traditional Banks</h2>
+                    <p data-i18n="article.savings.high_yield.text">
+                        Don't let your money sit in low-interest accounts. High-yield savings accounts can earn 
+                        50–100 times more interest than traditional savings accounts.
+                    </p>
+
+                    <div class="article-table-wrapper">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="article.savings.table.account">Account Type</th>
+                                    <th data-i18n="article.savings.table.apy">APY Rate (Nov 2025)</th>
+                                    <th data-i18n="article.savings.table.interest">Annual Interest on $10,000</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-i18n="article.savings.table.traditional">Traditional Bank</td>
+                                    <td>0.01%</td>
+                                    <td>$1</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td data-i18n="article.savings.table.high_yield"><strong>High-Yield Savings (Ally, SoFi, Marcus)</strong></td>
+                                    <td><strong>3.8–4.0%</strong></td>
+                                    <td><strong>$380–$400</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>6-month CD</strong></td>
+                                    <td><strong>4.5–4.8%</strong></td>
+                                    <td><strong>$450–$480</strong></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>Money Market Account</strong></td>
+                                    <td><strong>4.2–4.6%</strong></td>
+                                    <td><strong>$420–$460</strong></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M16 8l-4 4-4-4"/><path d="M12 12v4"/></svg>
+                        </div>
+                        <div class="key-takeaway__title">Key Takeaway</div>
+                        <p>
+                            The difference between $1 and $400 annual interest is staggering. Moving to a high-yield account takes 15 minutes and can earn you hundreds more each year.
+                        </p>
+                    </div>
+
+                    <h2 id="conclusion" data-i18n="article.savings.conclusion.title">Start Today, Thank Yourself Tomorrow</h2>
+                    <p data-i18n="article.savings.conclusion.text">
+                        The best savings strategy is the one you actually follow. Start with small, consistent amounts 
+                        and gradually increase as your income grows. Your future self will thank you.
+                    </p>
+
+                    <!-- CTA Section -->
+                    <div class="article-cta">
+                        <h3 data-i18n="article.savings.cta.title">Ready to Plan Your Savings?</h3>
+                        <p data-i18n="article.savings.cta.text">Use our savings goal calculator to see exactly how much you need to save monthly to reach your target.</p>
+                        <a href="../calculators/savings-goal-modern.html" class="btn-cta">
+                            <span data-i18n="article.savings.cta.button">Try Savings Calculator</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <!-- Article Navigation -->
+                    <nav class="article-nav-bottom">
+                        <a href="budget-planning-guide.html" class="article-nav-link">
+                            <span class="article-nav-link__label" data-i18n="article.previous">Previous Article</span>
+                            <span class="article-nav-link__title">Budget Planning</span>
+                        </a>
+                        <a href="compound-interest-guide.html" class="article-nav-link article-nav-link--next">
+                            <span class="article-nav-link__label" data-i18n="article.next">Next Article</span>
+                            <span class="article-nav-link__title">Compound Interest</span>
+                        </a>
+                    </nav>
+
+                    <a href="../index.html#articles" class="article-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        <span data-i18n="article.back_to_list">Back to All Articles</span>
+                    </a>
                 </div>
-                <div class="goal-card yellow-card">
-                    <div class="goal-icon">📈</div>
-                    <div class="goal-title">Long-term (7+ years)</div>
-                    <div class="goal-desc">Retirement, education fund. Use: <strong>Stock ETFs, index funds, Roth IRA.</strong></div>
-                </div>
-            </div>
-
-            <h2 data-i18n="article.savings.automation.title">🤖 "Pay Yourself First" – The Magic of Automation</h2>
-            <p data-i18n="article.savings.automation.text">
-                The most successful savers don't rely on willpower. They automate the process. Set up a standing transfer 
-                on payday and watch your wealth build effortlessly.
-            </p>
-
-            <div class="automation-flow">
-                <div class="automation-step">
-                    <div class="step-icon step-blue">💰</div>
-                    <div class="step-label">1. Salary Arrives</div>
-                    <div class="step-desc">Money hits checking account</div>
-                </div>
-                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
-                <div class="automation-step">
-                    <div class="step-icon step-green">🤖</div>
-                    <div class="step-label">2. Auto-transfer (20%)</div>
-                    <div class="step-desc">Standing order executes</div>
-                </div>
-                <div class="automation-step" style="font-size: 2rem; color: var(--primary);">→</div>
-                <div class="automation-step">
-                    <div class="step-icon step-yellow">📈</div>
-                    <div class="step-label">3. Money Grows</div>
-                    <div class="step-desc">Earning interest/returns</div>
-                </div>
-            </div>
-
-            <h3 data-i18n="article.savings.automation.strategies">Automation Strategies:</h3>
-            <ul>
-                <li data-i18n="article.savings.automation.direct"><strong>Direct deposit split:</strong> Send 20% straight to savings before you see it</li>
-                <li data-i18n="article.savings.automation.transfer"><strong>Scheduled transfers:</strong> Every payday to your savings account</li>
-                <li data-i18n="article.savings.automation.roundup"><strong>Round-up apps:</strong> Acorns, Chime auto-save spare change</li>
-                <li data-i18n="article.savings.automation.investment"><strong>Invest automatically:</strong> Set up recurring ETF purchases</li>
-            </ul>
-
-            <div class="info-box">
-                <div class="info-title">💡 Pro Tip</div>
-                <p data-i18n="article.savings.emergency.tip">
-                    Start with just $500–$1,000 as your initial emergency fund goal. Once you reach that, 
-                    gradually build it up to the full 3-6 months of expenses (typically $15,000–$30,000 for US households).
-                </p>
-            </div>
-
-            <h2 data-i18n="article.savings.high_yield.title">💵 High-Yield Savings vs. Traditional Banks</h2>
-            <p data-i18n="article.savings.high_yield.text">
-                Don't let your money sit in low-interest accounts. High-yield savings accounts can earn 
-                50–100 times more interest than traditional savings accounts.
-            </p>
-
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th data-i18n="article.savings.table.account">Account Type</th>
-                        <th data-i18n="article.savings.table.apy">APY Rate (Nov 2025)</th>
-                        <th data-i18n="article.savings.table.interest">Annual Interest on $10,000</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td data-i18n="article.savings.table.traditional">Traditional Bank</td>
-                        <td>0.01%</td>
-                        <td>$1</td>
-                    </tr>
-                    <tr style="background: rgba(0, 168, 107, 0.05);">
-                        <td data-i18n="article.savings.table.high_yield"><strong>High-Yield Savings (Ally, SoFi, Marcus)</strong></td>
-                        <td><strong>3.8–4.0%</strong></td>
-                        <td><strong>$380–$400</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>6-month CD</strong></td>
-                        <td><strong>4.5–4.8%</strong></td>
-                        <td><strong>$450–$480</strong></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Money Market Account</strong></td>
-                        <td><strong>4.2–4.6%</strong></td>
-                        <td><strong>$420–$460</strong></td>
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2 data-i18n="article.savings.conclusion.title">🎯 Start Today, Thank Yourself Tomorrow</h2>
-            <p data-i18n="article.savings.conclusion.text">
-                The best savings strategy is the one you actually follow. Start with small, consistent amounts 
-                and gradually increase as your income grows. Your future self will thank you.
-            </p>
-
-            <div class="cta-section">
-                <h3 data-i18n="article.savings.cta.title">Ready to Plan Your Savings?</h3>
-                <p data-i18n="article.savings.cta.text">Use our savings goal calculator to see exactly how much you need to save monthly to reach your target.</p>
-                <a href="../calculators/savings-goal-modern.html" class="btn-cta" data-i18n="article.savings.cta.button">Try Savings Calculator</a>
-            </div>
+            </article>
         </div>
-
-        <!-- Article Navigation -->
-        <div class="article-nav">
-            <a href="compound-interest-guide.html" class="nav-btn" data-i18n="article.next">Next Article</a>
-            <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
-        </div>
-    </div>
+    </main>
 
     <!-- Footer -->
-    <footer class="site-footer">
+    <footer class="article-footer">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
-            </div>
+            <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
         </div>
     </footer>
 
@@ -497,9 +325,50 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
+            initReadingProgress();
+            initTocHighlight();
             initCompoundChart();
         });
 
+        // Reading Progress Bar
+        function initReadingProgress() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            
+            window.addEventListener('scroll', function() {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = window.scrollY;
+                const progress = (scrolled / docHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+        }
+
+        // TOC Active Highlight
+        function initTocHighlight() {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const sections = document.querySelectorAll('.article-body h2[id]');
+            
+            if (!tocLinks.length || !sections.length) return;
+
+            window.addEventListener('scroll', function() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
+
+        // Compound Interest Chart
         function initCompoundChart() {
             const ctx = document.getElementById('compoundChart');
             if (!ctx) return;
@@ -512,7 +381,7 @@
             for (let i = 0; i <= 20; i++) {
                 compoundData.push(Math.round(compoundValue));
                 simpleData.push(10000);
-                compoundValue *= 1.07; // 7% compound interest
+                compoundValue *= 1.07;
             }
 
             new Chart(ctx, {
@@ -523,40 +392,35 @@
                         {
                             label: 'With 7% Compound Interest',
                             data: compoundData,
-                            borderColor: 'rgb(0, 168, 107)',
-                            backgroundColor: 'rgba(0, 168, 107, 0.1)',
+                            borderColor: '#38A169',
+                            backgroundColor: 'rgba(56, 161, 105, 0.1)',
                             fill: true,
                             tension: 0.4,
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
+                            pointRadius: 3,
+                            pointHoverRadius: 5,
                         },
                         {
                             label: 'No Interest (Flat)',
                             data: simpleData,
-                            borderColor: 'rgb(156, 163, 175)',
-                            backgroundColor: 'rgba(156, 163, 175, 0.1)',
+                            borderColor: '#94A3B8',
+                            backgroundColor: 'rgba(148, 163, 184, 0.1)',
                             fill: true,
                             borderDash: [5, 5],
                             tension: 0,
+                            pointRadius: 0,
                         }
                     ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            ticks: {
-                                callback: function(value) {
-                                    return '$' + value.toLocaleString();
-                                }
-                            }
-                        }
-                    },
                     plugins: {
                         legend: {
-                            position: 'top',
+                            position: 'bottom',
+                            labels: {
+                                font: { family: "'DM Sans', sans-serif", size: 12 },
+                                padding: 16
+                            }
                         },
                         tooltip: {
                             callbacks: {
@@ -564,6 +428,22 @@
                                     return context.dataset.label + ': $' + context.parsed.y.toLocaleString();
                                 }
                             }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString();
+                                },
+                                font: { family: "'DM Sans', sans-serif" }
+                            },
+                            grid: { color: 'rgba(0,0,0,0.05)' }
+                        },
+                        x: {
+                            ticks: { font: { family: "'DM Sans', sans-serif" } },
+                            grid: { display: false }
                         }
                     }
                 }

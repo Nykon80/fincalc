@@ -1,193 +1,280 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-multilingual="true">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investment ROI Calculator - FinCalc</title>
-    <meta name="description" content="Calculate return on investment (ROI) and compare investment opportunities. Professional ROI calculator with detailed analysis.">
+    <title>ROI Calculator - Investment Return & Profitability | FinCalc</title>
+    <meta name="description" content="Free ROI calculator to measure investment returns and profitability. Calculate annualized ROI, compare investments, and analyze your portfolio performance.">
+    <meta name="keywords" content="ROI calculator, return on investment calculator, investment return calculator, profitability calculator, annualized return, investment analysis">
+    <meta name="author" content="FinCalc">
+    <meta name="robots" content="index, follow">
     
-    <!-- Styles -->
+    <!-- Open Graph -->
+    <meta property="og:title" content="ROI Calculator - Measure Investment Returns">
+    <meta property="og:description" content="Free calculator to measure investment returns, annualized ROI, and profitability.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
+    <meta property="og:site_name" content="FinCalc">
+    
+    <!-- Canonical & hreflang -->
+    <link rel="canonical" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
+    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
+    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html?lang=pl">
+    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html?lang=ru">
+    
+    <!-- Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Investment ROI Calculator",
+        "description": "Calculate Return on Investment (ROI), annualized returns, and compare investment performance",
+        "applicationCategory": "FinanceApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
+    }
+    </script>
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml">
+    
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        .calculator-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 2rem 0;
+        .calc-hero {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
+            padding: 2.5rem 1.5rem 2rem;
+            margin: -1rem -1rem 2rem -1rem;
+            border-radius: 0 0 24px 24px;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
         
-        .calculator-container h1 {
-            font-size: 1.85rem;
-            font-weight: 800;
+        .calc-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .calc-hero__icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.15);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        
+        .calc-hero__icon svg { width: 28px; height: 28px; stroke: white; }
+        .calc-hero h1 { font-size: 2rem; font-weight: 800; margin: 0 0 0.5rem 0; }
+        .calc-hero p { font-size: 1rem; color: rgba(255,255,255,0.9); margin: 0; max-width: 600px; line-height: 1.5; }
+        
+        .calculator-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
+        
+        .calculator-main-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        @media (max-width: 900px) { .calculator-main-grid { grid-template-columns: 1fr; } }
+        
+        .input-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        
+        .input-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
             color: #0b254a;
-            margin-bottom: 0.5rem;
+            margin: 0 0 1.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
         
-        .calculator-container > p {
-            font-size: 1rem;
-            color: var(--text-secondary);
+        .input-card h3 svg { width: 20px; height: 20px; stroke: #8b5cf6; }
+        
+        .slider-group { margin-bottom: 1.5rem; }
+        .slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
+        .slider-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
+        
+        .slider-input {
+            width: 100%;
+            height: 8px;
+            border-radius: 4px;
+            background: linear-gradient(to right, #8b5cf6 0%, #8b5cf6 var(--value), var(--gray-200) var(--value), var(--gray-200) 100%);
+            -webkit-appearance: none;
+            cursor: pointer;
+        }
+        
+        .slider-input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: white;
+            border: 3px solid #8b5cf6;
+            box-shadow: 0 2px 8px rgba(139,92,246,0.3);
+            cursor: grab;
+        }
+        
+        .slider-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
+        .slider-number-input { width: 110px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-align: right; }
+        
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
+        .form-group { margin-bottom: 1rem; }
+        .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
+        .form-input, .form-select { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; }
+        .form-input:focus, .form-select:focus { border-color: #8b5cf6; outline: none; box-shadow: 0 0 0 3px rgba(139,92,246,0.1); }
+        
+        .results-panel { display: flex; flex-direction: column; gap: 1rem; }
+        
+        .main-result-card {
+            background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
+            border-radius: 20px;
+            padding: 1.75rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        
+        .main-result-card::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        }
+        
+        .main-result-label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
+        .main-result-value { font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
+        .main-result-subtitle { font-size: 0.9rem; opacity: 0.9; }
+        
+        .roi-indicator { margin-top: 1rem; display: flex; justify-content: center; gap: 2rem; }
+        .roi-indicator__item { text-align: center; }
+        .roi-indicator__label { font-size: 0.75rem; opacity: 0.7; }
+        .roi-indicator__value { font-size: 1.1rem; font-weight: 700; }
+        .roi-indicator__value.positive { color: #86efac; }
+        .roi-indicator__value.negative { color: #fca5a5; }
+        
+        .result-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+        
+        .result-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 1rem;
+            text-align: center;
+        }
+        
+        .result-card__icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
+        .result-card__icon svg { width: 18px; height: 18px; }
+        .result-card__icon--purple { background: rgba(139,92,246,0.1); }
+        .result-card__icon--purple svg { stroke: #8b5cf6; }
+        .result-card__icon--green { background: rgba(16,185,129,0.1); }
+        .result-card__icon--green svg { stroke: #10b981; }
+        .result-card__icon--blue { background: rgba(59,130,246,0.1); }
+        .result-card__icon--blue svg { stroke: #3b82f6; }
+        .result-card__icon--orange { background: rgba(245,158,11,0.1); }
+        .result-card__icon--orange svg { stroke: #f59e0b; }
+        
+        .result-card__label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; }
+        .result-card__value { font-size: 1.15rem; font-weight: 700; color: #0b254a; }
+        .result-card__value--green { color: #10b981; }
+        .result-card__value--red { color: #ef4444; }
+        
+        .comparison-section {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
             margin-bottom: 1.5rem;
         }
         
-        .calculator-container h3 {
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin-bottom: 1.2rem;
-            color: var(--text-primary);
-            letter-spacing: 0;
-        }
-        
-        .breakdown-table {
-            width: 100%;
-            margin-top: var(--space-xl);
-            border-collapse: collapse;
-        }
-        
-        .breakdown-table th {
-            background: var(--gray-100);
-            padding: var(--space-md);
-            text-align: left;
-            font-weight: 600;
-            border-bottom: 2px solid var(--border);
-        }
-
-        .breakdown-table td {
-            padding: var(--space-md);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .breakdown-table th:nth-child(4),
-        .breakdown-table td:nth-child(4) {
-            width: 40%;
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-        }
-        
-        .breakdown-table tr:hover {
-            background: var(--gray-50);
-        }
-        
-        /* Стили для блоков результатов */
-        .results-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-        }
-        
-        .result-item {
-            background-color: white;
-            border-radius: var(--radius-md);
-            padding: 1.5rem;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            text-align: center;
-            height: 100%;
-            min-height: 120px;
-        }
-        
-        .result-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            font-weight: 500;
-            margin-bottom: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            flex-shrink: 0;
-        }
-        
-        .result-value {
-            font-size: 2rem;
+        .comparison-section h3 {
+            font-size: 1.1rem;
             font-weight: 700;
-            line-height: 1;
-            flex-grow: 1;
+            color: #0b254a;
+            margin: 0 0 1rem 0;
             display: flex;
-            align-items: flex-end;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .comparison-section h3 svg { width: 20px; height: 20px; stroke: #8b5cf6; }
+        
+        .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
+        
+        .comparison-card {
+            border: 2px solid var(--border);
+            border-radius: 14px;
+            padding: 1.25rem;
+            text-align: center;
+        }
+        
+        .comparison-card.best { border-color: #10b981; background: #ecfdf5; }
+        .comparison-card__title { font-size: 0.85rem; font-weight: 700; color: #0b254a; margin-bottom: 0.5rem; }
+        .comparison-card__roi { font-size: 1.75rem; font-weight: 800; color: #8b5cf6; }
+        .comparison-card__details { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
+        
+        .action-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .btn-action {
+            flex: 1;
+            padding: 0.65rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
             justify-content: center;
+            gap: 0.35rem;
         }
-
-        /* Risk level slider styling */
-        .form-input[type="range"] {
-            width: 100%;
-            height: 6px;
-            border-radius: 3px;
-            background: var(--gray-200);
-            outline: none;
-            -webkit-appearance: none;
-        }
-
-        .form-input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-        }
-
-        .form-input[type="range"]::-moz-range-thumb {
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: var(--primary);
-            cursor: pointer;
-            border: none;
-        }
+        .btn-action:hover { background: var(--gray-50); }
+        .btn-action svg { width: 16px; height: 16px; }
         
-        /* Цвета для значений */
-        #roi {
-            color: #0066ff;
-        }
-        
-        #annualRoi {
-            color: #555;
-        }
-        
-        #totalProfit {
-            color: #00a86b;
-        }
-        
-        #netProfit {
-            color: #0066ff;
-        }
-
-        #realRoi {
-            color: #ff9500;
-        }
-
-        #riskAdjustedRoi {
-            color: #ff3b30;
+        @media (max-width: 640px) {
+            .calc-hero { padding: 1.5rem 1rem; }
+            .calc-hero h1 { font-size: 1.5rem; }
+            .main-result-value { font-size: 2.5rem; }
+            .result-cards-grid { grid-template-columns: 1fr; }
+            .form-row { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
                 <a href="../index.html" class="logo">
-                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
-                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="23" cy="10" r="2" fill="white"/>
-                        <defs>
-                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-                                <stop stop-color="#0066ff"/>
-                                <stop offset="1" stop-color="#00a86b"/>
-                            </linearGradient>
-                        </defs>
-                    </svg>
+                    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#gradient)"/><path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="10" r="2" fill="white"/><defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs></svg>
                     <span>FinCalc</span>
                 </a>
-                
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
                         <button class="lang-dropdown-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
                             <span class="lang-btn-text" data-i18n="nav.language">Language</span>
                         </button>
                         <div class="lang-dropdown-content">
@@ -201,7 +288,6 @@
         </div>
     </header>
     
-    <!-- Tabs Navigation -->
     <div class="tabs-navigation">
         <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
         <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
@@ -209,123 +295,144 @@
         <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
     </div>
     
-    <!-- Calculator -->
     <div class="container calculator-container">
-        <h1 data-i18n="roi.title">Investment ROI Calculator</h1>
-        <p class="mb-3" data-i18n="roi.description">Calculate return on investment and compare opportunities</p>
+        <div class="calc-hero">
+            <div class="calc-hero__icon">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                    <polyline points="17 6 23 6 23 12"/>
+                </svg>
+            </div>
+            <h1 data-i18n="calc.roi">ROI Calculator</h1>
+            <p data-i18n="calc.roi.desc">Measure investment profitability by comparing invested capital, net profit, and annualized return after extra costs.</p>
+        </div>
         
-        <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 2rem;">
-            <!-- Input Form -->
-            <div class="calculator-form">
-                <h3 data-i18n="section.investment">Investment Details</h3>
+        <div class="calculator-main-grid">
+            <div class="input-card">
+                <h3>
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                    <span data-i18n="roi.investment_details">Investment Details</span>
+                </h3>
                 
-                <div class="form-group">
-                    <label class="form-label" data-i18n="form.investment.initial">Initial Investment</label>
-                    <input type="number" class="form-input" id="initialInvestment" value="10000" min="0" step="1000">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-label" data-i18n="roi.initial_investment">Initial Investment</span>
+                        <input type="number" class="slider-number-input" id="investedInput" value="10000" min="0" step="100">
+                    </div>
+                    <input type="range" class="slider-input" id="investedSlider" min="100" max="1000000" value="10000" step="100">
+                    <div class="slider-range"><span>$100</span><span>$1,000,000</span></div>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label" data-i18n="form.investment.final">Final Value</label>
-                    <input type="number" class="form-input" id="finalValue" value="15000" min="0" step="1000">
+                <div class="slider-group">
+                    <div class="slider-header">
+                        <span class="slider-label" data-i18n="roi.final_value">Final Value</span>
+                        <input type="number" class="slider-number-input" id="finalInput" value="15000" min="0" step="100">
+                    </div>
+                    <input type="range" class="slider-input" id="finalSlider" min="100" max="2000000" value="15000" step="100">
+                    <div class="slider-range"><span>$100</span><span>$2,000,000</span></div>
                 </div>
                 
-                <div class="form-group">
-                    <label class="form-label" data-i18n="form.investment.time">Investment Period (Years)</label>
-                    <input type="number" class="form-input" id="timePeriod" value="5" min="0.1" max="50" step="0.1">
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" data-i18n="form.investment.costs">Associated Costs (e.g., fees, taxes):</label>
-                    <input type="number" class="form-input" id="additionalCosts" value="500" min="0" step="100">
-                </div>
-
-                <!-- Risk Assessment -->
-                <div class="form-group">
-                    <label class="form-label" data-i18n="form.risk.level">Risk Level (1-10)</label>
-                    <input type="range" class="form-input" id="riskLevel" value="5" min="1" max="10" step="1">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary);">
-                        <span data-i18n="form.risk.scale.split.0">Conservative</span>
-                        <span data-i18n="form.risk.scale.split.1">Balanced</span>
-                        <span data-i18n="form.risk.scale.split.2">Aggressive</span>
+                <div class="form-row">
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" data-i18n="roi.investment_period">Investment Period</label>
+                        <input type="number" class="form-input" id="yearsInput" value="3" min="0.1" step="0.5">
+                    </div>
+                    <div class="form-group" style="margin-bottom: 0;">
+                        <label class="form-label" data-i18n="roi.period_unit">Period Unit</label>
+                        <select class="form-select" id="periodUnit">
+                            <option value="years" selected data-i18n="unit.years">Years</option>
+                            <option value="months" data-i18n="unit.months">Months</option>
+                        </select>
                     </div>
                 </div>
-
-                <!-- Inflation Rate -->
+                
                 <div class="form-group">
-                    <label class="form-label" data-i18n="form.inflation.rate">Expected Inflation (%)</label>
-                    <input type="number" class="form-input" id="inflationRate" value="3" min="0" max="20" step="0.1">
+                    <label class="form-label" data-i18n="roi.additional_costs">Additional Costs (fees, taxes)</label>
+                    <input type="number" class="form-input" id="costsInput" value="500" min="0" step="50">
+                </div>
+                
+                <div class="form-group" style="margin-bottom: 0;">
+                    <label class="form-label" data-i18n="roi.dividends">Dividends / Income Received</label>
+                    <input type="number" class="form-input" id="dividendsInput" value="1000" min="0" step="100">
                 </div>
             </div>
             
-            <!-- Results -->
-            <div>
-                <div class="results-container">
-                    <h3 data-i18n="section.results">Results</h3>
-                    <div class="results-grid">
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.roi">ROI (%)</div>
-                            <div class="result-value" id="roi">0%</div>
+            <div class="results-panel">
+                <div class="main-result-card">
+                    <div class="main-result-label" data-i18n="roi.total_roi">Total ROI</div>
+                    <div class="main-result-value" id="totalROI">55%</div>
+                    <div class="main-result-subtitle" id="roiSubtitle">Over 3 years</div>
+                    
+                    <div class="roi-indicator">
+                        <div class="roi-indicator__item">
+                            <div class="roi-indicator__label" data-i18n="roi.annualized">Annualized</div>
+                            <div class="roi-indicator__value positive" id="annualROI">15.7%</div>
                         </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.annual_roi">Annual ROI (%)</div>
-                            <div class="result-value" id="annualRoi">0%</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.profit">Total Profit</div>
-                            <div class="result-value" id="totalProfit">$0</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.profit.net">Net Profit</div>
-                            <div class="result-value" id="netProfit">$0</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.real_roi">Real ROI (Inflation-adjusted)</div>
-                            <div class="result-value" id="realRoi">0%</div>
-                        </div>
-                        <div class="result-item">
-                            <div class="result-label" data-i18n="result.risk_adjusted_roi">Risk-adjusted ROI</div>
-                            <div class="result-value" id="riskAdjustedRoi">0%</div>
+                        <div class="roi-indicator__item">
+                            <div class="roi-indicator__label" data-i18n="roi.net_profit">Net Profit</div>
+                            <div class="roi-indicator__value positive" id="netProfit">+$5,500</div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="info-box">
-                    <h4 data-i18n="how_it_works.title">How It Works</h4>
-                    <p style="margin: 0; color: var(--text-secondary);" data-i18n="how_it_works.text">
-                        ROI measures the efficiency of an investment by comparing the gain or loss relative to the cost.
-                    </p>
+                <div class="result-cards-grid">
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                        </div>
+                        <div class="result-card__label" data-i18n="roi.invested">Invested</div>
+                        <div class="result-card__value" id="investedAmount">$10,000</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--green">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                        </div>
+                        <div class="result-card__label" data-i18n="roi.gain">Capital Gain</div>
+                        <div class="result-card__value result-card__value--green" id="capitalGain">+$5,000</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="result-card__label" data-i18n="roi.dividends_label">Dividends</div>
+                        <div class="result-card__value" id="dividendsAmount">+$1,000</div>
+                    </div>
+                    
+                    <div class="result-card">
+                        <div class="result-card__icon result-card__icon--orange">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        </div>
+                        <div class="result-card__label" data-i18n="roi.costs_label">Costs</div>
+                        <div class="result-card__value result-card__value--red" id="costsAmount">-$500</div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button class="btn-action" id="shareBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                        <span data-i18n="button.share">Share</span>
+                    </button>
+                    <button class="btn-action" id="resetBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+                        <span data-i18n="form.reset">Reset</span>
+                    </button>
                 </div>
             </div>
         </div>
         
-        <!-- Comparison Table -->
-        <div style="margin-top: 2rem;">
-            <h3 data-i18n="section.comparison">Investment Analysis & Comparison</h3>
-            <div style="overflow-x: auto;">
-                <table class="breakdown-table" id="comparisonTable">
-                    <thead>
-                        <tr>
-                            <th data-i18n="table.metric">Metric</th>
-                            <th data-i18n="table.value">Value</th>
-                            <th data-i18n="table.rating">Rating</th>
-                            <th data-i18n="table.description">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody id="tableBody">
-                        <!-- Populated by JavaScript -->
-                    </tbody>
-                </table>
+        <div class="comparison-section">
+            <h3>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                <span data-i18n="roi.compare_benchmarks">Compare to Benchmarks</span>
+            </h3>
+            <div class="comparison-grid" id="comparisonGrid">
+                <!-- Populated by JS -->
             </div>
-        </div>
-        
-        <!-- Ad Slot -->
-        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted); margin-top: 2rem;">
-            <!-- Google AdSense will go here -->
-            <small>Advertisement</small>
         </div>
     </div>
     
-    <!-- Footer -->
     <footer class="site-footer">
         <div class="container">
             <div class="footer-bottom">
@@ -334,151 +441,144 @@
         </div>
     </footer>
     
-    <!-- Google Analytics 4 (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-LW2KKBR4L2');
-    </script>
-
-    <!-- Scripts -->
     <script src="../assets/i18n.js"></script>
     <script>
-        function calculate() {
-            const initialInvestment = parseFloat(document.getElementById('initialInvestment').value) || 0;
-            const finalValue = parseFloat(document.getElementById('finalValue').value) || 0;
-            const timePeriod = parseFloat(document.getElementById('timePeriod').value) || 1;
-            const additionalCosts = parseFloat(document.getElementById('additionalCosts').value) || 0;
-            const riskLevel = parseInt(document.getElementById('riskLevel').value) || 5;
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 3;
-
-            if (initialInvestment <= 0 || timePeriod <= 0) {
-                alert('Please enter valid investment amount and time period.');
-                return;
-            }
-
-            const totalInvestment = initialInvestment + additionalCosts;
-            const totalProfit = finalValue - initialInvestment;
-            const netProfit = finalValue - totalInvestment;
-
-            // Calculate ROI
-            const roi = (netProfit / totalInvestment) * 100;
-
-            // Calculate annualized ROI
-            const annualRoi = (Math.pow((finalValue / totalInvestment), 1 / timePeriod) - 1) * 100;
-
-            // Calculate inflation-adjusted ROI (Real ROI)
-            const realRoi = annualRoi - inflationRate;
-
-            // Calculate risk-adjusted ROI (Sharpe-like ratio, simplified)
-            // Higher risk should reduce the effective ROI
-            const riskAdjustment = (riskLevel - 5) * 0.5; // -2% to +2% adjustment based on risk level
-            const riskAdjustedRoi = annualRoi - riskAdjustment;
-
-            // Update results
-            document.getElementById('roi').textContent = roi.toFixed(2) + '%';
-            document.getElementById('annualRoi').textContent = annualRoi.toFixed(2) + '%';
-            document.getElementById('totalProfit').textContent = i18n.formatCurrency(totalProfit);
-            document.getElementById('netProfit').textContent = i18n.formatCurrency(netProfit);
-            document.getElementById('realRoi').textContent = realRoi.toFixed(2) + '%';
-            document.getElementById('riskAdjustedRoi').textContent = riskAdjustedRoi.toFixed(2) + '%';
-
-            // Update comparison table
-            updateComparisonTable(roi, annualRoi, realRoi, riskAdjustedRoi, totalProfit, netProfit);
-        }
-        
-        function updateComparisonTable(roi, annualRoi, realRoi, riskAdjustedRoi, totalProfit, netProfit) {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-
-            const metrics = [
-                {
-                    metric: i18n.t('result.roi'),
-                    value: roi.toFixed(2) + '%',
-                    rating: getRating(roi),
-                    description: i18n.t('roi.description.total')
-                },
-                {
-                    metric: i18n.t('result.annual_roi'),
-                    value: annualRoi.toFixed(2) + '%',
-                    rating: getRating(annualRoi),
-                    description: i18n.t('roi.description.annual')
-                },
-                {
-                    metric: i18n.t('result.real_roi'),
-                    value: realRoi.toFixed(2) + '%',
-                    rating: getRating(realRoi),
-                    description: i18n.t('roi.description.real')
-                },
-                {
-                    metric: i18n.t('result.risk_adjusted_roi'),
-                    value: riskAdjustedRoi.toFixed(2) + '%',
-                    rating: getRating(riskAdjustedRoi),
-                    description: i18n.t('roi.description.risk')
-                },
-                {
-                    metric: i18n.t('result.profit'),
-                    value: i18n.formatCurrency(totalProfit),
-                    rating: getRating(totalProfit),
-                    description: i18n.t('roi.description.total_profit')
-                },
-                {
-                    metric: i18n.t('result.profit.net'),
-                    value: i18n.formatCurrency(netProfit),
-                    rating: getRating(netProfit),
-                    description: i18n.t('roi.description.net_profit')
-                }
-            ];
-
-            metrics.forEach(row => {
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${row.metric}</strong></td>
-                    <td>${row.value}</td>
-                    <td>${row.rating}</td>
-                    <td>${row.description}</td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-        
-        function getRating(value) {
-            const absValue = Math.abs(value);
-            if (absValue >= 15) return i18n.t('rating.excellent');
-            if (absValue >= 10) return i18n.t('rating.good');
-            if (absValue >= 5) return i18n.t('rating.fair');
-            if (absValue >= 0) return i18n.t('rating.poor');
-            return i18n.t('rating.loss');
-        }
-        
-        // Override i18n setLanguage to refresh calculations
-        const originalSetLanguage = i18n.setLanguage.bind(i18n);
-        i18n.setLanguage = function(lang) {
-            originalSetLanguage(lang);
-            // Recalculate to update the comparison table with new language
-            calculate();
-        };
-        
-        // Initialize on load
         document.addEventListener('DOMContentLoaded', function() {
-            // Set language from URL or localStorage
             const urlParams = new URLSearchParams(window.location.search);
-            const langFromUrl = urlParams.get('lang');
-            const savedLang = localStorage.getItem('preferredLanguage');
-            const currentLang = langFromUrl || savedLang || 'en';
-            
-            i18n.setLanguage(currentLang);
+            const lang = urlParams.get('lang') || localStorage.getItem('preferredLanguage') || 'en';
+            i18n.setLanguage(lang);
             i18n.updatePage();
+            
+            bindSliders();
+            bindInputs();
+            bindActions();
             calculate();
-
-            // Add input listeners
-            document.querySelectorAll('input').forEach(input => {
-                input.addEventListener('input', calculate);
-                input.addEventListener('change', calculate);
+        });
+        
+        function bindSliders() {
+            syncSliderInput('investedSlider', 'investedInput', calculate);
+            syncSliderInput('finalSlider', 'finalInput', calculate);
+            updateAllSliderFills();
+        }
+        
+        function syncSliderInput(sliderId, inputId, callback) {
+            const slider = document.getElementById(sliderId);
+            const input = document.getElementById(inputId);
+            slider.addEventListener('input', () => { input.value = slider.value; updateSliderFill(slider); callback(); });
+            input.addEventListener('input', () => { slider.value = input.value; updateSliderFill(slider); callback(); });
+        }
+        
+        function updateSliderFill(slider) {
+            const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
+            slider.style.setProperty('--value', percent + '%');
+        }
+        
+        function updateAllSliderFills() {
+            document.querySelectorAll('.slider-input').forEach(updateSliderFill);
+        }
+        
+        function bindInputs() {
+            ['yearsInput', 'costsInput', 'dividendsInput', 'periodUnit'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculate);
+                document.getElementById(id).addEventListener('change', calculate);
             });
-
+        }
+        
+        function bindActions() {
+            document.getElementById('shareBtn').addEventListener('click', () => {
+                const params = new URLSearchParams({
+                    invested: document.getElementById('investedInput').value,
+                    final: document.getElementById('finalInput').value,
+                    years: document.getElementById('yearsInput').value,
+                    costs: document.getElementById('costsInput').value,
+                    dividends: document.getElementById('dividendsInput').value
+                });
+                navigator.clipboard.writeText(window.location.origin + window.location.pathname + '?' + params).then(() => alert('Link copied!'));
+            });
+            
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                document.getElementById('investedInput').value = 10000;
+                document.getElementById('investedSlider').value = 10000;
+                document.getElementById('finalInput').value = 15000;
+                document.getElementById('finalSlider').value = 15000;
+                document.getElementById('yearsInput').value = 3;
+                document.getElementById('costsInput').value = 500;
+                document.getElementById('dividendsInput').value = 1000;
+                updateAllSliderFills();
+                calculate();
+            });
+        }
+        
+        function calculate() {
+            const invested = parseFloat(document.getElementById('investedInput').value) || 0;
+            const finalValue = parseFloat(document.getElementById('finalInput').value) || 0;
+            let period = parseFloat(document.getElementById('yearsInput').value) || 1;
+            const periodUnit = document.getElementById('periodUnit').value;
+            const costs = parseFloat(document.getElementById('costsInput').value) || 0;
+            const dividends = parseFloat(document.getElementById('dividendsInput').value) || 0;
+            
+            // Convert months to years
+            const years = periodUnit === 'months' ? period / 12 : period;
+            
+            const capitalGain = finalValue - invested;
+            const totalGain = capitalGain + dividends - costs;
+            const totalROI = invested > 0 ? (totalGain / invested) * 100 : 0;
+            const annualROI = years > 0 ? (Math.pow(1 + totalROI / 100, 1 / years) - 1) * 100 : 0;
+            
+            // Update UI
+            document.getElementById('totalROI').textContent = totalROI.toFixed(1) + '%';
+            document.getElementById('roiSubtitle').textContent = `Over ${period} ${periodUnit}`;
+            
+            const annualEl = document.getElementById('annualROI');
+            annualEl.textContent = annualROI.toFixed(1) + '%';
+            annualEl.className = 'roi-indicator__value ' + (annualROI >= 0 ? 'positive' : 'negative');
+            
+            const profitEl = document.getElementById('netProfit');
+            profitEl.textContent = (totalGain >= 0 ? '+' : '') + i18n.formatCurrency(totalGain);
+            profitEl.className = 'roi-indicator__value ' + (totalGain >= 0 ? 'positive' : 'negative');
+            
+            document.getElementById('investedAmount').textContent = i18n.formatCurrency(invested);
+            document.getElementById('capitalGain').textContent = (capitalGain >= 0 ? '+' : '') + i18n.formatCurrency(capitalGain);
+            document.getElementById('dividendsAmount').textContent = '+' + i18n.formatCurrency(dividends);
+            document.getElementById('costsAmount').textContent = '-' + i18n.formatCurrency(costs);
+            
+            updateComparison(annualROI);
+        }
+        
+        function updateComparison(userROI) {
+            const benchmarks = [
+                { name: 'S&P 500', roi: 10.5, desc: 'Historical average' },
+                { name: 'Bonds', roi: 4.5, desc: '10-year Treasury' },
+                { name: 'Savings', roi: 4.0, desc: 'High-yield savings' }
+            ];
+            
+            const grid = document.getElementById('comparisonGrid');
+            grid.innerHTML = '';
+            
+            const all = [...benchmarks, { name: 'Your Investment', roi: userROI, desc: 'Annualized' }];
+            const best = Math.max(...all.map(b => b.roi));
+            
+            benchmarks.forEach(b => {
+                const card = document.createElement('div');
+                card.className = 'comparison-card' + (b.roi === best ? ' best' : '');
+                card.innerHTML = `
+                    <div class="comparison-card__title">${b.name}</div>
+                    <div class="comparison-card__roi">${b.roi.toFixed(1)}%</div>
+                    <div class="comparison-card__details">${b.desc}</div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        // Load from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        ['invested', 'final', 'years', 'costs', 'dividends'].forEach(key => {
+            if (urlParams.has(key)) {
+                const input = document.getElementById(key + 'Input');
+                const slider = document.getElementById(key + 'Slider');
+                if (input) input.value = urlParams.get(key);
+                if (slider) slider.value = urlParams.get(key);
+            }
         });
     </script>
 </body>

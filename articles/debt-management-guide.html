@@ -8,267 +8,14 @@
     
     <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <style>
-        .article-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem 0;
-        }
-        
-        .article-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-        
-        .article-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-        
-        .article-meta {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 2rem;
-        }
-        
-        .article-content {
-            line-height: 1.7;
-            font-size: 1.1rem;
-        }
-        
-        .article-content h2 {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin: 2.5rem 0 1rem 0;
-            color: var(--primary);
-        }
-        
-        .article-content h3 {
-            font-size: 1.4rem;
-            font-weight: 600;
-            margin: 2rem 0 1rem 0;
-            color: var(--text-primary);
-        }
-        
-        .example-box {
-            background: var(--primary-light);
-            border: 1px solid var(--primary);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .example-title {
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        
-        .info-box {
-            background: var(--success-light);
-            border: 1px solid var(--success);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .info-title {
-            font-weight: 600;
-            color: var(--success);
-            margin-bottom: 0.5rem;
-        }
-        
-        .warning-box {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .warning-title {
-            font-weight: 600;
-            color: #856404;
-            margin-bottom: 0.5rem;
-        }
-        
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 2rem 0;
-            box-shadow: var(--shadow-md);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-        
-        .comparison-table th,
-        .comparison-table td {
-            padding: 1rem;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .comparison-table th {
-            background: var(--gray-100);
-            font-weight: 600;
-        }
-        
-        .strategy-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-        
-        .strategy-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .strategy-card h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .strategy-card p {
-            flex-grow: 1;
-        }
-        
-        .pros-cons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-        
-        .pros, .cons {
-            padding: 1rem;
-            border-radius: var(--radius-md);
-        }
-        
-        .pros {
-            background: var(--success-light);
-            border: 1px solid var(--success);
-        }
-        
-        .cons {
-            background: #fee;
-            border: 1px solid var(--danger);
-        }
-        
-        .pros h5 {
-            color: var(--success);
-            margin-bottom: 0.5rem;
-        }
-        
-        .cons h5 {
-            color: var(--danger);
-            margin-bottom: 0.5rem;
-        }
-        
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--success) 100%);
-            color: white;
-            padding: 2rem;
-            border-radius: var(--radius-lg);
-            text-align: center;
-            margin: 3rem 0;
-        }
-        
-        .cta-section h3 {
-            color: white;
-            margin-bottom: 1rem;
-        }
-        
-        .btn-cta {
-            background: white;
-            color: var(--primary);
-            padding: 0.75rem 2rem;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            display: inline-block;
-            margin-top: 1rem;
-            transition: var(--transition-base);
-        }
-        
-        .btn-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-        
-        .article-nav {
-            display: flex;
-            justify-content: space-between;
-            margin: 3rem 0;
-            padding: 2rem 0;
-            border-top: 1px solid var(--border);
-        }
-        
-        .nav-btn {
-            background: var(--gray-100);
-            color: var(--text-primary);
-            padding: 0.75rem 1.5rem;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition-base);
-        }
-        
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .checklist {
-            background: var(--gray-50);
-            border-radius: var(--radius-lg);
-            padding: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .checklist h4 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        .checklist ul {
-            list-style: none;
-            padding: 0;
-        }
-        
-        .checklist li {
-            padding: 0.5rem 0;
-            position: relative;
-            padding-left: 2rem;
-        }
-        
-        .checklist li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--success);
-            font-weight: bold;
-        }
-        
-        @media (max-width: 768px) {
-            .strategy-grid,
-            .pros-cons {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="../assets/article-styles.css">
 </head>
-<body>
+<body class="article-page">
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="reading-progress__bar" id="reading-progress"></div>
+    </div>
+
     <!-- Header -->
     <header class="site-header">
         <div class="container">
@@ -290,246 +37,291 @@
                 
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn active" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
 
-    <!-- Article -->
-    <div class="container article-container">
-        <div class="article-header">
-            <h1 class="article-title" data-i18n="article.debt.title">Debt Management: Take Control of Your Financial Future</h1>
-            <div class="article-meta">
-                <span data-i18n="article.meta.reading">5 min read</span> • 
-                <span data-i18n="article.meta.updated">Updated December 2024</span>
-            </div>
-        </div>
-
-        <div class="article-content">
-            <p data-i18n="article.debt.intro">
-                Debt can feel overwhelming, but with the right strategy, you can take control and work toward financial freedom. 
-                This guide outlines proven methods to tackle debt systematically and efficiently.
-            </p>
-
-            <h2 data-i18n="article.debt.assessment.title">Assess Your Debt Situation</h2>
-            <p data-i18n="article.debt.assessment.text">
-                List all your debts with balances, minimum payments, and interest rates. Understanding the full picture 
-                is the first step toward creating an effective payoff plan.
-            </p>
-
-            <div class="example-box">
-                <div class="example-title" data-i18n="article.debt.worksheet.title">Debt Assessment Worksheet</div>
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th data-i18n="article.debt.table.type">Debt Type</th>
-                            <th data-i18n="article.debt.table.balance">Balance</th>
-                            <th data-i18n="article.debt.table.rate">Interest Rate</th>
-                            <th data-i18n="article.debt.table.minimum">Min Payment</th>
-                            <th data-i18n="article.debt.table.priority">Priority</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td data-i18n="article.debt.example.card_a">Credit Card A</td>
-                            <td>$3,500</td>
-                            <td>18.9%</td>
-                            <td>$105</td>
-                            <td data-i18n="article.debt.priority.high">High</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n="article.debt.example.card_b">Credit Card B</td>
-                            <td>$1,200</td>
-                            <td>22.4%</td>
-                            <td>$36</td>
-                            <td data-i18n="article.debt.priority.highest">Highest</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n="article.debt.example.student">Student Loan</td>
-                            <td>$15,000</td>
-                            <td>4.5%</td>
-                            <td>$156</td>
-                            <td data-i18n="article.debt.priority.low">Low</td>
-                        </tr>
-                        <tr>
-                            <td data-i18n="article.debt.example.car">Car Loan</td>
-                            <td>$8,500</td>
-                            <td>6.2%</td>
-                            <td>$245</td>
-                            <td data-i18n="article.debt.priority.medium">Medium</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <h2 data-i18n="article.debt.strategies.title">Debt Payoff Strategies</h2>
-
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <h4 data-i18n="article.debt.snowball.title">🏔️ Debt Snowball Method</h4>
-                    <p data-i18n="article.debt.snowball.text">
-                        Pay minimum amounts on all debts, then put extra money toward the smallest balance. 
-                        This builds momentum and motivation as you eliminate debts one by one.
-                    </p>
-                    
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h5 data-i18n="article.debt.pros">Pros:</h5>
-                            <ul>
-                                <li data-i18n="article.debt.snowball.pro1">Quick psychological wins</li>
-                                <li data-i18n="article.debt.snowball.pro2">Builds momentum</li>
-                                <li data-i18n="article.debt.snowball.pro3">Easier to stick with</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h5 data-i18n="article.debt.cons">Cons:</h5>
-                            <ul>
-                                <li data-i18n="article.debt.snowball.con1">May cost more in interest</li>
-                                <li data-i18n="article.debt.snowball.con2">Takes longer mathematically</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="strategy-card">
-                    <h4 data-i18n="article.debt.avalanche.title">⚡ Debt Avalanche Method</h4>
-                    <p data-i18n="article.debt.avalanche.text">
-                        Focus extra payments on the highest interest rate debt first. This method saves 
-                        the most money in interest charges over time.
-                    </p>
-                    
-                    <div class="pros-cons">
-                        <div class="pros">
-                            <h5 data-i18n="article.debt.pros">Pros:</h5>
-                            <ul>
-                                <li data-i18n="article.debt.avalanche.pro1">Saves most money</li>
-                                <li data-i18n="article.debt.avalanche.pro2">Mathematically optimal</li>
-                                <li data-i18n="article.debt.avalanche.pro3">Faster payoff time</li>
-                            </ul>
-                        </div>
-                        <div class="cons">
-                            <h5 data-i18n="article.debt.cons">Cons:</h5>
-                            <ul>
-                                <li data-i18n="article.debt.avalanche.con1">Slower initial progress</li>
-                                <li data-i18n="article.debt.avalanche.con2">Requires more discipline</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="info-box">
-                <div class="info-title" data-i18n="article.debt.comparison.title">💡 Snowball vs Avalanche: Real Example</div>
-                <div class="strategy-grid">
-                    <div>
-                        <h5 data-i18n="article.debt.snowball.title">Debt Snowball</h5>
-                        <p><strong data-i18n="article.debt.comparison.order">Order:</strong> <span data-i18n="article.debt.comparison.snowball_order">Card B → Card A → Car → Student</span></p>
-                        <p><strong data-i18n="article.debt.comparison.time">Time to payoff:</strong> <span data-i18n="article.debt.comparison.snowball_time">3 years 2 months</span></p>
-                        <p><strong data-i18n="article.debt.comparison.interest">Total interest:</strong> <span data-i18n="article.debt.comparison.snowball_interest">$4,850</span></p>
-                    </div>
-                    <div>
-                        <h5 data-i18n="article.debt.avalanche.title">Debt Avalanche</h5>
-                        <p><strong data-i18n="article.debt.comparison.order">Order:</strong> <span data-i18n="article.debt.comparison.avalanche_order">Card B → Card A → Car → Student</span></p>
-                        <p><strong data-i18n="article.debt.comparison.time">Time to payoff:</strong> <span data-i18n="article.debt.comparison.avalanche_time">2 years 11 months</span></p>
-                        <p><strong data-i18n="article.debt.comparison.interest">Total interest:</strong> <span data-i18n="article.debt.comparison.avalanche_interest">$4,200</span></p>
-                    </div>
-                </div>
-                <p><strong data-i18n="article.debt.comparison.savings">Savings with Avalanche:</strong> <span data-i18n="article.debt.comparison.savings_amount">$650 and 3 months faster</span></p>
-            </div>
-
-            <h2 data-i18n="article.debt.consolidation.title">Consider Debt Consolidation</h2>
-            <p data-i18n="article.debt.consolidation.text">
-                Combining multiple debts into one loan with a lower interest rate can simplify payments and reduce total interest costs.
-            </p>
-
-            <h3 data-i18n="article.debt.consolidation.options">Consolidation Options:</h3>
-            <div class="strategy-grid">
-                <div class="strategy-card">
-                    <h4 data-i18n="article.debt.personal_loan.title">Personal Loan</h4>
-                    <ul>
-                        <li data-i18n="article.debt.personal_loan.feature1">Fixed rate & payment</li>
-                        <li data-i18n="article.debt.personal_loan.feature2">3-7 year terms</li>
-                        <li data-i18n="article.debt.personal_loan.feature3">Rates: 6-36%</li>
-                    </ul>
-                </div>
-                <div class="strategy-card">
-                    <h4 data-i18n="article.debt.balance_transfer.title">Balance Transfer</h4>
-                    <ul>
-                        <li data-i18n="article.debt.balance_transfer.feature1">0% intro APR offers</li>
-                        <li data-i18n="article.debt.balance_transfer.feature2">Transfer fee: 3-5%</li>
-                        <li data-i18n="article.debt.balance_transfer.feature3">Promotional periods</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="warning-box">
-                <div class="warning-title" data-i18n="article.debt.warning.title">⚠️ Important Warning</div>
-                <p data-i18n="article.debt.warning.text">
-                    Debt consolidation only works if you don't accumulate new debt. Close or limit access to 
-                    credit cards after consolidation to avoid falling back into debt.
-                </p>
-            </div>
-
-            <h2 data-i18n="article.debt.conclusion.title">Stay Committed to Your Plan</h2>
-            <p data-i18n="article.debt.conclusion.text">
-                Choose the method that motivates you most and stick with it. Avoid taking on new debt while 
-                paying off existing balances. Financial freedom is worth the temporary sacrifice.
-            </p>
-
-            <div class="checklist">
-                <h4 data-i18n="article.debt.action_plan.title">Your 30-Day Action Plan</h4>
-                <ul>
-                    <li data-i18n="article.debt.action_plan.step1">List all debts with balances, rates, and minimums</li>
-                    <li data-i18n="article.debt.action_plan.step2">Choose snowball or avalanche method</li>
-                    <li data-i18n="article.debt.action_plan.step3">Calculate extra payment amount</li>
-                    <li data-i18n="article.debt.action_plan.step4">Set up automatic payments</li>
-                    <li data-i18n="article.debt.action_plan.step5">Track progress monthly</li>
-                </ul>
-            </div>
-
-            <div class="cta-section">
-                <h3 data-i18n="article.debt.cta.title">Create Your Debt Payoff Plan</h3>
-                <p data-i18n="article.debt.cta.text">Use our credit card payoff calculator to see how much you can save and how fast you can become debt-free.</p>
-                <a href="../calculators/credit-card-modern.html" class="btn-cta" data-i18n="article.debt.cta.button">Try Debt Calculator</a>
-            </div>
-        </div>
-
-        <!-- Article Navigation -->
-        <div class="article-nav">
-            <a href="../articles/savings-strategies-guide.html" class="nav-btn" data-i18n="article.previous">Previous Article</a>
-            <a href="../articles/investment-basics-guide.html" class="nav-btn" data-i18n="article.next">Next Article</a>
-            <a href="../index.html#articles" class="nav-btn" data-i18n="article.back_to_list">Back to Articles</a>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer class="site-footer">
+    <!-- Breadcrumbs -->
+    <nav class="article-breadcrumbs">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            <ol class="breadcrumb-list">
+                <li><a href="../index.html" data-i18n="nav.home">Home</a></li>
+                <li><span class="separator">/</span></li>
+                <li><a href="../index.html#articles" data-i18n="nav.articles">Articles</a></li>
+                <li><span class="separator">/</span></li>
+                <li><span class="current" data-i18n="article.debt.title">Debt Management</span></li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Compact Hero -->
+    <section class="article-hero-compact">
+        <div class="container">
+            <span class="article-hero__category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                Debt Freedom Plan
+            </span>
+            <h1 data-i18n="article.debt.title">Debt Management: Take Control of Your Financial Future</h1>
+            <p class="article-hero__lead" data-i18n="article.debt.desc">
+                Learn effective strategies to pay off debt faster, reduce interest costs, and regain financial freedom with proven debt management techniques.
+            </p>
+            <div class="article-hero__meta">
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span data-i18n="article.meta.reading">6 min read</span>
+                </span>
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span data-i18n="article.meta.updated">Updated December 2024</span>
+                </span>
             </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="article-layout">
+            <aside class="article-toc">
+                <div class="toc-header" data-i18n="toc.title">Contents</div>
+                <ol class="toc-list">
+                    <li><a href="#assess" class="toc-link">Assess Your Debt</a></li>
+                    <li><a href="#strategies" class="toc-link">Payoff Strategies</a></li>
+                    <li><a href="#consolidation" class="toc-link">Consolidation Options</a></li>
+                    <li><a href="#action" class="toc-link">30-Day Action Plan</a></li>
+                </ol>
+                <div class="toc-stats">
+                    <div class="toc-stat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="article-main">
+                <div class="article-body">
+                    <p data-i18n="article.debt.intro">
+                        Debt can feel overwhelming, but with the right strategy, you can take control and work toward financial freedom. 
+                        This guide outlines proven methods to tackle debt systematically and efficiently.
+                    </p>
+
+                    <h2 id="assess" data-i18n="article.debt.assessment.title">Assess Your Debt Situation</h2>
+                    <p data-i18n="article.debt.assessment.text">
+                        List all your debts with balances, minimum payments, and interest rates. Understanding the full picture 
+                        is the first step toward creating an effective payoff plan.
+                    </p>
+
+                    <div class="article-table-wrapper">
+                        <table class="article-table">
+                            <thead>
+                                <tr>
+                                    <th data-i18n="article.debt.table.type">Debt Type</th>
+                                    <th data-i18n="article.debt.table.balance">Balance</th>
+                                    <th data-i18n="article.debt.table.rate">Interest Rate</th>
+                                    <th data-i18n="article.debt.table.minimum">Min Payment</th>
+                                    <th data-i18n="article.debt.table.priority">Priority</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td data-i18n="article.debt.example.card_a">Credit Card A</td>
+                                    <td>$3,500</td>
+                                    <td>18.9%</td>
+                                    <td>$105</td>
+                                    <td data-i18n="article.debt.priority.high">High</td>
+                                </tr>
+                                <tr class="highlight-row">
+                                    <td data-i18n="article.debt.example.card_b">Credit Card B</td>
+                                    <td>$1,200</td>
+                                    <td>22.4%</td>
+                                    <td>$36</td>
+                                    <td data-i18n="article.debt.priority.highest"><strong>Highest</strong></td>
+                                </tr>
+                                <tr>
+                                    <td data-i18n="article.debt.example.student">Student Loan</td>
+                                    <td>$15,000</td>
+                                    <td>4.5%</td>
+                                    <td>$156</td>
+                                    <td data-i18n="article.debt.priority.low">Low</td>
+                                </tr>
+                                <tr>
+                                    <td data-i18n="article.debt.example.car">Car Loan</td>
+                                    <td>$8,500</td>
+                                    <td>6.2%</td>
+                                    <td>$245</td>
+                                    <td data-i18n="article.debt.priority.medium">Medium</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <h2 id="strategies" data-i18n="article.debt.strategies.title">Debt Payoff Strategies</h2>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4 data-i18n="article.debt.snowball.title">🏔️ Debt Snowball Method</h4>
+                            <p data-i18n="article.debt.snowball.text">
+                                Pay minimum amounts on all debts, then put extra money toward the smallest balance. 
+                                This builds momentum and motivation as you eliminate debts one by one.
+                            </p>
+                            <ul>
+                                <li>Quick psychological wins</li>
+                                <li>Builds momentum</li>
+                                <li>Easier to stick with</li>
+                            </ul>
+                        </div>
+
+                        <div class="article-card article-card--success">
+                            <h4 data-i18n="article.debt.avalanche.title">⚡ Debt Avalanche Method</h4>
+                            <p data-i18n="article.debt.avalanche.text">
+                                Focus extra payments on the highest interest rate debt first. This method saves 
+                                the most money in interest charges over time.
+                            </p>
+                            <ul>
+                                <li>Saves most money</li>
+                                <li>Mathematically optimal</li>
+                                <li>Faster payoff time</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 14v-2"/><path d="M16.17 16.17a7 7 0 1 0-8.34 0"/></svg>
+                            <span data-i18n="article.debt.comparison.title">Snowball vs Avalanche: Real Example</span>
+                        </div>
+                        <p><strong>Avalanche saves $650 and 3 months</strong> compared to Snowball in the example above. However, Snowball provides faster early wins which can be more motivating.</p>
+                    </div>
+
+                    <h2 id="consolidation" data-i18n="article.debt.consolidation.title">Consider Debt Consolidation</h2>
+                    <p data-i18n="article.debt.consolidation.text">
+                        Combining multiple debts into one loan with a lower interest rate can simplify payments and reduce total interest costs.
+                    </p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4 data-i18n="article.debt.personal_loan.title">Personal Loan</h4>
+                            <ul>
+                                <li data-i18n="article.debt.personal_loan.feature1">Fixed rate & payment</li>
+                                <li data-i18n="article.debt.personal_loan.feature2">3-7 year terms</li>
+                                <li data-i18n="article.debt.personal_loan.feature3">Rates: 6-36%</li>
+                            </ul>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <h4 data-i18n="article.debt.balance_transfer.title">Balance Transfer</h4>
+                            <ul>
+                                <li data-i18n="article.debt.balance_transfer.feature1">0% intro APR offers</li>
+                                <li data-i18n="article.debt.balance_transfer.feature2">Transfer fee: 3-5%</li>
+                                <li data-i18n="article.debt.balance_transfer.feature3">Promotional periods</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <div class="warning-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+                            <span data-i18n="article.debt.warning.title">Important Warning</span>
+                        </div>
+                        <p data-i18n="article.debt.warning.text">
+                            Debt consolidation only works if you don't accumulate new debt. Close or limit access to 
+                            credit cards after consolidation to avoid falling back into debt.
+                        </p>
+                    </div>
+
+                    <h2 id="action" data-i18n="article.debt.action_plan.title">Your 30-Day Action Plan</h2>
+                    
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4 data-i18n="article.debt.action_plan.step1">List all debts</h4>
+                                <p>Include balances, interest rates, and minimum payments for every debt.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4 data-i18n="article.debt.action_plan.step2">Choose your method</h4>
+                                <p>Select snowball (motivation) or avalanche (savings) based on your personality.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4 data-i18n="article.debt.action_plan.step3">Calculate extra payment</h4>
+                                <p>Find money in your budget to put toward debt beyond minimums.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">4</div>
+                            <div class="article-step__content">
+                                <h4 data-i18n="article.debt.action_plan.step4">Set up automatic payments</h4>
+                                <p>Never miss a payment and stay consistent with your plan.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">5</div>
+                            <div class="article-step__content">
+                                <h4 data-i18n="article.debt.action_plan.step5">Track progress monthly</h4>
+                                <p>Celebrate wins and adjust as needed to stay on track.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="key-takeaway__title">Key Takeaway</div>
+                        <p data-i18n="article.debt.conclusion.text">
+                            Choose the method that motivates you most and stick with it. Financial freedom is worth the temporary sacrifice.
+                        </p>
+                    </div>
+
+                    <div class="article-cta">
+                        <h3 data-i18n="article.debt.cta.title">Create Your Debt Payoff Plan</h3>
+                        <p data-i18n="article.debt.cta.text">Use our credit card payoff calculator to see how much you can save and how fast you can become debt-free.</p>
+                        <a href="../calculators/credit-card-modern.html" class="btn-cta">
+                            <span data-i18n="article.debt.cta.button">Try Debt Calculator</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <nav class="article-nav-bottom">
+                        <a href="savings-strategies-guide.html" class="article-nav-link">
+                            <span class="article-nav-link__label" data-i18n="article.previous">Previous Article</span>
+                            <span class="article-nav-link__title">Savings Strategies</span>
+                        </a>
+                        <a href="investment-basics-guide.html" class="article-nav-link article-nav-link--next">
+                            <span class="article-nav-link__label" data-i18n="article.next">Next Article</span>
+                            <span class="article-nav-link__title">Investment Basics</span>
+                        </a>
+                    </nav>
+
+                    <a href="../index.html#articles" class="article-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        <span data-i18n="article.back_to_list">Back to All Articles</span>
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="article-footer">
+        <div class="container">
+            <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
         </div>
     </footer>
 
-    <!-- Google Analytics 4 (GA4) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-LW2KKBR4L2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -538,12 +330,45 @@
       gtag('config', 'G-LW2KKBR4L2');
     </script>
 
-    <!-- Scripts -->
     <script src="../assets/i18n.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
+            initReadingProgress();
+            initTocHighlight();
         });
+
+        function initReadingProgress() {
+            const progressBar = document.getElementById('reading-progress');
+            if (!progressBar) return;
+            window.addEventListener('scroll', function() {
+                const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = window.scrollY;
+                const progress = (scrolled / docHeight) * 100;
+                progressBar.style.width = progress + '%';
+            });
+        }
+
+        function initTocHighlight() {
+            const tocLinks = document.querySelectorAll('.toc-link');
+            const sections = document.querySelectorAll('.article-body h2[id]');
+            if (!tocLinks.length || !sections.length) return;
+            window.addEventListener('scroll', function() {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop - 120;
+                    if (window.scrollY >= sectionTop) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        }
     </script>
 </body>
 </html>

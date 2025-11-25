@@ -27,7 +27,7 @@
     <meta name="twitter:creator" content="@FinCalc">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="assets/styles-modern.css">
+    <link rel="stylesheet" href="assets/styles-modern.css?v=6">
     
     <!-- Favicon -->
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
@@ -145,6 +145,129 @@
         }]
     }
     </script>
+    
+    <!-- Schema.org - SoftwareApplication (Calculators) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Financial Calculators",
+        "description": "Free online financial calculators for deposits, loans, mortgages, savings, ROI and credit card payoff",
+        "numberOfItems": 6,
+        "itemListElement": [
+            {
+                "@type": "SoftwareApplication",
+                "position": 1,
+                "name": "Deposit Calculator",
+                "description": "Calculate deposit growth with compound interest, flexible compounding, planned top-ups or withdrawals",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "position": 2,
+                "name": "Loan Payment Calculator",
+                "description": "Calculate monthly loan payments, total interest, and view full amortization schedule",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "position": 3,
+                "name": "Savings Goal Calculator",
+                "description": "Plan how to reach your financial goals with monthly savings projections",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "position": 4,
+                "name": "Mortgage Calculator",
+                "description": "Calculate mortgage payments, affordability, and see full payment breakdown",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/mortgage-modern.html"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "position": 5,
+                "name": "Credit Card Payoff Calculator",
+                "description": "Plan debt payoff strategy, compare avalanche vs snowball methods",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/credit-card-modern.html"
+            },
+            {
+                "@type": "SoftwareApplication",
+                "position": 6,
+                "name": "Investment ROI Calculator",
+                "description": "Measure investment return and profitability with detailed analysis",
+                "applicationCategory": "FinanceApplication",
+                "operatingSystem": "Web Browser",
+                "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"},
+                "url": "https://nykon80.github.io/fincalc/calculators/roi-modern.html"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Schema.org - FAQPage -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "How do I calculate compound interest on my deposit?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use our Deposit Calculator to enter your initial amount, interest rate, and term. Choose your compounding frequency (monthly, quarterly, annually) to see how your money grows with compound interest over time."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the difference between APR and APY?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "APR (Annual Percentage Rate) is the simple interest rate without compounding. APY (Annual Percentage Yield) includes compound interest, showing the actual return you'll earn in a year. Our calculators automatically account for compounding."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How do I calculate my monthly mortgage payment?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Enter your home price, down payment, interest rate, and loan term in our Mortgage Calculator. It will show your monthly payment including principal, interest, property tax, and insurance estimates."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "What is the best way to pay off credit card debt?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Use our Credit Card Payoff Calculator to compare the Avalanche method (paying highest interest first) vs Snowball method (paying smallest balance first). The Avalanche method saves more on interest, while Snowball provides psychological wins."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "How much should I save each month to reach my financial goal?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Our Savings Goal Calculator helps you determine the monthly savings needed based on your target amount, current savings, expected interest rate, and timeline. It accounts for compound interest to optimize your savings plan."
+                }
+            }
+        ]
+    }
+    </script>
     <script src="assets/i18n.js" defer></script>
     <script src="assets/main.js" defer></script>
     <script src="assets/news-feed.js" defer></script>
@@ -187,167 +310,184 @@
         </div>
     </header>
     
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1 data-i18n="hero.title">Smart Financial Calculators</h1>
-            <p data-i18n="hero.subtitle">Make informed decisions with our professional tools</p>
-        </div>
-    </section>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <button class="tab-btn active" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
-        <button class="tab-btn" data-tab="news" data-i18n="nav.news">News</button>
-        <button class="tab-btn" data-tab="articles" data-i18n="nav.articles">Articles</button>
-        <button class="tab-btn" data-tab="compare" data-i18n="nav.compare">Compare</button>
-    </div>
-    
-    <!-- News Tab -->
-    <div id="news" class="tab-content">
-        <section class="container">
-            <h2 data-i18n="section.news.title">Financial News & Updates</h2>
-            <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="section.news.subtitle">Stay informed with the latest financial trends and insights</p>
-            
-            <!-- News Loading State -->
-            <div id="news-loading" style="text-align: center; padding: 3rem 0;">
-                <p data-i18n="news.loading">Loading news...</p>
+    <main class="page-surface">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1 data-i18n="hero.title">Smart Financial Calculators</h1>
+                <p data-i18n="hero.subtitle">Make informed decisions with our professional tools</p>
             </div>
-            
-            <!-- News Error State -->
-            <div id="news-error" style="display: none; text-align: center; padding: 3rem 0; color: var(--danger);">
-                <p data-i18n="news.error">Unable to load news. Please try again later.</p>
-            </div>
-            
-            <!-- News Grid -->
-            <div id="news-grid" class="grid" style="display: none;"></div>
         </section>
-    </div>
-    
-    <!-- Calculators Tab -->
-    <div id="calculators" class="tab-content active">
-        <section class="container">
-        <h2 data-i18n="section.calculators.title">Financial Calculators</h2>
-        <div class="grid">
-            <!-- Deposit Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/deposit-calculator-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="calc.deposit">Extended Deposit Calculator</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" role="img" aria-label="Deposit Calculator Icon">
-                        <title>Deposit Calculator</title>
-                        <!-- График роста с процентами -->
-                        <path d="M3 3v18h18" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M7 14l3-3 3 3 5-5" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle cx="7" cy="14" r="0.5" fill="currentColor"/>
-                        <circle cx="10" cy="11" r="0.5" fill="currentColor"/>
-                        <circle cx="13" cy="14" r="0.5" fill="currentColor"/>
-                        <circle cx="18" cy="9" r="0.5" fill="currentColor"/>
-                    </svg>
+        
+        <!-- Tabs Navigation -->
+        <div class="tabs-navigation">
+            <button class="tab-btn active" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
+            <button class="tab-btn" data-tab="news" data-i18n="nav.news">News</button>
+            <button class="tab-btn" data-tab="articles" data-i18n="nav.articles">Articles</button>
+            <button class="tab-btn" data-tab="compare" data-i18n="nav.compare">Compare</button>
+        </div>
+        
+        <!-- News Tab -->
+        <div id="news" class="tab-content">
+            <section class="container">
+                <h2 data-i18n="section.news.title">Financial News & Updates</h2>
+                <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="section.news.subtitle">Stay informed with the latest financial trends and insights</p>
+                
+                <!-- News Loading State -->
+                <div id="news-loading" style="text-align: center; padding: 3rem 0;">
+                    <p data-i18n="news.loading">Loading news...</p>
                 </div>
-                <p class="card-description" data-i18n="calc.deposit.desc">Simulate deposit growth with flexible capitalization schedules, planned top-ups or withdrawals, and instant tax projections so you know the real net profit.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.deposit.point1">Supports monthly, quarterly, annual, and daily compounding.</li>
-                    <li data-i18n="calc.deposit.point2">See balance timelines before and after partial withdrawals.</li>
-                </ul>
+                
+                <!-- News Error State -->
+                <div id="news-error" style="display: none; text-align: center; padding: 3rem 0; color: var(--danger);">
+                    <p data-i18n="news.error">Unable to load news. Please try again later.</p>
+                </div>
+                
+                <!-- News Grid -->
+                <div id="news-grid" class="grid" style="display: none;"></div>
+            </section>
+        </div>
+        
+        <!-- Calculators Tab -->
+        <div id="calculators" class="tab-content active">
+            <section class="container">
+        <h2 data-i18n="section.calculators.title">Financial Calculators</h2>
+        <div class="calc-cards-grid">
+            <!-- Deposit Calculator -->
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/deposit-calculator-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="calc.deposit">Deposit Calculator</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="12" y1="1" x2="12" y2="23"/>
+                            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.deposit.short">Calculate deposit growth with compound interest</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$10,000 → <strong>$12,800</strong></span>
+                    </div>
+                </div>
             </article>
             
             <!-- Loan Payment Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/loan-payment-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="calc.loan">Loan Payment</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Калькулятор с деньгами -->
-                        <rect x="4" y="4" width="16" height="16" rx="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M8 8h8M8 12h5" stroke-linecap="round"/>
-                        <circle cx="12" cy="16" r="1.5" fill="currentColor"/>
-                        <path d="M16 1v3M8 1v3" stroke-linecap="round"/>
-                    </svg>
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/loan-payment-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="calc.loan">Loan Payment</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="2" y="4" width="20" height="16" rx="2"/>
+                            <path d="M7 15h0M2 9.5h20"/>
+                        </svg>
+                    </div>
                 </div>
-                <p class="card-description" data-i18n="calc.loan.desc">Compare loan offers before applying: preview monthly payments, interest share, and payoff date for any term or rate.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.loan.point1">Full amortization table with principal vs. interest.</li>
-                    <li data-i18n="calc.loan.point2">Test extra payments to see how much faster you finish.</li>
-                </ul>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.loan.short">Calculate monthly payment & amortization</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$250K → <strong>$1,267/mo</strong></span>
+                    </div>
+                </div>
             </article>
             
             <!-- Savings Goal Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/savings-goal-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="calc.savings">Savings Goal</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Копилка/Цель -->
-                        <circle cx="12" cy="12" r="9" stroke-linecap="round"/>
-                        <circle cx="12" cy="12" r="3" stroke-linecap="round"/>
-                        <path d="M12 3v3M12 18v3M3 12h3M18 12h3" stroke-linecap="round"/>
-                        <path d="M12 9v6" stroke-linecap="round"/>
-                    </svg>
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/savings-goal-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="calc.savings">Savings Goal</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <circle cx="12" cy="12" r="6"/>
+                            <circle cx="12" cy="12" r="2"/>
+                        </svg>
+                    </div>
                 </div>
-                <p class="card-description" data-i18n="calc.savings.desc">Translate a dream purchase into a realistic monthly savings plan using current balance, future contributions, and expected return.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.savings.point1">Shows required monthly amount and total invested.</li>
-                    <li data-i18n="calc.savings.point2">Compares projections with and without extra deposits.</li>
-                </ul>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.savings.short">Plan how to reach your financial goal</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$50K → <strong>6 yrs</strong></span>
+                    </div>
+                </div>
             </article>
             
             <!-- Mortgage Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/mortgage-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="calc.mortgage">Mortgage Calculator</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Дом -->
-                        <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/mortgage-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="calc.mortgage">Mortgage Calculator</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                            <polyline points="9 22 9 12 15 12 15 22"/>
+                        </svg>
+                    </div>
                 </div>
-                <p class="card-description" data-i18n="calc.mortgage.desc">Estimate mortgage affordability including down payment, insurance, taxes, and adjustable interest scenarios.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.mortgage.point1">Provides monthly cost breakdown by component.</li>
-                    <li data-i18n="calc.mortgage.point2">Stress-test rate hikes before signing paperwork.</li>
-                </ul>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.mortgage.short">Calculate mortgage payment & affordability</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$350K → <strong>$2,245/mo</strong></span>
+                    </div>
+                </div>
             </article>
             
             <!-- Credit Card Payoff Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/credit-card-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="calc.creditcard">Credit Card Payoff</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Кредитная карта -->
-                        <rect x="3" y="6" width="18" height="12" rx="2" stroke-linecap="round"/>
-                        <path d="M3 10h18" stroke-linecap="round"/>
-                        <path d="M7 14h4" stroke-linecap="round"/>
-                        <circle cx="17" cy="14" r="1" fill="currentColor"/>
-                    </svg>
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/credit-card-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="calc.creditcard">Credit Card Payoff</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                            <line x1="1" y1="10" x2="23" y2="10"/>
+                        </svg>
+                    </div>
                 </div>
-                <p class="card-description" data-i18n="calc.creditcard.desc">Create a payoff roadmap for revolving credit: adjust payment size to see payoff time, interest cost, and best strategy.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.creditcard.point1">Suggests optimal payment to stop balance growth.</li>
-                    <li data-i18n="calc.creditcard.point2">Visual timeline of balances shrinking each month.</li>
-                </ul>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.credit.short">Plan debt payoff strategy & save interest</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$5K → <strong>34 mo</strong></span>
+                    </div>
+                </div>
             </article>
             
             <!-- Investment ROI Calculator -->
-            <article class="card fade-in card-link" role="link" tabindex="0" data-target="calculators/roi-modern.html">
-                <div class="card-header">
-                    <h3 data-i18n="card.roi.title">Investment ROI</h3>
-                    <svg class="card-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <!-- Процент/ROI -->
-                        <circle cx="12" cy="12" r="9" stroke-linecap="round"/>
-                        <path d="M9 15l6-6" stroke-linecap="round"/>
-                        <circle cx="9" cy="9" r="1.5" fill="currentColor"/>
-                        <circle cx="15" cy="15" r="1.5" fill="currentColor"/>
-                    </svg>
+            <article class="calc-card" role="link" tabindex="0" data-target="calculators/roi-modern.html">
+                <div class="calc-card__header">
+                    <h3 class="calc-card__title" data-i18n="card.roi.title">Investment ROI</h3>
+                    <div class="calc-card__icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                    </div>
                 </div>
-                <p class="card-description" data-i18n="card.roi.desc">Measure profitability of any project by comparing invested capital, net profit, and annualized return after extra costs.</p>
-                <ul class="card-highlights">
-                    <li data-i18n="calc.roi.point1">Calculates total and annualized ROI automatically.</li>
-                    <li data-i18n="calc.roi.point2">Add fees and taxes to see the true net result.</li>
-                </ul>
+                <div class="calc-card__content">
+                    <p class="calc-card__desc" data-i18n="home.roi.short">Measure investment return & profitability</p>
+                    <div class="calc-card__example">
+                        <span class="calc-card__example-label" data-i18n="home.example">Example:</span>
+                        <span class="calc-card__example-value">$10K → <strong>+55% ROI</strong></span>
+                    </div>
+                </div>
             </article>
         </div>
-        </section>
         
         <!-- News Section (Compact) -->
         <section class="container" style="margin-top: var(--space-3xl); padding-top: var(--space-3xl); border-top: 2px solid var(--border);">
-            <h2 style="margin-bottom: var(--space-xl);" data-i18n="section.news.compact_title">Latest Financial News</h2>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
+                <h2 style="margin: 0;" data-i18n="section.news.compact_title">Latest Financial News</h2>
+                <button id="refresh-news-btn" class="btn-refresh" onclick="window.newsManager?.refresh()" title="Refresh news">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
+                        <polyline points="23 4 23 10 17 10"/>
+                        <polyline points="1 20 1 14 7 14"/>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                    </svg>
+                    <span data-i18n="news.refresh">Refresh</span>
+                </button>
+            </div>
             
             <!-- News Loading State -->
             <div id="news-compact-loading" style="text-align: center; padding: 2rem 0;">
@@ -375,7 +515,16 @@
         <h2 class="text-center" data-i18n="section.articles.title">Financial Literacy Articles</h2>
         <div class="grid">
             <article class="card card-link" role="link" tabindex="0" data-article="savings-strategies-guide">
-                <h3 data-i18n="article.savings.title">Smart Savings Strategies: Build Wealth Step by Step</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.savings.title">Smart Savings Strategies: Build Wealth Step by Step</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/>
+                            <path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/>
+                            <path d="M18 12a2 2 0 0 0 0 4h4v-4h-4z"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.savings.desc">Build a resilient savings system: emergency fund checklist, automation tactics, and EU-friendly accounts explained in plain language.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.savings.point1">Step-by-step targets for 1, 3, and 6 months of expenses.</li>
@@ -384,7 +533,15 @@
             </article>
 
             <article class="card card-link" role="link" tabindex="0" data-article="investment-basics-guide">
-                <h3 data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.investment.title">Investment Basics: Your Path to Financial Growth</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.investment.desc">Learn diversification, risk management, and ready-to-use ETF/bond mixes tailored for EN/PL/RU investors with local data.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.investment.point1">Explains risk levels with sample portfolios.</li>
@@ -393,7 +550,16 @@
             </article>
 
             <article class="card card-link" role="link" tabindex="0" data-article="invest-with-clarity-guide">
-                <h3 data-i18n="article.clarity.title">Invest With Clarity in Any Market</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.clarity.title">Invest With Clarity in Any Market</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"/>
+                            <line x1="2" y1="12" x2="22" y2="12"/>
+                            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.clarity.desc">Use live dashboards, volatility scripts, and investor case studies to stay calm during US/EU swings and adjust your plan fast.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.clarity.point1">Macro heatmaps covering inflation, yields, and sector flows.</li>
@@ -402,7 +568,15 @@
             </article>
 
             <article class="card card-link" role="link" tabindex="0" data-target="articles/debt-management-guide.html">
-                <h3 data-i18n="article.debt.title">Debt Management: Take Control of Your Financial Future</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.debt.title">Debt Management: Take Control of Your Financial Future</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 12 15 22 5"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.debt.desc">Get out of debt faster with avalanche vs. snowball playbooks, negotiation scripts, and behavior tricks that keep motivation high.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.debt.point1">Choose the best strategy based on rate and balance.</li>
@@ -411,7 +585,17 @@
             </article>
 
             <article class="card card-link" role="link" tabindex="0" data-target="articles/budget-planning-guide.html">
-                <h3 data-i18n="article.budget.title">Budget Planning: Master Your Money Management</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.budget.title">Budget Planning: Master Your Money Management</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.budget.desc">Combine zero-based and 50/30/20 budgeting so every paycheck has a job while still keeping guilt-free spending money.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.budget.point1">Downloadable monthly review and category tracker.</li>
@@ -420,7 +604,15 @@
             </article>
 
             <article class="card card-link" role="link" tabindex="0" data-target="articles/compound-interest-guide.html">
-                <h3 data-i18n="article.compound.title">Understanding Compound Interest</h3>
+                <div class="card-header">
+                    <h3 data-i18n="article.compound.title">Understanding Compound Interest</h3>
+                    <div class="card-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                            <polyline points="17 6 23 6 23 12"/>
+                        </svg>
+                    </div>
+                </div>
                 <p class="card-description" data-i18n="article.compound.desc">See compound interest in action with charts, formulas, and comparisons between early vs. late investors.</p>
                 <ul class="card-highlights">
                     <li data-i18n="article.compound.point1">Interactive examples with yearly projections.</li>
@@ -429,11 +621,11 @@
             </article>
         </div>
         </section>
-    </div>
-    
-    <!-- Compare Tab -->
-    <div id="compare" class="tab-content">
-        <section class="container">
+        </div>
+        
+        <!-- Compare Tab -->
+        <div id="compare" class="tab-content">
+            <section class="container">
         <h2 class="text-center">Compare Financial Products</h2>
         <div class="results-container">
             <p class="text-center">Compare interest rates, fees, and features of financial products in your region.</p>
@@ -443,25 +635,24 @@
                 <button class="btn btn-success" disabled>Coming Soon</button>
             </div>
         </div>
-        </section>
-    </div>
-    
-    <!-- Ad Slot -->
-    <div class="container mt-3">
-        <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted);">
-            <!-- Google AdSense will go here -->
-            <small>Advertisement</small>
+            </section>
         </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+        
+        <!-- Ad Slot -->
+        <div class="container mt-3">
+            <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted);">
+                <!-- Google AdSense will go here -->
+                <small>Advertisement</small>
             </div>
         </div>
-    </footer>
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-bottom">
+                    <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+                </div>
+            </div>
+        </footer>
+    </main>
     
     <!-- Cookie Consent Banner -->
     <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; right: 0; background: var(--gray-900); color: white; padding: 20px; display: none; z-index: 1000;">
@@ -527,7 +718,7 @@
             });
 
             // Make entire cards clickable
-            document.querySelectorAll('.card-link').forEach(card => {
+            document.querySelectorAll('.card-link, .calc-card').forEach(card => {
                 card.addEventListener('click', () => handleCardNavigation(card));
                 card.addEventListener('keydown', (event) => {
                     if (event.key === 'Enter' || event.key === ' ') {

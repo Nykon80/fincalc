@@ -7,9 +7,13 @@
     <meta name="description" content="Compare the Avalanche and Snowball methods for paying off credit card debt. Learn which strategy works best for your situation.">
     
     <link rel="stylesheet" href="../assets/styles-modern.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/article-styles.css">
 </head>
-<body>
+<body class="article-page">
+    <div class="reading-progress">
+        <div class="reading-progress__bar" id="reading-progress"></div>
+    </div>
+
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -30,71 +34,215 @@
                 
                 <nav class="nav-menu">
                     <div class="lang-dropdown">
-                    <button class="lang-dropdown-btn">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-globe"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                    </button>
-                    <div class="lang-dropdown-content">
-                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        <button class="lang-dropdown-btn">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                        </button>
+                        <div class="lang-dropdown-content">
+                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                        </div>
                     </div>
-                </div>
                 </nav>
             </div>
         </div>
     </header>
-    
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn active" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
 
-    <div class="container" style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
-        <article class="article-content">
-            <h1 data-i18n="article.credit.title">Avalanche vs Snowball: Credit Card Payoff Methods</h1>
-            
-            <div class="article-meta">
-                <span class="date">January 15, 2024</span>
-                <span class="read-time">6 min read</span>
-            </div>
-            
-            <h2>The Avalanche Method</h2>
-            <p data-i18n="article.credit.p1">Avalanche saves more interest by targeting highest APR first.</p>
-            <ul>
-                <li>Pay minimum on all cards</li>
-                <li>Put extra money toward highest interest rate card</li>
-                <li>Mathematically optimal approach</li>
-                <li>Saves the most money in interest</li>
-            </ul>
-            
-            <h2>The Snowball Method</h2>
-            <p data-i18n="article.credit.p2">Snowball builds momentum by paying smallest balances first.</p>
-            <ul>
-                <li>Pay minimum on all cards</li>
-                <li>Put extra money toward smallest balance card</li>
-                <li>Psychological benefits</li>
-                <li>Quick wins build motivation</li>
-            </ul>
-            
-            <h2>Which Should You Choose?</h2>
-            <p data-i18n="article.credit.p3">Pick the method you will stick with consistently.</p>
-            
-            <div class="cta-box">
-                <h3>Calculate Your Payoff Plan</h3>
-                <a href="../calculators/credit-card-modern.html" class="btn btn-primary">Use Our Calculator</a>
-            </div>
-        </article>
-    </div>
-
-    <footer class="site-footer">
+    <nav class="article-breadcrumbs">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+            <ol class="breadcrumb-list">
+                <li><a href="../index.html">Home</a></li>
+                <li><span class="separator">/</span></li>
+                <li><a href="../index.html#articles">Articles</a></li>
+                <li><span class="separator">/</span></li>
+                <li><span class="current">Credit Card Payoff</span></li>
+            </ol>
+        </div>
+    </nav>
+
+    <section class="article-hero-compact">
+        <div class="container">
+            <span class="article-hero__category">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                Debt Tactics 2024
+            </span>
+            <h1 data-i18n="article.credit.title">Avalanche vs Snowball: Credit Card Payoff Methods</h1>
+            <p class="article-hero__lead">Understand the difference between Avalanche and Snowball strategies to pay down high-interest debt faster and stay motivated.</p>
+            <div class="article-hero__meta">
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    <span>6 min read</span>
+                </span>
+                <span class="article-hero__meta-item">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    <span>January 2024</span>
+                </span>
             </div>
+        </div>
+    </section>
+
+    <main>
+        <div class="article-layout">
+            <aside class="article-toc">
+                <div class="toc-header">Contents</div>
+                <ol class="toc-list">
+                    <li><a href="#avalanche" class="toc-link">The Avalanche Method</a></li>
+                    <li><a href="#snowball" class="toc-link">The Snowball Method</a></li>
+                    <li><a href="#choose" class="toc-link">Which to Choose?</a></li>
+                </ol>
+                <div class="toc-stats">
+                    <div class="toc-stat">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>6 min read</span>
+                    </div>
+                </div>
+            </aside>
+
+            <article class="article-main">
+                <div class="article-body">
+                    <p>When it comes to paying off credit card debt, two strategies dominate the conversation: the Avalanche method and the Snowball method. Both work, but they take different approaches to help you become debt-free.</p>
+
+                    <h2 id="avalanche">The Avalanche Method</h2>
+                    <p data-i18n="article.credit.p1">The Avalanche method saves you the most money by targeting the highest APR (interest rate) debt first.</p>
+                    
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4>Pay minimums on all cards</h4>
+                                <p>Make sure all accounts stay current to protect your credit score.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4>Attack highest interest rate first</h4>
+                                <p>Put every extra dollar toward the card with the highest APR.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4>Roll over to next highest</h4>
+                                <p>Once paid off, redirect that payment to the next highest rate card.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <div class="info-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+                            Avalanche Pros
+                        </div>
+                        <ul>
+                            <li>Mathematically optimal — saves the most money</li>
+                            <li>Faster total payoff time</li>
+                            <li>Minimizes total interest paid</li>
+                        </ul>
+                    </div>
+
+                    <h2 id="snowball">The Snowball Method</h2>
+                    <p data-i18n="article.credit.p2">The Snowball method builds momentum by paying off the smallest balances first, regardless of interest rate.</p>
+                    
+                    <div class="article-steps">
+                        <div class="article-step">
+                            <div class="article-step__number">1</div>
+                            <div class="article-step__content">
+                                <h4>Pay minimums on all cards</h4>
+                                <p>Keep all accounts in good standing.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">2</div>
+                            <div class="article-step__content">
+                                <h4>Attack smallest balance first</h4>
+                                <p>Put extra money toward the card with the lowest balance.</p>
+                            </div>
+                        </div>
+                        <div class="article-step">
+                            <div class="article-step__number">3</div>
+                            <div class="article-step__content">
+                                <h4>Celebrate and continue</h4>
+                                <p>Each paid-off card is a win that motivates you to keep going.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tip-box">
+                        <div class="tip-box__header">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2v1"/><path d="M12 14v-2"/><path d="M16.17 16.17a7 7 0 1 0-8.34 0"/></svg>
+                            Snowball Pros
+                        </div>
+                        <ul>
+                            <li>Quick psychological wins</li>
+                            <li>Builds momentum and motivation</li>
+                            <li>Easier to stick with long-term</li>
+                        </ul>
+                    </div>
+
+                    <h2 id="choose">Which Should You Choose?</h2>
+                    <p data-i18n="article.credit.p3">The best method is the one you'll actually stick with. Here's a quick guide:</p>
+
+                    <div class="article-cards-grid">
+                        <div class="article-card article-card--accent">
+                            <h4>Choose Avalanche if...</h4>
+                            <ul>
+                                <li>You're motivated by math and savings</li>
+                                <li>You can stay disciplined without quick wins</li>
+                                <li>Your highest-rate debt isn't huge</li>
+                            </ul>
+                        </div>
+                        <div class="article-card article-card--success">
+                            <h4>Choose Snowball if...</h4>
+                            <ul>
+                                <li>You need motivation from progress</li>
+                                <li>You have many small debts</li>
+                                <li>You've struggled with debt before</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="key-takeaway">
+                        <div class="key-takeaway__icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                        </div>
+                        <div class="key-takeaway__title">Key Takeaway</div>
+                        <p>Both methods work. The Avalanche saves more money; the Snowball keeps you motivated. Pick one and commit to it.</p>
+                    </div>
+
+                    <div class="article-cta">
+                        <h3>Calculate Your Payoff Plan</h3>
+                        <p>See exactly how long it will take and how much you'll save with each method.</p>
+                        <a href="../calculators/credit-card-modern.html" class="btn-cta">
+                            Use Our Calculator
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </a>
+                    </div>
+
+                    <nav class="article-nav-bottom">
+                        <a href="debt-management-guide.html" class="article-nav-link">
+                            <span class="article-nav-link__label">Previous Article</span>
+                            <span class="article-nav-link__title">Debt Management</span>
+                        </a>
+                        <a href="mortgage-basics-europe.html" class="article-nav-link article-nav-link--next">
+                            <span class="article-nav-link__label">Next Article</span>
+                            <span class="article-nav-link__title">Mortgage Basics</span>
+                        </a>
+                    </nav>
+
+                    <a href="../index.html#articles" class="article-back-link">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+                        Back to All Articles
+                    </a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer class="article-footer">
+        <div class="container">
+            <p>&copy; 2024 FinCalc. Financial calculators for informational purposes only</p>
         </div>
     </footer>
 
@@ -102,6 +250,14 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             i18n.updatePage();
+            const progressBar = document.getElementById('reading-progress');
+            if (progressBar) {
+                window.addEventListener('scroll', function() {
+                    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = (window.scrollY / docHeight) * 100;
+                    progressBar.style.width = progress + '%';
+                });
+            }
         });
     </script>
 </body>
