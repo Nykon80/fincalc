@@ -268,15 +268,26 @@
         ]
     }
     </script>
+    <!-- Chart.js for graphs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+    
     <script src="assets/i18n.js" defer></script>
     <script src="assets/main.js" defer></script>
     <script src="assets/news-feed.js" defer></script>
+    <script src="assets/hero-calculator.js" defer></script>
 </head>
 <body>
     <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
+                <!-- Mobile Menu Toggle -->
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle" aria-label="Toggle menu">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+                
                 <a href="index.html" class="logo">
                     <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
@@ -292,7 +303,11 @@
                     <span>FinCalc</span>
                 </a>
                 
-                <nav class="nav-menu">
+                <nav class="nav-menu header-tabs">
+                    <button class="header-tab active" data-tab="calculators" data-i18n="nav.allCalculators">All Calculators</button>
+                    <button class="header-tab" data-tab="news" data-i18n="nav.news">News</button>
+                    <button class="header-tab" data-tab="articles" data-i18n="nav.articles">Articles</button>
+                    <button class="header-tab" data-tab="compare" data-i18n="nav.compare">Compare</button>
                 </nav>
                 
                 <div class="lang-dropdown">
@@ -310,22 +325,623 @@
         </div>
     </header>
     
-    <main class="page-surface">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <h1 data-i18n="hero.title">Smart Financial Calculators</h1>
-                <p data-i18n="hero.subtitle">Make informed decisions with our professional tools</p>
-            </div>
-        </section>
+    <main class="page-surface page-surface--app">
+        <!-- Main App Layout - Calculator First -->
+        <div class="app-layout">
+            <!-- Mobile Overlay -->
+            <div class="sidebar-overlay" id="sidebar-overlay"></div>
+            
+            <!-- Sidebar Navigation -->
+            <aside class="app-sidebar" id="app-sidebar">
+                <div class="sidebar-header">
+                    <span class="sidebar-title" data-i18n="nav.calculators">Calculators</span>
+                    <button class="sidebar-close" id="sidebar-close" aria-label="Close sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                    </button>
+                </div>
+                <nav class="sidebar-nav">
+                    <a href="#" class="sidebar-link active" data-calc="deposit">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                        <span data-i18n="calc.deposit">Deposit Calculator</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-calc="loan">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M7 15h0M2 9.5h20"/></svg>
+                        <span data-i18n="calc.loan">Loan Payment</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-calc="savings">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+                        <span data-i18n="calc.savings">Savings Goal</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-calc="mortgage">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                        <span data-i18n="calc.mortgage">Mortgage</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-calc="creditcard">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                        <span data-i18n="calc.creditcard">Credit Card</span>
+                    </a>
+                    <a href="#" class="sidebar-link" data-calc="roi">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+                        <span data-i18n="card.roi.title">Investment ROI</span>
+                    </a>
+                </nav>
+            </aside>
+            
+            <!-- Main Content Area -->
+            <div class="app-main">
+                <!-- Calculator Container - All calculators here -->
+                <div class="calculators-container" id="calculators-container">
+                    
+                    <!-- ===== DEPOSIT CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--deposit active" id="calc-deposit" data-calc="deposit">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="calc.deposit">Deposit Calculator</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8l-4 4-4-4"/><path d="M12 16V8"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.finalAmount">Final Amount</span>
+                                        <span class="result-card__value" id="deposit-result-total">₽116,986</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.invested">Invested</span>
+                                        <span class="result-card__value" id="deposit-result-invested">₽100,000</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.interest">Interest Earned</span>
+                                        <span class="result-card__value result-card__value--success" id="deposit-result-interest">+₽16,986</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.growthTitle">Growth Chart</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--invested"></span> <span data-i18n="result.invested">Invested</span></span>
+                                        <span class="legend-item"><span class="legend-dot legend-dot--interest"></span> <span data-i18n="result.interest">Interest</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="deposit-chart"></canvas></div>
+                            </div>
+                            <div class="presets-card">
+                                <h4 data-i18n="form.quickPresets">Quick Presets</h4>
+                                <div class="preset-buttons">
+                                    <button class="preset-btn" data-rate="5" data-currency="USD"><span class="preset-flag">🇺🇸</span><span>USD 5%</span></button>
+                                    <button class="preset-btn" data-rate="3.5" data-currency="EUR"><span class="preset-flag">🇪🇺</span><span>EUR 3.5%</span></button>
+                                    <button class="preset-btn" data-rate="5.5" data-currency="PLN"><span class="preset-flag">🇵🇱</span><span>PLN 5.5%</span></button>
+                                    <button class="preset-btn active" data-rate="16" data-currency="RUB"><span class="preset-flag">🇷🇺</span><span>RUB 16%</span></button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="deposit" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.initialAmount">Initial Amount</label>
+                                    <div class="input-with-currency"><input type="text" id="deposit-initial" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="deposit-initial-range" min="1000" max="10000000" value="100000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                                    <div class="input-with-suffix"><input type="text" id="deposit-rate" value="16" inputmode="decimal"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="deposit-rate-range" min="0" max="30" value="16" step="0.1">
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label data-i18n="form.term">Term</label>
+                                        <input type="number" id="deposit-term" value="12" min="1" max="360">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <select id="deposit-term-unit">
+                                            <option value="months" data-i18n="form.months" selected>Months</option>
+                                            <option value="years" data-i18n="form.years">Years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.compounding">Compounding</label>
+                                    <select id="deposit-compound">
+                                        <option value="12" data-i18n="capitalization.monthly" selected>Monthly</option>
+                                        <option value="4" data-i18n="capitalization.quarterly">Quarterly</option>
+                                        <option value="1" data-i18n="capitalization.annually">Yearly</option>
+                                        <option value="365" data-i18n="capitalization.daily">Daily</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/deposit-calculator-modern.html" class="btn btn-primary btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
         
-        <!-- Tabs Navigation -->
-        <div class="tabs-navigation">
-            <button class="tab-btn active" data-tab="calculators" data-i18n="nav.calculators">Calculators</button>
-            <button class="tab-btn" data-tab="news" data-i18n="nav.news">News</button>
-            <button class="tab-btn" data-tab="articles" data-i18n="nav.articles">Articles</button>
-            <button class="tab-btn" data-tab="compare" data-i18n="nav.compare">Compare</button>
-        </div>
+                    <!-- ===== LOAN CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--loan" id="calc-loan" data-calc="loan">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="calc.loan">Loan Payment</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.monthlyPayment">Monthly Payment</span>
+                                        <span class="result-card__value" id="loan-result-payment">₽9,168</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalPayment">Total Payment</span>
+                                        <span class="result-card__value" id="loan-result-total">₽110,016</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalInterest">Total Interest</span>
+                                        <span class="result-card__value result-card__value--danger" id="loan-result-interest">₽10,016</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.paymentBreakdown">Payment Breakdown</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--principal"></span> <span data-i18n="result.principal">Principal</span></span>
+                                        <span class="legend-item"><span class="legend-dot legend-dot--interest-loan"></span> <span data-i18n="result.interest">Interest</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="loan-chart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="loan" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.loanAmount">Loan Amount</label>
+                                    <div class="input-with-currency"><input type="text" id="loan-amount" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="loan-amount-range" min="10000" max="10000000" value="100000" step="10000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                                    <div class="input-with-suffix"><input type="text" id="loan-rate" value="18" inputmode="decimal"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="loan-rate-range" min="1" max="50" value="18" step="0.1">
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label data-i18n="form.loanTerm">Term</label>
+                                        <input type="number" id="loan-term" value="12" min="1" max="360">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <select id="loan-term-unit">
+                                            <option value="months" data-i18n="form.months" selected>Months</option>
+                                            <option value="years" data-i18n="form.years">Years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/loan-payment-modern.html" class="btn btn-loan btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- ===== SAVINGS GOAL CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--savings" id="calc-savings" data-calc="savings">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="calc.savings">Savings Goal</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.monthlyNeeded">Monthly Savings</span>
+                                        <span class="result-card__value" id="savings-result-monthly">₽7,743</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--teal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.goalAmount">Goal Amount</span>
+                                        <span class="result-card__value" id="savings-result-goal">₽100,000</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.interestEarned">Interest Earned</span>
+                                        <span class="result-card__value result-card__value--success" id="savings-result-interest">+₽7,086</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.progressChart">Progress Chart</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--savings"></span> <span data-i18n="result.contributions">Contributions</span></span>
+                                        <span class="legend-item"><span class="legend-dot legend-dot--interest"></span> <span data-i18n="result.interest">Interest</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="savings-chart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="savings" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.targetAmount">Target Amount</label>
+                                    <div class="input-with-currency"><input type="text" id="savings-goal" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="savings-goal-range" min="10000" max="10000000" value="100000" step="10000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.initialSavings">Initial Savings</label>
+                                    <div class="input-with-currency"><input type="text" id="savings-initial" value="0" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                                    <div class="input-with-suffix"><input type="text" id="savings-rate" value="10" inputmode="decimal"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="savings-rate-range" min="0" max="25" value="10" step="0.5">
+                                </div>
+                                <div class="form-row-2">
+                                    <div class="form-group">
+                                        <label data-i18n="form.timeframe">Timeframe</label>
+                                        <input type="number" id="savings-term" value="12" min="1" max="360">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>&nbsp;</label>
+                                        <select id="savings-term-unit">
+                                            <option value="months" data-i18n="form.months" selected>Months</option>
+                                            <option value="years" data-i18n="form.years">Years</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/savings-goal-modern.html" class="btn btn-savings btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- ===== MORTGAGE CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--mortgage" id="calc-mortgage" data-calc="mortgage">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="calc.mortgage">Mortgage Calculator</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.monthlyPayment">Monthly Payment</span>
+                                        <span class="result-card__value" id="mortgage-result-payment">₽35,068</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--purple"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalCost">Total Cost</span>
+                                        <span class="result-card__value" id="mortgage-result-total">₽6,312,240</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalInterest">Total Interest</span>
+                                        <span class="result-card__value result-card__value--danger" id="mortgage-result-interest">₽3,312,240</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.amortization">Amortization</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--principal"></span> <span data-i18n="result.principal">Principal</span></span>
+                                        <span class="legend-item"><span class="legend-dot legend-dot--interest-loan"></span> <span data-i18n="result.interest">Interest</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="mortgage-chart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="mortgage" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.homePrice">Home Price</label>
+                                    <div class="input-with-currency"><input type="text" id="mortgage-price" value="3 000 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="mortgage-price-range" min="500000" max="50000000" value="3000000" step="100000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.downPayment">Down Payment</label>
+                                    <div class="input-with-suffix"><input type="text" id="mortgage-down" value="20" inputmode="numeric"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="mortgage-down-range" min="0" max="90" value="20" step="5">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                                    <div class="input-with-suffix"><input type="text" id="mortgage-rate" value="12" inputmode="decimal"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="mortgage-rate-range" min="1" max="25" value="12" step="0.1">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.loanTerm">Loan Term (Years)</label>
+                                    <select id="mortgage-term">
+                                        <option value="10" data-i18n="mortgage.term.10">10 years</option>
+                                        <option value="15" selected data-i18n="mortgage.term.15">15 years</option>
+                                        <option value="20" data-i18n="mortgage.term.20">20 years</option>
+                                        <option value="25" data-i18n="mortgage.term.25">25 years</option>
+                                        <option value="30" data-i18n="mortgage.term.30">30 years</option>
+                                    </select>
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/mortgage-modern.html" class="btn btn-mortgage btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- ===== CREDIT CARD CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--creditcard" id="calc-creditcard" data-calc="creditcard">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="calc.creditcard">Credit Card Payoff</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.payoffTime">Payoff Time</span>
+                                        <span class="result-card__value" id="cc-result-months">14 мес.</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--pink"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalPayment">Total Payment</span>
+                                        <span class="result-card__value" id="cc-result-total">₽70,000</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.totalInterest">Total Interest</span>
+                                        <span class="result-card__value result-card__value--danger" id="cc-result-interest">₽20,000</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.balanceOverTime">Balance Over Time</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--balance"></span> <span data-i18n="result.remainingBalance">Balance</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="creditcard-chart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="creditcard" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.currentBalance">Current Balance</label>
+                                    <div class="input-with-currency"><input type="text" id="cc-balance" value="50 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="cc-balance-range" min="1000" max="1000000" value="50000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.apr">APR (%)</label>
+                                    <div class="input-with-suffix"><input type="text" id="cc-apr" value="24" inputmode="decimal"><span class="input-suffix">%</span></div>
+                                    <input type="range" id="cc-apr-range" min="5" max="50" value="24" step="0.5">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.monthlyPayment">Monthly Payment</label>
+                                    <div class="input-with-currency"><input type="text" id="cc-payment" value="5 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="cc-payment-range" min="500" max="100000" value="5000" step="500">
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/credit-card-modern.html" class="btn btn-creditcard btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- ===== ROI CALCULATOR ===== -->
+                    <section class="calc-hero calc-hero--roi" id="calc-roi" data-calc="roi">
+                        <div class="calc-hero__results">
+                            <div class="calc-hero__title-row">
+                                <h1 class="calc-hero__title" data-i18n="card.roi.title">Investment ROI</h1>
+                                <div class="calc-hero__badges">
+                                    <span class="badge badge--live"><span class="badge__dot"></span>Live</span>
+                                </div>
+                            </div>
+                            <div class="result-cards">
+                                <div class="result-card result-card--primary">
+                                    <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.roi">ROI</span>
+                                        <span class="result-card__value" id="roi-result-percent">+50%</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--emerald"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.netProfit">Net Profit</span>
+                                        <span class="result-card__value result-card__value--success" id="roi-result-profit">+₽50,000</span>
+                                    </div>
+                                </div>
+                                <div class="result-card">
+                                    <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg></div>
+                                    <div class="result-card__content">
+                                        <span class="result-card__label" data-i18n="result.annualizedROI">Annualized ROI</span>
+                                        <span class="result-card__value" id="roi-result-annual">50%</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="chart-section">
+                                <div class="chart-header">
+                                    <h3 data-i18n="chart.investmentBreakdown">Investment Breakdown</h3>
+                                    <div class="chart-legend">
+                                        <span class="legend-item"><span class="legend-dot legend-dot--invested"></span> <span data-i18n="result.invested">Invested</span></span>
+                                        <span class="legend-item"><span class="legend-dot legend-dot--profit"></span> <span data-i18n="result.profit">Profit</span></span>
+                                    </div>
+                                </div>
+                                <div class="chart-container"><canvas id="roi-chart"></canvas></div>
+                            </div>
+                        </div>
+                        <div class="calc-hero__form">
+                            <div class="form-card">
+                                <div class="form-card__header">
+                                    <h3 data-i18n="form.parameters">Parameters</h3>
+                                    <button class="btn-reset" data-reset="roi" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.initialInvestment">Initial Investment</label>
+                                    <div class="input-with-currency"><input type="text" id="roi-initial" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="roi-initial-range" min="1000" max="10000000" value="100000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.finalValue">Final Value</label>
+                                    <div class="input-with-currency"><input type="text" id="roi-final" value="150 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                    <input type="range" id="roi-final-range" min="1000" max="20000000" value="150000" step="1000">
+                                </div>
+                                <div class="form-group">
+                                    <label data-i18n="form.investmentPeriod">Investment Period (Months)</label>
+                                    <input type="number" id="roi-period" value="12" min="1" max="360">
+                                    <input type="range" id="roi-period-range" min="1" max="120" value="12" step="1">
+                                </div>
+                                <div class="form-actions">
+                                    <a href="calculators/roi-modern.html" class="btn btn-roi btn-full">
+                                        <span data-i18n="button.fullCalculator">Full Calculator</span>
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- News Section on Main Page -->
+                    <section class="news-section-main">
+                        <div class="section-header-row">
+                            <h2 data-i18n="section.news.title">Financial News</h2>
+                            <a href="#news" class="btn btn-outline" id="view-all-news">
+                                <span data-i18n="button.viewAllNews">All News</span>
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                            </a>
+                        </div>
+                        <div class="news-grid-main" id="news-grid-main">
+                            <!-- Static news shown immediately, updated dynamically -->
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge" data-i18n="news.markets">Markets</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder1.title">Central Bank Monetary Policy Update</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder1.desc">Latest decisions on key interest rates and economic outlook.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">ЦБ РФ</span>
+                                </div>
+                            </article>
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge news-card-main__badge--invest" data-i18n="news.investments">Investments</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder2.title">Stock Market Daily Highlights</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder2.desc">Key movements and trends in equity markets today.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">Московская биржа</span>
+                                </div>
+                            </article>
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge news-card-main__badge--savings" data-i18n="news.deposits">Deposits</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder3.title">Best Deposit Rates This Month</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder3.desc">Compare top bank deposit offers and maximize your returns.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">Banki.ru</span>
+                                </div>
+                            </article>
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge news-card-main__badge--realty" data-i18n="news.realestate">Real Estate</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder4.title">Mortgage Market Overview</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder4.desc">Current mortgage rates and lending conditions analysis.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">ДОМ.РФ</span>
+                                </div>
+                            </article>
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge news-card-main__badge--crypto" data-i18n="news.crypto">Crypto</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder5.title">Cryptocurrency Market Update</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder5.desc">Bitcoin and major altcoins price movements and trends.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">CoinDesk</span>
+                                </div>
+                            </article>
+                            <article class="news-card-main">
+                                <div class="news-card-main__badge" data-i18n="news.economy">Economy</div>
+                                <h3 class="news-card-main__title" data-i18n="news.placeholder6.title">Economic Indicators Report</h3>
+                                <p class="news-card-main__desc" data-i18n="news.placeholder6.desc">Inflation, GDP and key economic metrics update.</p>
+                                <div class="news-card-main__meta">
+                                    <span class="news-card-main__date" data-today></span>
+                                    <span class="news-card-main__source">Росстат</span>
+                                </div>
+                            </article>
+                        </div>
+                    </section>
+                    
+                </div>
+                
+                <!-- Tab content is controlled by header tabs -->
         
         <!-- News Tab -->
         <div id="news" class="tab-content">
@@ -333,25 +949,22 @@
                 <h2 data-i18n="section.news.title">Financial News & Updates</h2>
                 <p class="text-center" style="color: var(--text-secondary); margin-bottom: 2rem;" data-i18n="section.news.subtitle">Stay informed with the latest financial trends and insights</p>
                 
-                <!-- News Loading State -->
                 <div id="news-loading" style="text-align: center; padding: 3rem 0;">
                     <p data-i18n="news.loading">Loading news...</p>
                 </div>
                 
-                <!-- News Error State -->
                 <div id="news-error" style="display: none; text-align: center; padding: 3rem 0; color: var(--danger);">
                     <p data-i18n="news.error">Unable to load news. Please try again later.</p>
                 </div>
                 
-                <!-- News Grid -->
                 <div id="news-grid" class="grid" style="display: none;"></div>
             </section>
         </div>
         
-        <!-- Calculators Tab -->
-        <div id="calculators" class="tab-content active">
+                <!-- Calculators Tab (All Calculators Grid) -->
+                <div id="calculators" class="tab-content">
             <section class="container">
-        <h2 data-i18n="section.calculators.title">Financial Calculators</h2>
+                        <h2 data-i18n="section.calculators.title">All Financial Calculators</h2>
         <div class="calc-cards-grid">
             <!-- Deposit Calculator -->
             <article class="calc-card" role="link" tabindex="0" data-target="calculators/deposit-calculator-modern.html">
@@ -475,36 +1088,6 @@
             </article>
         </div>
         
-        <!-- News Section (Compact) -->
-        <section class="container" style="margin-top: var(--space-3xl); padding-top: var(--space-3xl); border-top: 2px solid var(--border);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md);">
-                <h2 style="margin: 0;" data-i18n="section.news.compact_title">Latest Financial News</h2>
-                <button id="refresh-news-btn" class="btn-refresh" onclick="window.newsManager?.refresh()" title="Refresh news">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="18" height="18">
-                        <polyline points="23 4 23 10 17 10"/>
-                        <polyline points="1 20 1 14 7 14"/>
-                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
-                    </svg>
-                    <span data-i18n="news.refresh">Refresh</span>
-                </button>
-            </div>
-            
-            <!-- News Loading State -->
-            <div id="news-compact-loading" style="text-align: center; padding: 2rem 0;">
-                <p data-i18n="news.loading">Loading news...</p>
-            </div>
-            
-            <!-- News Error State -->
-            <div id="news-compact-error" style="display: none; text-align: center; padding: 2rem 0; color: var(--danger);">
-                <p data-i18n="news.error">Unable to load news. Please try again later.</p>
-            </div>
-            
-            <!-- News Grid (Compact) -->
-            <div id="news-compact-grid" class="grid" style="display: none;"></div>
-            
-            <!-- View All Button -->
-            <div style="text-align: center; margin-top: var(--space-xl);">
-                <button class="tab-btn view-all-btn" data-tab="news" data-i18n="section.news.view_all">View All News</button>
             </div>
         </section>
     </div>
@@ -626,29 +1209,23 @@
         <!-- Compare Tab -->
         <div id="compare" class="tab-content">
             <section class="container">
-        <h2 class="text-center">Compare Financial Products</h2>
+                        <h2 class="text-center" data-i18n="nav.compare">Compare Financial Products</h2>
         <div class="results-container">
-            <p class="text-center">Compare interest rates, fees, and features of financial products in your region.</p>
+                            <p class="text-center" data-i18n="compare.description">Compare interest rates, fees, and features of financial products in your region.</p>
             <div class="text-center mt-2">
-                <button class="btn btn-success" disabled>Coming Soon</button>
-                <button class="btn btn-success" disabled>Coming Soon</button>
-                <button class="btn btn-success" disabled>Coming Soon</button>
+                                <button class="btn btn-success" disabled data-i18n="compare.comingSoon">Coming Soon</button>
             </div>
         </div>
             </section>
         </div>
         
-        <!-- Ad Slot -->
-        <div class="container mt-3">
-            <div style="min-height: 100px; background: var(--gray-100); border-radius: var(--radius-md); display: grid; place-items: center; color: var(--text-muted);">
-                <!-- Google AdSense will go here -->
-                <small>Advertisement</small>
-            </div>
-        </div>
+            </div><!-- /.app-main -->
+        </div><!-- /.app-layout -->
+        
         <footer class="site-footer">
             <div class="container">
                 <div class="footer-bottom">
-                    <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
+                    <p>&copy; 2025 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
                 </div>
             </div>
         </footer>
@@ -689,11 +1266,15 @@
                 document.getElementById('cookie-banner').style.display = 'block';
             }
             
-            // Add smooth scroll
+            // Add smooth scroll (only for valid anchor links)
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
+                    const href = this.getAttribute('href');
+                    // Skip if it's just "#" or handled by calculator switching
+                    if (!href || href === '#' || this.hasAttribute('data-calc')) return;
+                    
                     e.preventDefault();
-                    const target = document.querySelector(this.getAttribute('href'));
+                    const target = document.querySelector(href);
                     if (target) {
                         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     }
