@@ -3,296 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mortgage Calculator - Monthly Payment & Affordability | FinCalc</title>
-    <meta name="description" content="Free mortgage calculator with monthly payment calculation, property tax & insurance estimates, affordability analysis, and full amortization schedule. Compare fixed vs adjustable rates.">
-    <meta name="keywords" content="mortgage calculator, home loan calculator, house payment calculator, mortgage affordability, property tax calculator, mortgage amortization">
-    <meta name="author" content="FinCalc">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Mortgage Calculator - Calculate Home Loan Payments">
-    <meta property="og:description" content="Free mortgage calculator with affordability analysis and amortization schedule.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html">
-    <meta property="og:site_name" content="FinCalc">
-    
-    <!-- Canonical & hreflang -->
-    <link rel="canonical" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html">
-    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html">
-    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html?lang=pl">
-    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html?lang=ru">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Mortgage Calculator",
-        "description": "Calculate mortgage payments, affordability, and view full amortization schedule with property tax & insurance estimates",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
-    }
-    </script>
-    
-    <!-- Favicon -->
+    <title>Mortgage Calculator - Home Loan Payments | FinCalc</title>
+    <meta name="description" content="Calculate mortgage payments, compare scenarios with different down payments, rates and terms.">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/i18n.js" defer></script>
     <style>
-        .calc-hero {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
-            padding: 2.5rem 1.5rem 2rem;
-            margin: -1rem -1rem 2rem -1rem;
-            border-radius: 0 0 24px 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .calc-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .calc-hero__icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .calc-hero__icon svg { width: 28px; height: 28px; stroke: white; }
-        .calc-hero h1 { font-size: 2rem; font-weight: 800; margin: 0 0 0.5rem 0; }
-        .calc-hero p { font-size: 1rem; color: rgba(255,255,255,0.9); margin: 0; max-width: 600px; line-height: 1.5; }
-        
-        .calculator-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-        
-        .calculator-main-grid { display: grid; grid-template-columns: 1fr 400px; gap: 1.5rem; margin-bottom: 2rem; }
-        @media (max-width: 900px) { .calculator-main-grid { grid-template-columns: 1fr; } }
-        
-        .input-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        
-        .input-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1.25rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .input-card h3 svg { width: 20px; height: 20px; stroke: #0284c7; }
-        
-        .slider-group { margin-bottom: 1.5rem; }
-        .slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .slider-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
-        
-        .slider-input {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, #0284c7 0%, #0284c7 var(--value), var(--gray-200) var(--value), var(--gray-200) 100%);
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
-        
-        .slider-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #0284c7;
-            box-shadow: 0 2px 8px rgba(2,132,199,0.3);
-            cursor: grab;
-        }
-        
-        .slider-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
-        .slider-number-input { width: 110px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-align: right; }
-        
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
-        .form-input, .form-select { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; }
-        .form-input:focus, .form-select:focus { border-color: #0284c7; outline: none; box-shadow: 0 0 0 3px rgba(2,132,199,0.1); }
-        
-        .toggle-section {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: #f0f9ff;
-            border: 1px solid #bae6fd;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-        
-        .toggle-section__checkbox { width: 18px; height: 18px; }
-        .toggle-section__label { font-size: 0.85rem; font-weight: 600; color: #0369a1; }
-        
-        .extra-fields { display: none; }
-        .extra-fields.active { display: block; }
-        
-        .results-panel { display: flex; flex-direction: column; gap: 1rem; }
-        
-        .main-result-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
-            border-radius: 20px;
-            padding: 1.75rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-result-card::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -15%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .main-result-label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
-        .main-result-value { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.25rem; }
-        .main-result-subtitle { font-size: 0.9rem; opacity: 0.9; }
-        
-        .payment-breakdown { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1rem; }
-        .payment-breakdown__item { display: flex; align-items: center; gap: 0.4rem; font-size: 0.8rem; }
-        .payment-breakdown__dot { width: 10px; height: 10px; border-radius: 50%; }
-        .payment-breakdown__dot--principal { background: #86efac; }
-        .payment-breakdown__dot--interest { background: #fbbf24; }
-        .payment-breakdown__dot--tax { background: #f87171; }
-        .payment-breakdown__dot--insurance { background: #c084fc; }
-        
-        .result-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        
-        .result-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .result-card__icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
-        .result-card__icon svg { width: 18px; height: 18px; }
-        .result-card__icon--blue { background: rgba(2,132,199,0.1); }
-        .result-card__icon--blue svg { stroke: #0284c7; }
-        .result-card__icon--green { background: rgba(34,197,94,0.1); }
-        .result-card__icon--green svg { stroke: #22c55e; }
-        .result-card__icon--orange { background: rgba(249,115,22,0.1); }
-        .result-card__icon--orange svg { stroke: #f97316; }
-        .result-card__icon--purple { background: rgba(168,85,247,0.1); }
-        .result-card__icon--purple svg { stroke: #a855f7; }
-        
-        .result-card__label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; }
-        .result-card__value { font-size: 1.15rem; font-weight: 700; color: #0b254a; }
-        .result-card__value--orange { color: #f97316; }
-        
-        .affordability-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .affordability-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .affordability-section h3 svg { width: 20px; height: 20px; stroke: #0284c7; }
-        
-        .affordability-bar { height: 20px; background: var(--gray-100); border-radius: 10px; overflow: hidden; position: relative; }
-        .affordability-bar__fill { height: 100%; border-radius: 10px; }
-        .affordability-bar__fill.good { background: linear-gradient(90deg, #22c55e, #16a34a); }
-        .affordability-bar__fill.warning { background: linear-gradient(90deg, #f59e0b, #d97706); }
-        .affordability-bar__fill.danger { background: linear-gradient(90deg, #ef4444, #dc2626); }
-        
-        .affordability-labels { display: flex; justify-content: space-between; margin-top: 0.5rem; font-size: 0.8rem; }
-        .affordability-labels__value { font-weight: 700; color: #0b254a; }
-        .affordability-labels__text { color: var(--text-muted); }
-        
-        .affordability-tips { margin-top: 1rem; padding: 1rem; background: #f0fdf4; border-radius: 10px; border-left: 4px solid #22c55e; }
-        .affordability-tips.warning { background: #fffbeb; border-color: #f59e0b; }
-        .affordability-tips.danger { background: #fef2f2; border-color: #ef4444; }
-        .affordability-tips__title { font-weight: 700; margin-bottom: 0.25rem; font-size: 0.9rem; }
-        .affordability-tips__text { font-size: 0.85rem; color: var(--text-secondary); }
-        
-        .chart-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .chart-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .chart-section h3 svg { width: 20px; height: 20px; stroke: #0284c7; }
-        .chart-wrapper { position: relative; height: 300px; }
-        
-        .action-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .btn-action {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-        }
-        .btn-action:hover { background: var(--gray-50); }
-        .btn-action svg { width: 16px; height: 16px; }
-        
-        @media (max-width: 640px) {
-            .calc-hero { padding: 1.5rem 1rem; }
-            .calc-hero h1 { font-size: 1.5rem; }
-            .main-result-value { font-size: 2rem; }
-            .result-cards-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-        }
+        .full-calc-page { max-width: 1200px; margin: 0 auto; padding: var(--space-xl); }
+        .full-calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .full-calc-header h1 { margin: 0; font-size: 1.75rem; display: flex; align-items: center; gap: var(--space-md); }
+        .back-link { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border); transition: all 0.2s; }
+        .back-link:hover { background: var(--gray-100); color: #8a2be2; border-color: #8a2be2; }
+        .back-link svg { width: 18px; height: 18px; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 400px; gap: var(--space-xl); }
+        @media (max-width: 1024px) { .calc-grid { grid-template-columns: 1fr; } }
+        .results-panel { background: linear-gradient(135deg, rgba(138, 43, 226, 0.04) 0%, rgba(255, 105, 180, 0.04) 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-xl); }
+        .form-panel { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .result-card--mortgage .result-card__icon { background: rgba(138, 43, 226, 0.15); color: #8a2be2; }
+        .calc-icon-mortgage { color: #8a2be2; }
+        .comparison-box { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg); margin-top: var(--space-xl); }
+        .comparison-title { font-weight: 600; margin-bottom: var(--space-md); }
+        .comparison-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); }
+        .comparison-item { text-align: center; padding: var(--space-md); background: var(--gray-50); border-radius: var(--radius-md); }
+        .comparison-item__label { font-size: 0.875rem; color: var(--text-secondary); }
+        .comparison-item__value { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); }
     </style>
 </head>
 <body>
@@ -300,477 +36,400 @@
         <div class="container">
             <div class="header-content">
                 <a href="../index.html" class="logo">
-                    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#gradient)"/><path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="10" r="2" fill="white"/><defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs></svg>
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs>
+                    </svg>
                     <span>FinCalc</span>
                 </a>
-                <nav class="nav-menu">
-                    <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                        </button>
-                        <div class="lang-dropdown-content">
-                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
-                        </div>
-                    </div>
+                <nav class="nav-menu header-tabs">
+                    <a href="../index.html#calculators" class="header-tab" data-i18n="nav.allCalculators">All Calculators</a>
+                    <a href="../index.html#news" class="header-tab" data-i18n="nav.news">News</a>
+                    <a href="../index.html#articles" class="header-tab" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="header-tab" data-i18n="nav.compare">Compare</a>
                 </nav>
+                <div class="lang-dropdown">
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
-    
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
-    
-    <div class="container calculator-container">
-        <div class="calc-hero">
-            <div class="calc-hero__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
-                    <polyline points="9 22 9 12 15 12 15 22"/>
-                </svg>
+
+    <main class="page-surface">
+        <div class="full-calc-page">
+            <div class="full-calc-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="calc-icon-mortgage"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    <span data-i18n="calc.mortgage">Mortgage Calculator</span>
+                    <span class="badge badge--live" style="background: #8a2be2; color: white;"><span class="badge__dot"></span>Pro</span>
+                </h1>
+                <a href="../index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span data-i18n="nav.home">Back to Home</span>
+                </a>
             </div>
-            <h1 data-i18n="calc.mortgage">Mortgage Calculator</h1>
-            <p data-i18n="calc.mortgage.desc">Project monthly payments, total loan cost, and affordability for a home purchase including taxes and insurance.</p>
-        </div>
-        
-        <div class="calculator-main-grid">
-            <div class="input-card">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
-                    <span data-i18n="mortgage.loan_details">Loan Details</span>
-                </h3>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="mortgage.home_price">Home Price</span>
-                        <input type="number" class="slider-number-input" id="priceInput" value="350000" min="10000" step="5000">
-                    </div>
-                    <input type="range" class="slider-input" id="priceSlider" min="50000" max="2000000" value="350000" step="5000">
-                    <div class="slider-range"><span>$50K</span><span>$2M</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="mortgage.down_payment">Down Payment</span>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="number" class="slider-number-input" id="downInput" value="70000" min="0" step="1000">
-                            <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-secondary);" id="downPercent">(20%)</span>
+            
+            <div class="calc-grid">
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <div class="result-cards" style="margin-bottom: var(--space-xl);">
+                        <div class="result-card result-card--primary result-card--mortgage">
+                            <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.monthlyPayment">Monthly Payment</span>
+                                <span class="result-card__value" id="result-monthly">₽0</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8l-4 4-4-4"/><path d="M12 16V8"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.loanAmount">Loan Amount</span>
+                                <span class="result-card__value" id="result-loan">₽0</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.totalInterest">Total Interest</span>
+                                <span class="result-card__value result-card__value--danger" id="result-interest">₽0</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.totalCost">Total Cost</span>
+                                <span class="result-card__value" id="result-total">₽0</span>
+                            </div>
                         </div>
                     </div>
-                    <input type="range" class="slider-input" id="downSlider" min="0" max="700000" value="70000" step="1000">
-                    <div class="slider-range"><span>$0</span><span>$700K</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="mortgage.interest_rate">Interest Rate</span>
-                        <div style="display: flex; align-items: center; gap: 0.25rem;">
-                            <input type="number" class="slider-number-input" id="rateInput" value="6.5" min="0" max="15" step="0.125" style="width: 70px;">
-                            <span style="font-weight: 600; color: #0b254a;">%</span>
+                    
+                    <div class="chart-section">
+                        <div class="chart-header">
+                            <h3 data-i18n="chart.amortization">Amortization</h3>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="legend-dot legend-dot--invested"></span> <span data-i18n="table.principal">Principal</span></span>
+                                <span class="legend-item"><span class="legend-dot legend-dot--interest"></span> <span data-i18n="table.interest">Interest</span></span>
+                            </div>
                         </div>
+                        <div class="chart-container"><canvas id="amort-chart"></canvas></div>
                     </div>
-                    <input type="range" class="slider-input" id="rateSlider" min="0" max="15" value="6.5" step="0.125">
-                    <div class="slider-range"><span>0%</span><span>15%</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="mortgage.loan_term">Loan Term</span>
-                        <div style="display: flex; align-items: center; gap: 0.5rem;">
-                            <input type="number" class="slider-number-input" id="termInput" value="30" min="1" max="50" step="1" style="width: 60px;">
-                            <span style="font-weight: 600; color: #0b254a;" data-i18n="unit.years">years</span>
-                        </div>
-                    </div>
-                    <input type="range" class="slider-input" id="termSlider" min="5" max="40" value="30" step="5">
-                    <div class="slider-range"><span>5</span><span>40</span></div>
-                </div>
-                
-                <div class="toggle-section">
-                    <input type="checkbox" class="toggle-section__checkbox" id="includeExtras" checked>
-                    <label class="toggle-section__label" for="includeExtras" data-i18n="mortgage.include_extras">Include Taxes & Insurance</label>
-                </div>
-                
-                <div class="extra-fields active" id="extraFields">
-                    <div class="form-row">
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label class="form-label" data-i18n="mortgage.property_tax">Property Tax (yearly)</label>
-                            <input type="number" class="form-input" id="taxInput" value="4200" min="0" step="100">
-                        </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                            <label class="form-label" data-i18n="mortgage.insurance">Home Insurance (yearly)</label>
-                            <input type="number" class="form-input" id="insuranceInput" value="1500" min="0" step="100">
+                    
+                    <!-- Comparison Box -->
+                    <div class="comparison-box">
+                        <div class="comparison-title" data-i18n="section.comparison">Cost Breakdown</div>
+                        <div class="comparison-grid">
+                            <div class="comparison-item">
+                                <div class="comparison-item__label" data-i18n="result.homeValue">Home Value</div>
+                                <div class="comparison-item__value" id="compare-home">₽0</div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item__label" data-i18n="result.downPayment">Down Payment</div>
+                                <div class="comparison-item__value" id="compare-down">₽0</div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item__label" data-i18n="result.interestRatio">Interest Ratio</div>
+                                <div class="comparison-item__value" id="compare-ratio">0%</div>
+                            </div>
+                            <div class="comparison-item">
+                                <div class="comparison-item__label" data-i18n="result.payoffDate">Payoff Date</div>
+                                <div class="comparison-item__value" id="compare-date">-</div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0; margin-top: 1rem;">
-                    <label class="form-label" data-i18n="mortgage.income">Monthly Gross Income (for affordability)</label>
-                    <input type="number" class="form-input" id="incomeInput" value="8000" min="0" step="500">
+                <!-- Form Panel -->
+                <div class="form-panel">
+                    <div class="form-card">
+                        <div class="form-card__header">
+                            <h3 data-i18n="section.mortgage">Mortgage Details</h3>
+                            <button class="btn-reset" id="btn-reset" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.homeValue">Home Value</label>
+                            <div class="input-with-currency"><input type="text" id="home-value" value="5 000 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="home-value-range" min="500000" max="100000000" value="5000000" step="100000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.downPayment">Down Payment</label>
+                            <div class="input-with-currency"><input type="text" id="down-payment" value="1 000 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="down-payment-range" min="0" max="50000000" value="1000000" step="50000">
+                            <span class="input-hint" id="down-percent">20%</span>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                            <div class="input-with-suffix"><input type="text" id="interest-rate" value="12" inputmode="decimal"><span class="input-suffix">%</span></div>
+                            <input type="range" id="interest-rate-range" min="0" max="30" value="12" step="0.1">
+                        </div>
+                        
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label data-i18n="form.loanTerm">Term</label>
+                                <input type="number" id="term" value="20" min="1" max="30">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <select id="term-unit">
+                                    <option value="years" data-i18n="form.years" selected>Years</option>
+                                    <option value="months" data-i18n="form.months">Months</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="presets-card">
+                        <h4 data-i18n="form.quickPresets">Quick Presets</h4>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-rate="7" data-currency="USD"><span class="preset-flag">🇺🇸</span><span>USD 7%</span></button>
+                            <button class="preset-btn" data-rate="4" data-currency="EUR"><span class="preset-flag">🇪🇺</span><span>EUR 4%</span></button>
+                            <button class="preset-btn" data-rate="8" data-currency="PLN"><span class="preset-flag">🇵🇱</span><span>PLN 8%</span></button>
+                            <button class="preset-btn active" data-rate="12" data-currency="RUB"><span class="preset-flag">🇷🇺</span><span>RUB 12%</span></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="results-panel">
-                <div class="main-result-card">
-                    <div class="main-result-label" data-i18n="mortgage.monthly_payment">Monthly Payment</div>
-                    <div class="main-result-value" id="monthlyPayment">$2,245</div>
-                    <div class="main-result-subtitle" id="paymentSubtitle">Principal & Interest: $1,770</div>
-                    
-                    <div class="payment-breakdown">
-                        <div class="payment-breakdown__item">
-                            <span class="payment-breakdown__dot payment-breakdown__dot--principal"></span>
-                            <span data-i18n="result.principal">Principal</span>: <span id="principalPart">$558</span>
-                        </div>
-                        <div class="payment-breakdown__item">
-                            <span class="payment-breakdown__dot payment-breakdown__dot--interest"></span>
-                            <span data-i18n="table.interest">Interest</span>: <span id="interestPart">$1,212</span>
-                        </div>
-                        <div class="payment-breakdown__item" id="taxItem">
-                            <span class="payment-breakdown__dot payment-breakdown__dot--tax"></span>
-                            <span data-i18n="mortgage.tax">Tax</span>: <span id="taxPart">$350</span>
-                        </div>
-                        <div class="payment-breakdown__item" id="insuranceItem">
-                            <span class="payment-breakdown__dot payment-breakdown__dot--insurance"></span>
-                            <span data-i18n="mortgage.insurance_short">Insurance</span>: <span id="insurancePart">$125</span>
-                        </div>
+            <!-- Amortization Table -->
+            <section class="breakdown-section" style="margin-top: var(--space-xl);">
+                <div class="section-header">
+                    <h2 data-i18n="section.schedule">Amortization Schedule</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="yearly" data-i18n="button.yearly">Yearly</button>
+                        <button class="view-btn" data-view="monthly" data-i18n="button.monthly">Monthly</button>
                     </div>
                 </div>
-                
-                <div class="result-cards-grid">
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="mortgage.loan_amount">Loan Amount</div>
-                        <div class="result-card__value" id="loanAmount">$280,000</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--orange">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="mortgage.total_interest">Total Interest</div>
-                        <div class="result-card__value result-card__value--orange" id="totalInterest">$357,000</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--green">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="mortgage.total_cost">Total Cost</div>
-                        <div class="result-card__value" id="totalCost">$637,000</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="mortgage.payoff_date">Payoff Date</div>
-                        <div class="result-card__value" id="payoffDate">Nov 2055</div>
-                    </div>
+                <div class="table-container">
+                    <table class="breakdown-table" id="breakdown-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="table.period">Period</th>
+                                <th data-i18n="table.payment">Payment</th>
+                                <th data-i18n="table.principal">Principal</th>
+                                <th data-i18n="table.interest">Interest</th>
+                                <th data-i18n="table.balance">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakdown-body"></tbody>
+                    </table>
                 </div>
-                
-                <div class="action-buttons">
-                    <button class="btn-action" id="shareBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                        <span data-i18n="button.share">Share</span>
-                    </button>
-                    <button class="btn-action" id="printBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
-                        <span data-i18n="button.print">Print</span>
-                    </button>
-                </div>
-            </div>
+            </section>
         </div>
         
-        <div class="affordability-section">
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                <span data-i18n="mortgage.affordability">Affordability Check</span>
-            </h3>
-            <div class="affordability-bar">
-                <div class="affordability-bar__fill good" id="affordabilityFill" style="width: 28%;"></div>
+        <footer class="site-footer" style="margin-top: var(--space-2xl);">
+            <div class="container">
+                <p>&copy; 2025 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
             </div>
-            <div class="affordability-labels">
-                <div>
-                    <span class="affordability-labels__value" id="dtiValue">28%</span>
-                    <span class="affordability-labels__text"> DTI Ratio</span>
-                </div>
-                <div>
-                    <span class="affordability-labels__text">Recommended: </span>
-                    <span class="affordability-labels__value">&lt;36%</span>
-                </div>
-            </div>
-            <div class="affordability-tips" id="affordabilityTips">
-                <div class="affordability-tips__title">✓ Good Affordability</div>
-                <div class="affordability-tips__text">Your debt-to-income ratio is healthy. Lenders typically prefer DTI below 36%.</div>
-            </div>
-        </div>
-        
-        <div class="chart-section">
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/><path d="M22 12A10 10 0 0 0 12 2v10z"/></svg>
-                <span data-i18n="mortgage.payment_breakdown">Payment Breakdown</span>
-            </h3>
-            <div class="chart-wrapper">
-                <canvas id="mortgageChart"></canvas>
-            </div>
-        </div>
-    </div>
-    
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="../assets/i18n.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </footer>
+    </main>
+
     <script>
-        let chart = null;
+    (function() {
+        'use strict';
         
-        // Локализованные настройки по умолчанию
-        const mortgageDefaults = {
-            en: { price: 350000, down: 70000, rate: 6.5, term: 30, tax: 4200, insurance: 1500 },
-            pl: { price: 500000, down: 100000, rate: 7.5, term: 25, tax: 2500, insurance: 1200 },
-            ru: { price: 8000000, down: 1600000, rate: 18, term: 20, tax: 15000, insurance: 8000 }
-        };
+        let amortChart = null;
+        let currentCurrency = '₽';
+        const currencies = { USD: '$', EUR: '€', PLN: 'zł', RUB: '₽' };
+        let scheduleData = [];
         
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || localStorage.getItem('preferredLanguage') || 'en';
-            i18n.setLanguage(lang);
-            i18n.updatePage();
-            
-            // Apply locale defaults if no URL params
-            if (!urlParams.has('price')) {
-                applyLocaleDefaults(lang);
-            }
-            
-            bindSliders();
-            bindInputs();
-            bindActions();
-            
-            // Re-apply defaults on language change
-            window.addEventListener('languageChanged', (e) => {
-                applyLocaleDefaults(e.detail.language);
-                updateAllSliderFills();
-                calculate();
-            });
-            
-            calculate();
-        });
-        
-        function applyLocaleDefaults(lang) {
-            const defaults = mortgageDefaults[lang] || mortgageDefaults.en;
-            
-            document.getElementById('priceInput').value = defaults.price;
-            document.getElementById('priceSlider').value = defaults.price;
-            document.getElementById('downInput').value = defaults.down;
-            document.getElementById('downSlider').value = defaults.down;
-            document.getElementById('rateInput').value = defaults.rate;
-            document.getElementById('rateSlider').value = defaults.rate;
-            document.getElementById('termInput').value = defaults.term;
-            document.getElementById('termSlider').value = defaults.term;
-            document.getElementById('taxInput').value = defaults.tax;
-            document.getElementById('insuranceInput').value = defaults.insurance;
+        function formatCurrency(num, currency = currentCurrency) {
+            const formatted = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(Math.abs(num));
+            return `${currency}${formatted}`;
         }
         
-        function bindSliders() {
-            syncSliderInput('priceSlider', 'priceInput', calculate);
-            syncSliderInput('downSlider', 'downInput', calculate);
-            syncSliderInput('rateSlider', 'rateInput', calculate);
-            syncSliderInput('termSlider', 'termInput', calculate);
-            updateAllSliderFills();
+        function parseNumber(str) {
+            return parseFloat((str || '').toString().replace(/\s|\u00A0/g, '').replace(',', '.')) || 0;
         }
         
-        function syncSliderInput(sliderId, inputId, callback) {
-            const slider = document.getElementById(sliderId);
-            const input = document.getElementById(inputId);
-            slider.addEventListener('input', () => { input.value = slider.value; updateSliderFill(slider); callback(); });
-            input.addEventListener('input', () => { slider.value = input.value; updateSliderFill(slider); callback(); });
-        }
-        
-        function updateSliderFill(slider) {
-            const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-            slider.style.setProperty('--value', percent + '%');
-        }
-        
-        function updateAllSliderFills() {
-            document.querySelectorAll('.slider-input').forEach(updateSliderFill);
-        }
-        
-        function bindInputs() {
-            ['taxInput', 'insuranceInput', 'incomeInput'].forEach(id => {
-                document.getElementById(id).addEventListener('input', calculate);
-            });
-            
-            document.getElementById('includeExtras').addEventListener('change', function() {
-                document.getElementById('extraFields').classList.toggle('active', this.checked);
-                document.getElementById('taxItem').style.display = this.checked ? '' : 'none';
-                document.getElementById('insuranceItem').style.display = this.checked ? '' : 'none';
-                calculate();
-            });
-        }
-        
-        function bindActions() {
-            document.getElementById('shareBtn').addEventListener('click', () => {
-                const params = new URLSearchParams({
-                    price: document.getElementById('priceInput').value,
-                    down: document.getElementById('downInput').value,
-                    rate: document.getElementById('rateInput').value,
-                    term: document.getElementById('termInput').value
-                });
-                navigator.clipboard.writeText(window.location.origin + window.location.pathname + '?' + params).then(() => alert('Link copied!'));
-            });
-            
-            document.getElementById('printBtn').addEventListener('click', () => window.print());
+        function formatInput(value) {
+            return new Intl.NumberFormat('ru-RU').format(Math.round(value));
         }
         
         function calculate() {
-            const price = parseFloat(document.getElementById('priceInput').value) || 0;
-            const down = parseFloat(document.getElementById('downInput').value) || 0;
-            const rate = parseFloat(document.getElementById('rateInput').value) || 0;
-            const term = parseInt(document.getElementById('termInput').value) || 30;
-            const tax = parseFloat(document.getElementById('taxInput').value) || 0;
-            const insurance = parseFloat(document.getElementById('insuranceInput').value) || 0;
-            const income = parseFloat(document.getElementById('incomeInput').value) || 1;
-            const includeExtras = document.getElementById('includeExtras').checked;
+            const homeValue = parseNumber(document.getElementById('home-value').value);
+            const downPayment = parseNumber(document.getElementById('down-payment').value);
+            const rate = parseNumber(document.getElementById('interest-rate').value);
+            const term = parseNumber(document.getElementById('term').value);
+            const termUnit = document.getElementById('term-unit').value;
             
-            const loanAmount = price - down;
+            const loanAmount = homeValue - downPayment;
+            const months = termUnit === 'years' ? term * 12 : term;
             const monthlyRate = rate / 100 / 12;
-            const totalPayments = term * 12;
             
-            // Down payment percentage
-            const downPercent = price > 0 ? ((down / price) * 100).toFixed(0) : 0;
-            document.getElementById('downPercent').textContent = `(${downPercent}%)`;
+            // Update down payment percentage
+            const downPercent = homeValue > 0 ? (downPayment / homeValue * 100).toFixed(0) : 0;
+            document.getElementById('down-percent').textContent = downPercent + '%';
             
-            // Calculate P&I payment
-            let piPayment = 0;
+            scheduleData = [];
+            let balance = loanAmount;
+            let totalInterest = 0;
+            let totalPayments = 0;
+            
+            let monthlyPayment = 0;
             if (monthlyRate > 0) {
-                piPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, totalPayments)) / 
-                          (Math.pow(1 + monthlyRate, totalPayments) - 1);
+                monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) / (Math.pow(1 + monthlyRate, months) - 1);
             } else {
-                piPayment = loanAmount / totalPayments;
+                monthlyPayment = loanAmount / months;
             }
             
-            const monthlyTax = includeExtras ? tax / 12 : 0;
-            const monthlyInsurance = includeExtras ? insurance / 12 : 0;
-            const totalMonthly = piPayment + monthlyTax + monthlyInsurance;
+            const chartLabels = [];
+            const principalData = [];
+            const interestDataChart = [];
             
-            // First month breakdown
-            const firstInterest = loanAmount * monthlyRate;
-            const firstPrincipal = piPayment - firstInterest;
+            for (let m = 1; m <= months && balance > 0; m++) {
+                const interestPart = balance * monthlyRate;
+                let principalPart = monthlyPayment - interestPart;
+                
+                if (principalPart > balance) {
+                    principalPart = balance;
+                }
+                
+                balance -= principalPart;
+                if (balance < 0) balance = 0;
+                
+                totalInterest += interestPart;
+                totalPayments += monthlyPayment;
+                
+                scheduleData.push({ period: m, payment: monthlyPayment, principal: principalPart, interest: interestPart, balance });
+                
+                if (m % 12 === 0 || m === months) {
+                    chartLabels.push(`${Math.ceil(m/12)}г`);
+                    principalData.push(principalPart);
+                    interestDataChart.push(interestPart);
+                }
+            }
             
-            // Totals
-            const totalInterest = (piPayment * totalPayments) - loanAmount;
-            const totalCost = price + totalInterest + (includeExtras ? (tax + insurance) * term : 0);
-            
-            // Payoff date
             const payoffDate = new Date();
-            payoffDate.setMonth(payoffDate.getMonth() + totalPayments);
+            payoffDate.setMonth(payoffDate.getMonth() + scheduleData.length);
+            const interestRatio = totalPayments > 0 ? (totalInterest / totalPayments * 100).toFixed(1) : 0;
             
-            // DTI calculation
-            const dti = income > 0 ? (totalMonthly / income) * 100 : 0;
+            document.getElementById('result-monthly').textContent = formatCurrency(monthlyPayment);
+            document.getElementById('result-loan').textContent = formatCurrency(loanAmount);
+            document.getElementById('result-interest').textContent = formatCurrency(totalInterest);
+            document.getElementById('result-total').textContent = formatCurrency(totalPayments + downPayment);
             
-            // Update UI
-            document.getElementById('monthlyPayment').textContent = i18n.formatCurrency(totalMonthly);
-            const piLabel = i18n.t('mortgage.principal_interest') || 'Principal & Interest';
-            document.getElementById('paymentSubtitle').textContent = `${piLabel}: ${i18n.formatCurrency(piPayment)}`;
-            document.getElementById('principalPart').textContent = i18n.formatCurrency(firstPrincipal);
-            document.getElementById('interestPart').textContent = i18n.formatCurrency(firstInterest);
-            document.getElementById('taxPart').textContent = i18n.formatCurrency(monthlyTax);
-            document.getElementById('insurancePart').textContent = i18n.formatCurrency(monthlyInsurance);
+            document.getElementById('compare-home').textContent = formatCurrency(homeValue);
+            document.getElementById('compare-down').textContent = formatCurrency(downPayment);
+            document.getElementById('compare-ratio').textContent = interestRatio + '%';
+            document.getElementById('compare-date').textContent = payoffDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short' });
             
-            document.getElementById('loanAmount').textContent = i18n.formatCurrency(loanAmount);
-            document.getElementById('totalInterest').textContent = i18n.formatCurrency(totalInterest);
-            document.getElementById('totalCost').textContent = i18n.formatCurrency(totalCost);
-            document.getElementById('payoffDate').textContent = payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
-            
-            updateAffordability(dti);
-            updateChart(loanAmount, totalInterest, tax * term, insurance * term, includeExtras);
+            updateChart(chartLabels, principalData, interestDataChart);
+            updateTable();
         }
         
-        function updateAffordability(dti) {
-            const fill = document.getElementById('affordabilityFill');
-            const tips = document.getElementById('affordabilityTips');
-            const dtiEl = document.getElementById('dtiValue');
+        function updateChart(labels, principal, interest) {
+            const ctx = document.getElementById('amort-chart');
+            if (!ctx) return;
             
-            dtiEl.textContent = dti.toFixed(0) + '%';
-            fill.style.width = Math.min(dti, 100) + '%';
-            
-            if (dti <= 28) {
-                fill.className = 'affordability-bar__fill good';
-                tips.className = 'affordability-tips';
-                tips.innerHTML = '<div class="affordability-tips__title">✓ Excellent Affordability</div><div class="affordability-tips__text">Your DTI is under 28%, which is ideal for mortgage approval.</div>';
-            } else if (dti <= 36) {
-                fill.className = 'affordability-bar__fill good';
-                tips.className = 'affordability-tips';
-                tips.innerHTML = '<div class="affordability-tips__title">✓ Good Affordability</div><div class="affordability-tips__text">Your DTI is healthy. Most lenders prefer below 36%.</div>';
-            } else if (dti <= 43) {
-                fill.className = 'affordability-bar__fill warning';
-                tips.className = 'affordability-tips warning';
-                tips.innerHTML = '<div class="affordability-tips__title">⚠️ Moderate Risk</div><div class="affordability-tips__text">Your DTI is high. Consider a smaller loan or larger down payment.</div>';
-            } else {
-                fill.className = 'affordability-bar__fill danger';
-                tips.className = 'affordability-tips danger';
-                tips.innerHTML = '<div class="affordability-tips__title">⛔ High Risk</div><div class="affordability-tips__text">Your DTI exceeds 43%. You may have difficulty getting approved.</div>';
-            }
-        }
-        
-        function updateChart(principal, interest, tax, insurance, includeExtras) {
-            const ctx = document.getElementById('mortgageChart').getContext('2d');
-            if (chart) chart.destroy();
-            
-            const data = includeExtras ? 
-                [principal, interest, tax, insurance] : 
-                [principal, interest];
-            
-            const labels = includeExtras ? 
-                ['Principal', 'Interest', 'Property Tax', 'Insurance'] : 
-                ['Principal', 'Interest'];
-            
-            const colors = includeExtras ? 
-                ['#0284c7', '#f97316', '#ef4444', '#a855f7'] : 
-                ['#0284c7', '#f97316'];
-            
-            chart = new Chart(ctx, {
-                type: 'doughnut',
+            const config = {
+                type: 'bar',
                 data: {
-                    labels,
-                    datasets: [{
-                        data,
-                        backgroundColor: colors,
-                        borderWidth: 0
-                    }]
+                    labels: labels,
+                    datasets: [
+                        { label: 'Principal', data: principal, backgroundColor: 'rgba(138, 43, 226, 0.8)' },
+                        { label: 'Interest', data: interest, backgroundColor: 'rgba(255, 105, 180, 0.6)' }
+                    ]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom' }
-                    }
+                    responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { stacked: true, grid: { display: false } }, y: { stacked: true } }
                 }
+            };
+            if (amortChart) { amortChart.data = config.data; amortChart.update('none'); }
+            else { amortChart = new Chart(ctx, config); }
+        }
+        
+        function updateTable() {
+            const tbody = document.getElementById('breakdown-body');
+            const viewBtn = document.querySelector('.view-btn.active');
+            const isYearly = viewBtn && viewBtn.dataset.view === 'yearly';
+            
+            let filtered = isYearly ? scheduleData.filter((_, i) => (i + 1) % 12 === 0 || i === scheduleData.length - 1) : scheduleData;
+            
+            tbody.innerHTML = filtered.map(row => `<tr>
+                <td>${isYearly ? Math.ceil(row.period / 12) + ' г.' : row.period + ' м.'}</td>
+                <td>${formatCurrency(row.payment)}</td>
+                <td>${formatCurrency(row.principal)}</td>
+                <td class="text-danger">${formatCurrency(row.interest)}</td>
+                <td><strong>${formatCurrency(row.balance)}</strong></td>
+            </tr>`).join('');
+        }
+        
+        function setupInputs() {
+            ['home-value', 'down-payment', 'interest-rate'].forEach(id => {
+                const input = document.getElementById(id);
+                const range = document.getElementById(id + '-range');
+                if (!input || !range) return;
+                
+                input.addEventListener('input', () => { range.value = parseNumber(input.value); calculate(); });
+                range.addEventListener('input', () => {
+                    input.value = id === 'interest-rate' ? range.value : formatInput(range.value);
+                    calculate();
+                });
+            });
+            
+            ['term', 'term-unit'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.addEventListener('change', calculate); el.addEventListener('input', calculate); }
+            });
+            
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                document.getElementById('home-value').value = '5 000 000';
+                document.getElementById('home-value-range').value = 5000000;
+                document.getElementById('down-payment').value = '1 000 000';
+                document.getElementById('down-payment-range').value = 1000000;
+                document.getElementById('interest-rate').value = '12';
+                document.getElementById('interest-rate-range').value = 12;
+                document.getElementById('term').value = '20';
+                document.getElementById('term-unit').value = 'years';
+                currentCurrency = '₽';
+                document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = '₽');
+                document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.preset-btn[data-currency="RUB"]').classList.add('active');
+                calculate();
+            });
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const rate = parseFloat(btn.dataset.rate);
+                    currentCurrency = currencies[btn.dataset.currency] || '₽';
+                    document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = currentCurrency);
+                    document.getElementById('interest-rate').value = rate;
+                    document.getElementById('interest-rate-range').value = rate;
+                    calculate();
+                });
+            });
+            
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    updateTable();
+                });
             });
         }
         
-        // Load from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        ['price', 'down', 'rate', 'term'].forEach(key => {
-            if (urlParams.has(key)) {
-                const input = document.getElementById(key + 'Input');
-                const slider = document.getElementById(key + 'Slider');
-                if (input) input.value = urlParams.get(key);
-                if (slider) slider.value = urlParams.get(key);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInputs();
+            calculate();
+            if (window.i18n) i18n.updatePage();
         });
+    })();
     </script>
 </body>
 </html>

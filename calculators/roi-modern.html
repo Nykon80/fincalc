@@ -3,264 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ROI Calculator - Investment Return & Profitability | FinCalc</title>
-    <meta name="description" content="Free ROI calculator to measure investment returns and profitability. Calculate annualized ROI, compare investments, and analyze your portfolio performance.">
-    <meta name="keywords" content="ROI calculator, return on investment calculator, investment return calculator, profitability calculator, annualized return, investment analysis">
-    <meta name="author" content="FinCalc">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="ROI Calculator - Measure Investment Returns">
-    <meta property="og:description" content="Free calculator to measure investment returns, annualized ROI, and profitability.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
-    <meta property="og:site_name" content="FinCalc">
-    
-    <!-- Canonical & hreflang -->
-    <link rel="canonical" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
-    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html">
-    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html?lang=pl">
-    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html?lang=ru">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Investment ROI Calculator",
-        "description": "Calculate Return on Investment (ROI), annualized returns, and compare investment performance",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
-    }
-    </script>
-    
-    <!-- Favicon -->
+    <title>ROI Calculator - Investment Return Analysis | FinCalc</title>
+    <meta name="description" content="Calculate Return on Investment (ROI), annualized returns, and compare investment performance.">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/i18n.js" defer></script>
     <style>
-        .calc-hero {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
-            padding: 2.5rem 1.5rem 2rem;
-            margin: -1rem -1rem 2rem -1rem;
-            border-radius: 0 0 24px 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .calc-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .calc-hero__icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .calc-hero__icon svg { width: 28px; height: 28px; stroke: white; }
-        .calc-hero h1 { font-size: 2rem; font-weight: 800; margin: 0 0 0.5rem 0; }
-        .calc-hero p { font-size: 1rem; color: rgba(255,255,255,0.9); margin: 0; max-width: 600px; line-height: 1.5; }
-        
-        .calculator-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-        
-        .calculator-main-grid {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        @media (max-width: 900px) { .calculator-main-grid { grid-template-columns: 1fr; } }
-        
-        .input-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        
-        .input-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1.25rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .input-card h3 svg { width: 20px; height: 20px; stroke: #8b5cf6; }
-        
-        .slider-group { margin-bottom: 1.5rem; }
-        .slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .slider-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
-        
-        .slider-input {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, #8b5cf6 0%, #8b5cf6 var(--value), var(--gray-200) var(--value), var(--gray-200) 100%);
-            -webkit-appearance: none;
-            cursor: pointer;
-        }
-        
-        .slider-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid #8b5cf6;
-            box-shadow: 0 2px 8px rgba(139,92,246,0.3);
-            cursor: grab;
-        }
-        
-        .slider-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
-        .slider-number-input { width: 110px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-align: right; }
-        
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem; }
-        .form-group { margin-bottom: 1rem; }
-        .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
-        .form-input, .form-select { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; }
-        .form-input:focus, .form-select:focus { border-color: #8b5cf6; outline: none; box-shadow: 0 0 0 3px rgba(139,92,246,0.1); }
-        
-        .results-panel { display: flex; flex-direction: column; gap: 1rem; }
-        
-        .main-result-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
-            border-radius: 20px;
-            padding: 1.75rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-        
-        .main-result-card::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -15%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .main-result-label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
-        .main-result-value { font-size: 3rem; font-weight: 800; margin-bottom: 0.25rem; }
-        .main-result-subtitle { font-size: 0.9rem; opacity: 0.9; }
-        
-        .roi-indicator { margin-top: 1rem; display: flex; justify-content: center; gap: 2rem; }
-        .roi-indicator__item { text-align: center; }
-        .roi-indicator__label { font-size: 0.75rem; opacity: 0.7; }
-        .roi-indicator__value { font-size: 1.1rem; font-weight: 700; }
-        .roi-indicator__value.positive { color: #86efac; }
-        .roi-indicator__value.negative { color: #fca5a5; }
-        
-        .result-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        
-        .result-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .result-card__icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
-        .result-card__icon svg { width: 18px; height: 18px; }
-        .result-card__icon--purple { background: rgba(139,92,246,0.1); }
-        .result-card__icon--purple svg { stroke: #8b5cf6; }
-        .result-card__icon--green { background: rgba(16,185,129,0.1); }
-        .result-card__icon--green svg { stroke: #10b981; }
-        .result-card__icon--blue { background: rgba(59,130,246,0.1); }
-        .result-card__icon--blue svg { stroke: #3b82f6; }
-        .result-card__icon--orange { background: rgba(245,158,11,0.1); }
-        .result-card__icon--orange svg { stroke: #f59e0b; }
-        
-        .result-card__label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; }
-        .result-card__value { font-size: 1.15rem; font-weight: 700; color: #0b254a; }
-        .result-card__value--green { color: #10b981; }
-        .result-card__value--red { color: #ef4444; }
-        
-        .comparison-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .comparison-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .comparison-section h3 svg { width: 20px; height: 20px; stroke: #8b5cf6; }
-        
-        .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        @media (max-width: 768px) { .comparison-grid { grid-template-columns: 1fr; } }
-        
-        .comparison-card {
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            padding: 1.25rem;
-            text-align: center;
-        }
-        
-        .comparison-card.best { border-color: #10b981; background: #ecfdf5; }
-        .comparison-card__title { font-size: 0.85rem; font-weight: 700; color: #0b254a; margin-bottom: 0.5rem; }
-        .comparison-card__roi { font-size: 1.75rem; font-weight: 800; color: #8b5cf6; }
-        .comparison-card__details { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem; }
-        
-        .action-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .btn-action {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-        }
-        .btn-action:hover { background: var(--gray-50); }
-        .btn-action svg { width: 16px; height: 16px; }
-        
-        @media (max-width: 640px) {
-            .calc-hero { padding: 1.5rem 1rem; }
-            .calc-hero h1 { font-size: 1.5rem; }
-            .main-result-value { font-size: 2.5rem; }
-            .result-cards-grid { grid-template-columns: 1fr; }
-            .form-row { grid-template-columns: 1fr; }
-        }
+        .full-calc-page { max-width: 1200px; margin: 0 auto; padding: var(--space-xl); }
+        .full-calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .full-calc-header h1 { margin: 0; font-size: 1.75rem; display: flex; align-items: center; gap: var(--space-md); }
+        .back-link { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border); transition: all 0.2s; }
+        .back-link:hover { background: var(--gray-100); color: #008080; border-color: #008080; }
+        .back-link svg { width: 18px; height: 18px; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 400px; gap: var(--space-xl); }
+        @media (max-width: 1024px) { .calc-grid { grid-template-columns: 1fr; } }
+        .results-panel { background: linear-gradient(135deg, rgba(0, 128, 128, 0.04) 0%, rgba(32, 178, 170, 0.04) 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-xl); }
+        .form-panel { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .result-card--roi .result-card__icon { background: rgba(0, 128, 128, 0.15); color: #008080; }
+        .calc-icon-roi { color: #008080; }
+        .roi-big { text-align: center; padding: var(--space-xl); background: linear-gradient(135deg, rgba(0, 128, 128, 0.1), rgba(32, 178, 170, 0.1)); border-radius: var(--radius-xl); margin-bottom: var(--space-xl); }
+        .roi-big__label { font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .roi-big__value { font-size: 3.5rem; font-weight: 800; background: linear-gradient(135deg, #008080, #20b2aa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .roi-big__subtitle { font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem; }
+        .metrics-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--space-md); margin-top: var(--space-xl); }
+        .metric-item { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: var(--space-lg); text-align: center; }
+        .metric-item__label { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.25rem; }
+        .metric-item__value { font-size: 1.5rem; font-weight: 700; color: var(--text-primary); }
+        .metric-item__value--success { color: var(--success); }
+        .metric-item__value--danger { color: var(--danger); }
     </style>
 </head>
 <body>
@@ -268,318 +40,346 @@
         <div class="container">
             <div class="header-content">
                 <a href="../index.html" class="logo">
-                    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#gradient)"/><path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="10" r="2" fill="white"/><defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs></svg>
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs>
+                    </svg>
                     <span>FinCalc</span>
                 </a>
-                <nav class="nav-menu">
-                    <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                        </button>
-                        <div class="lang-dropdown-content">
-                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
-                        </div>
-                    </div>
+                <nav class="nav-menu header-tabs">
+                    <a href="../index.html#calculators" class="header-tab" data-i18n="nav.allCalculators">All Calculators</a>
+                    <a href="../index.html#news" class="header-tab" data-i18n="nav.news">News</a>
+                    <a href="../index.html#articles" class="header-tab" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="header-tab" data-i18n="nav.compare">Compare</a>
                 </nav>
+                <div class="lang-dropdown">
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
-    
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
-    
-    <div class="container calculator-container">
-        <div class="calc-hero">
-            <div class="calc-hero__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                    <polyline points="17 6 23 6 23 12"/>
-                </svg>
-            </div>
-            <h1 data-i18n="calc.roi">ROI Calculator</h1>
-            <p data-i18n="calc.roi.desc">Measure investment profitability by comparing invested capital, net profit, and annualized return after extra costs.</p>
-        </div>
-        
-        <div class="calculator-main-grid">
-            <div class="input-card">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-                    <span data-i18n="roi.investment_details">Investment Details</span>
-                </h3>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="roi.initial_investment">Initial Investment</span>
-                        <input type="number" class="slider-number-input" id="investedInput" value="10000" min="0" step="100">
-                    </div>
-                    <input type="range" class="slider-input" id="investedSlider" min="100" max="1000000" value="10000" step="100">
-                    <div class="slider-range"><span>$100</span><span>$1,000,000</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="roi.final_value">Final Value</span>
-                        <input type="number" class="slider-number-input" id="finalInput" value="15000" min="0" step="100">
-                    </div>
-                    <input type="range" class="slider-input" id="finalSlider" min="100" max="2000000" value="15000" step="100">
-                    <div class="slider-range"><span>$100</span><span>$2,000,000</span></div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label" data-i18n="roi.investment_period">Investment Period</label>
-                        <input type="number" class="form-input" id="yearsInput" value="3" min="0.1" step="0.5">
-                    </div>
-                    <div class="form-group" style="margin-bottom: 0;">
-                        <label class="form-label" data-i18n="roi.period_unit">Period Unit</label>
-                        <select class="form-select" id="periodUnit">
-                            <option value="years" selected data-i18n="unit.years">Years</option>
-                            <option value="months" data-i18n="unit.months">Months</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label class="form-label" data-i18n="roi.additional_costs">Additional Costs (fees, taxes)</label>
-                    <input type="number" class="form-input" id="costsInput" value="500" min="0" step="50">
-                </div>
-                
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label class="form-label" data-i18n="roi.dividends">Dividends / Income Received</label>
-                    <input type="number" class="form-input" id="dividendsInput" value="1000" min="0" step="100">
-                </div>
+
+    <main class="page-surface">
+        <div class="full-calc-page">
+            <div class="full-calc-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="calc-icon-roi"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                    <span data-i18n="calc.roi">ROI Calculator</span>
+                    <span class="badge badge--live" style="background: #008080; color: white;"><span class="badge__dot"></span>Pro</span>
+                </h1>
+                <a href="../index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span data-i18n="nav.home">Back to Home</span>
+                </a>
             </div>
             
-            <div class="results-panel">
-                <div class="main-result-card">
-                    <div class="main-result-label" data-i18n="roi.total_roi">Total ROI</div>
-                    <div class="main-result-value" id="totalROI">55%</div>
-                    <div class="main-result-subtitle" id="roiSubtitle">Over 3 years</div>
+            <div class="calc-grid">
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <!-- Big ROI Display -->
+                    <div class="roi-big">
+                        <div class="roi-big__label" data-i18n="result.roi">Return on Investment</div>
+                        <div class="roi-big__value" id="result-roi">+0%</div>
+                        <div class="roi-big__subtitle" id="result-status" data-i18n="result.profitable">Profitable Investment</div>
+                    </div>
                     
-                    <div class="roi-indicator">
-                        <div class="roi-indicator__item">
-                            <div class="roi-indicator__label" data-i18n="roi.annualized">Annualized</div>
-                            <div class="roi-indicator__value positive" id="annualROI">15.7%</div>
+                    <div class="result-cards">
+                        <div class="result-card result-card--primary result-card--roi">
+                            <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.netProfit">Net Profit</span>
+                                <span class="result-card__value" id="result-profit">₽0</span>
+                            </div>
                         </div>
-                        <div class="roi-indicator__item">
-                            <div class="roi-indicator__label" data-i18n="roi.net_profit">Net Profit</div>
-                            <div class="roi-indicator__value positive" id="netProfit">+$5,500</div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.annualizedReturn">Annualized Return</span>
+                                <span class="result-card__value" id="result-annual">0%</span>
+                            </div>
                         </div>
+                    </div>
+                    
+                    <!-- Metrics Grid -->
+                    <div class="metrics-grid">
+                        <div class="metric-item">
+                            <div class="metric-item__label" data-i18n="result.initialInvestment">Initial Investment</div>
+                            <div class="metric-item__value" id="metric-initial">₽0</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-item__label" data-i18n="result.finalValue">Final Value</div>
+                            <div class="metric-item__value" id="metric-final">₽0</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-item__label" data-i18n="result.totalGain">Total Gain/Loss</div>
+                            <div class="metric-item__value" id="metric-gain">₽0</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-item__label" data-i18n="result.holdingPeriod">Holding Period</div>
+                            <div class="metric-item__value" id="metric-period">0 мес.</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-section" style="margin-top: var(--space-xl);">
+                        <div class="chart-header">
+                            <h3 data-i18n="chart.valueComparison">Value Comparison</h3>
+                        </div>
+                        <div class="chart-container" style="max-width: 350px; margin: 0 auto;"><canvas id="comparison-chart"></canvas></div>
                     </div>
                 </div>
                 
-                <div class="result-cards-grid">
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--purple">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                <!-- Form Panel -->
+                <div class="form-panel">
+                    <div class="form-card">
+                        <div class="form-card__header">
+                            <h3 data-i18n="section.investment">Investment Details</h3>
+                            <button class="btn-reset" id="btn-reset" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
                         </div>
-                        <div class="result-card__label" data-i18n="roi.invested">Invested</div>
-                        <div class="result-card__value" id="investedAmount">$10,000</div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.initialInvestment">Initial Investment</label>
+                            <div class="input-with-currency"><input type="text" id="initial-investment" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="initial-investment-range" min="1000" max="100000000" value="100000" step="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.finalValue">Final Value</label>
+                            <div class="input-with-currency"><input type="text" id="final-value" value="150 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="final-value-range" min="1000" max="100000000" value="150000" step="1000">
+                        </div>
+                        
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label data-i18n="form.holdingPeriod">Holding Period</label>
+                                <input type="number" id="period" value="24" min="1" max="600">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <select id="period-unit">
+                                    <option value="months" data-i18n="form.months" selected>Months</option>
+                                    <option value="years" data-i18n="form.years">Years</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--green">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
+                    <div class="form-card form-card--collapsible">
+                        <button class="form-card__toggle" id="toggle-additional">
+                            <h3 data-i18n="section.additionalCosts">Additional Costs</h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="form-card__content" id="additional-content" style="display:none;">
+                            <div class="form-group">
+                                <label data-i18n="form.fees">Fees & Commissions</label>
+                                <div class="input-with-currency"><input type="text" id="fees" value="0" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label data-i18n="form.dividends">Dividends Received</label>
+                                <div class="input-with-currency"><input type="text" id="dividends" value="0" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            </div>
                         </div>
-                        <div class="result-card__label" data-i18n="roi.gain">Capital Gain</div>
-                        <div class="result-card__value result-card__value--green" id="capitalGain">+$5,000</div>
                     </div>
                     
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <div class="presets-card">
+                        <h4 data-i18n="form.quickExamples">Quick Examples</h4>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-initial="100000" data-final="110000" data-period="12"><span>+10%</span><span style="font-size:0.75rem;opacity:0.7">1 год</span></button>
+                            <button class="preset-btn" data-initial="100000" data-final="125000" data-period="24"><span>+25%</span><span style="font-size:0.75rem;opacity:0.7">2 года</span></button>
+                            <button class="preset-btn active" data-initial="100000" data-final="150000" data-period="24"><span>+50%</span><span style="font-size:0.75rem;opacity:0.7">2 года</span></button>
+                            <button class="preset-btn" data-initial="100000" data-final="200000" data-period="36"><span>+100%</span><span style="font-size:0.75rem;opacity:0.7">3 года</span></button>
                         </div>
-                        <div class="result-card__label" data-i18n="roi.dividends_label">Dividends</div>
-                        <div class="result-card__value" id="dividendsAmount">+$1,000</div>
                     </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--orange">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="roi.costs_label">Costs</div>
-                        <div class="result-card__value result-card__value--red" id="costsAmount">-$500</div>
-                    </div>
-                </div>
-                
-                <div class="action-buttons">
-                    <button class="btn-action" id="shareBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                        <span data-i18n="button.share">Share</span>
-                    </button>
-                    <button class="btn-action" id="resetBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-                        <span data-i18n="form.reset">Reset</span>
-                    </button>
                 </div>
             </div>
         </div>
         
-        <div class="comparison-section">
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                <span data-i18n="roi.compare_benchmarks">Compare to Benchmarks</span>
-            </h3>
-            <div class="comparison-grid" id="comparisonGrid">
-                <!-- Populated by JS -->
+        <footer class="site-footer" style="margin-top: var(--space-2xl);">
+            <div class="container">
+                <p>&copy; 2025 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
             </div>
-        </div>
-    </div>
-    
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="../assets/i18n.js"></script>
+        </footer>
+    </main>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || localStorage.getItem('preferredLanguage') || 'en';
-            i18n.setLanguage(lang);
-            i18n.updatePage();
-            
-            bindSliders();
-            bindInputs();
-            bindActions();
-            calculate();
-        });
+    (function() {
+        'use strict';
         
-        function bindSliders() {
-            syncSliderInput('investedSlider', 'investedInput', calculate);
-            syncSliderInput('finalSlider', 'finalInput', calculate);
-            updateAllSliderFills();
+        let chart = null;
+        let currentCurrency = '₽';
+        
+        function formatCurrency(num, currency = currentCurrency) {
+            const formatted = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(Math.abs(num));
+            const sign = num >= 0 ? '' : '-';
+            return `${sign}${currency}${formatted}`;
         }
         
-        function syncSliderInput(sliderId, inputId, callback) {
-            const slider = document.getElementById(sliderId);
-            const input = document.getElementById(inputId);
-            slider.addEventListener('input', () => { input.value = slider.value; updateSliderFill(slider); callback(); });
-            input.addEventListener('input', () => { slider.value = input.value; updateSliderFill(slider); callback(); });
+        function parseNumber(str) {
+            return parseFloat((str || '').toString().replace(/\s|\u00A0/g, '').replace(',', '.')) || 0;
         }
         
-        function updateSliderFill(slider) {
-            const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-            slider.style.setProperty('--value', percent + '%');
-        }
-        
-        function updateAllSliderFills() {
-            document.querySelectorAll('.slider-input').forEach(updateSliderFill);
-        }
-        
-        function bindInputs() {
-            ['yearsInput', 'costsInput', 'dividendsInput', 'periodUnit'].forEach(id => {
-                document.getElementById(id).addEventListener('input', calculate);
-                document.getElementById(id).addEventListener('change', calculate);
-            });
-        }
-        
-        function bindActions() {
-            document.getElementById('shareBtn').addEventListener('click', () => {
-                const params = new URLSearchParams({
-                    invested: document.getElementById('investedInput').value,
-                    final: document.getElementById('finalInput').value,
-                    years: document.getElementById('yearsInput').value,
-                    costs: document.getElementById('costsInput').value,
-                    dividends: document.getElementById('dividendsInput').value
-                });
-                navigator.clipboard.writeText(window.location.origin + window.location.pathname + '?' + params).then(() => alert('Link copied!'));
-            });
-            
-            document.getElementById('resetBtn').addEventListener('click', () => {
-                document.getElementById('investedInput').value = 10000;
-                document.getElementById('investedSlider').value = 10000;
-                document.getElementById('finalInput').value = 15000;
-                document.getElementById('finalSlider').value = 15000;
-                document.getElementById('yearsInput').value = 3;
-                document.getElementById('costsInput').value = 500;
-                document.getElementById('dividendsInput').value = 1000;
-                updateAllSliderFills();
-                calculate();
-            });
+        function formatInput(value) {
+            return new Intl.NumberFormat('ru-RU').format(Math.round(value));
         }
         
         function calculate() {
-            const invested = parseFloat(document.getElementById('investedInput').value) || 0;
-            const finalValue = parseFloat(document.getElementById('finalInput').value) || 0;
-            let period = parseFloat(document.getElementById('yearsInput').value) || 1;
-            const periodUnit = document.getElementById('periodUnit').value;
-            const costs = parseFloat(document.getElementById('costsInput').value) || 0;
-            const dividends = parseFloat(document.getElementById('dividendsInput').value) || 0;
+            const initial = parseNumber(document.getElementById('initial-investment').value);
+            const final = parseNumber(document.getElementById('final-value').value);
+            const period = parseNumber(document.getElementById('period').value);
+            const periodUnit = document.getElementById('period-unit').value;
+            const fees = parseNumber(document.getElementById('fees').value);
+            const dividends = parseNumber(document.getElementById('dividends').value);
             
-            // Convert months to years
-            const years = periodUnit === 'months' ? period / 12 : period;
+            const months = periodUnit === 'years' ? period * 12 : period;
+            const years = months / 12;
             
-            const capitalGain = finalValue - invested;
-            const totalGain = capitalGain + dividends - costs;
-            const totalROI = invested > 0 ? (totalGain / invested) * 100 : 0;
-            const annualROI = years > 0 ? (Math.pow(1 + totalROI / 100, 1 / years) - 1) * 100 : 0;
+            const totalGain = final - initial + dividends - fees;
+            const roi = initial > 0 ? (totalGain / initial * 100) : 0;
+            const annualizedReturn = initial > 0 && years > 0 
+                ? (Math.pow((final + dividends - fees) / initial, 1/years) - 1) * 100 
+                : 0;
             
-            // Update UI
-            document.getElementById('totalROI').textContent = totalROI.toFixed(1) + '%';
-            document.getElementById('roiSubtitle').textContent = `Over ${period} ${periodUnit}`;
+            const isProfit = totalGain >= 0;
             
-            const annualEl = document.getElementById('annualROI');
-            annualEl.textContent = annualROI.toFixed(1) + '%';
-            annualEl.className = 'roi-indicator__value ' + (annualROI >= 0 ? 'positive' : 'negative');
+            // Update displays
+            document.getElementById('result-roi').textContent = (isProfit ? '+' : '') + roi.toFixed(1) + '%';
+            document.getElementById('result-roi').style.background = isProfit 
+                ? 'linear-gradient(135deg, #008080, #20b2aa)' 
+                : 'linear-gradient(135deg, #f44336, #ff5722)';
+            document.getElementById('result-status').textContent = isProfit ? 'Прибыльная инвестиция' : 'Убыточная инвестиция';
             
-            const profitEl = document.getElementById('netProfit');
-            profitEl.textContent = (totalGain >= 0 ? '+' : '') + i18n.formatCurrency(totalGain);
-            profitEl.className = 'roi-indicator__value ' + (totalGain >= 0 ? 'positive' : 'negative');
+            document.getElementById('result-profit').textContent = (isProfit ? '+' : '') + formatCurrency(totalGain);
+            document.getElementById('result-profit').classList.toggle('result-card__value--success', isProfit);
+            document.getElementById('result-profit').classList.toggle('result-card__value--danger', !isProfit);
             
-            document.getElementById('investedAmount').textContent = i18n.formatCurrency(invested);
-            document.getElementById('capitalGain').textContent = (capitalGain >= 0 ? '+' : '') + i18n.formatCurrency(capitalGain);
-            document.getElementById('dividendsAmount').textContent = '+' + i18n.formatCurrency(dividends);
-            document.getElementById('costsAmount').textContent = '-' + i18n.formatCurrency(costs);
+            document.getElementById('result-annual').textContent = (annualizedReturn >= 0 ? '+' : '') + annualizedReturn.toFixed(1) + '%';
             
-            updateComparison(annualROI);
+            document.getElementById('metric-initial').textContent = formatCurrency(initial);
+            document.getElementById('metric-final').textContent = formatCurrency(final);
+            document.getElementById('metric-gain').textContent = (isProfit ? '+' : '') + formatCurrency(totalGain);
+            document.getElementById('metric-gain').className = 'metric-item__value ' + (isProfit ? 'metric-item__value--success' : 'metric-item__value--danger');
+            
+            const formatPeriod = (m) => {
+                const y = Math.floor(m / 12);
+                const mo = m % 12;
+                if (y > 0 && mo > 0) return `${y} г. ${mo} мес.`;
+                if (y > 0) return `${y} г.`;
+                return `${mo} мес.`;
+            };
+            document.getElementById('metric-period').textContent = formatPeriod(months);
+            
+            updateChart(initial, final, totalGain, isProfit);
         }
         
-        function updateComparison(userROI) {
-            const benchmarks = [
-                { name: 'S&P 500', roi: 10.5, desc: 'Historical average' },
-                { name: 'Bonds', roi: 4.5, desc: '10-year Treasury' },
-                { name: 'Savings', roi: 4.0, desc: 'High-yield savings' }
-            ];
+        function updateChart(initial, final, gain, isProfit) {
+            const ctx = document.getElementById('comparison-chart');
+            if (!ctx) return;
             
-            const grid = document.getElementById('comparisonGrid');
-            grid.innerHTML = '';
+            const config = {
+                type: 'bar',
+                data: {
+                    labels: ['Начало', 'Конец'],
+                    datasets: [{
+                        data: [initial, final],
+                        backgroundColor: ['rgba(107, 114, 128, 0.6)', isProfit ? 'rgba(0, 128, 128, 0.8)' : 'rgba(244, 67, 54, 0.8)'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        x: { grid: { display: false } },
+                        y: { 
+                            beginAtZero: true,
+                            ticks: { callback: v => v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v }
+                        }
+                    }
+                }
+            };
             
-            const all = [...benchmarks, { name: 'Your Investment', roi: userROI, desc: 'Annualized' }];
-            const best = Math.max(...all.map(b => b.roi));
+            if (chart) { chart.data = config.data; chart.update('none'); }
+            else { chart = new Chart(ctx, config); }
+        }
+        
+        function setupInputs() {
+            ['initial-investment', 'final-value'].forEach(id => {
+                const input = document.getElementById(id);
+                const range = document.getElementById(id + '-range');
+                if (!input || !range) return;
+                
+                input.addEventListener('input', () => { range.value = parseNumber(input.value); calculate(); });
+                range.addEventListener('input', () => {
+                    input.value = formatInput(range.value);
+                    calculate();
+                });
+            });
             
-            benchmarks.forEach(b => {
-                const card = document.createElement('div');
-                card.className = 'comparison-card' + (b.roi === best ? ' best' : '');
-                card.innerHTML = `
-                    <div class="comparison-card__title">${b.name}</div>
-                    <div class="comparison-card__roi">${b.roi.toFixed(1)}%</div>
-                    <div class="comparison-card__details">${b.desc}</div>
-                `;
-                grid.appendChild(card);
+            ['period', 'period-unit', 'fees', 'dividends'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.addEventListener('change', calculate); el.addEventListener('input', calculate); }
+            });
+            
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                document.getElementById('initial-investment').value = '100 000';
+                document.getElementById('initial-investment-range').value = 100000;
+                document.getElementById('final-value').value = '150 000';
+                document.getElementById('final-value-range').value = 150000;
+                document.getElementById('period').value = '24';
+                document.getElementById('period-unit').value = 'months';
+                document.getElementById('fees').value = '0';
+                document.getElementById('dividends').value = '0';
+                document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.preset-btn[data-initial="100000"][data-final="150000"]').classList.add('active');
+                calculate();
+            });
+            
+            document.querySelectorAll('.form-card__toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const isOpen = content.style.display !== 'none';
+                    content.style.display = isOpen ? 'none' : 'block';
+                    btn.classList.toggle('open', !isOpen);
+                });
+            });
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const initial = parseInt(btn.dataset.initial);
+                    const final = parseInt(btn.dataset.final);
+                    const period = parseInt(btn.dataset.period);
+                    
+                    document.getElementById('initial-investment').value = formatInput(initial);
+                    document.getElementById('initial-investment-range').value = initial;
+                    document.getElementById('final-value').value = formatInput(final);
+                    document.getElementById('final-value-range').value = final;
+                    document.getElementById('period').value = period;
+                    document.getElementById('period-unit').value = 'months';
+                    
+                    calculate();
+                });
             });
         }
         
-        // Load from URL
-        const urlParams = new URLSearchParams(window.location.search);
-        ['invested', 'final', 'years', 'costs', 'dividends'].forEach(key => {
-            if (urlParams.has(key)) {
-                const input = document.getElementById(key + 'Input');
-                const slider = document.getElementById(key + 'Slider');
-                if (input) input.value = urlParams.get(key);
-                if (slider) slider.value = urlParams.get(key);
-            }
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInputs();
+            calculate();
+            if (window.i18n) i18n.updatePage();
         });
+    })();
     </script>
 </body>
 </html>

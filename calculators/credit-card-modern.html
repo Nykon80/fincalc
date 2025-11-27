@@ -3,292 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Credit Card Payoff Calculator - Debt Free Strategy | FinCalc</title>
-    <meta name="description" content="Free credit card payoff calculator. Calculate how long to pay off debt, total interest, and compare avalanche vs snowball methods. Create your debt-free plan.">
-    <meta name="keywords" content="credit card payoff calculator, debt payoff calculator, credit card interest calculator, avalanche method, snowball method, debt free calculator">
-    <meta name="author" content="FinCalc">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Credit Card Payoff Calculator - Plan Your Debt-Free Journey">
-    <meta property="og:description" content="Free calculator to plan credit card debt payoff with avalanche vs snowball comparison.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html">
-    <meta property="og:site_name" content="FinCalc">
-    
-    <!-- Canonical & hreflang -->
-    <link rel="canonical" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html">
-    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html">
-    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html?lang=pl">
-    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html?lang=ru">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Credit Card Payoff Calculator",
-        "description": "Calculate credit card payoff time, total interest, and compare debt payoff strategies",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}
-    }
-    </script>
-    
-    <!-- Favicon -->
+    <title>Credit Card Payoff Calculator | FinCalc</title>
+    <meta name="description" content="Calculate how long to pay off credit card debt. See interest savings with extra payments.">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/i18n.js" defer></script>
     <style>
-        .calc-hero {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
-            padding: 2.5rem 1.5rem 2rem;
-            margin: -1rem -1rem 2rem -1rem;
-            border-radius: 0 0 24px 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .calc-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .calc-hero__icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .calc-hero__icon svg { width: 28px; height: 28px; stroke: white; }
-        .calc-hero h1 { font-size: 2rem; font-weight: 800; margin: 0 0 0.5rem 0; }
-        .calc-hero p { font-size: 1rem; color: rgba(255,255,255,0.9); margin: 0; max-width: 600px; line-height: 1.5; }
-        
-        .calculator-container { max-width: 1100px; margin: 0 auto; padding: 2rem 1rem; }
-        
-        .calculator-main-grid { display: grid; grid-template-columns: 1fr 380px; gap: 1.5rem; margin-bottom: 2rem; }
-        @media (max-width: 900px) { .calculator-main-grid { grid-template-columns: 1fr; } }
-        
-        .input-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        
-        .input-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1.25rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .input-card h3 svg { width: 20px; height: 20px; stroke: #ef4444; }
-        
-        .slider-group { margin-bottom: 1.5rem; }
-        .slider-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; }
-        .slider-label { font-size: 0.85rem; font-weight: 600; color: var(--text-secondary); }
-        
-        .slider-input {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--value), var(--gray-200) var(--value), var(--gray-200) 100%);
-            -webkit-appearance: none;
-            appearance: none;
-            cursor: pointer;
-        }
-        
-        .slider-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid var(--primary);
-            box-shadow: 0 2px 8px rgba(0,102,255,0.3);
-            cursor: grab;
-        }
-        
-        .slider-range { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 0.25rem; }
-        .slider-number-input { width: 110px; padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.95rem; font-weight: 600; text-align: right; }
-        
-        .form-group { margin-bottom: 1rem; }
-        .form-label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.35rem; }
-        .form-input { width: 100%; padding: 0.6rem 0.75rem; border: 1px solid var(--border); border-radius: 10px; font-size: 0.9rem; }
-        .form-input:focus { border-color: #ef4444; outline: none; box-shadow: 0 0 0 3px rgba(239,68,68,0.1); }
-        
-        .results-panel { display: flex; flex-direction: column; gap: 1rem; }
-        
-        .main-result-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
-            border-radius: 20px;
-            padding: 1.75rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-result-card::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -15%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .main-result-label { font-size: 0.85rem; opacity: 0.8; margin-bottom: 0.5rem; }
-        .main-result-value { font-size: 2.5rem; font-weight: 800; margin-bottom: 0.5rem; }
-        .main-result-subtitle { font-size: 0.9rem; opacity: 0.9; }
-        
-        .payoff-progress { margin-top: 1rem; }
-        .payoff-progress__bar { height: 10px; background: rgba(255,255,255,0.2); border-radius: 8px; overflow: hidden; }
-        .payoff-progress__fill { height: 100%; background: linear-gradient(90deg, #86efac, #22c55e); border-radius: 8px; }
-        .payoff-progress__labels { display: flex; justify-content: space-between; font-size: 0.75rem; margin-top: 0.5rem; opacity: 0.8; }
-        
-        .result-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-        
-        .result-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .result-card__icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; margin: 0 auto 0.5rem; }
-        .result-card__icon svg { width: 18px; height: 18px; }
-        .result-card__icon--red { background: rgba(239,68,68,0.1); }
-        .result-card__icon--red svg { stroke: #ef4444; }
-        .result-card__icon--green { background: rgba(34,197,94,0.1); }
-        .result-card__icon--green svg { stroke: #22c55e; }
-        .result-card__icon--blue { background: rgba(59,130,246,0.1); }
-        .result-card__icon--blue svg { stroke: #3b82f6; }
-        .result-card__icon--orange { background: rgba(249,115,22,0.1); }
-        .result-card__icon--orange svg { stroke: #f97316; }
-        
-        .result-card__label { font-size: 0.7rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.25rem; }
-        .result-card__value { font-size: 1.15rem; font-weight: 700; color: #0b254a; }
-        .result-card__value--red { color: #ef4444; }
-        .result-card__value--green { color: #22c55e; }
-        
-        .strategy-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .strategy-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .strategy-section h3 svg { width: 20px; height: 20px; stroke: #ef4444; }
-        
-        .strategy-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-        @media (max-width: 768px) { .strategy-grid { grid-template-columns: 1fr; } }
-        
-        .strategy-card {
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            padding: 1.25rem;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .strategy-card:hover { border-color: #ef4444; }
-        .strategy-card.active { border-color: #ef4444; background: #fef2f2; }
-        .strategy-card.best { border-color: #22c55e; background: #f0fdf4; }
-        
-        .strategy-card__title { font-size: 0.85rem; font-weight: 700; color: #0b254a; margin-bottom: 0.25rem; }
-        .strategy-card__payment { font-size: 1.35rem; font-weight: 800; color: #ef4444; }
-        .strategy-card__time { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; }
-        .strategy-card__interest { font-size: 0.8rem; color: #ef4444; font-weight: 600; }
-        .strategy-card__savings { font-size: 0.8rem; color: #22c55e; font-weight: 600; margin-top: 0.25rem; }
-        
-        .chart-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .chart-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .chart-section h3 svg { width: 20px; height: 20px; stroke: #ef4444; }
-        .chart-wrapper { position: relative; height: 300px; }
-        
-        .action-buttons { display: flex; gap: 0.5rem; margin-top: 1rem; }
-        .btn-action {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-        }
-        .btn-action:hover { background: var(--gray-50); }
-        .btn-action svg { width: 16px; height: 16px; }
-        
-        .warning-box {
-            background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1rem;
-            border-radius: 8px;
-            margin-top: 1rem;
-        }
-        
-        .warning-box__title { font-weight: 700; color: #92400e; margin-bottom: 0.25rem; font-size: 0.9rem; }
-        .warning-box__text { font-size: 0.85rem; color: #92400e; }
-        
-        @media (max-width: 640px) {
-            .calc-hero { padding: 1.5rem 1rem; }
-            .calc-hero h1 { font-size: 1.5rem; }
-            .main-result-value { font-size: 2rem; }
-            .result-cards-grid { grid-template-columns: 1fr; }
-        }
+        .full-calc-page { max-width: 1200px; margin: 0 auto; padding: var(--space-xl); }
+        .full-calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .full-calc-header h1 { margin: 0; font-size: 1.75rem; display: flex; align-items: center; gap: var(--space-md); }
+        .back-link { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border); transition: all 0.2s; }
+        .back-link:hover { background: var(--gray-100); color: #ff69b4; border-color: #ff69b4; }
+        .back-link svg { width: 18px; height: 18px; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 400px; gap: var(--space-xl); }
+        @media (max-width: 1024px) { .calc-grid { grid-template-columns: 1fr; } }
+        .results-panel { background: linear-gradient(135deg, rgba(255, 105, 180, 0.04) 0%, rgba(138, 43, 226, 0.04) 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-xl); }
+        .form-panel { display: flex; flex-direction: column; gap: var(--space-lg); }
+        .result-card--credit .result-card__icon { background: rgba(255, 105, 180, 0.15); color: #ff69b4; }
+        .calc-icon-credit { color: #ff69b4; }
+        .savings-box { background: linear-gradient(135deg, rgba(0, 168, 107, 0.1), rgba(0, 102, 255, 0.1)); border: 2px solid var(--success); border-radius: var(--radius-lg); padding: var(--space-lg); margin-top: var(--space-xl); text-align: center; }
+        .savings-box__title { font-size: 0.875rem; color: var(--text-secondary); margin-bottom: 0.5rem; }
+        .savings-box__value { font-size: 2rem; font-weight: 800; color: var(--success); }
+        .savings-box__subtitle { font-size: 0.875rem; color: var(--text-secondary); margin-top: 0.5rem; }
     </style>
 </head>
 <body>
@@ -296,405 +34,385 @@
         <div class="container">
             <div class="header-content">
                 <a href="../index.html" class="logo">
-                    <svg viewBox="0 0 32 32" fill="none"><rect width="32" height="32" rx="8" fill="url(#gradient)"/><path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="23" cy="10" r="2" fill="white"/><defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs></svg>
+                    <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
+                        <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="23" cy="10" r="2" fill="white"/>
+                        <defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs>
+                    </svg>
                     <span>FinCalc</span>
                 </a>
-                <nav class="nav-menu">
-                    <div class="lang-dropdown">
-                        <button class="lang-dropdown-btn">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-                            <span class="lang-btn-text" data-i18n="nav.language">Language</span>
-                        </button>
-                        <div class="lang-dropdown-content">
-                            <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
-                            <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
-                            <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
-                        </div>
-                    </div>
+                <nav class="nav-menu header-tabs">
+                    <a href="../index.html#calculators" class="header-tab" data-i18n="nav.allCalculators">All Calculators</a>
+                    <a href="../index.html#news" class="header-tab" data-i18n="nav.news">News</a>
+                    <a href="../index.html#articles" class="header-tab" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="header-tab" data-i18n="nav.compare">Compare</a>
                 </nav>
+                <div class="lang-dropdown">
+                    <button class="lang-dropdown-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                        <span class="lang-btn-text" data-i18n="nav.language">Language</span>
+                    </button>
+                    <div class="lang-dropdown-content">
+                        <a href="#" onclick="i18n.setLanguage('en'); return false;">English</a>
+                        <a href="#" onclick="i18n.setLanguage('pl'); return false;">Polski</a>
+                        <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
-    
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
-    </div>
-    
-    <div class="container calculator-container">
-        <div class="calc-hero">
-            <div class="calc-hero__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
-                    <line x1="1" y1="10" x2="23" y2="10"/>
-                </svg>
+
+    <main class="page-surface">
+        <div class="full-calc-page">
+            <div class="full-calc-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" class="calc-icon-credit"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                    <span data-i18n="calc.creditcard">Credit Card Payoff</span>
+                    <span class="badge badge--live" style="background: #ff69b4; color: white;"><span class="badge__dot"></span>Pro</span>
+                </h1>
+                <a href="../index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span data-i18n="nav.home">Back to Home</span>
+                </a>
             </div>
-            <h1 data-i18n="calc.creditcard">Credit Card Payoff</h1>
-            <p data-i18n="calc.creditcard.desc">Build a payoff roadmap for credit cards: adjust payment size to see payoff time, interest cost, and best strategy.</p>
-        </div>
-        
-        <div class="calculator-main-grid">
-            <div class="input-card">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
-                    <span data-i18n="credit.card_details">Card Details</span>
-                </h3>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="credit.balance">Current Balance</span>
-                        <input type="number" class="slider-number-input" id="balanceInput" value="5000" min="0" step="100">
-                    </div>
-                    <input type="range" class="slider-input" id="balanceSlider" min="100" max="100000" value="5000" step="100">
-                    <div class="slider-range"><span>$100</span><span>$100,000</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="credit.apr">APR (Annual Rate)</span>
-                        <div style="display: flex; align-items: center; gap: 0.25rem;">
-                            <input type="number" class="slider-number-input" id="aprInput" value="22" min="0" max="40" step="0.5" style="width: 70px;">
-                            <span style="font-weight: 600; color: #0b254a;">%</span>
+            
+            <div class="calc-grid">
+                <!-- Results Panel -->
+                <div class="results-panel">
+                    <div class="result-cards" style="margin-bottom: var(--space-xl);">
+                        <div class="result-card result-card--primary result-card--credit">
+                            <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.payoffTime">Payoff Time</span>
+                                <span class="result-card__value" id="result-time">0 мес.</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.totalPayments">Total Payments</span>
+                                <span class="result-card__value" id="result-total">₽0</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.totalInterest">Total Interest</span>
+                                <span class="result-card__value result-card__value--danger" id="result-interest">₽0</span>
+                            </div>
+                        </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.payoffDate">Payoff Date</span>
+                                <span class="result-card__value" id="result-date">-</span>
+                            </div>
                         </div>
                     </div>
-                    <input type="range" class="slider-input" id="aprSlider" min="0" max="40" value="22" step="0.5">
-                    <div class="slider-range"><span>0%</span><span>40%</span></div>
-                </div>
-                
-                <div class="slider-group">
-                    <div class="slider-header">
-                        <span class="slider-label" data-i18n="credit.payment">Monthly Payment</span>
-                        <input type="number" class="slider-number-input" id="paymentInput" value="200" min="0" step="25">
+                    
+                    <!-- Savings Box -->
+                    <div class="savings-box" id="savings-box" style="display: none;">
+                        <div class="savings-box__title" data-i18n="result.extraSavings">Extra Payments Savings</div>
+                        <div class="savings-box__value" id="savings-value">₽0</div>
+                        <div class="savings-box__subtitle" id="savings-time">0 months faster</div>
                     </div>
-                    <input type="range" class="slider-input" id="paymentSlider" min="25" max="5000" value="200" step="25">
-                    <div class="slider-range"><span>$25</span><span>$5,000</span></div>
+                    
+                    <div class="chart-section" style="margin-top: var(--space-xl);">
+                        <div class="chart-header">
+                            <h3 data-i18n="chart.balancePayoff">Balance Payoff</h3>
+                        </div>
+                        <div class="chart-container"><canvas id="payoff-chart"></canvas></div>
+                    </div>
                 </div>
                 
-                <div class="form-group" style="margin-bottom: 0;">
-                    <label class="form-label" data-i18n="credit.min_payment">Minimum Payment ($)</label>
-                    <input type="number" class="form-input" id="minPayment" value="50" min="0" step="5">
-                </div>
-                
-                <div class="warning-box" id="warningBox" style="display: none;">
-                    <div class="warning-box__title">⚠️ Payment Too Low</div>
-                    <div class="warning-box__text">Your payment doesn't cover the monthly interest. Increase it to <span id="suggestedPayment">$100</span> minimum.</div>
+                <!-- Form Panel -->
+                <div class="form-panel">
+                    <div class="form-card">
+                        <div class="form-card__header">
+                            <h3 data-i18n="section.cardDebt">Card Debt Details</h3>
+                            <button class="btn-reset" id="btn-reset" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.currentBalance">Current Balance</label>
+                            <div class="input-with-currency"><input type="text" id="balance" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="balance-range" min="1000" max="5000000" value="100000" step="1000">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.annualRate">Annual Rate (APR) %</label>
+                            <div class="input-with-suffix"><input type="text" id="apr" value="25" inputmode="decimal"><span class="input-suffix">%</span></div>
+                            <input type="range" id="apr-range" min="0" max="60" value="25" step="0.5">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.monthlyPayment">Monthly Payment</label>
+                            <div class="input-with-currency"><input type="text" id="monthly-payment" value="5 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="monthly-payment-range" min="500" max="500000" value="5000" step="500">
+                        </div>
+                    </div>
+                    
+                    <div class="form-card form-card--collapsible">
+                        <button class="form-card__toggle" id="toggle-extra">
+                            <h3 data-i18n="section.extraPayments">Extra Payments</h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="form-card__content" id="extra-content" style="display:none;">
+                            <div class="form-group">
+                                <label data-i18n="form.extraMonthly">Extra Monthly</label>
+                                <div class="input-with-currency"><input type="text" id="extra-monthly" value="0" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                <input type="range" id="extra-monthly-range" min="0" max="100000" value="0" step="500">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="presets-card">
+                        <h4 data-i18n="form.quickPresets">Quick Presets</h4>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-rate="20" data-currency="USD"><span class="preset-flag">🇺🇸</span><span>USD 20%</span></button>
+                            <button class="preset-btn" data-rate="18" data-currency="EUR"><span class="preset-flag">🇪🇺</span><span>EUR 18%</span></button>
+                            <button class="preset-btn" data-rate="22" data-currency="PLN"><span class="preset-flag">🇵🇱</span><span>PLN 22%</span></button>
+                            <button class="preset-btn active" data-rate="25" data-currency="RUB"><span class="preset-flag">🇷🇺</span><span>RUB 25%</span></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             
-            <div class="results-panel">
-                <div class="main-result-card">
-                    <div class="main-result-label" data-i18n="credit.payoff_time">Time to Pay Off</div>
-                    <div class="main-result-value" id="payoffTime">2 yrs 6 mo</div>
-                    <div class="main-result-subtitle" id="payoffDate">Debt-free: May 2027</div>
-                    
-                    <div class="payoff-progress">
-                        <div class="payoff-progress__bar">
-                            <div class="payoff-progress__fill" id="progressBar" style="width: 0%;"></div>
-                        </div>
-                        <div class="payoff-progress__labels">
-                            <span>$0 paid</span>
-                            <span id="totalToPayLabel">$6,500 total</span>
-                        </div>
-                    </div>
+            <!-- Payment History Table -->
+            <section class="breakdown-section" style="margin-top: var(--space-xl);">
+                <div class="section-header">
+                    <h2 data-i18n="section.paymentHistory">Payment History</h2>
                 </div>
-                
-                <div class="result-cards-grid">
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--red">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="credit.total_interest">Total Interest</div>
-                        <div class="result-card__value result-card__value--red" id="totalInterest">$1,500</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="credit.total_paid">Total Paid</div>
-                        <div class="result-card__value" id="totalPaid">$6,500</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--orange">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="credit.months">Months</div>
-                        <div class="result-card__value" id="totalMonths">30</div>
-                    </div>
-                    
-                    <div class="result-card">
-                        <div class="result-card__icon result-card__icon--green">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-                        </div>
-                        <div class="result-card__label" data-i18n="credit.daily_interest">Daily Interest</div>
-                        <div class="result-card__value" id="dailyInterest">$3.01</div>
-                    </div>
+                <div class="table-container">
+                    <table class="breakdown-table" id="breakdown-table">
+                        <thead>
+                            <tr>
+                                <th data-i18n="table.month">Month</th>
+                                <th data-i18n="table.payment">Payment</th>
+                                <th data-i18n="table.principal">Principal</th>
+                                <th data-i18n="table.interest">Interest</th>
+                                <th data-i18n="table.balance">Balance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="breakdown-body"></tbody>
+                    </table>
                 </div>
-                
-                <div class="action-buttons">
-                    <button class="btn-action" id="shareBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                        <span data-i18n="button.share">Share</span>
-                    </button>
-                    <button class="btn-action" id="exportBtn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        <span data-i18n="button.export">Export</span>
-                    </button>
-                </div>
-            </div>
+            </section>
         </div>
         
-        <div class="strategy-section">
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
-                <span data-i18n="credit.strategies">Payoff Strategies</span>
-            </h3>
-            <div class="strategy-grid" id="strategyGrid">
-                <!-- Populated by JS -->
+        <footer class="site-footer" style="margin-top: var(--space-2xl);">
+            <div class="container">
+                <p>&copy; 2025 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
             </div>
-        </div>
-        
-        <div class="chart-section">
-            <h3>
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                <span data-i18n="credit.balance_chart">Balance Over Time</span>
-            </h3>
-            <div class="chart-wrapper">
-                <canvas id="payoffChart"></canvas>
-            </div>
-        </div>
-    </div>
-    
-    <footer class="site-footer">
-        <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
-            </div>
-        </div>
-    </footer>
-    
-    <script src="../assets/i18n.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        </footer>
+    </main>
+
     <script>
+    (function() {
+        'use strict';
+        
         let chart = null;
+        let currentCurrency = '₽';
+        const currencies = { USD: '$', EUR: '€', PLN: 'zł', RUB: '₽' };
+        let scheduleData = [];
         
-        document.addEventListener('DOMContentLoaded', function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || localStorage.getItem('preferredLanguage') || 'en';
-            i18n.setLanguage(lang);
-            i18n.updatePage();
+        function formatCurrency(num, currency = currentCurrency) {
+            const formatted = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(Math.abs(num));
+            return `${currency}${formatted}`;
+        }
+        
+        function parseNumber(str) {
+            return parseFloat((str || '').toString().replace(/\s|\u00A0/g, '').replace(',', '.')) || 0;
+        }
+        
+        function formatInput(value) {
+            return new Intl.NumberFormat('ru-RU').format(Math.round(value));
+        }
+        
+        function calculatePayoff(balance, apr, monthly) {
+            const monthlyRate = apr / 100 / 12;
+            let bal = balance;
+            let totalInterest = 0;
+            let months = 0;
+            const data = [];
+            const maxMonths = 600;
             
-            bindSliders();
-            bindInputs();
-            bindActions();
-            calculate();
-        });
-        
-        function bindSliders() {
-            syncSliderInput('balanceSlider', 'balanceInput', calculate);
-            syncSliderInput('aprSlider', 'aprInput', calculate);
-            syncSliderInput('paymentSlider', 'paymentInput', calculate);
-            updateAllSliderFills();
-        }
-        
-        function syncSliderInput(sliderId, inputId, callback) {
-            const slider = document.getElementById(sliderId);
-            const input = document.getElementById(inputId);
-            slider.addEventListener('input', () => { input.value = slider.value; updateSliderFill(slider); callback(); });
-            input.addEventListener('input', () => { slider.value = input.value; updateSliderFill(slider); callback(); });
-        }
-        
-        function updateSliderFill(slider) {
-            const percent = ((slider.value - slider.min) / (slider.max - slider.min)) * 100;
-            slider.style.setProperty('--value', percent + '%');
-        }
-        
-        function updateAllSliderFills() {
-            document.querySelectorAll('.slider-input').forEach(updateSliderFill);
-        }
-        
-        function bindInputs() {
-            document.getElementById('minPayment').addEventListener('input', calculate);
-        }
-        
-        function bindActions() {
-            document.getElementById('shareBtn').addEventListener('click', () => {
-                const params = new URLSearchParams({
-                    balance: document.getElementById('balanceInput').value,
-                    apr: document.getElementById('aprInput').value,
-                    payment: document.getElementById('paymentInput').value
-                });
-                navigator.clipboard.writeText(window.location.origin + window.location.pathname + '?' + params).then(() => alert('Link copied!'));
-            });
+            while (bal > 0 && months < maxMonths) {
+                const interest = bal * monthlyRate;
+                let principal = monthly - interest;
+                
+                if (principal <= 0) {
+                    // Payment too low to cover interest
+                    return { months: Infinity, totalInterest: Infinity, data: [] };
+                }
+                
+                if (principal > bal) {
+                    principal = bal;
+                }
+                
+                bal -= principal;
+                totalInterest += interest;
+                months++;
+                
+                data.push({ month: months, payment: monthly, principal, interest, balance: bal });
+            }
             
-            document.getElementById('exportBtn').addEventListener('click', exportSchedule);
+            return { months, totalInterest, data };
         }
         
         function calculate() {
-            const balance = parseFloat(document.getElementById('balanceInput').value) || 0;
-            const apr = parseFloat(document.getElementById('aprInput').value) || 0;
-            const payment = parseFloat(document.getElementById('paymentInput').value) || 0;
+            const balance = parseNumber(document.getElementById('balance').value);
+            const apr = parseNumber(document.getElementById('apr').value);
+            const monthly = parseNumber(document.getElementById('monthly-payment').value);
+            const extra = parseNumber(document.getElementById('extra-monthly').value);
             
-            const monthlyRate = apr / 100 / 12;
-            const minInterest = balance * monthlyRate;
+            // Calculate without extra
+            const baseResult = calculatePayoff(balance, apr, monthly);
+            // Calculate with extra
+            const extraResult = calculatePayoff(balance, apr, monthly + extra);
             
-            // Check if payment covers interest
-            const warningBox = document.getElementById('warningBox');
-            if (payment <= minInterest && balance > 0) {
-                warningBox.style.display = 'block';
-                document.getElementById('suggestedPayment').textContent = i18n.formatCurrency(Math.ceil(minInterest + 25));
-            } else {
-                warningBox.style.display = 'none';
-            }
-            
-            // Calculate payoff
-            const result = calculatePayoff(balance, monthlyRate, payment);
-            
-            // Update UI
-            const years = Math.floor(result.months / 12);
-            const remainingMonths = result.months % 12;
-            document.getElementById('payoffTime').textContent = result.months >= 600 ? 'Never' : 
-                `${years > 0 ? years + ' yrs ' : ''}${remainingMonths} mo`;
+            scheduleData = extraResult.data;
             
             const payoffDate = new Date();
-            payoffDate.setMonth(payoffDate.getMonth() + result.months);
-            document.getElementById('payoffDate').textContent = 'Debt-free: ' + 
-                payoffDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' });
+            payoffDate.setMonth(payoffDate.getMonth() + extraResult.months);
             
-            document.getElementById('totalInterest').textContent = i18n.formatCurrency(result.totalInterest);
-            document.getElementById('totalPaid').textContent = i18n.formatCurrency(result.totalPaid);
-            document.getElementById('totalMonths').textContent = result.months >= 600 ? '∞' : result.months;
-            document.getElementById('dailyInterest').textContent = i18n.formatCurrency(balance * (apr / 100 / 365));
-            document.getElementById('totalToPayLabel').textContent = i18n.formatCurrency(result.totalPaid) + ' total';
+            const formatTime = (months) => {
+                if (months === Infinity) return '∞';
+                const years = Math.floor(months / 12);
+                const m = months % 12;
+                if (years > 0 && m > 0) return `${years} г. ${m} мес.`;
+                if (years > 0) return `${years} г.`;
+                return `${m} мес.`;
+            };
             
-            updateStrategies(balance, monthlyRate, payment);
-            updateChart(result.schedule);
-        }
-        
-        function calculatePayoff(balance, monthlyRate, payment) {
-            let remaining = balance;
-            let totalInterest = 0;
-            let totalPaid = 0;
-            let months = 0;
-            const schedule = [];
+            document.getElementById('result-time').textContent = formatTime(extraResult.months);
+            document.getElementById('result-total').textContent = formatCurrency(extraResult.months * (monthly + extra));
+            document.getElementById('result-interest').textContent = formatCurrency(extraResult.totalInterest);
+            document.getElementById('result-date').textContent = extraResult.months < Infinity ? payoffDate.toLocaleDateString('ru-RU', { year: 'numeric', month: 'short' }) : '—';
             
-            while (remaining > 0.01 && months < 600) {
-                const interest = remaining * monthlyRate;
-                const actualPayment = Math.min(payment, remaining + interest);
-                const principal = actualPayment - interest;
-                
-                remaining -= principal;
-                totalInterest += interest;
-                totalPaid += actualPayment;
-                months++;
-                
-                schedule.push({ month: months, balance: Math.max(0, remaining), interest, principal });
+            // Show savings if extra payments
+            const savingsBox = document.getElementById('savings-box');
+            if (extra > 0 && baseResult.months < Infinity) {
+                const savedInterest = baseResult.totalInterest - extraResult.totalInterest;
+                const savedMonths = baseResult.months - extraResult.months;
+                savingsBox.style.display = 'block';
+                document.getElementById('savings-value').textContent = formatCurrency(savedInterest);
+                document.getElementById('savings-time').textContent = `${savedMonths} мес. быстрее`;
+            } else {
+                savingsBox.style.display = 'none';
             }
             
-            return { months, totalInterest, totalPaid, schedule };
+            updateChart(scheduleData);
+            updateTable();
         }
         
-        function updateStrategies(balance, monthlyRate, currentPayment) {
-            const strategies = [
-                { name: 'Minimum', payment: parseFloat(document.getElementById('minPayment').value) || 50 },
-                { name: 'Current', payment: currentPayment },
-                { name: 'Aggressive', payment: Math.max(currentPayment * 2, balance * 0.1) }
-            ];
+        function updateChart(data) {
+            const ctx = document.getElementById('payoff-chart');
+            if (!ctx) return;
             
-            const grid = document.getElementById('strategyGrid');
-            grid.innerHTML = '';
+            const labels = data.filter((_, i) => i % 3 === 0 || i === data.length - 1).map(d => d.month + 'м');
+            const balances = data.filter((_, i) => i % 3 === 0 || i === data.length - 1).map(d => d.balance);
             
-            const results = strategies.map(s => ({
-                ...s,
-                ...calculatePayoff(balance, monthlyRate, s.payment)
-            }));
-            
-            const minTime = Math.min(...results.map(r => r.months).filter(m => m < 600));
-            
-            results.forEach((r, i) => {
-                const isBest = r.months === minTime && r.months < 600;
-                const card = document.createElement('div');
-                card.className = 'strategy-card' + (i === 1 ? ' active' : '') + (isBest ? ' best' : '');
-                
-                const years = Math.floor(r.months / 12);
-                const mo = r.months % 12;
-                const timeStr = r.months >= 600 ? 'Never' : `${years > 0 ? years + 'y ' : ''}${mo}mo`;
-                
-                const savings = i > 0 ? results[0].totalInterest - r.totalInterest : 0;
-                
-                card.innerHTML = `
-                    <div class="strategy-card__title">${r.name}</div>
-                    <div class="strategy-card__payment">${i18n.formatCurrency(r.payment)}/mo</div>
-                    <div class="strategy-card__time">${timeStr}</div>
-                    <div class="strategy-card__interest">${i18n.formatCurrency(r.totalInterest)} interest</div>
-                    ${savings > 0 ? `<div class="strategy-card__savings">Save ${i18n.formatCurrency(savings)}</div>` : ''}
-                `;
-                
-                card.addEventListener('click', () => {
-                    document.getElementById('paymentInput').value = r.payment;
-                    document.getElementById('paymentSlider').value = r.payment;
-                    updateSliderFill(document.getElementById('paymentSlider'));
-                    calculate();
-                });
-                
-                grid.appendChild(card);
-            });
-        }
-        
-        function updateChart(schedule) {
-            const ctx = document.getElementById('payoffChart').getContext('2d');
-            if (chart) chart.destroy();
-            
-            const data = schedule.filter((_, i) => i % Math.ceil(schedule.length / 50) === 0 || i === schedule.length - 1);
-            
-            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(239, 68, 68, 0.3)');
-            gradient.addColorStop(1, 'rgba(239, 68, 68, 0.02)');
-            
-            chart = new Chart(ctx, {
+            const config = {
                 type: 'line',
                 data: {
-                    labels: data.map(d => 'Mo ' + d.month),
+                    labels,
                     datasets: [{
                         label: 'Balance',
-                        data: data.map(d => d.balance),
-                        borderColor: '#ef4444',
-                        backgroundColor: gradient,
+                        data: balances,
+                        borderColor: '#ff69b4',
+                        backgroundColor: 'rgba(255, 105, 180, 0.2)',
                         fill: true,
-                        tension: 0.4
+                        tension: 0.4,
+                        pointRadius: 0
                     }]
                 },
                 options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
+                    responsive: true, maintainAspectRatio: false,
                     plugins: { legend: { display: false } },
                     scales: {
-                        y: { ticks: { callback: v => i18n.formatCurrency(v) } }
+                        x: { grid: { display: false } },
+                        y: { ticks: { callback: v => v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v } }
                     }
                 }
+            };
+            
+            if (chart) { chart.data = config.data; chart.update('none'); }
+            else { chart = new Chart(ctx, config); }
+        }
+        
+        function updateTable() {
+            const tbody = document.getElementById('breakdown-body');
+            const filtered = scheduleData.filter((_, i) => i < 24 || i === scheduleData.length - 1);
+            
+            tbody.innerHTML = filtered.map(row => `<tr>
+                <td>${row.month}</td>
+                <td>${formatCurrency(row.payment)}</td>
+                <td>${formatCurrency(row.principal)}</td>
+                <td class="text-danger">${formatCurrency(row.interest)}</td>
+                <td><strong>${formatCurrency(row.balance)}</strong></td>
+            </tr>`).join('');
+        }
+        
+        function setupInputs() {
+            ['balance', 'apr', 'monthly-payment', 'extra-monthly'].forEach(id => {
+                const input = document.getElementById(id);
+                const range = document.getElementById(id + '-range');
+                if (!input || !range) return;
+                
+                input.addEventListener('input', () => { range.value = parseNumber(input.value); calculate(); });
+                range.addEventListener('input', () => {
+                    input.value = id === 'apr' ? range.value : formatInput(range.value);
+                    calculate();
+                });
+            });
+            
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                document.getElementById('balance').value = '100 000';
+                document.getElementById('balance-range').value = 100000;
+                document.getElementById('apr').value = '25';
+                document.getElementById('apr-range').value = 25;
+                document.getElementById('monthly-payment').value = '5 000';
+                document.getElementById('monthly-payment-range').value = 5000;
+                document.getElementById('extra-monthly').value = '0';
+                document.getElementById('extra-monthly-range').value = 0;
+                currentCurrency = '₽';
+                document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = '₽');
+                document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.preset-btn[data-currency="RUB"]').classList.add('active');
+                calculate();
+            });
+            
+            document.querySelectorAll('.form-card__toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const isOpen = content.style.display !== 'none';
+                    content.style.display = isOpen ? 'none' : 'block';
+                    btn.classList.toggle('open', !isOpen);
+                });
+            });
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const rate = parseFloat(btn.dataset.rate);
+                    currentCurrency = currencies[btn.dataset.currency] || '₽';
+                    document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = currentCurrency);
+                    document.getElementById('apr').value = rate;
+                    document.getElementById('apr-range').value = rate;
+                    calculate();
+                });
             });
         }
         
-        function exportSchedule() {
-            const balance = parseFloat(document.getElementById('balanceInput').value) || 0;
-            const apr = parseFloat(document.getElementById('aprInput').value) || 0;
-            const payment = parseFloat(document.getElementById('paymentInput').value) || 0;
-            const result = calculatePayoff(balance, apr / 100 / 12, payment);
-            
-            let csv = 'Month,Payment,Principal,Interest,Balance\n';
-            result.schedule.forEach(r => {
-                csv += `${r.month},${(r.principal + r.interest).toFixed(2)},${r.principal.toFixed(2)},${r.interest.toFixed(2)},${r.balance.toFixed(2)}\n`;
-            });
-            
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'credit_card_payoff.csv';
-            a.click();
-        }
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInputs();
+            calculate();
+            if (window.i18n) i18n.updatePage();
+        });
+    })();
     </script>
 </body>
 </html>

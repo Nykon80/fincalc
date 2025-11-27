@@ -2,8 +2,8 @@
 // Только финансовые новости с приоритетом изображений
 
 const NEWS_CONFIG = {
-  cacheLifetimeMs: 30 * 60 * 1000,
-  autoRefreshMs: 30 * 60 * 1000,
+  cacheLifetimeMs: 12 * 60 * 60 * 1000, // 12 часов кэширования
+  autoRefreshMs: 24 * 60 * 60 * 1000,   // Обновление раз в день
   maxNewsAge: 7,
   newsLimit: 15,
   minNewsCount: 12,
@@ -164,7 +164,80 @@ class NewsFeedManager {
     this.compactErrorElement = document.getElementById('news-compact-error');
     this.compactGridElement = document.getElementById('news-compact-grid');
     
+    // Main page news grid
+    this.mainGridElement = document.getElementById('news-grid-main');
+    
     this.startAutoRefresh();
+    
+    // Load news immediately for main page
+    this.loadMainPageNews();
+  }
+  
+  async loadMainPageNews() {
+    const lang = window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+    
+    // First show fallback immediately
+    if (this.mainGridElement) {
+      this.displayMainPageNews(FALLBACK_NEWS[lang] || FALLBACK_NEWS.en);
+    }
+    
+    // Then load real news in background
+    try {
+      await this.loadNews(lang);
+      if (this.newsCache[lang] && this.mainGridElement) {
+        this.displayMainPageNews(this.newsCache[lang]);
+      }
+    } catch (e) {
+      console.log('Using fallback news for main page');
+    }
+  }
+  
+  displayMainPageNews(newsItems) {
+    if (!this.mainGridElement) return;
+    
+    const validNews = newsItems.filter(n => n.title && n.description?.length >= 20).slice(0, 6);
+    if (validNews.length === 0) return;
+    
+    // Category badges mapping
+    const categoryBadges = {
+      'Yahoo Finance': { class: 'news-card-main__badge--invest', key: 'investments' },
+      'CNBC Markets': { class: 'news-card-main__badge--invest', key: 'investments' },
+      'MarketWatch': { class: '', key: 'markets' },
+      'РБК Финансы': { class: '', key: 'markets' },
+      'Ведомости': { class: '', key: 'economy' },
+      'Коммерсантъ': { class: '', key: 'economy' },
+      'Финам': { class: 'news-card-main__badge--invest', key: 'investments' },
+      'Прайм': { class: '', key: 'markets' },
+      'Bankier': { class: 'news-card-main__badge--invest', key: 'investments' },
+      'Money.pl': { class: '', key: 'economy' }
+    };
+    
+    const defaultCategories = [
+      { class: '', key: 'markets' },
+      { class: 'news-card-main__badge--invest', key: 'investments' },
+      { class: 'news-card-main__badge--savings', key: 'deposits' },
+      { class: 'news-card-main__badge--realty', key: 'realestate' },
+      { class: 'news-card-main__badge--crypto', key: 'crypto' },
+      { class: '', key: 'economy' }
+    ];
+    
+    this.mainGridElement.innerHTML = validNews.map((news, i) => {
+      const badge = categoryBadges[news.source] || defaultCategories[i % defaultCategories.length];
+      const badgeText = window.i18n?.t(`news.${badge.key}`) || badge.key;
+      const dateStr = this.formatDate(news.pubDate);
+      
+      return `
+        <article class="news-card-main" onclick="window.open('${news.link}', '_blank')" style="cursor: pointer;">
+          <div class="news-card-main__badge ${badge.class}">${badgeText}</div>
+          <h3 class="news-card-main__title">${this.escapeHtml(news.title)}</h3>
+          <p class="news-card-main__desc">${this.escapeHtml(news.description?.substring(0, 120))}${news.description?.length > 120 ? '...' : ''}</p>
+          <div class="news-card-main__meta">
+            <span class="news-card-main__date">${dateStr}</span>
+            <span class="news-card-main__source">${this.escapeHtml(news.source)}</span>
+          </div>
+        </article>
+      `;
+    }).join('');
   }
 
   startAutoRefresh() {
@@ -427,6 +500,11 @@ class NewsFeedManager {
       this.displayNews(news);
     } else if (calculatorsTab?.classList.contains('active')) {
       this.displayCompactNews(news, NEWS_CONFIG.compactLimit);
+    }
+    
+    // Always update main page news if element exists
+    if (this.mainGridElement) {
+      this.displayMainPageNews(news);
     }
   }
 

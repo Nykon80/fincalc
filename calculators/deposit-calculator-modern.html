@@ -4,921 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Deposit Calculator - Compound Interest & Growth | FinCalc</title>
-    <meta name="description" content="Free deposit calculator with compound interest, flexible compounding (daily/monthly/quarterly/yearly), planned top-ups, withdrawals, and instant tax projections. Calculate your real net profit.">
-    <meta name="keywords" content="deposit calculator, compound interest calculator, savings calculator, interest rate calculator, deposit growth, capitalization calculator, tax on deposits">
-    <meta name="author" content="FinCalc">
-    <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="Deposit Calculator - Calculate Compound Interest Growth">
-    <meta property="og:description" content="Free deposit calculator with compound interest, flexible compounding, planned top-ups, and tax projections.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html">
-    <meta property="og:site_name" content="FinCalc">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Deposit Calculator - FinCalc">
-    <meta name="twitter:description" content="Calculate deposit growth with compound interest and tax projections.">
-    
-    <!-- Canonical & hreflang -->
-    <link rel="canonical" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html">
-    <link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html">
-    <link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html?lang=pl">
-    <link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html?lang=ru">
-    
-    <!-- Schema.org -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Deposit Calculator",
-        "description": "Calculate deposit growth with compound interest, flexible compounding options, planned additions/withdrawals, and instant tax projections",
-        "applicationCategory": "FinanceApplication",
-        "operatingSystem": "Web Browser",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.8",
-            "ratingCount": "1250"
-        }
-    }
-    </script>
-    
-    <!-- Favicon -->
+    <meta name="description" content="Free deposit calculator with compound interest, flexible compounding, planned top-ups, withdrawals, and instant tax projections.">
     <link rel="icon" href="../favicon.svg" type="image/svg+xml">
-    
-    <!-- Styles -->
     <link rel="stylesheet" href="../assets/styles-modern.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../assets/i18n.js" defer></script>
     <style>
-        /* ═══════════════════════════════════════════════════
-           HERO SECTION
-           ═══════════════════════════════════════════════════ */
-        .calc-hero {
-            background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3b82f6 100%);
-            padding: 2.5rem 1.5rem 2rem;
-            margin: -1rem -1rem 2rem -1rem;
-            border-radius: 0 0 24px 24px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .calc-hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            pointer-events: none;
-        }
-        
-        .calc-hero__icon {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.15);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1rem;
-        }
-        
-        .calc-hero__icon svg {
-            width: 28px;
-            height: 28px;
-            stroke: white;
-        }
-        
-        .calc-hero h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            margin: 0 0 0.5rem 0;
-            letter-spacing: -0.02em;
-        }
-        
-        .calc-hero p {
-            font-size: 1rem;
-            color: rgba(255, 255, 255, 0.9);
-            margin: 0;
-            max-width: 600px;
-            line-height: 1.5;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           CALCULATOR CONTAINER
-           ═══════════════════════════════════════════════════ */
-        .calculator-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           TABS (MODE SWITCHER)
-           ═══════════════════════════════════════════════════ */
-        .calc-mode-tabs {
-            display: flex;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-            background: var(--gray-100);
-            padding: 4px;
-            border-radius: 12px;
-            width: fit-content;
-        }
-        
-        .calc-mode-tab {
-            padding: 0.6rem 1.2rem;
-            border: none;
-            background: transparent;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-        }
-        
-        .calc-mode-tab.active {
-            background: white;
-            color: var(--primary);
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           PRESET BUTTONS
-           ═══════════════════════════════════════════════════ */
-        .rate-presets {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1rem;
-        }
-        
-        .rate-preset {
-            padding: 0.5rem 1rem;
-            border: 1px solid var(--border);
-            background: var(--bg-card);
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-primary);
-            transition: all 0.2s ease;
-        }
-        
-        .rate-preset svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--primary);
-            flex-shrink: 0;
-        }
-        
-        .rate-preset:hover {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-        
-        .rate-preset.active {
-            border-color: var(--primary);
-            background: var(--primary);
-            color: white;
-        }
-        
-        .rate-preset.active svg {
-            stroke: white;
-        }
-        
-        .rate-preset__code {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            opacity: 0.8;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           MAIN GRID
-           ═══════════════════════════════════════════════════ */
-        .calculator-main-grid {
-            display: grid;
-            grid-template-columns: 1fr 380px;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-        
-        @media (max-width: 900px) {
-            .calculator-main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           INPUT CARD
-           ═══════════════════════════════════════════════════ */
-        .input-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
-        }
-        
-        .input-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1.25rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .input-card h3 svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--primary);
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           SLIDER INPUT GROUP
-           ═══════════════════════════════════════════════════ */
-        .slider-group {
-            margin-bottom: 1.5rem;
-        }
-        
-        .slider-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.5rem;
-        }
-        
-        .slider-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-        }
-        
-        .slider-value {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-        }
-        
-        .slider-input {
-            width: 100%;
-            height: 8px;
-            border-radius: 4px;
-            background: linear-gradient(to right, var(--primary) 0%, var(--primary) var(--value), var(--gray-200) var(--value), var(--gray-200) 100%);
-            -webkit-appearance: none;
-            appearance: none;
-            cursor: pointer;
-        }
-        
-        .slider-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            background: white;
-            border: 3px solid var(--primary);
-            box-shadow: 0 2px 8px rgba(0,102,255,0.3);
-            cursor: grab;
-        }
-        
-        .slider-input::-webkit-slider-thumb:active {
-            cursor: grabbing;
-            transform: scale(1.1);
-        }
-        
-        .slider-range {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            margin-top: 0.25rem;
-        }
-        
-        /* Number input inline with slider */
-        .slider-number-input {
-            width: 100px;
-            padding: 0.35rem 0.5rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            text-align: right;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           FORM ELEMENTS
-           ═══════════════════════════════════════════════════ */
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-bottom: 1rem;
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-label {
-            display: block;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 0.35rem;
-        }
-        
-        .form-input, .form-select {
-            width: 100%;
-            padding: 0.6rem 0.75rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            font-size: 0.9rem;
-            background: white;
-        }
-        
-        .form-input:focus, .form-select:focus {
-            border-color: var(--primary);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(0,102,255,0.1);
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           RESULTS PANEL (RIGHT SIDE)
-           ═══════════════════════════════════════════════════ */
-        .results-panel {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        /* Main Result Card */
-        .main-result-card {
-            background: linear-gradient(135deg, #1e3a5f 0%, #3b82f6 100%);
-            border-radius: 20px;
-            padding: 1.75rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .main-result-card::before {
-            content: '';
-            position: absolute;
-            top: -30%;
-            right: -15%;
-            width: 200px;
-            height: 200px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-        }
-        
-        .main-result-label {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-        }
-        
-        .main-result-value {
-            font-size: 2.5rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            margin-bottom: 1rem;
-        }
-        
-        /* Growth Progress Bar */
-        .growth-progress {
-            background: rgba(255,255,255,0.2);
-            border-radius: 8px;
-            height: 10px;
-            overflow: hidden;
-            margin-bottom: 0.5rem;
-        }
-        
-        .growth-progress__bar {
-            height: 100%;
-            background: linear-gradient(90deg, #00d68f, #00ffb3);
-            border-radius: 8px;
-        }
-        
-        .growth-stats {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-        }
-        
-        .growth-stats span:first-child {
-            opacity: 0.7;
-        }
-        
-        .growth-stats span:last-child {
-            color: #00ffb3;
-            font-weight: 700;
-        }
-        
-        /* Secondary Result Cards */
-        .result-cards-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 0.75rem;
-        }
-        
-        .result-card {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 14px;
-            padding: 1rem;
-            text-align: center;
-        }
-        
-        .result-card__icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 0.5rem;
-        }
-        
-        .result-card__icon svg {
-            width: 18px;
-            height: 18px;
-        }
-        
-        .result-card__icon--blue {
-            background: rgba(0,102,255,0.1);
-        }
-        .result-card__icon--blue svg { stroke: #0066ff; }
-        
-        .result-card__icon--green {
-            background: rgba(0,168,107,0.1);
-        }
-        .result-card__icon--green svg { stroke: #00a86b; }
-        
-        .result-card__icon--orange {
-            background: rgba(255,152,0,0.1);
-        }
-        .result-card__icon--orange svg { stroke: #ff9800; }
-        
-        .result-card__icon--red {
-            background: rgba(239,68,68,0.1);
-        }
-        .result-card__icon--red svg { stroke: #ef4444; }
-        
-        .result-card__label {
-            font-size: 0.7rem;
-            font-weight: 600;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.25rem;
-        }
-        
-        .result-card__value {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #0b254a;
-        }
-        
-        .result-card__value--green { color: #00a86b; }
-        .result-card__value--red { color: #ef4444; }
-        
-        /* ═══════════════════════════════════════════════════
-           COLLAPSIBLE SECTIONS
-           ═══════════════════════════════════════════════════ */
-        .collapsible {
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            margin-bottom: 1rem;
-            overflow: hidden;
-        }
-        
-        .collapsible__header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0.85rem 1rem;
-            background: var(--gray-50);
-            cursor: pointer;
-            user-select: none;
-        }
-        
-        .collapsible__header:hover {
-            background: var(--gray-100);
-        }
-        
-        .collapsible__title {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #0b254a;
-        }
-        
-        .collapsible__title svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--primary);
-        }
-        
-        .collapsible__toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .collapsible__toggle input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-        }
-        
-        .collapsible__chevron {
-            width: 20px;
-            height: 20px;
-            stroke: var(--text-muted);
-        }
-        
-        .collapsible__content {
-            padding: 1rem;
-            display: none;
-        }
-        
-        .collapsible.open .collapsible__content {
-            display: block;
-        }
-        
-        .collapsible.open .collapsible__chevron {
-            transform: rotate(180deg);
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           CHART SECTION
-           ═══════════════════════════════════════════════════ */
-        .chart-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .chart-section h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0 0 1rem 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .chart-section h3 svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--primary);
-        }
-        
-        .chart-wrapper {
-            position: relative;
-            height: 320px;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           TABLE SECTION
-           ═══════════════════════════════════════════════════ */
-        .table-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            overflow: hidden;
-        }
-        
-        .table-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        
-        .table-header h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .table-header h3 svg {
-            width: 20px;
-            height: 20px;
-            stroke: var(--primary);
-        }
-        
-        .table-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .btn-sm {
-            padding: 0.5rem 0.85rem;
-            font-size: 0.8rem;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            border: 1px solid var(--border);
-            background: white;
-            color: var(--text-secondary);
-            display: flex;
-            align-items: center;
-            gap: 0.35rem;
-        }
-        
-        .btn-sm:hover {
-            background: var(--gray-50);
-        }
-        
-        .btn-sm.active {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        .btn-sm svg {
-            width: 14px;
-            height: 14px;
-        }
-        
-        .table-wrapper {
-            overflow-x: auto;
-        }
-        
-        .breakdown-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.85rem;
-        }
-        
-        .breakdown-table th {
-            background: var(--gray-50);
-            padding: 0.75rem 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--text-secondary);
-            border-bottom: 2px solid var(--border);
-            white-space: nowrap;
-            position: sticky;
-            top: 0;
-        }
-        
-        .breakdown-table td {
-            padding: 0.75rem 1rem;
-            border-bottom: 1px solid var(--border);
-        }
-        
-        .breakdown-table tr:hover {
-            background: var(--gray-50);
-        }
-        
-        .breakdown-table .positive { color: #00a86b; }
-        .breakdown-table .negative { color: #ef4444; }
-        
-        /* ═══════════════════════════════════════════════════
-           SCENARIOS COMPARISON
-           ═══════════════════════════════════════════════════ */
-        .scenarios-section {
-            background: white;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .scenarios-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-        
-        .scenarios-header h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        
-        .scenarios-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1rem;
-        }
-        
-        @media (max-width: 768px) {
-            .scenarios-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        .scenario-card {
-            border: 2px solid var(--border);
-            border-radius: 14px;
-            padding: 1.25rem;
-            text-align: center;
-            cursor: pointer;
-        }
-        
-        .scenario-card:hover {
-            border-color: var(--primary);
-        }
-        
-        .scenario-card.active {
-            border-color: var(--primary);
-            background: var(--primary-light);
-        }
-        
-        .scenario-card__title {
-            font-size: 0.85rem;
-            font-weight: 700;
-            color: #0b254a;
-            margin-bottom: 0.25rem;
-        }
-        
-        .scenario-card__rate {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 0.75rem;
-        }
-        
-        .scenario-card__result {
-            font-size: 1.35rem;
-            font-weight: 800;
-            color: var(--primary);
-        }
-        
-        .scenario-card__profit {
-            font-size: 0.8rem;
-            color: #00a86b;
-            font-weight: 600;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           GOAL CALCULATOR MODE
-           ═══════════════════════════════════════════════════ */
-        .goal-mode {
-            display: none;
-        }
-        
-        .goal-mode.active {
-            display: block;
-        }
-        
-        .goal-result-card {
-            background: linear-gradient(135deg, #00a86b 0%, #00d68f 100%);
-            border-radius: 20px;
-            padding: 1.75rem;
-            color: white;
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .goal-result-card__label {
-            font-size: 0.9rem;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-        
-        .goal-result-card__value {
-            font-size: 2.5rem;
-            font-weight: 800;
-        }
-        
-        .goal-result-card__subtitle {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            margin-top: 0.5rem;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           SHARE & SAVE BUTTONS
-           ═══════════════════════════════════════════════════ */
-        .action-buttons {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-        
-        .btn-action {
-            flex: 1;
-            padding: 0.65rem 1rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: white;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: var(--text-secondary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.35rem;
-        }
-        
-        .btn-action:hover {
-            background: var(--gray-50);
-        }
-        
-        .btn-action svg {
-            width: 16px;
-            height: 16px;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           INFLATION TOGGLE
-           ═══════════════════════════════════════════════════ */
-        .inflation-toggle {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            background: #fff7ed;
-            border: 1px solid #fed7aa;
-            border-radius: 10px;
-            margin-bottom: 1rem;
-        }
-        
-        .inflation-toggle__checkbox {
-            width: 18px;
-            height: 18px;
-        }
-        
-        .inflation-toggle__label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #9a3412;
-        }
-        
-        .inflation-toggle__input {
-            width: 60px;
-            padding: 0.3rem 0.5rem;
-            border: 1px solid #fed7aa;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            text-align: center;
-            background: white;
-        }
-        
-        /* ═══════════════════════════════════════════════════
-           RESPONSIVE
-           ═══════════════════════════════════════════════════ */
-        @media (max-width: 640px) {
-            .calc-hero {
-                padding: 1.5rem 1rem;
-            }
-            
-            .calc-hero h1 {
-                font-size: 1.5rem;
-            }
-            
-            .main-result-value {
-                font-size: 2rem;
-            }
-            
-            .result-cards-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-        }
+        .full-calc-page { max-width: 1200px; margin: 0 auto; padding: var(--space-xl); }
+        .full-calc-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-xl); flex-wrap: wrap; gap: var(--space-md); }
+        .full-calc-header h1 { margin: 0; font-size: 1.75rem; display: flex; align-items: center; gap: var(--space-md); }
+        .back-link { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-weight: 500; padding: 0.5rem 1rem; border-radius: var(--radius-md); border: 1px solid var(--border); transition: all 0.2s; }
+        .back-link:hover { background: var(--gray-100); color: var(--primary); border-color: var(--primary); }
+        .back-link svg { width: 18px; height: 18px; }
+        .calc-grid { display: grid; grid-template-columns: 1fr 400px; gap: var(--space-xl); }
+        @media (max-width: 1024px) { .calc-grid { grid-template-columns: 1fr; } }
+        .results-panel { background: linear-gradient(135deg, rgba(0, 102, 255, 0.04) 0%, rgba(0, 168, 107, 0.04) 100%); border: 1px solid var(--border); border-radius: var(--radius-xl); padding: var(--space-xl); }
+        .form-panel { display: flex; flex-direction: column; gap: var(--space-lg); }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <header class="site-header">
         <div class="container">
             <div class="header-content">
@@ -927,17 +32,16 @@
                         <rect width="32" height="32" rx="8" fill="url(#gradient)"/>
                         <path d="M9 22L13 16L17 18L23 10" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         <circle cx="23" cy="10" r="2" fill="white"/>
-                        <defs>
-                            <linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32">
-                                <stop stop-color="#0066ff"/>
-                                <stop offset="1" stop-color="#00a86b"/>
-                            </linearGradient>
-                        </defs>
+                        <defs><linearGradient id="gradient" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#0066ff"/><stop offset="1" stop-color="#00a86b"/></linearGradient></defs>
                     </svg>
                     <span>FinCalc</span>
                 </a>
-                
-                <nav class="nav-menu">
+                <nav class="nav-menu header-tabs">
+                    <a href="../index.html#calculators" class="header-tab" data-i18n="nav.allCalculators">All Calculators</a>
+                    <a href="../index.html#news" class="header-tab" data-i18n="nav.news">News</a>
+                    <a href="../index.html#articles" class="header-tab" data-i18n="nav.articles">Articles</a>
+                    <a href="../index.html#compare" class="header-tab" data-i18n="nav.compare">Compare</a>
+                </nav>
                     <div class="lang-dropdown">
                         <button class="lang-dropdown-btn">
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -949,1028 +53,389 @@
                             <a href="#" onclick="i18n.setLanguage('ru'); return false;">Русский</a>
                         </div>
                     </div>
-                </nav>
             </div>
         </div>
     </header>
     
-    <!-- Tabs Navigation -->
-    <div class="tabs-navigation">
-        <a href="../index.html#calculators" class="tab-btn active" data-i18n="nav.calculators">Calculators</a>
-        <a href="../index.html#news" class="tab-btn" data-i18n="nav.news">News</a>
-        <a href="../index.html#articles" class="tab-btn" data-i18n="nav.articles">Articles</a>
-        <a href="../index.html#compare" class="tab-btn" data-i18n="nav.compare">Compare</a>
+    <main class="page-surface">
+        <div class="full-calc-page">
+            <div class="full-calc-header">
+                <h1>
+                    <svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--primary)"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                    <span data-i18n="calc.deposit">Deposit Calculator</span>
+                    <span class="badge badge--live"><span class="badge__dot"></span>Pro</span>
+                </h1>
+                <a href="../index.html" class="back-link">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+                    <span data-i18n="nav.home">Back to Home</span>
+                </a>
     </div>
     
-    <!-- Calculator -->
-    <div class="container calculator-container">
-        <!-- Hero Section -->
-        <div class="calc-hero">
-            <div class="calc-hero__icon">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="12" y1="1" x2="12" y2="23"></line>
-                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-                </svg>
-            </div>
-            <h1 data-i18n="calc.deposit">Deposit Calculator</h1>
-            <p data-i18n="calc.deposit.desc">Simulate deposit growth with flexible compounding, planned top-ups or withdrawals, and instant tax projections to see real net profit.</p>
-        </div>
-        
-        <!-- Mode Tabs -->
-        <div class="calc-mode-tabs">
-            <button class="calc-mode-tab active" data-mode="calculate" data-i18n="mode.calculate">Calculate Growth</button>
-            <button class="calc-mode-tab" data-mode="goal" data-i18n="mode.goal">Reach a Goal</button>
-        </div>
-        
-        <!-- Rate Presets -->
-        <div class="rate-presets">
-            <button class="rate-preset" data-rate="5.0" data-currency="USD">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M9 9.5c0-1.5 1.5-2.5 3-2.5s3 1 3 2.5-1.5 2-3 2.5-3 1.5-3 3c0 1.5 1.5 2.5 3 2.5s3-1 3-2.5"/></svg>
-                <span>USD 5.0%</span>
-            </button>
-            <button class="rate-preset" data-rate="3.5" data-currency="EUR">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M7 10h7M7 14h7M15 7c-3 0-5 2-5 5s2 5 5 5"/></svg>
-                <span>EUR 3.5%</span>
-            </button>
-            <button class="rate-preset" data-rate="5.5" data-currency="PLN">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9 7v10M9 12h5l-4 5"/></svg>
-                <span>PLN 5.5%</span>
-            </button>
-            <button class="rate-preset active" data-rate="16.0" data-currency="RUB">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M10 7v10M10 10h3c1.5 0 3 1 3 2.5s-1.5 2.5-3 2.5h-3M8 14h5"/></svg>
-                <span>RUB 16%</span>
-            </button>
-        </div>
-        
-        <!-- CALCULATE MODE -->
-        <div id="calculateMode">
-        <div class="calculator-main-grid">
-                <!-- Left Column: Inputs -->
-                <div class="input-card">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M10 8h.01M14 8h.01M18 8h.01M6 12h.01M10 12h.01M14 12h.01M18 12h.01M6 16h12"/></svg>
-                        <span data-i18n="section.deposit">Deposit Parameters</span>
-                    </h3>
-                    
-                    <!-- Initial Amount Slider -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="form.initial">Initial Amount</span>
-                            <input type="number" class="slider-number-input" id="initialInput" value="100000" min="0" step="1000">
-                        </div>
-                        <input type="range" class="slider-input" id="initialSlider" min="1000" max="10000000" value="100000" step="1000">
-                        <div class="slider-range">
-                            <span>$1,000</span>
-                            <span>$10,000,000</span>
-                        </div>
-                </div>
-                
-                    <!-- Interest Rate Slider -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="form.rate">Interest Rate</span>
-                            <div style="display: flex; align-items: center; gap: 0.25rem;">
-                                <input type="number" class="slider-number-input" id="rateInput" value="16" min="0" max="50" step="0.1" style="width: 70px;">
-                                <span style="font-weight: 600; color: #0b254a;">%</span>
-                            </div>
-                        </div>
-                        <input type="range" class="slider-input" id="rateSlider" min="0" max="30" value="16" step="0.1">
-                        <div class="slider-range">
-                            <span>0%</span>
-                            <span>30%</span>
-                        </div>
-                </div>
-                
-                    <!-- Term Slider -->
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="form.term">Term</span>
-                            <div style="display: flex; align-items: center; gap: 0.5rem;">
-                                <input type="number" class="slider-number-input" id="termInput" value="12" min="1" max="360" step="1" style="width: 60px;">
-                                <select id="termUnit" style="padding: 0.35rem 0.5rem; border: 1px solid var(--border); border-radius: 8px; font-size: 0.85rem;">
-                                    <option value="months" selected data-i18n="unit.months">Months</option>
-                                    <option value="years" data-i18n="unit.years">Years</option>
-                                </select>
-                            </div>
-                        </div>
-                        <input type="range" class="slider-input" id="termSlider" min="1" max="120" value="12" step="1">
-                        <div class="slider-range">
-                            <span>1 mo</span>
-                            <span>10 yrs</span>
-                        </div>
-                    </div>
-                    
-                    <div class="form-row">
-                        <div class="form-group" style="margin-bottom: 0;">
-                    <label class="form-label" data-i18n="form.capitalization">Capitalization</label>
-                    <select class="form-select" id="capitalization">
-                        <option value="none" data-i18n="capitalization.none">None</option>
-                        <option value="monthly" selected data-i18n="capitalization.monthly">Monthly</option>
-                        <option value="quarterly" data-i18n="capitalization.quarterly">Quarterly</option>
-                        <option value="annually" data-i18n="capitalization.annually">Annually</option>
-                        <option value="daily" data-i18n="capitalization.daily">Daily</option>
-                    </select>
-                </div>
-                        <div class="form-group" style="margin-bottom: 0;">
-                    <label class="form-label" data-i18n="form.deposit.start">Start Date</label>
-                            <input type="date" class="form-input" id="startDate">
-                    </div>
-                </div>
-                
-                    <!-- Inflation Toggle -->
-                    <div class="inflation-toggle">
-                        <input type="checkbox" class="inflation-toggle__checkbox" id="enableInflation">
-                        <label class="inflation-toggle__label" for="enableInflation" data-i18n="form.inflation">Account for Inflation:</label>
-                        <input type="number" class="inflation-toggle__input" id="inflationRate" value="3.0" min="0" max="50" step="0.1">
-                        <span style="color: #9a3412; font-weight: 600;">%</span>
-            </div>
-            
-                    <!-- Collapsible: Additions -->
-                    <div class="collapsible" id="additionsCollapsible">
-                        <div class="collapsible__header">
-                            <div class="collapsible__title">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-                                <span data-i18n="section.additions">Regular Additions</span>
-                            </div>
-                            <div class="collapsible__toggle">
-                                <input type="checkbox" id="enableAdditions">
-                                <svg class="collapsible__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                        </div>
-                        <div class="collapsible__content">
-                            <div class="form-row">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.addition.amount">Amount</label>
-                                    <input type="number" class="form-input" id="additionAmount" value="5000" min="0" step="100">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.addition.frequency">Frequency</label>
-                                    <select class="form-select" id="additionFrequency">
-                                        <option value="monthly" selected data-i18n="frequency.monthly">Monthly</option>
-                                        <option value="quarterly" data-i18n="frequency.quarterly">Quarterly</option>
-                                        <option value="annually" data-i18n="frequency.annually">Annually</option>
-                                    </select>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- Collapsible: Withdrawals -->
-                    <div class="collapsible" id="withdrawalsCollapsible">
-                        <div class="collapsible__header">
-                            <div class="collapsible__title">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
-                                <span data-i18n="section.withdrawals">Partial Withdrawals</span>
-                            </div>
-                            <div class="collapsible__toggle">
-                                <input type="checkbox" id="enableWithdrawals">
-                                <svg class="collapsible__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                        </div>
-                        <div class="collapsible__content">
-                            <div class="form-row">
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.withdrawal.amount">Amount</label>
-                                    <input type="number" class="form-input" id="withdrawalAmount" value="3000" min="0" step="100">
-                                </div>
-                                <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.withdrawal.frequency">Frequency</label>
-                                    <select class="form-select" id="withdrawalFrequency">
-                                        <option value="monthly" data-i18n="frequency.monthly">Monthly</option>
-                                        <option value="quarterly" selected data-i18n="frequency.quarterly">Quarterly</option>
-                                        <option value="annually" data-i18n="frequency.annually">Annually</option>
-                                    </select>
-                                </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    <!-- Collapsible: Tax -->
-                    <div class="collapsible open" id="taxCollapsible">
-                        <div class="collapsible__header">
-                            <div class="collapsible__title">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-                                <span data-i18n="section.tax">Tax Settings</span>
-                            </div>
-                            <div class="collapsible__toggle">
-                                <svg class="collapsible__chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-                            </div>
-                        </div>
-                        <div class="collapsible__content">
-                            <div class="form-group" style="margin-bottom: 0;">
-                                    <label class="form-label" data-i18n="form.tax.rate">Tax Rate (%)</label>
-                                <input type="number" class="form-input" id="taxRate" value="13" min="0" max="100" step="0.1">
-                            </div>
-                                </div>
-                            </div>
-                        </div>
-
-                <!-- Right Column: Results -->
+            <div class="calc-grid">
+                <!-- Results Panel -->
                 <div class="results-panel">
-                    <!-- Main Result -->
-                    <div class="main-result-card">
-                        <div class="main-result-label" data-i18n="result.total">Final Amount</div>
-                        <div class="main-result-value" id="totalResult">$116,000</div>
-                        
-                        <div class="growth-progress">
-                            <div class="growth-progress__bar" id="growthBar" style="width: 16%;"></div>
-                            </div>
-                        <div class="growth-stats">
-                            <span data-i18n="result.growth">Growth</span>
-                            <span id="growthPercent">+16.0%</span>
-                                </div>
-                                </div>
-                    
-                    <!-- Secondary Results -->
-                    <div class="result-cards-grid">
+                    <div class="result-cards" style="margin-bottom: var(--space-xl);">
+                        <div class="result-card result-card--primary">
+                            <div class="result-card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M16 8l-4 4-4-4"/><path d="M12 16V8"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.finalAmount">Final Amount</span>
+                                <span class="result-card__value" id="result-total">₽0</span>
+            </div>
+        </div>
                         <div class="result-card">
-                            <div class="result-card__icon result-card__icon--blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="result.invested">Deposited</div>
-                            <div class="result-card__value" id="investedResult">$100,000</div>
-                        </div>
-                        
+                            <div class="result-card__icon result-card__icon--blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.invested">Total Invested</span>
+                                <span class="result-card__value" id="result-invested">₽0</span>
+        </div>
+        </div>
                         <div class="result-card">
-                            <div class="result-card__icon result-card__icon--green">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>
-                    </div>
-                            <div class="result-card__label" data-i18n="result.interest">Interest Earned</div>
-                            <div class="result-card__value result-card__value--green" id="interestResult">+$16,000</div>
+                            <div class="result-card__icon result-card__icon--green"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.interest">Interest Earned</span>
+                                <span class="result-card__value result-card__value--success" id="result-interest">+₽0</span>
                         </div>
-                        
-                        <div class="result-card" id="taxResultCard" style="display: none;">
-                            <div class="result-card__icon result-card__icon--red">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="result.tax">Tax</div>
-                            <div class="result-card__value result-card__value--red" id="taxResult">-$2,080</div>
                         </div>
-                        
-                        <div class="result-card" id="inflationResultCard" style="display: none;">
-                            <div class="result-card__icon result-card__icon--orange">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="result.realValue">Real Value</div>
-                            <div class="result-card__value" id="realValueResult">$112,500</div>
-                        </div>
-                    </div>
-                    
-                    <!-- Action Buttons -->
-                    <div class="action-buttons">
-                        <button class="btn-action" id="shareBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-                            <span data-i18n="button.share">Share</span>
-                        </button>
-                        <button class="btn-action" id="saveBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
-                            <span data-i18n="button.save">Save</span>
-                        </button>
-                    </div>
+                        <div class="result-card">
+                            <div class="result-card__icon result-card__icon--red"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                            <div class="result-card__content">
+                                <span class="result-card__label" data-i18n="result.tax">Tax Withheld</span>
+                                <span class="result-card__value result-card__value--danger" id="result-tax">-₽0</span>
                 </div>
+                        </div>
+                </div>
+                
+                    <div class="chart-section">
+                        <div class="chart-header">
+                            <h3 data-i18n="chart.growthTitle">Growth Chart</h3>
+                            <div class="chart-legend">
+                                <span class="legend-item"><span class="legend-dot legend-dot--invested"></span> <span data-i18n="result.invested">Invested</span></span>
+                                <span class="legend-item"><span class="legend-dot legend-dot--interest"></span> <span data-i18n="result.interest">Interest</span></span>
+                            </div>
+                        </div>
+                        <div class="chart-container"><canvas id="growth-chart"></canvas></div>
+                        </div>
+                    </div>
+                    
+                <!-- Form Panel -->
+                <div class="form-panel">
+                    <div class="form-card">
+                        <div class="form-card__header">
+                            <h3 data-i18n="section.deposit">Deposit Details</h3>
+                            <button class="btn-reset" id="btn-reset" title="Reset"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg></button>
+                </div>
+                        
+                        <div class="form-group">
+                            <label data-i18n="form.initialAmount">Initial Amount</label>
+                            <div class="input-with-currency"><input type="text" id="initial-amount" value="100 000" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                            <input type="range" id="initial-amount-range" min="1000" max="10000000" value="100000" step="1000">
+                </div>
+                
+                        <div class="form-group">
+                            <label data-i18n="form.interestRate">Interest Rate (%)</label>
+                            <div class="input-with-suffix"><input type="text" id="interest-rate" value="16" inputmode="decimal"><span class="input-suffix">%</span></div>
+                            <input type="range" id="interest-rate-range" min="0" max="30" value="16" step="0.1">
             </div>
             
-            <!-- Scenarios Comparison -->
-            <div class="scenarios-section">
-                <div class="scenarios-header">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-                        <span data-i18n="section.scenarios">Compare Scenarios</span>
-                    </h3>
-                </div>
-                <div class="scenarios-grid" id="scenariosGrid">
-                    <!-- Populated by JS -->
-            </div>
-        </div>
-        
-        <!-- Chart -->
-            <div class="chart-section">
-                <h3>
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                    <span data-i18n="section.chart">Growth Chart</span>
-                </h3>
-                <div class="chart-wrapper">
-            <canvas id="growthChart"></canvas>
-                </div>
-        </div>
-        
-            <!-- Table -->
-            <div class="table-section">
-                <div class="table-header">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="3" y1="15" x2="21" y2="15"/><line x1="9" y1="3" x2="9" y2="21"/><line x1="15" y1="3" x2="15" y2="21"/></svg>
-                        <span data-i18n="section.breakdown">Detailed Breakdown</span>
-                    </h3>
-                    <div class="table-actions">
-                        <button class="btn-sm active" id="yearlyViewBtn" data-i18n="button.yearly">Yearly</button>
-                        <button class="btn-sm" id="monthlyViewBtn" data-i18n="button.monthly">Monthly</button>
-                        <button class="btn-sm" id="exportBtn">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                            <span data-i18n="button.export">Export</span>
+                        <div class="form-row-2">
+                            <div class="form-group">
+                                <label data-i18n="form.term">Term</label>
+                                <input type="number" id="term" value="12" min="1" max="360">
+                            </div>
+                            <div class="form-group">
+                                <label>&nbsp;</label>
+                                <select id="term-unit">
+                                    <option value="months" data-i18n="form.months" selected>Months</option>
+                                    <option value="years" data-i18n="form.years">Years</option>
+                                    </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label data-i18n="form.compounding">Compounding</label>
+                            <select id="compound">
+                                <option value="12" data-i18n="capitalization.monthly" selected>Monthly</option>
+                                <option value="4" data-i18n="capitalization.quarterly">Quarterly</option>
+                                <option value="1" data-i18n="capitalization.annually">Yearly</option>
+                                <option value="365" data-i18n="capitalization.daily">Daily</option>
+                                    </select>
+                            </div>
+                        </div>
+
+                    <div class="form-card form-card--collapsible">
+                        <button class="form-card__toggle" id="toggle-additions">
+                            <h3 data-i18n="section.additions">Monthly Additions</h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </button>
+                        <div class="form-card__content" id="additions-content" style="display:none;">
+                            <div class="form-group">
+                                <label data-i18n="form.monthly">Monthly Contribution</label>
+                                <div class="input-with-currency"><input type="text" id="monthly-add" value="0" inputmode="numeric"><span class="currency-symbol">₽</span></div>
+                                <input type="range" id="monthly-add-range" min="0" max="500000" value="0" step="1000">
+                                </div>
+                            </div>
+                        </div>
+
+                    <div class="form-card form-card--collapsible">
+                        <button class="form-card__toggle" id="toggle-tax">
+                            <h3 data-i18n="section.tax">Tax Settings</h3>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="form-card__content" id="tax-content" style="display:none;">
+                            <div class="form-group">
+                                <label data-i18n="form.tax.rate">Tax Rate (%)</label>
+                                <div class="input-with-suffix"><input type="text" id="tax-rate" value="13" inputmode="decimal"><span class="input-suffix">%</span></div>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-label">
+                                    <input type="checkbox" id="apply-tax">
+                                    <span data-i18n="enable.tax">Apply tax on interest</span>
+                                </label>
+                                </div>
+                                </div>
+                        </div>
+                        
+                    <div class="presets-card">
+                        <h4 data-i18n="form.quickPresets">Quick Presets</h4>
+                        <div class="preset-buttons">
+                            <button class="preset-btn" data-rate="5" data-currency="USD"><span class="preset-flag">🇺🇸</span><span>USD 5%</span></button>
+                            <button class="preset-btn" data-rate="3.5" data-currency="EUR"><span class="preset-flag">🇪🇺</span><span>EUR 3.5%</span></button>
+                            <button class="preset-btn" data-rate="5.5" data-currency="PLN"><span class="preset-flag">🇵🇱</span><span>PLN 5.5%</span></button>
+                            <button class="preset-btn active" data-rate="16" data-currency="RUB"><span class="preset-flag">🇷🇺</span><span>RUB 16%</span></button>
                     </div>
-                </div>
-                <div class="table-wrapper">
-                    <table class="breakdown-table">
+                        </div>
+                            </div>
+                        </div>
+                        
+            <!-- Breakdown Table -->
+            <section class="breakdown-section" style="margin-top: var(--space-xl);">
+                <div class="section-header">
+                    <h2 data-i18n="section.breakdown">Detailed Breakdown</h2>
+                    <div class="view-toggle">
+                        <button class="view-btn active" data-view="yearly" data-i18n="button.yearly">Yearly</button>
+                        <button class="view-btn" data-view="monthly" data-i18n="button.monthly">Monthly</button>
+                            </div>
+                        </div>
+                <div class="table-container">
+                    <table class="breakdown-table" id="breakdown-table">
                     <thead>
                         <tr>
                             <th data-i18n="table.period">Period</th>
-                                <th data-i18n="table.balance.start">Start</th>
+                                <th data-i18n="table.initialBalance">Initial</th>
                             <th data-i18n="table.additions">Additions</th>
-                            <th data-i18n="table.withdrawals">Withdrawals</th>
                             <th data-i18n="table.interest">Interest</th>
                             <th data-i18n="table.tax">Tax</th>
-                                <th data-i18n="table.balance.end">End</th>
+                                <th data-i18n="table.finalBalance">Final</th>
                         </tr>
                     </thead>
-                    <tbody id="tableBody">
-                            <!-- Populated by JS -->
-                    </tbody>
+                        <tbody id="breakdown-body"></tbody>
                 </table>
             </div>
-            </div>
+            </section>
         </div>
         
-        <!-- GOAL MODE -->
-        <div id="goalMode" class="goal-mode">
-            <div class="calculator-main-grid">
-                <div class="input-card">
-                    <h3>
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                        <span data-i18n="goal.title">Set Your Goal</span>
-                    </h3>
-                    
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="goal.target">Target Amount</span>
-                            <input type="number" class="slider-number-input" id="goalTarget" value="500000" min="1000" step="1000">
-                        </div>
-                        <input type="range" class="slider-input" id="goalTargetSlider" min="10000" max="10000000" value="500000" step="10000">
-                    </div>
-                    
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="goal.initial">Starting Amount</span>
-                            <input type="number" class="slider-number-input" id="goalInitial" value="50000" min="0" step="1000">
-                        </div>
-                        <input type="range" class="slider-input" id="goalInitialSlider" min="0" max="1000000" value="50000" step="1000">
-                    </div>
-                    
-                    <div class="slider-group">
-                        <div class="slider-header">
-                            <span class="slider-label" data-i18n="goal.timeframe">Timeframe (years)</span>
-                            <input type="number" class="slider-number-input" id="goalYears" value="5" min="1" max="30" step="1">
-                        </div>
-                        <input type="range" class="slider-input" id="goalYearsSlider" min="1" max="30" value="5" step="1">
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="form-label" data-i18n="goal.rate">Expected Rate (%)</label>
-                        <input type="number" class="form-input" id="goalRate" value="10" min="0" max="30" step="0.5">
-                    </div>
-                </div>
-                
-                <div class="results-panel">
-                    <div class="goal-result-card">
-                        <div class="goal-result-card__label" data-i18n="goal.monthly">Monthly Contribution Needed</div>
-                        <div class="goal-result-card__value" id="goalMonthly">$5,847</div>
-                        <div class="goal-result-card__subtitle" data-i18n="goal.to_reach">to reach your goal</div>
-                    </div>
-                    
-                    <div class="result-cards-grid">
-                        <div class="result-card">
-                            <div class="result-card__icon result-card__icon--blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="goal.target">Goal</div>
-                            <div class="result-card__value" id="goalTargetDisplay">$500,000</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-card__icon result-card__icon--green">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="goal.interest_earned">Interest Earned</div>
-                            <div class="result-card__value result-card__value--green" id="goalInterest">+$148,180</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-card__icon result-card__icon--blue">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="goal.total_deposited">Total Deposited</div>
-                            <div class="result-card__value" id="goalDeposited">$351,820</div>
-                        </div>
-                        
-                        <div class="result-card">
-                            <div class="result-card__icon result-card__icon--orange">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                            </div>
-                            <div class="result-card__label" data-i18n="goal.months">Months</div>
-                            <div class="result-card__value" id="goalMonths">60</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Footer -->
-    <footer class="site-footer">
+        <footer class="site-footer" style="margin-top: var(--space-2xl);">
         <div class="container">
-            <div class="footer-bottom">
-                <p>&copy; 2024 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
-            </div>
+                <p>&copy; 2025 FinCalc. <span data-i18n="footer.disclaimer">Financial calculators for informational purposes only</span></p>
         </div>
     </footer>
+    </main>
 
-    <!-- Scripts -->
-    <script src="../assets/i18n.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // ═══════════════════════════════════════════════════
-        // STATE & VARIABLES
-        // ═══════════════════════════════════════════════════
+    (function() {
+        'use strict';
+        
         let chart = null;
-        let detailedData = [];
-        let viewMode = 'yearly';
-        let calcMode = 'calculate';
+        let currentCurrency = '₽';
+        const currencies = { USD: '$', EUR: '€', PLN: 'zł', RUB: '₽' };
         
-        // ═══════════════════════════════════════════════════
-        // INITIALIZATION
-        // ═══════════════════════════════════════════════════
-        document.addEventListener('DOMContentLoaded', function() {
-            // Set today's date
-            document.getElementById('startDate').value = new Date().toISOString().split('T')[0];
-            
-            // Initialize i18n
-            const urlParams = new URLSearchParams(window.location.search);
-            const lang = urlParams.get('lang') || localStorage.getItem('preferredLanguage') || 'en';
-            i18n.setLanguage(lang);
-            i18n.updatePage();
-            
-            // Bind events
-            bindSliders();
-            bindInputs();
-            bindModeTabs();
-            bindPresets();
-            bindCollapsibles();
-            bindTableControls();
-            bindActionButtons();
-            
-            // Initial calculation
-            calculate();
-            calculateGoal();
-        });
-        
-        // ═══════════════════════════════════════════════════
-        // SLIDER BINDING
-        // ═══════════════════════════════════════════════════
-        function bindSliders() {
-            // Initial Amount
-            syncSliderInput('initialSlider', 'initialInput', calculate, updateSliderFill);
-            
-            // Rate
-            syncSliderInput('rateSlider', 'rateInput', calculate, updateSliderFill);
-            
-            // Term
-            syncSliderInput('termSlider', 'termInput', calculate, updateSliderFill);
-            
-            // Goal sliders
-            syncSliderInput('goalTargetSlider', 'goalTarget', calculateGoal, updateSliderFill);
-            syncSliderInput('goalInitialSlider', 'goalInitial', calculateGoal, updateSliderFill);
-            syncSliderInput('goalYearsSlider', 'goalYears', calculateGoal, updateSliderFill);
-            
-            // Initialize fills
-            updateAllSliderFills();
+        function formatCurrency(num, currency = currentCurrency) {
+            const formatted = new Intl.NumberFormat('ru-RU', { maximumFractionDigits: 0 }).format(Math.abs(num));
+            return `${currency}${formatted}`;
         }
         
-        function syncSliderInput(sliderId, inputId, callback, fillCallback) {
-            const slider = document.getElementById(sliderId);
-            const input = document.getElementById(inputId);
-            
-            if (!slider || !input) return;
-            
-            slider.addEventListener('input', () => {
-                input.value = slider.value;
-                fillCallback(slider);
-                callback();
-            });
-            
-            input.addEventListener('input', () => {
-                slider.value = input.value;
-                fillCallback(slider);
-                callback();
-            });
+        function parseNumber(str) {
+            return parseFloat((str || '').toString().replace(/\s|\u00A0/g, '').replace(',', '.')) || 0;
         }
         
-        function updateSliderFill(slider) {
-            const min = parseFloat(slider.min);
-            const max = parseFloat(slider.max);
-            const val = parseFloat(slider.value);
-            const percent = ((val - min) / (max - min)) * 100;
-            slider.style.setProperty('--value', percent + '%');
+        function formatInput(value) {
+            return new Intl.NumberFormat('ru-RU').format(Math.round(value));
         }
         
-        function updateAllSliderFills() {
-            document.querySelectorAll('.slider-input').forEach(updateSliderFill);
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // INPUT BINDING
-        // ═══════════════════════════════════════════════════
-        function bindInputs() {
-            const inputs = [
-                'capitalization', 'startDate', 'termUnit',
-                'enableAdditions', 'additionAmount', 'additionFrequency',
-                'enableWithdrawals', 'withdrawalAmount', 'withdrawalFrequency',
-                'taxRate', 'enableInflation', 'inflationRate',
-                'goalRate'
-            ];
-            
-            inputs.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.addEventListener('input', calculate);
-                    el.addEventListener('change', calculate);
-                }
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // MODE TABS
-        // ═══════════════════════════════════════════════════
-        function bindModeTabs() {
-            document.querySelectorAll('.calc-mode-tab').forEach(tab => {
-                tab.addEventListener('click', () => {
-                    document.querySelectorAll('.calc-mode-tab').forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    
-                    calcMode = tab.dataset.mode;
-                    document.getElementById('calculateMode').style.display = calcMode === 'calculate' ? 'block' : 'none';
-                    document.getElementById('goalMode').classList.toggle('active', calcMode === 'goal');
-                    
-                    // Hide rate presets in goal mode (they only apply to calculate mode)
-                    document.querySelector('.rate-presets').style.display = calcMode === 'calculate' ? 'flex' : 'none';
-                });
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // RATE PRESETS
-        // ═══════════════════════════════════════════════════
-        function bindPresets() {
-            document.querySelectorAll('.rate-preset').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    document.querySelectorAll('.rate-preset').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    
-                    const rate = parseFloat(btn.dataset.rate);
-                    document.getElementById('rateInput').value = rate;
-                    document.getElementById('rateSlider').value = rate;
-                    updateSliderFill(document.getElementById('rateSlider'));
-            calculate();
-                });
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // COLLAPSIBLES
-        // ═══════════════════════════════════════════════════
-        function bindCollapsibles() {
-            document.querySelectorAll('.collapsible__header').forEach(header => {
-                header.addEventListener('click', (e) => {
-                    if (e.target.type === 'checkbox') return;
-                    header.closest('.collapsible').classList.toggle('open');
-                });
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // MAIN CALCULATION
-        // ═══════════════════════════════════════════════════
         function calculate() {
-            const initial = parseFloat(document.getElementById('initialInput').value) || 0;
-            const rate = parseFloat(document.getElementById('rateInput').value) || 0;
-            const termValue = parseInt(document.getElementById('termInput').value) || 0;
-            const termUnit = document.getElementById('termUnit').value;
-            const capitalization = document.getElementById('capitalization').value;
-            const startDate = new Date(document.getElementById('startDate').value);
+            const initial = parseNumber(document.getElementById('initial-amount').value);
+            const rate = parseNumber(document.getElementById('interest-rate').value);
+            const term = parseNumber(document.getElementById('term').value);
+            const termUnit = document.getElementById('term-unit').value;
+            const compound = parseInt(document.getElementById('compound').value);
+            const monthly = parseNumber(document.getElementById('monthly-add').value);
+            const taxRate = parseNumber(document.getElementById('tax-rate').value);
+            const applyTax = document.getElementById('apply-tax').checked;
             
-            const enableAdditions = document.getElementById('enableAdditions').checked;
-            const additionAmount = parseFloat(document.getElementById('additionAmount').value) || 0;
-            const additionFrequency = document.getElementById('additionFrequency').value;
-            
-            const enableWithdrawals = document.getElementById('enableWithdrawals').checked;
-            const withdrawalAmount = parseFloat(document.getElementById('withdrawalAmount').value) || 0;
-            const withdrawalFrequency = document.getElementById('withdrawalFrequency').value;
-            
-            const taxRatePercent = parseFloat(document.getElementById('taxRate').value) || 0;
-            const taxRate = taxRatePercent / 100;
-            
-            const enableInflation = document.getElementById('enableInflation').checked;
-            const inflationRate = parseFloat(document.getElementById('inflationRate').value) || 0;
-            
-            // Convert to days
-            let totalDays = termUnit === 'years' ? termValue * 365 : termValue * 30;
-            
-            const capFreq = { none: Infinity, monthly: 30, quarterly: 90, annually: 365, daily: 1 };
-            const capInterval = capFreq[capitalization];
-            
-            let balance = initial;
-            detailedData = [];
-            const chartLabels = [];
-            const balanceData = [];
-            
-            let totalDeposited = initial;
-            let totalInterest = 0;
-            let totalTax = 0;
-            let accumulatedInterest = 0;
-            
-            for (let day = 0; day <= totalDays; day++) {
-                // Additions
-                if (enableAdditions && day > 0) {
-                    let shouldAdd = false;
-                    if (additionFrequency === 'monthly' && day % 30 === 0) shouldAdd = true;
-                    if (additionFrequency === 'quarterly' && day % 90 === 0) shouldAdd = true;
-                    if (additionFrequency === 'annually' && day % 365 === 0) shouldAdd = true;
-                    if (shouldAdd) {
-                        balance += additionAmount;
-                        totalDeposited += additionAmount;
-                    }
-                }
-                
-                // Withdrawals
-                if (enableWithdrawals && day > 0) {
-                    let shouldWithdraw = false;
-                    if (withdrawalFrequency === 'monthly' && day % 30 === 0) shouldWithdraw = true;
-                    if (withdrawalFrequency === 'quarterly' && day % 90 === 0) shouldWithdraw = true;
-                    if (withdrawalFrequency === 'annually' && day % 365 === 0) shouldWithdraw = true;
-                    if (shouldWithdraw && balance >= withdrawalAmount) {
-                        balance -= withdrawalAmount;
-                    }
-                }
-                
-                // Daily interest
-                const dailyRate = rate / 100 / 365;
-                const dayInterest = balance * dailyRate;
-                accumulatedInterest += dayInterest;
-                
-                // Capitalization
-                if (day > 0 && day % capInterval === 0) {
-                    const taxOnInterest = accumulatedInterest * taxRate;
-                    totalTax += taxOnInterest;
-                    balance += accumulatedInterest - taxOnInterest;
-                    totalInterest += accumulatedInterest;
-                    accumulatedInterest = 0;
-                }
-                
-                // Monthly data
-                if (day % 30 === 0 || day === totalDays) {
-                    const month = Math.floor(day / 30);
-                    detailedData.push({
-                        period: month,
-                        startBalance: balance - accumulatedInterest,
-                        additions: 0,
-                        withdrawals: 0,
-                        interest: accumulatedInterest,
-                        tax: accumulatedInterest * taxRate,
-                        endBalance: balance
-                    });
-                    chartLabels.push((termUnit === 'years' ? 'Yr ' : 'Mo ') + month);
-                    balanceData.push(balance);
-                }
-            }
-            
-            // Handle remaining interest
-            if (accumulatedInterest > 0) {
-                const taxOnInterest = accumulatedInterest * taxRate;
-                totalTax += taxOnInterest;
-                balance += accumulatedInterest - taxOnInterest;
-                totalInterest += accumulatedInterest;
-            }
-            
-            // Calculate inflation-adjusted value
-            const years = totalDays / 365;
-            const realValue = enableInflation ? balance / Math.pow(1 + inflationRate / 100, years) : balance;
-            
-            // Update UI
-            const growthPercent = ((balance - totalDeposited) / totalDeposited * 100).toFixed(1);
-            
-            document.getElementById('totalResult').textContent = i18n.formatCurrency(balance);
-            document.getElementById('investedResult').textContent = i18n.formatCurrency(totalDeposited);
-            document.getElementById('interestResult').textContent = '+' + i18n.formatCurrency(totalInterest);
-            document.getElementById('growthPercent').textContent = '+' + growthPercent + '%';
-            document.getElementById('growthBar').style.width = Math.min(growthPercent, 100) + '%';
-            
-            // Tax
-            if (totalTax > 0) {
-                document.getElementById('taxResultCard').style.display = 'block';
-                document.getElementById('taxResult').textContent = '-' + i18n.formatCurrency(totalTax);
-            } else {
-                document.getElementById('taxResultCard').style.display = 'none';
-            }
-            
-            // Inflation
-            if (enableInflation) {
-                document.getElementById('inflationResultCard').style.display = 'block';
-                document.getElementById('realValueResult').textContent = i18n.formatCurrency(realValue);
-            } else {
-                document.getElementById('inflationResultCard').style.display = 'none';
-            }
-            
-            // Update chart & table
-            updateChart(chartLabels, balanceData);
-            updateTable();
-            updateScenarios(initial, termValue, termUnit, capitalization, enableAdditions, additionAmount, additionFrequency, taxRate);
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // GOAL CALCULATION
-        // ═══════════════════════════════════════════════════
-        function calculateGoal() {
-            const target = parseFloat(document.getElementById('goalTarget').value) || 0;
-            const initial = parseFloat(document.getElementById('goalInitial').value) || 0;
-            const years = parseInt(document.getElementById('goalYears').value) || 1;
-            const rate = parseFloat(document.getElementById('goalRate').value) || 0;
-            
-            const months = years * 12;
+            const months = termUnit === 'years' ? term * 12 : term;
             const monthlyRate = rate / 100 / 12;
             
-            // PMT formula
-            let monthlyPayment = 0;
-            if (monthlyRate > 0) {
-                const fv = target;
-                const pv = initial;
-                const n = months;
-                const r = monthlyRate;
-                
-                // FV = PV*(1+r)^n + PMT*((1+r)^n - 1)/r
-                // PMT = (FV - PV*(1+r)^n) * r / ((1+r)^n - 1)
-                const factor = Math.pow(1 + r, n);
-                monthlyPayment = (fv - pv * factor) * r / (factor - 1);
-            } else {
-                monthlyPayment = (target - initial) / months;
-            }
-            
-            const totalDeposited = initial + monthlyPayment * months;
-            const interestEarned = target - totalDeposited;
-            
-            document.getElementById('goalMonthly').textContent = i18n.formatCurrency(Math.max(0, monthlyPayment));
-            document.getElementById('goalTargetDisplay').textContent = i18n.formatCurrency(target);
-            document.getElementById('goalInterest').textContent = '+' + i18n.formatCurrency(Math.max(0, interestEarned));
-            document.getElementById('goalDeposited').textContent = i18n.formatCurrency(totalDeposited);
-            document.getElementById('goalMonths').textContent = months;
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // SCENARIOS
-        // ═══════════════════════════════════════════════════
-        function updateScenarios(initial, termValue, termUnit, capitalization, enableAdditions, additionAmount, additionFrequency, taxRate) {
-            const rates = [5, 10, 16];
-            const grid = document.getElementById('scenariosGrid');
-            grid.innerHTML = '';
-            
-            const annualLabel = i18n.t('scenario.annual') || 'Annual';
-            const termUnitLabel = termUnit === 'years' 
-                ? (i18n.t('unit.years') || 'years') 
-                : (i18n.t('scenario.months') || 'months');
-            
-            rates.forEach((rate, idx) => {
-                const result = simulateDeposit(initial, rate, termValue, termUnit, capitalization, enableAdditions, additionAmount, additionFrequency, taxRate);
-                const profit = result - initial;
-                const currentRate = parseFloat(document.getElementById('rateInput').value);
-                
-                const card = document.createElement('div');
-                card.className = 'scenario-card' + (rate === currentRate ? ' active' : '');
-                card.innerHTML = `
-                    <div class="scenario-card__title">${rate}% ${annualLabel}</div>
-                    <div class="scenario-card__rate">${termValue} ${termUnitLabel}</div>
-                    <div class="scenario-card__result">${i18n.formatCurrency(result)}</div>
-                    <div class="scenario-card__profit">+${i18n.formatCurrency(profit)}</div>
-                `;
-                card.addEventListener('click', () => {
-                    document.getElementById('rateInput').value = rate;
-                    document.getElementById('rateSlider').value = rate;
-                    updateSliderFill(document.getElementById('rateSlider'));
-                    document.querySelectorAll('.rate-preset').forEach(b => b.classList.remove('active'));
-                    calculate();
-                });
-                grid.appendChild(card);
-            });
-        }
-        
-        function simulateDeposit(initial, rate, termValue, termUnit, capitalization, enableAdditions, additionAmount, additionFrequency, taxRate) {
-            let totalDays = termUnit === 'years' ? termValue * 365 : termValue * 30;
-            const capFreq = { none: Infinity, monthly: 30, quarterly: 90, annually: 365, daily: 1 };
-            const capInterval = capFreq[capitalization];
-            
             let balance = initial;
-            let accumulatedInterest = 0;
+            let totalContributions = initial;
+            let totalInterest = 0;
+            let totalTax = 0;
             
-            for (let day = 0; day <= totalDays; day++) {
-                if (enableAdditions && day > 0) {
-                    let shouldAdd = false;
-                    if (additionFrequency === 'monthly' && day % 30 === 0) shouldAdd = true;
-                    if (additionFrequency === 'quarterly' && day % 90 === 0) shouldAdd = true;
-                    if (additionFrequency === 'annually' && day % 365 === 0) shouldAdd = true;
-                    if (shouldAdd) balance += additionAmount;
+            const chartLabels = ['Старт'];
+            const investedData = [initial];
+            const interestData = [0];
+            const tableData = [];
+            
+            for (let m = 1; m <= months; m++) {
+                const startBalance = balance;
+                const interest = balance * monthlyRate;
+                let tax = 0;
+                
+                if (applyTax && taxRate > 0) {
+                    tax = interest * (taxRate / 100);
                 }
                 
-                const dailyRate = rate / 100 / 365;
-                accumulatedInterest += balance * dailyRate;
+                balance = balance + interest - tax + monthly;
+                totalContributions += monthly;
+                totalInterest += interest;
+                totalTax += tax;
                 
-                if (day > 0 && day % capInterval === 0) {
-                    const tax = accumulatedInterest * taxRate;
-                    balance += accumulatedInterest - tax;
-                    accumulatedInterest = 0;
+                tableData.push({ period: m, initial: startBalance, additions: monthly, interest, tax, final: balance });
+                
+                if (m % (compound === 1 ? 12 : compound === 4 ? 3 : 1) === 0 || m === months) {
+                    chartLabels.push(`${m}м`);
+                    investedData.push(totalContributions);
+                    interestData.push(totalInterest - totalTax);
                 }
             }
             
-            if (accumulatedInterest > 0) {
-                const tax = accumulatedInterest * taxRate;
-                balance += accumulatedInterest - tax;
-            }
+            document.getElementById('result-total').textContent = formatCurrency(balance);
+            document.getElementById('result-invested').textContent = formatCurrency(totalContributions);
+            document.getElementById('result-interest').textContent = '+' + formatCurrency(totalInterest - totalTax);
+            document.getElementById('result-tax').textContent = '-' + formatCurrency(totalTax);
             
-            return balance;
+            updateChart(chartLabels, investedData, interestData);
+            updateTable(tableData);
         }
         
-        // ═══════════════════════════════════════════════════
-        // CHART
-        // ═══════════════════════════════════════════════════
-        function updateChart(labels, data) {
-            const ctx = document.getElementById('growthChart').getContext('2d');
+        function updateChart(labels, invested, interest) {
+            const ctx = document.getElementById('growth-chart');
+            if (!ctx) return;
             
-            if (chart) chart.destroy();
-            
-            const gradient = ctx.createLinearGradient(0, 0, 0, 300);
-            gradient.addColorStop(0, 'rgba(0, 102, 255, 0.3)');
-            gradient.addColorStop(1, 'rgba(0, 102, 255, 0.02)');
-            
-            chart = new Chart(ctx, {
+            const config = {
                 type: 'line',
                 data: {
                     labels: labels,
-                    datasets: [{
-                        label: 'Balance',
-                        data: data,
-                            borderColor: '#0066ff',
-                        backgroundColor: gradient,
-                            fill: true,
-                        tension: 0.4,
-                        pointRadius: 3,
-                        pointHoverRadius: 6,
-                        pointBackgroundColor: '#0066ff',
-                        borderWidth: 2.5
-                    }]
+                    datasets: [
+                        { label: 'Вложено', data: invested, borderColor: 'rgba(107, 114, 128, 0.8)', backgroundColor: 'rgba(107, 114, 128, 0.2)', fill: true, tension: 0.4, pointRadius: 0 },
+                        { label: 'Проценты', data: interest, borderColor: 'rgba(0, 168, 107, 1)', backgroundColor: 'rgba(0, 168, 107, 0.2)', fill: true, tension: 0.4, pointRadius: 0 }
+                    ]
                 },
                 options: {
                     responsive: true,
                     maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false },
-                        tooltip: {
-                            callbacks: {
-                                label: ctx => i18n.formatCurrency(ctx.parsed.y)
-                            }
-                        }
-                    },
+                    plugins: { legend: { display: false } },
                     scales: {
                         x: { grid: { display: false } },
-                        y: {
-                            ticks: { callback: v => i18n.formatCurrency(v) },
-                            grid: { color: 'rgba(0,0,0,0.05)' }
-                        }
+                        y: { stacked: true, ticks: { callback: v => v >= 1000000 ? (v/1000000).toFixed(1)+'M' : v >= 1000 ? (v/1000).toFixed(0)+'K' : v } }
                     }
                 }
-            });
+            };
+            
+            if (chart) { chart.data = config.data; chart.update('none'); }
+            else { chart = new Chart(ctx, config); }
         }
         
-        // ═══════════════════════════════════════════════════
-        // TABLE
-        // ═══════════════════════════════════════════════════
-        function bindTableControls() {
-            document.getElementById('yearlyViewBtn').addEventListener('click', () => {
-                viewMode = 'yearly';
-                document.getElementById('yearlyViewBtn').classList.add('active');
-                document.getElementById('monthlyViewBtn').classList.remove('active');
-                updateTable();
-            });
+        function updateTable(data) {
+            const tbody = document.getElementById('breakdown-body');
+            const viewBtn = document.querySelector('.view-btn.active');
+            const isYearly = viewBtn && viewBtn.dataset.view === 'yearly';
             
-            document.getElementById('monthlyViewBtn').addEventListener('click', () => {
-                viewMode = 'monthly';
-                document.getElementById('monthlyViewBtn').classList.add('active');
-                document.getElementById('yearlyViewBtn').classList.remove('active');
-                updateTable();
-            });
+            let filtered = isYearly ? data.filter((d, i) => (i + 1) % 12 === 0 || i === data.length - 1) : data;
             
-            document.getElementById('exportBtn').addEventListener('click', exportToCSV);
+            tbody.innerHTML = filtered.map(row => `<tr>
+                <td>${isYearly ? Math.ceil(row.period / 12) + ' г.' : row.period + ' м.'}</td>
+                <td>${formatCurrency(row.initial)}</td>
+                <td>${formatCurrency(row.additions)}</td>
+                <td class="text-success">+${formatCurrency(row.interest)}</td>
+                <td class="text-danger">-${formatCurrency(row.tax)}</td>
+                <td><strong>${formatCurrency(row.final)}</strong></td>
+            </tr>`).join('');
         }
         
-        function updateTable() {
-            const tbody = document.getElementById('tableBody');
-            tbody.innerHTML = '';
-            
-            const data = viewMode === 'yearly' ? getYearlyData(detailedData) : detailedData;
-            const yearLabel = i18n.t('table.year') || 'Year';
-            const monthLabel = i18n.t('table.month') || 'Month';
-            
-            data.forEach(row => {
-                const label = viewMode === 'yearly' ? yearLabel + ' ' + row.period : monthLabel + ' ' + row.period;
-                const tr = document.createElement('tr');
-                tr.innerHTML = `
-                    <td><strong>${label}</strong></td>
-                    <td>${i18n.formatCurrency(row.startBalance)}</td>
-                    <td class="positive">${row.additions > 0 ? '+' + i18n.formatCurrency(row.additions) : '-'}</td>
-                    <td class="negative">${row.withdrawals > 0 ? '-' + i18n.formatCurrency(row.withdrawals) : '-'}</td>
-                    <td class="positive">+${i18n.formatCurrency(row.interest)}</td>
-                    <td class="negative">${row.tax > 0 ? '-' + i18n.formatCurrency(row.tax) : '-'}</td>
-                    <td><strong>${i18n.formatCurrency(row.endBalance)}</strong></td>
-                `;
-                tbody.appendChild(tr);
-            });
-        }
-        
-        function getYearlyData(monthly) {
-            const yearly = [];
-            monthly.forEach(row => {
-                const year = Math.floor(row.period / 12);
-                if (!yearly[year]) {
-                    yearly[year] = { period: year, startBalance: row.startBalance, additions: 0, withdrawals: 0, interest: 0, tax: 0, endBalance: row.endBalance };
-                }
-                yearly[year].additions += row.additions;
-                yearly[year].withdrawals += row.withdrawals;
-                yearly[year].interest += row.interest;
-                yearly[year].tax += row.tax;
-                yearly[year].endBalance = row.endBalance;
-            });
-            return yearly.filter(d => d);
-        }
-        
-        function exportToCSV() {
-            let csv = 'Period,Start,Additions,Withdrawals,Interest,Tax,End\n';
-            const data = viewMode === 'yearly' ? getYearlyData(detailedData) : detailedData;
-            data.forEach(row => {
-                csv += `${row.period},${row.startBalance},${row.additions},${row.withdrawals},${row.interest},${row.tax},${row.endBalance}\n`;
-            });
-            
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const a = document.createElement('a');
-            a.href = URL.createObjectURL(blob);
-            a.download = 'deposit_calculation.csv';
-            a.click();
-        }
-        
-        // ═══════════════════════════════════════════════════
-        // ACTION BUTTONS
-        // ═══════════════════════════════════════════════════
-        function bindActionButtons() {
-            document.getElementById('shareBtn').addEventListener('click', () => {
-                const params = new URLSearchParams({
-                    initial: document.getElementById('initialInput').value,
-                    rate: document.getElementById('rateInput').value,
-                    term: document.getElementById('termInput').value,
-                    unit: document.getElementById('termUnit').value,
-                    cap: document.getElementById('capitalization').value
-                });
-                const url = window.location.origin + window.location.pathname + '?' + params.toString();
-                navigator.clipboard.writeText(url).then(() => {
-                    alert('Link copied to clipboard!');
+        function setupInputs() {
+            ['initial-amount', 'interest-rate', 'monthly-add'].forEach(id => {
+                const input = document.getElementById(id);
+                const range = document.getElementById(id + '-range');
+                if (!input || !range) return;
+                
+                input.addEventListener('input', () => { range.value = parseNumber(input.value); calculate(); });
+                range.addEventListener('input', () => {
+                    input.value = id === 'interest-rate' ? range.value : formatInput(range.value);
+                    calculate();
                 });
             });
             
-            document.getElementById('saveBtn').addEventListener('click', () => {
-                const data = {
-                    initial: document.getElementById('initialInput').value,
-                    rate: document.getElementById('rateInput').value,
-                    term: document.getElementById('termInput').value,
-                    unit: document.getElementById('termUnit').value,
-                    cap: document.getElementById('capitalization').value,
-                    date: new Date().toISOString()
-                };
-                const saved = JSON.parse(localStorage.getItem('savedCalculations') || '[]');
-                saved.push(data);
-                localStorage.setItem('savedCalculations', JSON.stringify(saved));
-                alert('Calculation saved!');
+            ['term', 'term-unit', 'compound', 'tax-rate', 'apply-tax'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) { el.addEventListener('change', calculate); el.addEventListener('input', calculate); }
+            });
+            
+            document.getElementById('btn-reset').addEventListener('click', () => {
+                document.getElementById('initial-amount').value = '100 000';
+                document.getElementById('initial-amount-range').value = 100000;
+                document.getElementById('interest-rate').value = '16';
+                document.getElementById('interest-rate-range').value = 16;
+                document.getElementById('term').value = '12';
+                document.getElementById('term-unit').value = 'months';
+                document.getElementById('compound').value = '12';
+                document.getElementById('monthly-add').value = '0';
+                document.getElementById('monthly-add-range').value = 0;
+                document.getElementById('tax-rate').value = '13';
+                document.getElementById('apply-tax').checked = false;
+                currentCurrency = '₽';
+                document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = '₽');
+                document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                document.querySelector('.preset-btn[data-currency="RUB"]').classList.add('active');
+                calculate();
+            });
+            
+            document.querySelectorAll('.form-card__toggle').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const content = btn.nextElementSibling;
+                    const isOpen = content.style.display !== 'none';
+                    content.style.display = isOpen ? 'none' : 'block';
+                    btn.classList.toggle('open', !isOpen);
+                });
+            });
+            
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    const rate = parseFloat(btn.dataset.rate);
+                    currentCurrency = currencies[btn.dataset.currency] || '₽';
+                    document.querySelectorAll('.currency-symbol').forEach(el => el.textContent = currentCurrency);
+                    document.getElementById('interest-rate').value = rate;
+                    document.getElementById('interest-rate-range').value = rate;
+                    calculate();
+                });
+            });
+            
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    calculate();
+                });
             });
         }
         
-        // Load params from URL
-            const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.has('initial')) {
-            document.getElementById('initialInput').value = urlParams.get('initial');
-            document.getElementById('initialSlider').value = urlParams.get('initial');
-        }
-        if (urlParams.has('rate')) {
-            document.getElementById('rateInput').value = urlParams.get('rate');
-            document.getElementById('rateSlider').value = urlParams.get('rate');
-        }
-        if (urlParams.has('term')) {
-            document.getElementById('termInput').value = urlParams.get('term');
-            document.getElementById('termSlider').value = urlParams.get('term');
-        }
-        if (urlParams.has('unit')) document.getElementById('termUnit').value = urlParams.get('unit');
-        if (urlParams.has('cap')) document.getElementById('capitalization').value = urlParams.get('cap');
+        document.addEventListener('DOMContentLoaded', () => {
+            setupInputs();
+            calculate();
+            if (window.i18n) i18n.updatePage();
+        });
+    })();
     </script>
 </body>
 </html>

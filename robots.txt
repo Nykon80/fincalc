@@ -1,5 +1,6 @@
 # FinCalc - Financial Calculators
 # https://nykon80.github.io/fincalc/
+# Last updated: 2025-11-27
 
 User-agent: *
 Allow: /
@@ -16,26 +17,39 @@ Allow: /articles/
 Allow: /pages/
 Allow: /assets/
 Allow: /favicon.svg
+Allow: /favicon.ico
+Allow: /manifest.json
 
 # Disallow temporary and development files
 Disallow: /*.log
 Disallow: /*.md
-Disallow: /*.txt$
 Disallow: /combined.log
 Disallow: /error.log
 Disallow: /.playwright-mcp/
+Disallow: /.git/
+Disallow: /node_modules/
 
 # Allow sitemap and robots
 Allow: /sitemap.xml
 Allow: /robots.txt
 
-# Google-specific
+# Google-specific (primary target)
 User-agent: Googlebot
 Allow: /
 Crawl-delay: 0
 
+# Googlebot Images
+User-agent: Googlebot-Image
+Allow: /assets/
+Allow: /favicon.svg
+
 # Bing-specific
 User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# DuckDuckGo
+User-agent: DuckDuckBot
 Allow: /
 Crawl-delay: 1
 
@@ -44,3 +58,64 @@ User-agent: YandexBot
 Allow: /
 Crawl-delay: 2
 Host: https://nykon80.github.io/fincalc/
+
+# Yandex Images
+User-agent: YandexImages
+Allow: /assets/
+Allow: /favicon.svg
+
+# Baidu (for international reach)
+User-agent: Baiduspider
+Allow: /
+Crawl-delay: 2
+
+# Social Media Crawlers (for better link previews)
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+User-agent: LinkedInBot
+Allow: /
+
+User-agent: Pinterest
+Allow: /
+
+User-agent: Slackbot
+Allow: /
+
+User-agent: TelegramBot
+Allow: /
+
+User-agent: WhatsApp
+Allow: /
+
+# SEO Tools
+User-agent: AhrefsBot
+Allow: /
+Crawl-delay: 5
+
+User-agent: SemrushBot
+Allow: /
+Crawl-delay: 5
+
+User-agent: MJ12bot
+Allow: /
+Crawl-delay: 5
+
+# Block known bad bots
+User-agent: AhrefsBot/2.0
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+User-agent: SemrushBot-SA
+Disallow: /
+
+User-agent: dotbot
+Disallow: /
+
+User-agent: PetalBot
+Disallow: /

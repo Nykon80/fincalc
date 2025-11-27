@@ -10,25 +10,46 @@
     const charts = {};
     let currentCalc = 'deposit';
     
-    // Currency settings
+    // Currency settings by code
     const currencies = {
         'USD': '$',
         'EUR': '€',
         'PLN': 'zł',
         'RUB': '₽'
     };
-    let currentCurrency = '₽';
+    
+    // Default currency by language
+    const langToCurrency = {
+        'en': { symbol: '$', code: 'USD', locale: 'en-US' },
+        'pl': { symbol: 'zł', code: 'PLN', locale: 'pl-PL' },
+        'ru': { symbol: '₽', code: 'RUB', locale: 'ru-RU' }
+    };
+    
+    // Get current language
+    function getCurrentLang() {
+        return window.i18n?.currentLang || localStorage.getItem('preferredLanguage') || 'en';
+    }
+    
+    // Get currency config for current language
+    function getCurrencyConfig() {
+        const lang = getCurrentLang();
+        return langToCurrency[lang] || langToCurrency['en'];
+    }
+    
+    let currentCurrency = getCurrencyConfig().symbol;
+    let currentLocale = getCurrencyConfig().locale;
     
     // =========================================
     // UTILITY FUNCTIONS
     // =========================================
     
-    function formatCurrency(num, currency = '₽') {
-        const formatted = new Intl.NumberFormat('ru-RU', {
+    function formatCurrency(num, currency) {
+        const symbol = currency || currentCurrency;
+        const formatted = new Intl.NumberFormat(currentLocale, {
             maximumFractionDigits: 0,
             minimumFractionDigits: 0
         }).format(Math.abs(num));
-        return `${currency}${formatted}`;
+        return `${symbol}${formatted}`;
     }
     
     function parseNumber(str) {
@@ -36,7 +57,24 @@
     }
     
     function formatInput(value) {
-        return new Intl.NumberFormat('ru-RU').format(Math.round(value));
+        return new Intl.NumberFormat(currentLocale).format(Math.round(value));
+    }
+    
+    // Update currency when language changes
+    function updateCurrencyFromLang() {
+        const config = getCurrencyConfig();
+        currentCurrency = config.symbol;
+        currentLocale = config.locale;
+        
+        // Update all currency symbols on page
+        document.querySelectorAll('.currency-symbol').forEach(el => {
+            el.textContent = currentCurrency;
+        });
+        
+        // Recalculate current calculator to update displayed values
+        if (currentCalc) {
+            initCalculator(currentCalc);
+        }
     }
     
     // =========================================
@@ -747,6 +785,12 @@
         
         // Setup input handlers
         setupInputHandlers();
+        
+        // Listen for language changes
+        window.addEventListener('languageChanged', updateCurrencyFromLang);
+        
+        // Set initial currency based on language
+        updateCurrencyFromLang();
         
         // Initialize deposit calculator (default)
         setTimeout(() => {

@@ -59,21 +59,30 @@ window.financeUtils = {
 
 // Tabs functionality
 document.addEventListener('DOMContentLoaded', function() {
-  const tabBtns = document.querySelectorAll('.tab-btn');
+  const headerTabs = document.querySelectorAll('.header-tab');
   const tabContents = document.querySelectorAll('.tab-content');
+  const calculatorsContainer = document.getElementById('calculators-container');
   
   // Function to switch tabs
   function switchTab(tabName) {
     // Remove active class from all buttons and contents
-    tabBtns.forEach(btn => btn.classList.remove('active'));
+    headerTabs.forEach(btn => btn.classList.remove('active'));
     tabContents.forEach(content => content.classList.remove('active'));
     
     // Add active class to selected button and content
-    const selectedBtn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+    const selectedBtn = document.querySelector(`.header-tab[data-tab="${tabName}"]`);
     const selectedContent = document.getElementById(tabName);
     
     if (selectedBtn) selectedBtn.classList.add('active');
-    if (selectedContent) selectedContent.classList.add('active');
+    
+    // Show/hide calculators container vs tab content
+    if (tabName === 'calculators') {
+      if (calculatorsContainer) calculatorsContainer.style.display = 'block';
+      tabContents.forEach(content => content.classList.remove('active'));
+    } else {
+      if (calculatorsContainer) calculatorsContainer.style.display = 'none';
+      if (selectedContent) selectedContent.classList.add('active');
+    }
     
     // Update URL hash without scrolling
     history.pushState(null, null, `#${tabName}`);
@@ -96,13 +105,34 @@ document.addEventListener('DOMContentLoaded', function() {
     }));
   }
   
-  // Add click event to all tab buttons
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', function() {
+  // Add click event to all header tab buttons
+  headerTabs.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
       const tabName = this.getAttribute('data-tab');
       switchTab(tabName);
     });
   });
+  
+  // View All News button
+  const viewAllNewsBtn = document.getElementById('view-all-news');
+  if (viewAllNewsBtn) {
+    viewAllNewsBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      switchTab('news');
+    });
+  }
+  
+  // Set today's date on news cards
+  const todayElements = document.querySelectorAll('[data-today]');
+  const today = new Date();
+  const dateStr = today.toLocaleDateString('ru-RU', { day: '2-digit', month: '2-digit', year: 'numeric' });
+  todayElements.forEach(el => {
+    el.textContent = dateStr;
+  });
+  
+  // Make switchTab globally accessible
+  window.switchTab = switchTab;
   
   // Check URL hash on load and switch to that tab
   const hash = window.location.hash.substring(1); // Remove # from hash

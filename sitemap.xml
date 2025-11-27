@@ -1,68 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  
   <!-- Homepage with language alternates -->
   <url>
     <loc>https://nykon80.github.io/fincalc/</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/?lang=ru"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://nykon80.github.io/fincalc/"/>
+    <image:image>
+      <image:loc>https://nykon80.github.io/fincalc/assets/og-image.png</image:loc>
+      <image:title>FinCalc Financial Calculators</image:title>
+      <image:caption>Professional financial calculators for deposits, loans, mortgages, savings, ROI and credit cards</image:caption>
+    </image:image>
   </url>
   
-  <!-- Calculators -->
+  <!-- Calculators - High Priority -->
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/deposit-calculator-modern.html?lang=ru"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/loan-payment-modern.html?lang=ru"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/mortgage-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/mortgage-modern.html?lang=ru"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/savings-goal-modern.html?lang=ru"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/credit-card-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html?lang=pl"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/calculators/credit-card-modern.html?lang=ru"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/calculators/roi-modern.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.95</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/calculators/roi-modern.html"/>
@@ -72,65 +84,73 @@
   
   <!-- Articles - English -->
   <url>
+    <loc>https://nykon80.github.io/fincalc/articles/compound-interest-guide.html</loc>
+    <lastmod>2025-11-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  
+  <url>
     <loc>https://nykon80.github.io/fincalc/articles/savings-strategies-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/articles/savings-strategies-guide.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/articles/savings-strategies-guide-pl.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/articles/savings-strategies-guide-ru.html"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/investment-basics-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide-pl.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/articles/investment-basics-guide-ru.html"/>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
     <xhtml:link rel="alternate" hreflang="en" href="https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide.html"/>
     <xhtml:link rel="alternate" hreflang="pl" href="https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide-pl.html"/>
     <xhtml:link rel="alternate" hreflang="ru" href="https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide-ru.html"/>
   </url>
-  <url>
-    <loc>https://nykon80.github.io/fincalc/articles/compound-interest-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.85</priority>
-  </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/budget-planning-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/debt-management-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/credit-card-payoff-methods.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/mortgage-basics-europe.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/roi-investment-guide.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
@@ -138,19 +158,21 @@
   <!-- Articles - Polish -->
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/savings-strategies-guide-pl.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/investment-basics-guide-pl.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide-pl.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -158,19 +180,21 @@
   <!-- Articles - Russian -->
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/savings-strategies-guide-ru.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/investment-basics-guide-ru.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/articles/invest-with-clarity-guide-ru.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -178,13 +202,14 @@
   <!-- Legal Pages -->
   <url>
     <loc>https://nykon80.github.io/fincalc/pages/privacy.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
+  
   <url>
     <loc>https://nykon80.github.io/fincalc/pages/terms.html</loc>
-    <lastmod>2025-11-25</lastmod>
+    <lastmod>2025-11-27</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
